@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- VecStamp ribbon. Copyright (c) 2026 vluckyzhang. MIT License.
+     image="..." ids are relationship ids of the PNGs in src/icons (see build/make_template.py). -->
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="VS_OnLoad">
+  <ribbon>
+    <tabs>
+      <tab id="vsTab" label="矢印" insertAfterMso="TabView" keytip="SY">
+
+        <group id="vsGrpExport" label="导出选中图形">
+          <splitButton id="vsSplitExport" size="large">
+            <button id="vsBtnExport" image="export64" getLabel="VS_GetExportLabel" onAction="VS_OnExport"
+                    screentip="导出选中图形" getSupertip="VS_GetSupertip"/>
+            <menu id="vsMnuExport" itemSize="large">
+              <menuSeparator id="vsMnuSepVector" title="矢量图"/>
+              <button id="vsMnuEMF" image="emf64" label="EMF 增强型图元文件" onAction="VS_OnExport"
+                      description="Word / WPS / PowerPoint 通用的矢量图，论文插图首选。"/>
+              <button id="vsMnuEMZ" image="emz64" label="EMZ 压缩图元文件" onAction="VS_OnExport"
+                      description="gzip 压缩的 EMF，内容相同，体积更小。"/>
+              <button id="vsMnuSVG" image="svg64" label="SVG 可缩放矢量图形" onAction="VS_OnExport"
+                      description="网页、Illustrator、Inkscape 通用；PowerPoint 2013 及以上都能导出。"/>
+              <button id="vsMnuWMF" image="wmf64" label="WMF Windows 图元文件" onAction="VS_OnExport"
+                      description="兼容老软件；不支持透明和渐变。"/>
+              <menuSeparator id="vsMnuSepDoc" title="文档"/>
+              <button id="vsMnuPDF" image="pdf64" label="PDF 矢量文档" onAction="VS_OnExport"
+                      description="页面大小与图形一致，适合 LaTeX 和投稿系统。"/>
+              <button id="vsMnuVSDX" image="vsdx64" label="VSDX Visio 绘图" onAction="VS_OnExport"
+                      description="Visio 原生形状，文字可直接编辑；无需安装 Visio。"/>
+              <menuSeparator id="vsMnuSepRaster" title="位图"/>
+              <button id="vsMnuPNG" image="png64" label="PNG 高分辨率位图" onAction="VS_OnExport"
+                      description="150 / 300 / 600 DPI 或自定义（最高 3000 DPI）。"/>
+            </menu>
+          </splitButton>
+          <button id="vsBtnEMF" label="EMF" image="emf32" onAction="VS_OnExport"
+                  screentip="导出为 EMF" supertip="增强型图元文件，Word / WPS / PowerPoint 通用，论文插图首选。"/>
+          <button id="vsBtnEMZ" label="EMZ" image="emz32" onAction="VS_OnExport"
+                  screentip="导出为 EMZ" supertip="gzip 压缩的 EMF，内容与 EMF 相同，文件更小。"/>
+          <button id="vsBtnSVG" label="SVG" image="svg32" onAction="VS_OnExport"
+                  screentip="导出为 SVG" supertip="可缩放矢量图形，浏览器可直接打开。PowerPoint 2013 及以上都能导出：新版本直接导出，旧版本自动经 XPS 内置转换（文字仍是文字），并在导出后检查文件。"/>
+          <button id="vsBtnPDF" label="PDF" image="pdf32" onAction="VS_OnExport"
+                  screentip="导出为 PDF" supertip="页面大小与图形一致的矢量 PDF。"/>
+          <button id="vsBtnVSDX" label="VSDX" image="vsdx32" onAction="VS_OnExport"
+                  screentip="导出为 VSDX" supertip="Visio 绘图文件：每个图形都转换为 Visio 原生形状（形状、颜色、线条、箭头、组合），文字可直接编辑，无需安装 Visio。图片、图表等无法转换的对象以矢量图片嵌入。"/>
+          <button id="vsBtnPNG" label="PNG" image="png32" onAction="VS_OnExport"
+                  screentip="导出为 PNG" supertip="高分辨率位图；分辨率在“导出设置 → PNG 分辨率”中选择。"/>
+        </group>
+
+        <group id="vsGrpTools" label="批量与工具">
+          <button id="vsBtnBatch" label="逐页导出" size="large" image="pages64" onAction="VS_OnBatch"
+                  screentip="逐页导出"
+                  supertip="每张幻灯片导出为一个文件（使用“默认格式”）。在左侧缩略图中多选页面时只导出所选页；空白页和空的标题占位符会被跳过。"/>
+          <button id="vsBtnPicture" label="EMF 图片副本" image="picture32" onAction="VS_OnPicture"
+                  screentip="EMF 图片副本"
+                  supertip="把所选图形复制成一张矢量图片放在旁边，用来“冻结”排版；原图形保持不变。"/>
+          <button id="vsBtnOpenFolder" label="打开导出文件夹" image="folder32" onAction="VS_OnOpenFolder"
+                  screentip="打开导出文件夹" getSupertip="VS_GetSupertip"/>
+        </group>
+
+        <group id="vsGrpBackground" label="背景">
+          <dropDown id="vsDdBg" label="背景" sizeString="自定义颜色……"
+                    getSelectedItemIndex="VS_GetIndex" onAction="VS_OnDropDown"
+                    screentip="背景" supertip="导出时垫在图形下面的背景：透明、白色、米色、网格（坐标纸）或自定义颜色。">
+            <item id="vsBgNone" label="透明" image="bgnone32"/>
+            <item id="vsBgWhite" label="白色" image="bgwhite32"/>
+            <item id="vsBgBeige" label="米色" image="bgbeige32"/>
+            <item id="vsBgGrid" label="网格" image="bggrid32"/>
+            <item id="vsBgCustom" label="自定义颜色" image="bgcustom32"/>
+          </dropDown>
+          <editBox id="vsEbRgb" label="RGB" sizeString="#FFFFFF  " maxLength="24"
+                   getText="VS_GetText" onChange="VS_OnChange" screentip="自定义背景色" getSupertip="VS_GetSupertip"/>
+          <gallery id="vsGalColor" label="背景颜色" getImage="VS_GalColorMainImage" columns="10"
+                   itemWidth="16" itemHeight="16" showItemLabel="false" getItemCount="VS_GalColorCount"
+                   getItemImage="VS_GalColorImage" getItemScreentip="VS_GalColorTip" onAction="VS_GalColorPick"
+                   screentip="背景颜色" getSupertip="VS_GetSupertip">
+            <button id="vsBtnMoreColors" label="其他颜色(M)…" image="palette32" onAction="VS_OnMoreColors"/>
+            <button id="vsBtnEyedropper" label="取色器(E)" image="eyedropper32" onAction="VS_OnEyedropper"/>
+          </gallery>
+          <editBox id="vsEbAlpha" label="透明度%" sizeString="0000" maxLength="3"
+                   getText="VS_GetText" onChange="VS_OnChange" getEnabled="VS_GetEnabled"
+                   screentip="背景透明度" supertip="0 表示不透明，100 表示完全透明；只影响背景，不影响图形本身。"/>
+          <editBox id="vsEbGrid" label="网格(磅)" sizeString="0000" maxLength="5"
+                   getText="VS_GetText" onChange="VS_OnChange" getEnabled="VS_GetEnabled"
+                   screentip="网格间距" supertip="网格背景的格子大小，单位为磅；每 5 格一条深色线。"/>
+          <editBox id="vsEbMargin" label="边距(磅)" sizeString="0000" maxLength="5"
+                   getText="VS_GetText" onChange="VS_OnChange"
+                   screentip="边距" supertip="图形四周留白的宽度，单位为磅（1 磅 ≈ 0.35 毫米）。0 表示紧贴图形。"/>
+        </group>
+
+        <group id="vsGrpSettings" label="导出设置">
+          <dropDown id="vsDdFormat" label="默认格式" sizeString="自动保存到默认文件夹"
+                    getSelectedItemIndex="VS_GetIndex" onAction="VS_OnDropDown"
+                    screentip="默认格式" supertip="“导出”和“逐页导出”使用的格式（保存对话框中也可以临时更改）。">
+            <item id="vsFmtEMF" label="EMF" image="emf32"/>
+            <item id="vsFmtEMZ" label="EMZ" image="emz32"/>
+            <item id="vsFmtSVG" label="SVG" image="svg32"/>
+            <item id="vsFmtWMF" label="WMF" image="wmf32"/>
+            <item id="vsFmtPNG" label="PNG" image="png32"/>
+            <item id="vsFmtPDF" label="PDF" image="pdf32"/>
+            <item id="vsFmtVSDX" label="VSDX" image="vsdx32"/>
+          </dropDown>
+          <dropDown id="vsDdMode" label="多个图形" sizeString="自动保存到默认文件夹"
+                    getSelectedItemIndex="VS_GetIndex" onAction="VS_OnDropDown"
+                    screentip="选中多个图形时" supertip="合并为一个文件，或每个图形分别导出（文件名取自“选择窗格”中的图形名称）。">
+            <item id="vsModeMerge" label="合并为一个文件"/>
+            <item id="vsModeSplit" label="每个图形一个文件"/>
+          </dropDown>
+          <dropDown id="vsDdNaming" label="保存方式" sizeString="自动保存到默认文件夹"
+                    getSelectedItemIndex="VS_GetIndex" onAction="VS_OnDropDown"
+                    screentip="保存方式" supertip="每次弹出对话框选择位置，或直接保存到默认文件夹（文件名自动带时间）。">
+            <item id="vsNameAsk" label="每次选择保存位置"/>
+            <item id="vsNameAuto" label="自动保存到默认文件夹"/>
+          </dropDown>
+          <separator id="vsSep1"/>
+          <dropDown id="vsDdDpi" label="PNG 分辨率" sizeString="自定义……"
+                    getSelectedItemIndex="VS_GetIndex" onAction="VS_OnDropDown"
+                    screentip="PNG 分辨率" supertip="只影响 PNG 导出。期刊印刷通常要求 300 DPI 以上，线条图可选 600 DPI；也可以自定义（最高 3000 DPI）。">
+            <item id="vsDpi150" label="150 DPI"/>
+            <item id="vsDpi300" label="300 DPI"/>
+            <item id="vsDpi600" label="600 DPI"/>
+            <item id="vsDpiCustom" label="自定义"/>
+          </dropDown>
+          <editBox id="vsEbDpi" label="自定义 DPI" sizeString="00000" maxLength="4"
+                   getText="VS_GetText" onChange="VS_OnChange" getEnabled="VS_GetEnabled"
+                   screentip="自定义分辨率" supertip="1～3000 之间的整数。“PNG 分辨率”选“自定义”时生效。分辨率越高文件越大。"/>
+          <checkBox id="vsChkVsdx" label="VSDX 原生形状" getPressed="VS_GetPressed" onAction="VS_OnCheck"
+                    screentip="VSDX 原生形状" getSupertip="VS_GetSupertip"/>
+          <separator id="vsSep2"/>
+          <checkBox id="vsChkOpen" label="完成后打开文件夹" getPressed="VS_GetPressed" onAction="VS_OnCheck"
+                    screentip="完成后打开文件夹" supertip="导出完成后在资源管理器 / 访达中定位到导出的文件。"/>
+          <button id="vsBtnFolder" label="默认文件夹…" image="setfolder32" onAction="VS_OnFolder"
+                  screentip="默认文件夹" getSupertip="VS_GetSupertip"/>
+          <button id="vsBtnReset" label="恢复默认设置" image="reset32" onAction="VS_OnReset"
+                  screentip="恢复默认设置" supertip="把所有导出和背景设置恢复为默认值。"/>
+          <dialogBoxLauncher>
+            <button id="vsBtnLauncher" screentip="查看当前设置" supertip="显示当前所有导出设置。"
+                    onAction="VS_OnSettings"/>
+          </dialogBoxLauncher>
+        </group>
+
+        <group id="vsGrpAbout" label="关于">
+          <button id="vsBtnAbout" label="关于矢印" size="large" image="logo64" onAction="VS_OnAbout"
+                  screentip="关于 矢印 VecStamp" supertip="版本、作者、MIT 开源协议；矢印永久开源、永久免费。"/>
+          <gallery id="vsGalDonate" label="赞赏作者" size="large" image="donate64" columns="2"
+                   itemWidth="240" itemHeight="302" showItemLabel="false" onAction="VS_OnDonate"
+                   screentip="赞赏作者"
+                   supertip="矢印永久免费、开源。如果它帮到了你，可以用支付宝或微信扫码请作者喝杯咖啡（完全自愿，不影响任何功能）。">
+            <item id="vsDonAlipay" label="支付宝" image="qralipay" screentip="支付宝扫码赞赏"/>
+            <item id="vsDonWechat" label="微信支付" image="qrwechat" screentip="微信扫码赞赏"/>
+            <button id="vsBtnDonateInfo" label="关于赞赏…" image="help32" onAction="VS_OnDonateInfo"/>
+          </gallery>
+          <button id="vsBtnHelp" label="使用说明" image="help32" onAction="VS_OnHelp"
+                  screentip="使用说明" supertip="各按钮和设置的简要说明。"/>
+          <button id="vsBtnFeedback" label="反馈" image="mail32" onAction="VS_OnFeedback"
+                  screentip="反馈问题或建议" supertip="选择发送邮件给作者，或在 GitHub 提交 Issue。"/>
+          <button id="vsBtnHome" label="项目主页" image="home32" onAction="VS_OnHome"
+                  screentip="项目主页" supertip="在浏览器中打开矢印的 GitHub 页面：下载新版本、查看源码和更新日志。"/>
+        </group>
+
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

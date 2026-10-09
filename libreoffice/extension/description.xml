@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006"
+             xmlns:d="http://openoffice.org/extensions/description/2006"
+             xmlns:l="http://libreoffice.org/extensions/description/2011"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+  <identifier value="com.vluckyzhang.vecstamp"/>
+  <version value="{VERSION}"/>
+  <platform value="all"/>
+  <dependencies>
+    <l:LibreOffice-minimal-version value="6.4" d:name="LibreOffice 6.4"/>
+  </dependencies>
+  <publisher>
+    <name xlink:href="mailto:vluckyzhang@gmail.com" lang="en">vluckyzhang</name>
+  </publisher>
+  <display-name>
+    <name lang="zh-CN">矢印 VecStamp</name>
+    <name lang="en">VecStamp</name>
+  </display-name>
+  <icon>
+    <default xlink:href="icons/logo_64.png"/>
+  </icon>
+  <extension-description>
+    <src lang="zh-CN" xlink:href="description/desc_zh-CN.txt"/>
+    <src lang="en" xlink:href="description/desc_en.txt"/>
+  </extension-description>
+</description>

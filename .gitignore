@@ -1,0 +1,13 @@
+# build artefacts
+build/out/
+__pycache__/
+*.pyc
+# the add-in itself is produced by PowerPoint; publish it on the Releases page
+dist/VecStamp.ppam
+~$*
+.DS_Store
+Thumbs.db
+# kept LibreOffice test output (VECSTAMP_KEEP=1)
+vecstamp-test-*/
+# release archives copied into the website for direct download
+website/download/*.zip

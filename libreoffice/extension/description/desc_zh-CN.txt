@@ -1,0 +1,2 @@
+矢印 VecStamp —— 选中图形，一键导出 EMF、EMZ、SVG、WMF、PDF、VSDX 和高分辨率 PNG。支持白色、米色、网格和自定义颜色背景，可设透明度和边距；可逐页批量导出。
+作者：vluckyzhang（vluckyzhang@gmail.com），MIT 开源协议。

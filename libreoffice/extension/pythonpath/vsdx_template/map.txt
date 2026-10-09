@@ -1,0 +1,11 @@
+content_types.xml=[Content_Types].xml
+root.rels=_rels/.rels
+app.xml=docProps/app.xml
+core.xml=docProps/core.xml
+document.xml=visio/document.xml
+document.xml.rels=visio/_rels/document.xml.rels
+windows.xml=visio/windows.xml
+pages.xml=visio/pages/pages.xml
+pages.xml.rels=visio/pages/_rels/pages.xml.rels
+page1.xml=visio/pages/page1.xml
+page1.xml.rels=visio/pages/_rels/page1.xml.rels
