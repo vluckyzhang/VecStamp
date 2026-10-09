@@ -364,6 +364,7 @@ footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: w
 footer a { color: var(--muted); }
 footer a:hover { color: var(--ink); }
 .legal { grid-column: 1 / -1; font-size: 13px; line-height: 1.7; }
+#police img { width: 20px; height: 20px; margin-right: 6px; vertical-align: -4px; }
 .beian { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; }
 .beian a[hidden] { display: none; }
 @media (max-width: 720px) { footer .wrap { grid-template-columns: 1fr; } }
@@ -741,7 +742,7 @@ footer a:hover { color: var(--ink); }
       Microsoft、PowerPoint、Visio、Windows 是 Microsoft Corporation 的商标；macOS 是 Apple Inc. 的商标；LibreOffice 是 The Document Foundation 的商标；支付宝、微信是其各自所有者的商标。本项目与上述公司无隶属关系。
       <div class="beian">
         <a id="icp" href="https://beian.miit.gov.cn/" rel="noopener" hidden></a>
-        <a id="police" href="https://beian.mps.gov.cn/" rel="noopener" hidden></a>
+        <a id="police" href="https://beian.mps.gov.cn/" rel="noopener" hidden><img src="assets/公安备案图标.png" alt="" width="20" height="20"><span></span></a>
       </div>
     </div>
   </div>
@@ -773,7 +774,7 @@ footer a:hover { color: var(--ink); }
   if (SITE.icp) { var icp = document.getElementById('icp'); icp.textContent = SITE.icp; icp.hidden = false; }
   if (SITE.police) {
     var pol = document.getElementById('police'), code = (SITE.police.match(/\d{6,}/) || [''])[0];
-    pol.textContent = SITE.police; pol.hidden = false;
+    pol.querySelector('span').textContent = SITE.police; pol.hidden = false;
     if (code) pol.href = 'https://beian.mps.gov.cn/#/query/webSearch?code=' + code;
   }
 
