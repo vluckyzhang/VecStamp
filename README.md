@@ -17,6 +17,7 @@
 </p>
 
 <p align="center">
+  <a href="http://vluckyzhang.cn/shiyin/">软件官网</a> ·
   <a href="#-v121-新功能">v1.2.1 新功能</a> ·
   <a href="#-七种格式按需而选">格式</a> ·
   <a href="#-背景与分辨率">背景与分辨率</a> ·
