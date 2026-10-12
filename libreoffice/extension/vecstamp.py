@@ -3,7 +3,7 @@
 Menu and toolbar entries (Addons.xcu) call
     service:com.vluckyzhang.vecstamp.Exporter?<action>
 where <action> is export:<ext> | export:default | batch | picture | settings |
-openfolder | about | donate | feedback | home | help.
+openfolder | language | about | donate | feedback | home | help.
 
 Copyright (c) 2026 vluckyzhang <vluckyzhang@gmail.com>. MIT License.
 """
@@ -14,6 +14,7 @@ import unohelper
 from com.sun.star.task import XJobExecutor
 
 import vecstamp_core as core
+import vecstamp_i18n
 import vecstamp_ui
 
 IMPLEMENTATION_NAME = 'com.vluckyzhang.vecstamp.Exporter'
@@ -37,6 +38,8 @@ class VecStampJob(unohelper.Base, XJobExecutor):
                 ui.settings_dialog()
             elif action == 'openfolder':
                 ui.open_folder()
+            elif action == 'language':
+                ui.language()
             elif action in ('about', 'donate'):
                 ui.about()
             elif action == 'feedback':
@@ -64,17 +67,42 @@ class VecStampJob(unohelper.Base, XJobExecutor):
                 if hasattr(d, 'getDrawPages'):
                     doc = d
         target = core.selection_target(doc) or core.current_page_target(doc)
-        st = core.Settings(os.path.join(out_dir, 'settings.json'))
-        report = {'version': core.VERSION, 'files': {}}
-        for ext, _ in core.FORMATS:
-            path = os.path.join(out_dir, 'selftest.' + ext)
-            core.export_target(self.ctx, doc, target, ext, path, st)
-            report['files'][ext] = os.path.getsize(path)
+        report = {'version': core.VERSION, 'files': {}, 'steps': {}}
         ui = vecstamp_ui.UI(self.ctx, doc)
+        st = core.Settings(os.path.join(out_dir, 'settings.json'))       # UI() loaded the user's settings
+        for ext in core.FORMATS:
+            path = os.path.join(out_dir, 'selftest.' + ext)
+            steps = []
+            core.export_target(self.ctx, doc, target, ext, path, st,
+                               progress=lambda f, d, steps=steps: steps.append([round(f, 3), d]))
+            report['files'][ext] = os.path.getsize(path)
+            report['steps'][ext] = steps
+        # progress window: shown, updated, cancelled
+        prog = vecstamp_ui.Progress(ui, 'selftest', 2)
+        try:
+            prog.item(1, 'one')
+            prog(0.5, 'half')
+            report['progress'] = {'window': prog.win is not None, 'percent': prog.percent()}
+            prog.cancel()
+            try:
+                prog(0.6, 'more')
+                report['progress']['cancel'] = False
+            except core.Cancelled:
+                report['progress']['cancel'] = True
+        finally:
+            prog.end()
         report['dialog'] = sorted(ui.settings_dialog(execute=False).keys())
         about = vecstamp_ui.AboutDialog(ui)
         report['about'] = sorted(about.model.getElementNames())
         report['choice'] = sorted(vecstamp_ui.ChoiceDialog(ui, 't', 'x', [('a', 'A'), ('b', 'B')]).model.getElementNames())
+        report['color'] = len(vecstamp_ui.ColorDialog(ui, [10, 20, 30], [[1, 2, 3]]).swatches)
+        report['langs'] = {}
+        for code in vecstamp_i18n.LANGS:                    # every dialog can be built in every language
+            st['lang'] = code
+            vecstamp_i18n.set_lang(code)
+            report['langs'][code] = [vecstamp_ui.SettingsDialog(ui, st).model.Title, vecstamp_ui.AboutDialog(ui).model.Title,
+                                     core.format_label('vsdx'), vecstamp_i18n.T('step.vsdxshape', 1, 2, 'x')]
+        vecstamp_i18n.set_lang(vecstamp_i18n.DEFAULT)
         with open(os.path.join(out_dir, 'selftest.json'), 'w', encoding='utf-8') as f:
             json.dump(report, f, ensure_ascii=False, indent=1)
 

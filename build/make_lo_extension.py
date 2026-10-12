@@ -6,10 +6,12 @@
 - copies the VSDX template parts from src/vsdx and the LICENSE into the extension
 - writes the version into description.xml and zips everything as an .oxt
 """
+import json
 import os
 import re
 import shutil
 import zipfile
+from xml.sax.saxutils import escape
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXT = os.path.join(ROOT, 'libreoffice', 'extension')
@@ -17,37 +19,34 @@ OUT = os.path.join(ROOT, 'dist', 'VecStamp-LibreOffice.oxt')
 
 SERVICE = 'service:com.vluckyzhang.vecstamp.Exporter?'
 CONTEXT = 'com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument'
+# (action, icon); titles come from libreoffice/extension/pythonpath/vecstamp_strings.json ('menu.<action>')
 MENU = [
-    ('export:emf', '导出为 EMF…', 'Export as EMF…', 'emf'),
-    ('export:emz', '导出为 EMZ…', 'Export as EMZ…', 'emz'),
-    ('export:svg', '导出为 SVG…', 'Export as SVG…', 'svg'),
-    ('export:wmf', '导出为 WMF…', 'Export as WMF…', 'wmf'),
+    ('export:emf', 'emf'), ('export:emz', 'emz'), ('export:svg', 'svg'), ('export:wmf', 'wmf'),
     None,
-    ('export:pdf', '导出为 PDF…', 'Export as PDF…', 'pdf'),
-    ('export:vsdx', '导出为 VSDX（Visio）…', 'Export as VSDX (Visio)…', 'vsdx'),
-    ('export:png', '导出为 PNG…', 'Export as PNG…', 'png'),
+    ('export:pdf', 'pdf'), ('export:vsdx', 'vsdx'), ('export:png', 'png'),
     None,
-    ('batch', '逐页导出…', 'Export every slide…', 'pages'),
-    ('picture', 'EMF 图片副本', 'EMF picture copy', 'picture'),
-    ('openfolder', '打开导出文件夹', 'Open export folder', 'folder'),
+    ('batch', 'pages'), ('picture', 'picture'), ('openfolder', 'folder'),
     None,
-    ('settings', '导出设置…', 'Export settings…', 'settings'),
-    ('help', '使用说明', 'Help', 'help'),
-    ('feedback', '反馈…', 'Feedback…', 'mail'),
-    ('home', '项目主页', 'Project page', 'home'),
+    ('settings', 'settings'), ('language', 'lang'), ('help', 'help'), ('feedback', 'mail'), ('home', 'home'),
     None,
-    ('donate', '赞赏作者', 'Support the author', 'donate'),
-    ('about', '关于矢印', 'About VecStamp', 'logo'),
+    ('donate', 'donate'), ('about', 'logo'),
 ]
-TOOLBAR = [
-    ('export:default', '导出（默认格式）', 'Export (default format)', 'export'),
-    ('export:emf', 'EMF', 'EMF', 'emf'),
-    ('export:svg', 'SVG', 'SVG', 'svg'),
-    ('export:pdf', 'PDF', 'PDF', 'pdf'),
-    ('export:png', 'PNG', 'PNG', 'png'),
-    ('batch', '逐页导出', 'Export every slide', 'pages'),
-    ('settings', '导出设置', 'Export settings', 'settings'),
-]
+# toolbar titles: 'tb.<action>', or the format name
+TOOLBAR = [('export:default', 'export'), ('export:emf', 'emf'), ('export:svg', 'svg'), ('export:pdf', 'pdf'),
+           ('export:png', 'png'), ('batch', 'pages'), ('settings', 'settings')]
+# LibreOffice UI locales for the four VecStamp languages (other UI languages fall back to en-US)
+XML_LANG = {'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'en': 'en-US', 'ja': 'ja'}
+STRINGS = json.load(open(os.path.join(EXT, 'pythonpath', 'vecstamp_strings.json'), encoding='utf-8'))
+
+
+def titles(key, fallback=None):
+    """<value xml:lang=...> elements for one menu title in all languages."""
+    entry = STRINGS.get(key)
+    if entry is None:
+        if fallback is None:
+            raise SystemExit(f'vecstamp_strings.json: missing {key}')
+        entry = {lang: fallback for lang in XML_LANG}
+    return ''.join(f'<value xml:lang="{XML_LANG[lang]}">{escape(entry[lang])}</value>' for lang in XML_LANG)
 
 
 def version():
@@ -56,13 +55,12 @@ def version():
     return m.group(1)
 
 
-def item(node, action, zh, en, indent):
+def item(node, action, title_values, indent):
     pad = ' ' * indent
     return '\n'.join([
         f'{pad}<node oor:name="{node}" oor:op="replace">',
         f'{pad}  <prop oor:name="URL" oor:type="xs:string"><value>{SERVICE}{action}</value></prop>',
-        f'{pad}  <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">{en}</value>'
-        f'<value xml:lang="zh-CN">{zh}</value></prop>',
+        f'{pad}  <prop oor:name="Title" oor:type="xs:string">{title_values}</prop>',
         f'{pad}  <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>',
         f'{pad}  <prop oor:name="Context" oor:type="xs:string"><value>{CONTEXT}</value></prop>',
         f'{pad}</node>'])
@@ -77,8 +75,7 @@ def addons_xcu():
            '  <node oor:name="AddonUI">',
            '    <node oor:name="OfficeMenuBar">',
            '      <node oor:name="com.vluckyzhang.vecstamp.menu" oor:op="replace">',
-           '        <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">VecStamp</value>'
-           '<value xml:lang="zh-CN">矢印</value></prop>',
+           f'        <prop oor:name="Title" oor:type="xs:string">{titles("menu.title")}</prop>',
            f'        <prop oor:name="Context" oor:type="xs:string"><value>{CONTEXT}</value></prop>',
            '        <node oor:name="Submenu">']
     for i, m in enumerate(MENU, 1):
@@ -87,14 +84,13 @@ def addons_xcu():
                     '            <prop oor:name="URL" oor:type="xs:string"><value>private:separator</value></prop>',
                     '          </node>']
         else:
-            out.append(item(f'm{i:02d}', m[0], m[1], m[2], 10))
+            out.append(item(f'm{i:02d}', m[0], titles('menu.' + m[0]), 10))
     out += ['        </node>', '      </node>', '    </node>',
             '    <node oor:name="OfficeToolBar">',
             '      <node oor:name="com.vluckyzhang.vecstamp.toolbar" oor:op="replace">',
-            '        <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">VecStamp</value>'
-            '<value xml:lang="zh-CN">矢印</value></prop>']
+            f'        <prop oor:name="Title" oor:type="xs:string">{titles("menu.title")}</prop>']
     for i, t in enumerate(TOOLBAR, 1):
-        out.append(item(f't{i:02d}', t[0], t[1], t[2], 8))
+        out.append(item(f't{i:02d}', t[0], titles('tb.' + t[0], t[0].split(':')[-1].upper()), 8))
     out += ['      </node>', '    </node>', '    <node oor:name="Images">']
     seen = set()
     for m in [x for x in MENU if x] + TOOLBAR:
@@ -102,13 +98,13 @@ def addons_xcu():
             continue
         seen.add(m[0])
         for size in (16, 26):
-            if not os.path.exists(os.path.join(EXT, 'icons', f'{m[3]}_{size}.png')):
-                raise SystemExit(f'missing icon icons/{m[3]}_{size}.png (run build/make_icons.py)')
+            if not os.path.exists(os.path.join(EXT, 'icons', f'{m[1]}_{size}.png')):
+                raise SystemExit(f'missing icon icons/{m[1]}_{size}.png (run build/make_icons.py)')
         out += [f'      <node oor:name="com.vluckyzhang.vecstamp.img.{m[0].replace(":", "_")}" oor:op="replace">',
                 f'        <prop oor:name="URL" oor:type="xs:string"><value>{SERVICE}{m[0]}</value></prop>',
                 '        <node oor:name="UserDefinedImages">',
-                f'          <prop oor:name="ImageSmallURL" oor:type="xs:string"><value>%origin%/icons/{m[3]}_16.png</value></prop>',
-                f'          <prop oor:name="ImageBigURL" oor:type="xs:string"><value>%origin%/icons/{m[3]}_26.png</value></prop>',
+                f'          <prop oor:name="ImageSmallURL" oor:type="xs:string"><value>%origin%/icons/{m[1]}_16.png</value></prop>',
+                f'          <prop oor:name="ImageBigURL" oor:type="xs:string"><value>%origin%/icons/{m[1]}_26.png</value></prop>',
                 '        </node>',
                 '      </node>']
     out += ['    </node>', '  </node>', '</oor:component-data>', '']

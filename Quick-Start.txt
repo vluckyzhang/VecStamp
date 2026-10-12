@@ -1,0 +1,34 @@
+﻿VecStamp v1.2.2 — Quick start
+===============================
+
+The installers are in Chinese. In their menus: 1 = install / update, 2 = uninstall.
+After installing, switch VecStamp to English in the language menu of the About group (关于)
+on the 矢印 tab – it takes effect at once.
+
+[Windows · PowerPoint]
+1. Extract the whole folder and close all PowerPoint windows.
+2. Double-click "安装或卸载-Windows.bat" (install or uninstall) and enter 1.
+   The first installation builds the add-in from source with your PowerPoint; answer Y when asked
+   (it temporarily enables "Trust access to the VBA project object model" and restores it afterwards).
+3. Open PowerPoint – the 矢印 (VecStamp) tab is to the right of View.
+
+[macOS · PowerPoint for Mac]
+1. Get dist/VecStamp.ppam first (built on Windows with installer menu 4, or on the Mac as described in docs/DEVELOPMENT.md).
+2. Quit PowerPoint, double-click "安装或卸载-macOS.command" (if macOS cannot verify the developer: right-click → Open), enter 1.
+3. In PowerPoint: Tools → PowerPoint Add-ins… → + → VecStamp.ppam → OK.
+
+[Linux · LibreOffice Impress / Draw]
+1. Close LibreOffice.
+2. In a terminal run: bash 安装或卸载-Linux.sh and enter 1 (no sudo needed).
+3. Open Impress or Draw: a VecStamp menu and toolbar appear.
+   LibreOffice on other systems can install dist/VecStamp-LibreOffice.oxt with a double-click.
+
+[Uninstall] Run the installer again and enter 2.
+
+[Use] Select shapes → click Export, or EMF / EMZ / SVG / PDF / VSDX / PNG.
+Choose the background in the Background menu (transparent / white / beige / grid / custom colour – the colour panel
+is under Custom colour); PNG resolution (up to 3000 DPI), VSDX native shapes and more are in Export settings.
+A progress window shows the percentage and the current step; press Esc (macOS: Cancel) to cancel.
+See README.en.md and Help in the About group; use Feedback (e-mail or GitHub issue) for problems.
+
+VecStamp is free and open source forever. If you like it, you can buy the author a coffee in About → Support the author (voluntary).

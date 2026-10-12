@@ -19,28 +19,25 @@ import uno
 from com.sun.star.awt import Point, Size
 from com.sun.star.beans import PropertyValue
 
+import vecstamp_i18n as i18n
 import vecstamp_shapes
 import vecstamp_vsdx
+from vecstamp_i18n import T
 
-VERSION = '1.2.1'
+VERSION = '1.2.2'
 AUTHOR = 'vluckyzhang'
 EMAIL = 'vluckyzhang@gmail.com'
 REPO = 'https://github.com/vluckyzhang/VecStamp'
 
-# key: (extension, label)
-FORMATS = [
-    ('emf', 'EMF 增强型图元文件'),
-    ('emz', 'EMZ 压缩的增强型图元文件'),
-    ('svg', 'SVG 可缩放矢量图形'),
-    ('wmf', 'WMF Windows 图元文件'),
-    ('png', 'PNG 高分辨率位图'),
-    ('pdf', 'PDF 矢量文档'),
-    ('vsdx', 'VSDX Visio 绘图'),
-]
-FMT_INDEX = {ext: i for i, (ext, _) in enumerate(FORMATS)}
+FORMATS = ['emf', 'emz', 'svg', 'wmf', 'png', 'pdf', 'vsdx']      # order of the 'format' setting
+FMT_INDEX = {ext: i for i, ext in enumerate(FORMATS)}
 MEDIA = {'emf': 'image/x-emf', 'wmf': 'image/x-wmf', 'svg': 'image/svg+xml', 'png': 'image/png'}
-BACKGROUNDS = ['透明', '白色', '米色', '网格', '自定义颜色']
 BG_NONE, BG_WHITE, BG_BEIGE, BG_GRID, BG_CUSTOM = range(5)
+BG_KEYS = ('bg.none', 'bg.white', 'bg.beige', 'bg.grid', 'bg.custom')
+BEIGE = [245, 240, 225]
+# colour palette of the fallback colour dialog: 10 theme colours with 5 tints / shades each, 10 standard colours
+THEME = [0xFFFFFF, 0x000000, 0xE7E6E6, 0x44546A, 0x4472C4, 0xED7D31, 0xA5A5A5, 0xFFC000, 0x5B9BD5, 0x70AD47]
+STANDARD = [0xC00000, 0xFF0000, 0xFFC000, 0xFFFF00, 0x92D050, 0x00B050, 0x00B0F0, 0x0070C0, 0x002060, 0x7030A0]
 DPI_PRESETS = [150, 300, 600]
 DPI_MAX = 3000
 PNG_WARN_PIXELS = 120_000_000
@@ -50,11 +47,24 @@ DEFAULTS = {
     'format': 0, 'mode': 0, 'naming': 0, 'dpi_index': 1, 'dpi_custom': 1200,
     'bg_type': 0, 'bg_color': [255, 248, 235], 'bg_alpha': 0, 'grid_step': 10.0,
     'margin': 0.0, 'open_folder': False, 'folder': '', 'last_folder': '', 'vsdx_native': True,
+    'lang': i18n.DEFAULT, 'recent_colors': [],
 }
 
 
+def format_label(ext):
+    return T('fmt.' + ext)
+
+
+def backgrounds():
+    return [T(k) for k in BG_KEYS]
+
+
 class Cancelled(Exception):
-    pass
+    """The user stopped the export. quiet: no 'cancelled' message (the user just answered No)."""
+
+    def __init__(self, quiet=False):
+        super().__init__('cancelled')
+        self.quiet = quiet
 
 
 # --------------------------------------------------------------------- settings
@@ -78,9 +88,10 @@ class Settings(dict):
             for k, v in data.items():
                 if k in DEFAULTS:
                     self[k] = v
-        except (OSError, ValueError):
+        except (OSError, ValueError, AttributeError):
             pass
         self.normalize()
+        i18n.set_lang(self['lang'])
 
     def normalize(self):
         def clamp(key, lo, hi, cast):
@@ -100,18 +111,30 @@ class Settings(dict):
         clamp('margin', 0.0, 500.0, float)
         self['vsdx_native'] = bool(self.get('vsdx_native', True))
         c = self.get('bg_color')
-        if not (isinstance(c, (list, tuple)) and len(c) == 3 and all(isinstance(x, int) and 0 <= x <= 255 for x in c)):
+        if not _is_rgb(c):
             self['bg_color'] = list(DEFAULTS['bg_color'])
+        if self.get('lang') not in i18n.LANGS:
+            self['lang'] = i18n.DEFAULT
+        rc = self.get('recent_colors')
+        self['recent_colors'] = [list(x) for x in rc if _is_rgb(x)][:10] if isinstance(rc, list) else []
 
     def save(self):
         os.makedirs(os.path.dirname(self.path), exist_ok=True)
         with open(self.path, 'w', encoding='utf-8') as f:
             json.dump({k: self[k] for k in DEFAULTS}, f, ensure_ascii=False, indent=2)
+        i18n.set_lang(self['lang'])
 
     def reset(self):
+        keep = {k: self[k] for k in ('lang', 'recent_colors', 'last_folder')}
         self.clear()
         self.update(DEFAULTS)
+        self.update(keep)
         self['bg_color'] = list(DEFAULTS['bg_color'])
+
+    def add_recent(self, c):
+        """Remembers a custom colour (newest first, at most 10)."""
+        c = list(c)
+        self['recent_colors'] = [c] + [x for x in self['recent_colors'] if list(x) != c][:9]
 
     @property
     def dpi(self):
@@ -120,7 +143,11 @@ class Settings(dict):
 
     @property
     def ext(self):
-        return FORMATS[self['format']][0]
+        return FORMATS[self['format']]
+
+
+def _is_rgb(c):
+    return isinstance(c, (list, tuple)) and len(c) == 3 and all(isinstance(x, int) and 0 <= x <= 255 for x in c)
 
 
 def parse_color(text):
@@ -147,10 +174,15 @@ def rgb_int(c):
     return (c[0] << 16) | (c[1] << 8) | c[2]
 
 
+def int_rgb(v):
+    v = int(v) & 0xFFFFFF
+    return [(v >> 16) & 255, (v >> 8) & 255, v & 255]
+
+
 def bg_color(settings):
     t = settings['bg_type']
     if t == BG_BEIGE:
-        return [245, 240, 225]
+        return list(BEIGE)
     if t == BG_CUSTOM:
         return list(settings['bg_color'])
     return [255, 255, 255]
@@ -458,15 +490,25 @@ def fix_svg(path):
     return True
 
 
-def export_target(ctx, doc, target, ext, out_path, settings, confirm_big=None):
-    """Exports one target to out_path. confirm_big(width_px, height_px) -> bool for huge PNGs.
+def _step(progress, frac, detail):
+    """Reports progress (fraction of the current file, step text); the callback may raise Cancelled."""
+    if progress is not None:
+        progress(frac, detail)
 
-    LibreOffice writes to an ASCII-named temporary file first; Python then moves it to
-    out_path, so destinations with non-ASCII names work regardless of the process locale.
+
+def export_target(ctx, doc, target, ext, out_path, settings, confirm_big=None, progress=None):
+    """Exports one target to out_path.
+
+    confirm_big(width_px, height_px) -> bool is asked before huge PNGs; progress(fraction, step)
+    is called with the fraction of this file done (0..1) and the current step, and may raise
+    Cancelled. LibreOffice writes to an ASCII-named temporary file first; Python then moves it
+    to out_path, so destinations with non-ASCII names work regardless of the process locale.
     """
+    _step(progress, 0.02, T('step.prepare', len(target.shapes)))
     work = temp_file(ext)
     try:
-        _export_to(ctx, doc, target, ext, work, settings, confirm_big)
+        _export_to(ctx, doc, target, ext, work, settings, confirm_big, progress)
+        _step(progress, 0.97, T('step.save', os.path.basename(out_path)))
         if os.path.exists(out_path):
             os.remove(out_path)
         shutil.move(work, out_path)
@@ -476,26 +518,35 @@ def export_target(ctx, doc, target, ext, out_path, settings, confirm_big=None):
             os.chmod(out_path, 0o666 & ~mask)
     finally:
         _remove(work)
+    _step(progress, 1.0, T('step.done'))
     return out_path
 
 
-def _export_to(ctx, doc, target, ext, out_path, settings, confirm_big):
+def _export_to(ctx, doc, target, ext, out_path, settings, confirm_big, progress=None):
     desktop = ctx.ServiceManager.createInstanceWithContext('com.sun.star.frame.Desktop', ctx)
+    if settings['bg_type'] != BG_NONE or settings['margin'] > 0:
+        _step(progress, 0.05, T('step.background'))
     with Composition(ctx, doc, target, settings) as comp:
         shapes = comp.shapes()
         if ext in ('emf', 'wmf', 'svg'):
+            _step(progress, 0.12, T('step.render', ext.upper()))
             graphic_export(ctx, shapes, out_path, MEDIA[ext])
-            if ext == 'svg' and not fix_svg(out_path):
-                raise RuntimeError('SVG export produced an invalid file')
+            if ext == 'svg':
+                _step(progress, 0.9, T('step.checksvg'))
+                if not fix_svg(out_path):
+                    raise RuntimeError('SVG export produced an invalid file')
         elif ext == 'png':
             w, h = png_pixels(comp.rect, settings.dpi)
             if w * h > PNG_WARN_PIXELS and confirm_big is not None and not confirm_big(w, h):
-                raise Cancelled()
+                raise Cancelled(quiet=True)
+            _step(progress, 0.12, T('step.png', w, h, settings.dpi))
             graphic_export(ctx, shapes, out_path, MEDIA['png'], [pv('PixelWidth', w), pv('PixelHeight', h)])
         elif ext == 'emz':
             t = temp_file('emf')
             try:
+                _step(progress, 0.12, T('step.render', 'EMF'))
                 graphic_export(ctx, shapes, t, MEDIA['emf'])
+                _step(progress, 0.8, T('step.compress'))
                 with open(t, 'rb') as src, gzip.open(out_path, 'wb', compresslevel=9) as dst:
                     shutil.copyfileobj(src, dst)
             finally:
@@ -503,16 +554,20 @@ def _export_to(ctx, doc, target, ext, out_path, settings, confirm_big):
         elif ext == 'pdf':
             t = temp_file('svg')
             try:
+                _step(progress, 0.12, T('step.render', 'SVG'))
                 graphic_export(ctx, shapes, t, MEDIA['svg'])
-                _svg_to_pdf(ctx, desktop, t, comp.rect, out_path)
+                _step(progress, 0.5, T('step.pdfpage'))
+                _svg_to_pdf(ctx, desktop, t, comp.rect, out_path, progress)
             finally:
                 _remove(t)
         elif ext == 'vsdx':
-            if settings['vsdx_native'] and export_vsdx_native(ctx, doc, shapes, comp.rect, out_path):
+            if settings['vsdx_native'] and export_vsdx_native(ctx, doc, shapes, comp.rect, out_path, progress):
                 return
             t = temp_file('emf')
             try:
+                _step(progress, 0.15, T('step.render', 'EMF'))
                 graphic_export(ctx, shapes, t, MEDIA['emf'])
+                _step(progress, 0.8, T('step.vsdxpack'))
                 x0, y0, x1, y1 = comp.rect
                 vecstamp_vsdx.build_vsdx(t, out_path, VERSION, doc_base_name(doc),
                                          size_in=((x1 - x0) / 2540.0, (y1 - y0) / 2540.0))
@@ -522,20 +577,26 @@ def _export_to(ctx, doc, target, ext, out_path, settings, confirm_big):
             raise ValueError('unknown format: %s' % ext)
 
 
-def export_vsdx_native(ctx, doc, shapes, rect, out_path):
+def export_vsdx_native(ctx, doc, shapes, rect, out_path, progress=None):
     """Visio drawing with native, editable shapes. Returns False to fall back to picture mode."""
+    def shape_step(i, n, name):
+        _step(progress, 0.1 + 0.75 * (i - 1) / max(n, 1), T('step.vsdxshape', i, n, name or '-'))
     try:
         dicts, pw, ph, col = vecstamp_shapes.collect(ctx, shapes, rect,
-                                                     vecstamp_shapes.emf_exporter(ctx, graphic_export))
+                                                     vecstamp_shapes.emf_exporter(ctx, graphic_export),
+                                                     shape_step if progress is not None else None)
         if not dicts:
             return False
+        _step(progress, 0.88, T('step.vsdxwrite', col.native, col.pictures))
         vecstamp_vsdx.save(out_path, pw, ph, dicts, VERSION, doc_base_name(doc))
         return True
+    except Cancelled:
+        raise
     except Exception:
         return False
 
 
-def _svg_to_pdf(ctx, desktop, svg_path, rect, out_path):
+def _svg_to_pdf(ctx, desktop, svg_path, rect, out_path, progress=None):
     """Places the SVG on a Draw page of exactly the drawing's size and saves it as PDF."""
     gp = ctx.ServiceManager.createInstanceWithContext('com.sun.star.graphic.GraphicProvider', ctx)
     graphic = gp.queryGraphic(props(('URL', to_url(svg_path))))
@@ -555,6 +616,7 @@ def _svg_to_pdf(ctx, desktop, svg_path, rect, out_path):
         g.setPropertyValue('Graphic', graphic)
         g.setPosition(Point(0, 0))
         g.setSize(Size(w, h))
+        _step(progress, 0.75, T('step.pdfwrite'))
         d.storeToURL(to_url(out_path), props(('FilterName', 'draw_pdf_Export')))
     finally:
         d.close(True)
@@ -567,23 +629,29 @@ def _remove(p):
         pass
 
 
-def export_pages(ctx, doc, folder, ext, settings, page_numbers=None, confirm_big=None, progress=None):
-    """One file per page. Returns (files, skipped_pages). progress(i, n) is called before each page."""
+def export_pages(ctx, doc, folder, ext, settings, page_numbers=None, confirm_big=None, on_page=None, progress=None,
+                 files=None):
+    """One file per page. Returns (files, skipped_pages).
+
+    on_page(i, n) is called before each page (1-based page number, page count); progress is passed
+    on to export_target for every page. files: optional list the written files are appended to
+    as they are written (so the caller still has them when the export is cancelled)."""
     pages = doc.getDrawPages()
     base = doc_base_name(doc)
-    files, skipped = [], 0
+    files = [] if files is None else files
+    skipped = 0
     for i in range(pages.getCount()):
         if page_numbers and (i + 1) not in page_numbers:
             continue
-        if progress is not None:
-            progress(i + 1, pages.getCount())
+        if on_page is not None:
+            on_page(i + 1, pages.getCount())
         page = pages.getByIndex(i)
         shapes = page_shapes(page)
         if not shapes:
             skipped += 1
             continue
-        path = unique_path(folder, '%s_第%d页' % (base, i + 1), ext)
-        export_target(ctx, doc, Target(page, shapes, i + 1), ext, path, settings, confirm_big)
+        path = unique_path(folder, '%s_%s' % (base, T('file.page', i + 1)), ext)
+        export_target(ctx, doc, Target(page, shapes, i + 1), ext, path, settings, confirm_big, progress)
         files.append(path)
     return files, skipped
 

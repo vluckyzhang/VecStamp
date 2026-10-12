@@ -1,0 +1,1082 @@
+{
+ "矢印 VecStamp：PowerPoint 一键导出 EMF、SVG、PDF、Visio 矢量图（免费开源）": {
+  "zh-CN": "矢印 VecStamp：PowerPoint 一键导出 EMF、SVG、PDF、Visio 矢量图（免费开源）",
+  "zh-TW": "矢印 VecStamp：PowerPoint 一鍵匯出 EMF、SVG、PDF、Visio 向量圖（免費開源）",
+  "en": "VecStamp – export PowerPoint shapes to EMF, SVG, PDF and Visio in one click (free, open source)",
+  "ja": "矢印 VecStamp：PowerPoint の図形を EMF・SVG・PDF・Visio にワンクリックでエクスポート（無料・オープンソース）"
+ },
+ "矢印 VecStamp 是免费开源的 PowerPoint 加载项和 LibreOffice 扩展：选中幻灯片中的图形，一键导出 EMF、EMZ、SVG、PDF、Visio VSDX、高分辨率 PNG 和 WMF 矢量图，适用于论文插图、标书配图和技术文档。支持 Windows、macOS、Linux，界面提供简体中文、繁体中文、英文、日文。": {
+  "zh-CN": "矢印 VecStamp 是免费开源的 PowerPoint 加载项和 LibreOffice 扩展：选中幻灯片中的图形，一键导出 EMF、EMZ、SVG、PDF、Visio VSDX、高分辨率 PNG 和 WMF 矢量图，适用于论文插图、标书配图和技术文档。支持 Windows、macOS、Linux，界面提供简体中文、繁体中文、英文、日文。",
+  "zh-TW": "矢印 VecStamp 是免費開源的 PowerPoint 載入項和 LibreOffice 擴充套件：選取投影片中的圖形，一鍵匯出 EMF、EMZ、SVG、PDF、Visio VSDX、高解析度 PNG 和 WMF 向量圖，適用於論文插圖、標書配圖和技術文件。支援 Windows、macOS、Linux，介面提供簡體中文、繁體中文、英文、日文。",
+  "en": "VecStamp is a free, open-source PowerPoint add-in and LibreOffice extension: select shapes on a slide and export them as EMF, EMZ, SVG, PDF, Visio VSDX, high-resolution PNG or WMF in one click – for paper figures, proposals and technical documents. Windows, macOS and Linux; interface in English, Japanese, Simplified and Traditional Chinese.",
+  "ja": "矢印 VecStamp は無料・オープンソースの PowerPoint アドインと LibreOffice 拡張機能です。スライドの図形を選んで、EMF・EMZ・SVG・PDF・Visio VSDX・高解像度 PNG・WMF にワンクリックでエクスポート。論文の図、提案書、技術文書に最適です。Windows・macOS・Linux 対応、表示言語は日本語・英語・中国語（簡体字 / 繁体字）。"
+ },
+ "PowerPoint 导出矢量图,PPT 导出 EMF,PPT 导出 SVG,PPT 转 PDF,PPT 转 Visio,VSDX,PPT 插件,PowerPoint 加载项,论文插图,科研绘图,矢量图,LibreOffice,VecStamp,矢印": {
+  "zh-CN": "PowerPoint 导出矢量图,PPT 导出 EMF,PPT 导出 SVG,PPT 转 PDF,PPT 转 Visio,VSDX,PPT 插件,PowerPoint 加载项,论文插图,科研绘图,矢量图,LibreOffice,VecStamp,矢印",
+  "zh-TW": "PowerPoint 匯出向量圖,PPT 匯出 EMF,PPT 匯出 SVG,PPT 轉 PDF,PPT 轉 Visio,VSDX,PPT 外掛,PowerPoint 載入項,論文插圖,科研繪圖,向量圖,LibreOffice,VecStamp,矢印",
+  "en": "PowerPoint to SVG,export PowerPoint to EMF,PowerPoint vector graphics,PowerPoint to Visio,PPT to VSDX,PowerPoint add-in,save shapes as PDF,high resolution PNG,scientific figures,LibreOffice Impress extension,VecStamp",
+  "ja": "PowerPoint SVG 書き出し,PowerPoint EMF 保存,パワポ ベクター画像,PowerPoint Visio 変換,VSDX,PowerPoint アドイン,図形 PDF 保存,高解像度 PNG,論文 図,LibreOffice 拡張機能,VecStamp,矢印"
+ },
+ "矢印 VecStamp：PowerPoint 一键导出 EMF、SVG、PDF、Visio 矢量图": {
+  "zh-CN": "矢印 VecStamp：PowerPoint 一键导出 EMF、SVG、PDF、Visio 矢量图",
+  "zh-TW": "矢印 VecStamp：PowerPoint 一鍵匯出 EMF、SVG、PDF、Visio 向量圖",
+  "en": "VecStamp – export PowerPoint shapes to EMF, SVG, PDF and Visio in one click",
+  "ja": "矢印 VecStamp：PowerPoint の図形を EMF・SVG・PDF・Visio にワンクリックでエクスポート"
+ },
+ "选中即印。免费开源的 PowerPoint / LibreOffice 矢量导出工具，支持 EMF、SVG、PDF、Visio 等七种格式。": {
+  "zh-CN": "选中即印。免费开源的 PowerPoint / LibreOffice 矢量导出工具，支持 EMF、SVG、PDF、Visio 等七种格式。",
+  "zh-TW": "選取即印。免費開源的 PowerPoint / LibreOffice 向量匯出工具，支援 EMF、SVG、PDF、Visio 等七種格式。",
+  "en": "Select and stamp. A free, open-source vector export tool for PowerPoint and LibreOffice – EMF, SVG, PDF, Visio and three more formats.",
+  "ja": "選んで押すだけ。PowerPoint / LibreOffice 向けの無料・オープンソースのベクター書き出しツール。EMF・SVG・PDF・Visio など 7 形式に対応。"
+ },
+ "跳到正文": {
+  "zh-CN": "跳到正文",
+  "zh-TW": "跳到正文",
+  "en": "Skip to content",
+  "ja": "本文へ移動"
+ },
+ "矢印 VecStamp 首页": {
+  "zh-CN": "矢印 VecStamp 首页",
+  "zh-TW": "矢印 VecStamp 首頁",
+  "en": "VecStamp home",
+  "ja": "矢印 VecStamp ホーム"
+ },
+ "矢印": {
+  "zh-CN": "矢印",
+  "zh-TW": "矢印",
+  "en": "矢印",
+  "ja": "矢印"
+ },
+ "新版本": {
+  "zh-CN": "新版本",
+  "zh-TW": "新版本",
+  "en": "What's new",
+  "ja": "新機能"
+ },
+ "格式": {
+  "zh-CN": "格式",
+  "zh-TW": "格式",
+  "en": "Formats",
+  "ja": "形式"
+ },
+ "背景": {
+  "zh-CN": "背景",
+  "zh-TW": "背景",
+  "en": "Backgrounds",
+  "ja": "背景"
+ },
+ "安装": {
+  "zh-CN": "安装",
+  "zh-TW": "安裝",
+  "en": "Install",
+  "ja": "インストール"
+ },
+ "常见问题": {
+  "zh-CN": "常见问题",
+  "zh-TW": "常見問題",
+  "en": "FAQ",
+  "ja": "よくある質問"
+ },
+ "赞赏": {
+  "zh-CN": "赞赏",
+  "zh-TW": "贊助",
+  "en": "Support",
+  "ja": "支援"
+ },
+ "切换深色 / 浅色外观": {
+  "zh-CN": "切换深色 / 浅色外观",
+  "zh-TW": "切換深色 / 淺色外觀",
+  "en": "Switch between dark and light appearance",
+  "ja": "ダーク / ライト表示の切り替え"
+ },
+ "下载": {
+  "zh-CN": "下载",
+  "zh-TW": "下載",
+  "en": "Download",
+  "ja": "ダウンロード"
+ },
+ "选中即印": {
+  "zh-CN": "选中即印",
+  "zh-TW": "選取即印",
+  "en": "Select. Stamp. Vector.",
+  "ja": "選んで、押すだけ。"
+ },
+ "PowerPoint 里的图形，一键导出 EMF、SVG、PDF、Visio 等矢量格式": {
+  "zh-CN": "PowerPoint 里的图形，一键导出 EMF、SVG、PDF、Visio 等矢量格式",
+  "zh-TW": "PowerPoint 裡的圖形，一鍵匯出 EMF、SVG、PDF、Visio 等向量格式",
+  "en": "Export PowerPoint shapes to EMF, SVG, PDF, Visio and more – in one click",
+  "ja": "PowerPoint の図形を EMF・SVG・PDF・Visio などのベクター形式にワンクリックで"
+ },
+ "论文插图、标书配图、技术文档：在幻灯片里画好的图，选中后点一下，就能得到放大、打印都不失真的矢量文件。": {
+  "zh-CN": "论文插图、标书配图、技术文档：在幻灯片里画好的图，选中后点一下，就能得到放大、打印都不失真的矢量文件。",
+  "zh-TW": "論文插圖、標書配圖、技術文件：在投影片裡畫好的圖，選取後點一下，就能得到放大、列印都不失真的向量檔案。",
+  "en": "Paper figures, proposals, technical documents: select a diagram you drew on a slide, click once, and get a vector file that stays sharp however much you zoom or print it.",
+  "ja": "論文の図、提案書、技術文書に。スライドで描いた図を選んでクリックするだけで、拡大しても印刷しても劣化しないベクターファイルが手に入ります。"
+ },
+ "下载 v": {
+  "zh-CN": "下载 v",
+  "zh-TW": "下載 v",
+  "en": "Download v",
+  "ja": "ダウンロード v"
+ },
+ "查看源码": {
+  "zh-CN": "查看源码",
+  "zh-TW": "檢視原始碼",
+  "en": "Source code",
+  "ja": "ソースコード"
+ },
+ "适用于 Windows 和 macOS 版 PowerPoint（2013 及以上）、Linux 版 LibreOffice。永久免费，MIT 协议开源，离线可用。界面支持简体中文、繁体中文、英文和日文。": {
+  "zh-CN": "适用于 Windows 和 macOS 版 PowerPoint（2013 及以上）、Linux 版 LibreOffice。永久免费，MIT 协议开源，离线可用。界面支持简体中文、繁体中文、英文和日文。",
+  "zh-TW": "適用於 Windows 和 macOS 版 PowerPoint（2013 及以上）、Linux 版 LibreOffice。永久免費，MIT 授權開源，離線可用。介面支援簡體中文、繁體中文、英文和日文。",
+  "en": "For PowerPoint on Windows and macOS (2013 or later) and LibreOffice on Linux. Free forever, MIT-licensed open source, works offline. Interface in English, Japanese, Simplified and Traditional Chinese.",
+  "ja": "Windows / macOS の PowerPoint（2013 以降）と Linux の LibreOffice に対応。ずっと無料、MIT ライセンスのオープンソースで、オフラインで動作します。表示言語は日本語・英語・中国語（簡体字 / 繁体字）。"
+ },
+ "示例插图：物流业降碳减污扩绿增长协同框架": {
+  "zh-CN": "示例插图：物流业降碳减污扩绿增长协同框架",
+  "zh-TW": "示例插圖：物流業降碳減汙擴綠增長協同框架",
+  "en": "Sample figure: a synergy framework for green logistics",
+  "ja": "サンプル図：グリーン物流の相乗効果フレームワーク"
+ },
+ "物流业降碳减污扩绿增长协同框架": {
+  "zh-CN": "物流业降碳减污扩绿增长协同框架",
+  "zh-TW": "物流業降碳減汙擴綠增長協同框架",
+  "en": "Synergy Framework for Green Logistics",
+  "ja": "物流業の脱炭素・汚染削減・緑化・成長の協同枠組み"
+ },
+ "降碳": {
+  "zh-CN": "降碳",
+  "zh-TW": "降碳",
+  "en": "Low carbon",
+  "ja": "脱炭素"
+ },
+ "扩绿": {
+  "zh-CN": "扩绿",
+  "zh-TW": "擴綠",
+  "en": "Greening",
+  "ja": "緑化"
+ },
+ "减污": {
+  "zh-CN": "减污",
+  "zh-TW": "減汙",
+  "en": "Clean air",
+  "ja": "汚染削減"
+ },
+ "增长": {
+  "zh-CN": "增长",
+  "zh-TW": "增長",
+  "en": "Growth",
+  "ja": "成長"
+ },
+ "协同增效": {
+  "zh-CN": "协同增效",
+  "zh-TW": "協同增效",
+  "en": "Synergy",
+  "ja": "相乗効果"
+ },
+ "政策": {
+  "zh-CN": "政策",
+  "zh-TW": "政策",
+  "en": "Policy",
+  "ja": "政策"
+ },
+ "技术": {
+  "zh-CN": "技术",
+  "zh-TW": "技術",
+  "en": "Technology",
+  "ja": "技術"
+ },
+ "市场": {
+  "zh-CN": "市场",
+  "zh-TW": "市場",
+  "en": "Market",
+  "ja": "市場"
+ },
+ "数字": {
+  "zh-CN": "数字",
+  "zh-TW": "數字",
+  "en": "Digital",
+  "ja": "デジタル"
+ },
+ "图 3-2　政策、技术、市场与数字化四类要素对协同增效的支撑作用": {
+  "zh-CN": "图 3-2　政策、技术、市场与数字化四类要素对协同增效的支撑作用",
+  "zh-TW": "圖 3-2　政策、技術、市場與數字化四類要素對協同增效的支撐作用",
+  "en": "Fig. 3-2  How policy, technology, market and digitalisation support synergy",
+  "ja": "図 3-2　政策・技術・市場・デジタル化の 4 要素による相乗効果への支え"
+ },
+ "截图（位图）": {
+  "zh-CN": "截图（位图）",
+  "zh-TW": "截圖（點陣圖）",
+  "en": "Screenshot",
+  "ja": "スクリーンショット"
+ },
+ "矢印导出（矢量）": {
+  "zh-CN": "矢印导出（矢量）",
+  "zh-TW": "矢印匯出（向量）",
+  "en": "VecStamp vector",
+  "ja": "矢印のベクター"
+ },
+ "左右对比分隔线": {
+  "zh-CN": "左右对比分隔线",
+  "zh-TW": "左右對比分隔線",
+  "en": "Comparison divider",
+  "ja": "比較用の区切り線"
+ },
+ "放大": {
+  "zh-CN": "放大",
+  "zh-TW": "放大",
+  "en": "Zoom",
+  "ja": "拡大"
+ },
+ "1.0 倍": {
+  "zh-CN": "1.0 倍",
+  "zh-TW": "1.0 倍",
+  "en": "1.0×",
+  "ja": "1.0 倍"
+ },
+ "复原": {
+  "zh-CN": "复原",
+  "zh-TW": "復原",
+  "en": "Reset",
+  "ja": "リセット"
+ },
+ "同一张图，左侧是 96 DPI 的截图，右侧是矢印导出的矢量图：放大后截图出现锯齿，矢量图的线条和小字依然清晰。": {
+  "zh-CN": "同一张图，左侧是 96 DPI 的截图，右侧是矢印导出的矢量图：放大后截图出现锯齿，矢量图的线条和小字依然清晰。",
+  "zh-TW": "同一張圖，左側是 96 DPI 的截圖，右側是矢印匯出的向量圖：放大後截圖出現鋸齒，向量圖的線條和小字依然清晰。",
+  "en": "The same figure: a 96 DPI screenshot on the left, the vector export from VecStamp on the right. Zoomed in, the screenshot gets jagged while the vector lines and small text stay crisp. ",
+  "ja": "同じ図の左側は 96 DPI のスクリーンショット、右側は矢印でエクスポートしたベクター画像です。拡大するとスクリーンショットはギザギザになりますが、ベクター画像の線と小さな文字はくっきりしたままです。"
+ },
+ "拖动分隔线对比，放大后可按住画面平移。": {
+  "zh-CN": "拖动分隔线对比，放大后可按住画面平移。",
+  "zh-TW": "拖動分隔線對比，放大後可按住畫面平移。",
+  "en": "Drag the divider to compare; when zoomed in, drag the picture to pan.",
+  "ja": "区切り線をドラッグして比較。拡大中は画像をドラッグして移動できます。"
+ },
+ "拖动分隔线对比左右两侧。": {
+  "zh-CN": "拖动分隔线对比左右两侧。",
+  "zh-TW": "拖動分隔線對比左右兩側。",
+  "en": "Drag the divider to compare both sides.",
+  "ja": "区切り線をドラッグして左右を比較できます。"
+ },
+ "使用步骤": {
+  "zh-CN": "使用步骤",
+  "zh-TW": "使用步驟",
+  "en": "How it works",
+  "ja": "使い方"
+ },
+ "选中图形": {
+  "zh-CN": "选中图形",
+  "zh-TW": "選取圖形",
+  "en": "Select shapes",
+  "ja": "図形を選ぶ"
+ },
+ "单个图形、多个图形或组合都可以；什么都不选时，可以导出当前幻灯片上的全部图形。": {
+  "zh-CN": "单个图形、多个图形或组合都可以；什么都不选时，可以导出当前幻灯片上的全部图形。",
+  "zh-TW": "單個圖形、多個圖形或組合都可以；什麼都不選時，可以匯出目前投影片上的全部圖形。",
+  "en": "One shape, several shapes or a group; with nothing selected you can export every shape on the slide.",
+  "ja": "1 つの図形でも、複数の図形やグループでも OK。何も選ばなければスライドのすべての図形をエクスポートできます。"
+ },
+ "点「导出」": {
+  "zh-CN": "点「导出」",
+  "zh-TW": "點「匯出」",
+  "en": "Click Export",
+  "ja": "「エクスポート」をクリック"
+ },
+ "在「矢印」选项卡上点大按钮，或从下拉菜单选择格式。导出时显示进度百分比和当前步骤，按 Esc 可随时取消。": {
+  "zh-CN": "在「矢印」选项卡上点大按钮，或从下拉菜单选择格式。导出时显示进度百分比和当前步骤，按 Esc 可随时取消。",
+  "zh-TW": "在「矢印」選項卡上點大按鈕，或從下拉選單選擇格式。匯出時顯示進度百分比和目前步驟，按 Esc 可隨時取消。",
+  "en": "Click the large button on the VecStamp tab, or pick a format from its menu. A progress window shows the percentage and the current step; press Esc to cancel at any time.",
+  "ja": "「矢印」タブの大きなボタンをクリックするか、メニューから形式を選びます。エクスポート中は割合と現在の処理が表示され、Esc キーでいつでも中止できます。"
+ },
+ "插入你的文档": {
+  "zh-CN": "插入你的文档",
+  "zh-TW": "插入你的文件",
+  "en": "Use it anywhere",
+  "ja": "文書に挿入"
+ },
+ "把文件插入 Word、LaTeX、Visio 或网页。放大、打印、重新排版，线条和文字都保持清晰。": {
+  "zh-CN": "把文件插入 Word、LaTeX、Visio 或网页。放大、打印、重新排版，线条和文字都保持清晰。",
+  "zh-TW": "把檔案插入 Word、LaTeX、Visio 或網頁。放大、列印、重新排版，線條和文字都保持清晰。",
+  "en": "Insert the file into Word, LaTeX, Visio or a web page. Zoom, print, re-typeset – lines and text stay sharp.",
+  "ja": "Word・LaTeX・Visio・Web ページに挿入しましょう。拡大・印刷・再レイアウトしても、線と文字はくっきりしたままです。"
+ },
+ "版更新": {
+  "zh-CN": "版更新",
+  "zh-TW": "版更新",
+  "en": "update",
+  "ja": "の更新"
+ },
+ "2026 年 10 月发布": {
+  "zh-CN": "2026 年 10 月发布",
+  "zh-TW": "2026 年 10 月釋出",
+  "en": "Released October 2026",
+  "ja": "2026 年 10 月リリース"
+ },
+ "完整更新日志": {
+  "zh-CN": "完整更新日志",
+  "zh-TW": "完整更新日誌",
+  "en": "Full change log",
+  "ja": "更新履歴（全文）"
+ },
+ "SVG 导出不再卡住": {
+  "zh-CN": "SVG 导出不再卡住",
+  "zh-TW": "SVG 匯出不再卡住",
+  "en": "SVG export no longer hangs",
+  "ja": "SVG エクスポートが止まらない"
+ },
+ "旧版 PowerPoint 的 SVG 转换改为后台运行，进度持续刷新，按 Esc 立即停止；超过 180 秒会自动停止并给出替代方案。": {
+  "zh-CN": "旧版 PowerPoint 的 SVG 转换改为后台运行，进度持续刷新，按 Esc 立即停止；超过 180 秒会自动停止并给出替代方案。",
+  "zh-TW": "舊版 PowerPoint 的 SVG 轉換改為背景執行，進度持續重新整理，按 Esc 立即停止；超過 180 秒會自動停止並給出替代方案。",
+  "en": "The SVG conversion for older PowerPoint versions now runs in the background with live progress; Esc stops it at once, and after 180 seconds it stops by itself and offers alternatives.",
+  "ja": "古い PowerPoint 向けの SVG 変換はバックグラウンドで動き、進行状況が更新され続けます。Esc ですぐに停止でき、180 秒を超えると自動で停止して代わりの方法を提案します。"
+ },
+ "圆角保持为曲线": {
+  "zh-CN": "圆角保持为曲线",
+  "zh-TW": "圓角保持為曲線",
+  "en": "Rounded corners stay curved",
+  "ja": "角丸は曲線のまま"
+ },
+ "VSDX 中的圆角矩形、圆角箭头、云形、弧形等 177 种预设形状按标准公式计算，圆角写成 Visio 椭圆弧，不再变成多边形。": {
+  "zh-CN": "VSDX 中的圆角矩形、圆角箭头、云形、弧形等 177 种预设形状按标准公式计算，圆角写成 Visio 椭圆弧，不再变成多边形。",
+  "zh-TW": "VSDX 中的圓角矩形、圓角箭頭、雲形、弧形等 177 種預設形狀按標準公式計算，圓角寫成 Visio 橢圓弧，不再變成多邊形。",
+  "en": "Rounded rectangles, round-corner arrows, clouds, arcs and 173 more preset shapes are computed from the standard formulas; corners become Visio elliptical arcs instead of polygons.",
+  "ja": "角丸四角形、角丸矢印、雲、円弧など 177 種類のプリセット図形を標準の数式で計算し、角を Visio の楕円弧として書き出します。多角形にはなりません。"
+ },
+ "进度显示百分比": {
+  "zh-CN": "进度显示百分比",
+  "zh-TW": "進度顯示百分比",
+  "en": "Progress with percentage",
+  "ja": "進行状況をパーセント表示"
+ },
+ "进度窗口显示百分比、当前文件或幻灯片、当前步骤和已用时间；Windows、macOS 和 LibreOffice 都可以随时取消。": {
+  "zh-CN": "进度窗口显示百分比、当前文件或幻灯片、当前步骤和已用时间；Windows、macOS 和 LibreOffice 都可以随时取消。",
+  "zh-TW": "進度視窗顯示百分比、目前檔案或投影片、目前步驟和已用時間；Windows、macOS 和 LibreOffice 都可以隨時取消。",
+  "en": "The progress window shows the percentage, the current file or slide, the current step and the elapsed time – cancellable on Windows, macOS and LibreOffice.",
+  "ja": "進行状況ウィンドウに割合、現在のファイルまたはスライド、現在の処理、経過時間を表示。Windows・macOS・LibreOffice のどれでもいつでも中止できます。"
+ },
+ "背景菜单内置取色面板": {
+  "zh-CN": "背景菜单内置取色面板",
+  "zh-TW": "背景選單內建取色面板",
+  "en": "Colour panel in the Background menu",
+  "ja": "背景メニューに色パネル"
+ },
+ "自定义颜色面板并入「背景」菜单，「背景」前的方块随时预览当前背景；PowerPoint 的颜色对话框不可用时，自动换用矢印自带的颜色面板。": {
+  "zh-CN": "自定义颜色面板并入「背景」菜单，「背景」前的方块随时预览当前背景；PowerPoint 的颜色对话框不可用时，自动换用矢印自带的颜色面板。",
+  "zh-TW": "自訂顏色面板併入「背景」選單，「背景」前的方塊隨時預覽目前背景；PowerPoint 的顏色對話方塊不可用時，自動換用矢印自帶的顏色面板。",
+  "en": "The custom colour panel now lives in the Background menu, and a square in front of \"Background\" previews the current background. When PowerPoint's colour dialog is unavailable, VecStamp's own colour panel takes over.",
+  "ja": "ユーザー設定の色パネルを「背景」メニューに統合し、「背景」の前の四角で現在の背景をプレビューできます。PowerPoint の色ダイアログを使えないときは矢印独自の色パネルに切り替わります。"
+ },
+ "四种界面语言": {
+  "zh-CN": "四种界面语言",
+  "zh-TW": "四種介面語言",
+  "en": "Four interface languages",
+  "ja": "4 つの表示言語"
+ },
+ "简体中文、繁体中文、英文和日文，在「关于」组的语言菜单中即时切换，无需重启 PowerPoint。": {
+  "zh-CN": "简体中文、繁体中文、英文和日文，在「关于」组的语言菜单中即时切换，无需重启 PowerPoint。",
+  "zh-TW": "簡體中文、繁體中文、英文和日文，在「關於」組的語言選單中即時切換，無需重新啟動 PowerPoint。",
+  "en": "English, Japanese, Simplified and Traditional Chinese – switch instantly in the language menu of the About group, no restart needed.",
+  "ja": "日本語・英語・簡体字中国語・繁体字中国語。「矢印について」グループの言語メニューですぐに切り替えられ、PowerPoint の再起動は不要です。"
+ },
+ "多语言文档与网站": {
+  "zh-CN": "多语言文档与网站",
+  "zh-TW": "多語言文件與網站",
+  "en": "Multilingual docs and website",
+  "ja": "多言語のドキュメントとサイト"
+ },
+ "README 和这个网站都提供四种语言版本，海外同学和同事也能轻松上手。": {
+  "zh-CN": "README 和这个网站都提供四种语言版本，海外同学和同事也能轻松上手。",
+  "zh-TW": "README 和這個網站都提供四種語言版本，海外同學和同事也能輕鬆上手。",
+  "en": "The README and this website are available in four languages, too.",
+  "ja": "README とこのサイトも 4 言語で用意しました。"
+ },
+ "七种格式，按用途选": {
+  "zh-CN": "七种格式，按用途选",
+  "zh-TW": "七種格式，按用途選",
+  "en": "Seven formats for every purpose",
+  "ja": "7 つの形式を用途に合わせて"
+ },
+ "同一个按钮，导出到不同的地方。默认格式可以在功能区里设置，下拉菜单随时切换。": {
+  "zh-CN": "同一个按钮，导出到不同的地方。默认格式可以在功能区里设置，下拉菜单随时切换。",
+  "zh-TW": "同一個按鈕，匯出到不同的地方。預設格式可以在功能區裡設定，下拉選單隨時切換。",
+  "en": "One button, many destinations. Set the default format on the ribbon, or pick another one from the menu at any time.",
+  "ja": "ボタンは 1 つ、行き先はさまざま。既定の形式はリボンで設定でき、メニューからいつでも切り替えられます。"
+ },
+ "适合用在": {
+  "zh-CN": "适合用在",
+  "zh-TW": "適合用在",
+  "en": "Best for",
+  "ja": "用途"
+ },
+ "说明": {
+  "zh-CN": "说明",
+  "zh-TW": "說明",
+  "en": "Notes",
+  "ja": "説明"
+ },
+ "Word / WPS 论文、报告": {
+  "zh-CN": "Word / WPS 论文、报告",
+  "zh-TW": "Word / WPS 論文、報告",
+  "en": "Word / WPS papers and reports",
+  "ja": "Word / WPS の論文・レポート"
+ },
+ "插入后保持矢量，双击可以取消组合继续编辑。": {
+  "zh-CN": "插入后保持矢量，双击可以取消组合继续编辑。",
+  "zh-TW": "插入後保持向量，按兩下可以取消組合繼續編輯。",
+  "en": "Stays vector after inserting; double-click to ungroup and keep editing.",
+  "ja": "挿入後もベクターのまま。ダブルクリックでグループを解除して編集できます。"
+ },
+ "邮件、网盘发送": {
+  "zh-CN": "邮件、网盘发送",
+  "zh-TW": "郵件、網盤傳送",
+  "en": "E-mail and cloud drives",
+  "ja": "メール、クラウドストレージ"
+ },
+ "压缩过的 EMF，内容相同、体积更小，Office 可直接插入。": {
+  "zh-CN": "压缩过的 EMF，内容相同、体积更小，Office 可直接插入。",
+  "zh-TW": "壓縮過的 EMF，內容相同、體積更小，Office 可直接插入。",
+  "en": "Compressed EMF: same content, smaller file; Office inserts it directly.",
+  "ja": "圧縮した EMF。内容は同じでサイズが小さく、Office にそのまま挿入できます。"
+ },
+ "网页、Inkscape、Illustrator、Figma": {
+  "zh-CN": "网页、Inkscape、Illustrator、Figma",
+  "zh-TW": "網頁、Inkscape、Illustrator、Figma",
+  "en": "Web, Inkscape, Illustrator, Figma",
+  "ja": "Web、Inkscape、Illustrator、Figma"
+ },
+ "1.2.2 更新": {
+  "zh-CN": "1.2.2 更新",
+  "zh-TW": "1.2.2 更新",
+  "en": "Updated in 1.2.2",
+  "ja": "1.2.2 で更新"
+ },
+ "通用矢量格式，浏览器可直接打开；PowerPoint 2013 起均可导出。": {
+  "zh-CN": "通用矢量格式，浏览器可直接打开；PowerPoint 2013 起均可导出。",
+  "zh-TW": "通用向量格式，瀏覽器可直接開啟；PowerPoint 2013 起均可匯出。",
+  "en": "The universal vector format, opens in any browser; works with every PowerPoint from 2013.",
+  "ja": "汎用のベクター形式で、ブラウザーで直接開けます。PowerPoint 2013 以降ならエクスポート可能。"
+ },
+ "期刊投稿、LaTeX、打印": {
+  "zh-CN": "期刊投稿、LaTeX、打印",
+  "zh-TW": "期刊投稿、LaTeX、列印",
+  "en": "Journals, LaTeX, printing",
+  "ja": "学術誌への投稿、LaTeX、印刷"
+ },
+ "页面大小就是图形大小，不留白边，字体随文件嵌入。": {
+  "zh-CN": "页面大小就是图形大小，不留白边，字体随文件嵌入。",
+  "zh-TW": "頁面大小就是圖形大小，不留白邊，字型隨檔案嵌入。",
+  "en": "The page is exactly as large as the drawing – no white margins, fonts embedded.",
+  "ja": "ページは図形と同じ大きさで余白なし。フォントも埋め込まれます。"
+ },
+ "交给 Visio 继续编辑": {
+  "zh-CN": "交给 Visio 继续编辑",
+  "zh-TW": "交給 Visio 繼續編輯",
+  "en": "Further editing in Visio",
+  "ja": "Visio での編集"
+ },
+ "由 Visio 原生形状组成，文字可编辑，圆角保持为曲线；无法转换的对象保留为矢量图片。": {
+  "zh-CN": "由 Visio 原生形状组成，文字可编辑，圆角保持为曲线；无法转换的对象保留为矢量图片。",
+  "zh-TW": "由 Visio 原生形狀組成，文字可編輯，圓角保持為曲線；無法轉換的物件保留為向量圖片。",
+  "en": "Native Visio shapes with editable text and true curves; objects that cannot be converted stay as vector pictures.",
+  "ja": "Visio のネイティブ図形で、文字は編集でき、角丸も曲線のまま。変換できないオブジェクトはベクター画像として残ります。"
+ },
+ "只接受位图的投稿系统": {
+  "zh-CN": "只接受位图的投稿系统",
+  "zh-TW": "只接受點陣圖的投稿系統",
+  "en": "Systems that only accept bitmaps",
+  "ja": "ビットマップしか受け付けない投稿システム"
+ },
+ "150 / 300 / 600 DPI 或自定义，最高 3000 DPI，支持透明背景。": {
+  "zh-CN": "150 / 300 / 600 DPI 或自定义，最高 3000 DPI，支持透明背景。",
+  "zh-TW": "150 / 300 / 600 DPI 或自訂，最高 3000 DPI，支援透明背景。",
+  "en": "150 / 300 / 600 DPI or custom up to 3000 DPI, with transparent background.",
+  "ja": "150 / 300 / 600 DPI またはユーザー設定（最大 3000 DPI）。透明背景に対応。"
+ },
+ "只认旧格式的软件": {
+  "zh-CN": "只认旧格式的软件",
+  "zh-TW": "只認舊格式的軟體",
+  "en": "Programs that only read old formats",
+  "ja": "古い形式しか読めないソフト"
+ },
+ "兼容性最好，但不支持透明和渐变，非必要不选。": {
+  "zh-CN": "兼容性最好，但不支持透明和渐变，非必要不选。",
+  "zh-TW": "相容性最好，但不支援透明和漸變，非必要不選。",
+  "en": "The most compatible, but no transparency or gradients – only when needed.",
+  "ja": "互換性は最も高いものの、透明とグラデーションには非対応。必要なときだけ。"
+ },
+ "背景效果预览": {
+  "zh-CN": "背景效果预览",
+  "zh-TW": "背景效果預覽",
+  "en": "Background preview",
+  "ja": "背景のプレビュー"
+ },
+ "背景也是矢量": {
+  "zh-CN": "背景也是矢量",
+  "zh-TW": "背景也是向量",
+  "en": "Backgrounds are vector, too",
+  "ja": "背景もベクター"
+ },
+ "导出时可以给图形加上背景和边距，七种格式都适用。矢量格式里的背景本身也是矢量矩形和线条，不会变成一张底图。": {
+  "zh-CN": "导出时可以给图形加上背景和边距，七种格式都适用。矢量格式里的背景本身也是矢量矩形和线条，不会变成一张底图。",
+  "zh-TW": "匯出時可以給圖形加上背景和邊界，七種格式都適用。向量格式裡的背景本身也是向量矩形和線條，不會變成一張底圖。",
+  "en": "Add a background and a margin when exporting – in all seven formats. In vector formats the background itself is made of vector rectangles and lines, not a pasted bitmap.",
+  "ja": "エクスポート時に背景と余白を付けられます（7 形式すべて）。ベクター形式では背景自体もベクターの四角形と線で、画像にはなりません。"
+ },
+ "试试看": {
+  "zh-CN": "试试看",
+  "zh-TW": "試試看",
+  "en": "Try it",
+  "ja": "試してみる"
+ },
+ "透明": {
+  "zh-CN": "透明",
+  "zh-TW": "透明",
+  "en": "Transparent",
+  "ja": "透明"
+ },
+ "白色": {
+  "zh-CN": "白色",
+  "zh-TW": "白色",
+  "en": "White",
+  "ja": "白"
+ },
+ "米色": {
+  "zh-CN": "米色",
+  "zh-TW": "米色",
+  "en": "Beige",
+  "ja": "ベージュ"
+ },
+ "网格": {
+  "zh-CN": "网格",
+  "zh-TW": "格線",
+  "en": "Grid",
+  "ja": "方眼"
+ },
+ "自定义": {
+  "zh-CN": "自定义",
+  "zh-TW": "自訂",
+  "en": "Custom",
+  "ja": "ユーザー設定"
+ },
+ "默认选项。PNG 保留透明通道，矢量格式不加任何底色。": {
+  "zh-CN": "默认选项。PNG 保留透明通道，矢量格式不加任何底色。",
+  "zh-TW": "預設選項。PNG 保留透明通道，向量格式不加任何底色。",
+  "en": "The default. PNG keeps its alpha channel; vector formats get no background at all.",
+  "ja": "既定値。PNG はアルファチャンネルを保持し、ベクター形式には下地を付けません。"
+ },
+ "纯白底色，贴进深色模板或彩色页面时也能保持干净。": {
+  "zh-CN": "纯白底色，贴进深色模板或彩色页面时也能保持干净。",
+  "zh-TW": "純白底色，貼進深色模板或彩色頁面時也能保持乾淨。",
+  "en": "Plain white – stays clean on dark templates and coloured pages.",
+  "ja": "真っ白な下地。暗いテンプレートや色付きのページに貼ってもすっきり見えます。"
+ },
+ "米色，RGB 245, 240, 225，带一点纸张质感。": {
+  "zh-CN": "米色，RGB 245, 240, 225，带一点纸张质感。",
+  "zh-TW": "米色，RGB 245, 240, 225，帶一點紙張質感。",
+  "en": "Beige, RGB 245, 240, 225, for a slight paper feel.",
+  "ja": "ベージュ（RGB 245, 240, 225）。紙のような風合いになります。"
+ },
+ "白底方格纸：细线每格一条，粗线每 5 格一条，网格间距 2 – 200 磅可调。": {
+  "zh-CN": "白底方格纸：细线每格一条，粗线每 5 格一条，网格间距 2 – 200 磅可调。",
+  "zh-TW": "白底方格紙：細線每格一條，粗線每 5 格一條，格線間距 2 – 200 磅可調。",
+  "en": "Graph paper on white: a fine line for every square and a bold one every 5 squares; spacing adjustable from 2 to 200 pt.",
+  "ja": "白地の方眼紙：1 マスごとに細線、5 マスごとに太線。間隔は 2～200 pt で調整できます。"
+ },
+ "在「背景」菜单的自定义颜色面板中选色，或输入 RGB / 十六进制，透明度 0 – 100 % 可调。": {
+  "zh-CN": "在「背景」菜单的自定义颜色面板中选色，或输入 RGB / 十六进制，透明度 0 – 100 % 可调。",
+  "zh-TW": "在「背景」選單的自訂顏色面板中選色，或輸入 RGB / 十六進位，透明度 0 – 100 % 可調。",
+  "en": "Pick a colour from the custom colour panel in the Background menu, or type RGB / hex; transparency 0–100 %.",
+  "ja": "「背景」メニューの色パネルで色を選ぶか、RGB / 16 進数を入力。透明度は 0～100 % で調整できます。"
+ },
+ "颜色": {
+  "zh-CN": "颜色",
+  "zh-TW": "顏色",
+  "en": "Colour",
+  "ja": "色"
+ },
+ "透明度": {
+  "zh-CN": "透明度",
+  "zh-TW": "透明度",
+  "en": "Transparency",
+  "ja": "透明度"
+ },
+ "功能都在一个选项卡里": {
+  "zh-CN": "功能都在一个选项卡里",
+  "zh-TW": "功能都在一個選項卡里",
+  "en": "Everything on one ribbon tab",
+  "ja": "すべての機能を 1 つのタブに"
+ },
+ "安装后，PowerPoint 的「视图」右侧多出「矢印」选项卡：导出、批量工具、背景、导出设置和关于（含界面语言），都可以一键直达。": {
+  "zh-CN": "安装后，PowerPoint 的「视图」右侧多出「矢印」选项卡：导出、批量工具、背景、导出设置和关于（含界面语言），都可以一键直达。",
+  "zh-TW": "安裝後，PowerPoint 的「檢視」右側多出「矢印」選項卡：匯出、批次工具、背景、匯出設定和關於（含介面語言），都可以一鍵直達。",
+  "en": "After installing, PowerPoint gets a VecStamp tab next to View: export, batch tools, background, export settings and About (with the language menu) are one click away.",
+  "ja": "インストールすると、PowerPoint の「表示」の右に「矢印」タブが追加されます。エクスポート、一括処理、背景、エクスポート設定、「矢印について」（言語メニューを含む）にワンクリックでアクセスできます。"
+ },
+ "PowerPoint 中的「矢印」选项卡，「背景」菜单展开，显示自定义颜色面板：主题颜色、标准色、最近使用的颜色、其他颜色和取色器": {
+  "zh-CN": "PowerPoint 中的「矢印」选项卡，「背景」菜单展开，显示自定义颜色面板：主题颜色、标准色、最近使用的颜色、其他颜色和取色器",
+  "zh-TW": "PowerPoint 中的「矢印」選項卡，「背景」選單展開，顯示自訂顏色面板：主題顏色、標準色、最近使用的顏色、其他顏色和取色器",
+  "en": "The VecStamp tab in PowerPoint with the Background menu open, showing the custom colour panel: theme colours, standard colours, recent colours, More Colors and the eyedropper",
+  "ja": "PowerPoint の「矢印」タブ。「背景」メニューを開き、ユーザー設定の色パネル（テーマの色・標準の色・最近使用した色・その他の色・スポイト）を表示"
+ },
+ "示意图，按加载项的实际功能区布局绘制；不同 Office 版本的外观略有差异。": {
+  "zh-CN": "示意图，按加载项的实际功能区布局绘制；不同 Office 版本的外观略有差异。",
+  "zh-TW": "示意圖，按載入項的實際功能區佈局繪製；不同 Office 版本的外觀略有差異。",
+  "en": "Illustration drawn from the add-in's actual ribbon layout (Chinese interface); the look differs slightly between Office versions.",
+  "ja": "アドインの実際のリボン レイアウトをもとに描いたイメージ図（中国語表示）です。Office のバージョンによって見た目が少し異なります。"
+ },
+ "Linux 上用 LibreOffice": {
+  "zh-CN": "Linux 上用 LibreOffice",
+  "zh-TW": "Linux 上用 LibreOffice",
+  "en": "LibreOffice on Linux",
+  "ja": "Linux では LibreOffice で"
+ },
+ "PowerPoint 没有 Linux 版，矢印在 Linux 上以 LibreOffice Impress / Draw 扩展的形式提供：同样的七种格式、五种背景、自定义分辨率、逐页导出、Visio 原生形状和四种界面语言。": {
+  "zh-CN": "PowerPoint 没有 Linux 版，矢印在 Linux 上以 LibreOffice Impress / Draw 扩展的形式提供：同样的七种格式、五种背景、自定义分辨率、逐页导出、Visio 原生形状和四种界面语言。",
+  "zh-TW": "PowerPoint 沒有 Linux 版，矢印在 Linux 上以 LibreOffice Impress / Draw 擴充套件的形式提供：同樣的七種格式、五種背景、自訂解析度、逐頁匯出、Visio 原生形狀和四種介面語言。",
+  "en": "There is no PowerPoint for Linux, so on Linux VecStamp is a LibreOffice Impress / Draw extension with the same seven formats, five backgrounds, custom resolution, slide-by-slide export, native Visio shapes and four interface languages.",
+  "ja": "PowerPoint には Linux 版がないため、Linux では LibreOffice Impress / Draw の拡張機能として提供しています。同じ 7 形式、5 種類の背景、ユーザー設定の解像度、スライドごとのエクスポート、Visio ネイティブ図形、4 つの表示言語に対応しています。"
+ },
+ "这个扩展不依赖操作系统，Windows 和 macOS 上的 LibreOffice 也可以安装。": {
+  "zh-CN": "这个扩展不依赖操作系统，Windows 和 macOS 上的 LibreOffice 也可以安装。",
+  "zh-TW": "這個擴充套件不依賴作業系統，Windows 和 macOS 上的 LibreOffice 也可以安裝。",
+  "en": "The extension is platform-independent – LibreOffice on Windows and macOS can install it, too.",
+  "ja": "この拡張機能は OS に依存せず、Windows や macOS の LibreOffice にもインストールできます。"
+ },
+ "LibreOffice Impress 中的矢印菜单、导出设置对话框和取色器（Linux 实机截图）": {
+  "zh-CN": "LibreOffice Impress 中的矢印菜单、导出设置对话框和取色器（Linux 实机截图）",
+  "zh-TW": "LibreOffice Impress 中的矢印選單、匯出設定對話方塊和取色器（Linux 實機截圖）",
+  "en": "The VecStamp menu, export settings dialog and colour picker in LibreOffice Impress (Linux screenshot, Chinese interface)",
+  "ja": "LibreOffice Impress の矢印メニュー、エクスポート設定ダイアログ、カラーピッカー（Linux の実機スクリーンショット、中国語表示）"
+ },
+ "下载后先": {
+  "zh-CN": "下载后先",
+  "zh-TW": "下載後先",
+  "en": "After downloading, ",
+  "ja": "ダウンロードしたら、まず"
+ },
+ "完整解压": {
+  "zh-CN": "完整解压",
+  "zh-TW": "完整解壓",
+  "en": "extract everything",
+  "ja": "すべて展開"
+ },
+ "，再运行对应系统的安装器，在菜单里选择「安装 / 更新」或「卸载」。": {
+  "zh-CN": "，再运行对应系统的安装器，在菜单里选择「安装 / 更新」或「卸载」。",
+  "zh-TW": "，再執行對應系統的安裝器，在選單裡選擇「安裝 / 更新」或「解除安裝」。",
+  "en": " first, then run the installer for your system and choose 1 (install / update) or 2 (uninstall) in its menu – the installer menus are in Chinese.",
+  "ja": "してから、お使いの OS のインストーラーを実行し、メニューで 1（インストール / 更新）または 2（アンインストール）を選びます（メニューは中国語です）。"
+ },
+ "PowerPoint 2013 及以上，包括 2016、2019、2021、2024 和 Microsoft 365": {
+  "zh-CN": "PowerPoint 2013 及以上，包括 2016、2019、2021、2024 和 Microsoft 365",
+  "zh-TW": "PowerPoint 2013 及以上，包括 2016、2019、2021、2024 和 Microsoft 365",
+  "en": "PowerPoint 2013 or later, including 2016, 2019, 2021, 2024 and Microsoft 365",
+  "ja": "PowerPoint 2013 以降（2016、2019、2021、2024、Microsoft 365 を含む）"
+ },
+ "保存并关闭所有 PowerPoint 窗口": {
+  "zh-CN": "保存并关闭所有 PowerPoint 窗口",
+  "zh-TW": "儲存並關閉所有 PowerPoint 視窗",
+  "en": "Save and close all PowerPoint windows",
+  "ja": "PowerPoint のウィンドウをすべて保存して閉じる"
+ },
+ "双击": {
+  "zh-CN": "双击",
+  "zh-TW": "按兩下",
+  "en": "Double-click",
+  "ja": ""
+ },
+ "安装或卸载-Windows.bat": {
+  "zh-CN": "安装或卸载-Windows.bat",
+  "zh-TW": "安装或卸载-Windows.bat",
+  "en": "安装或卸载-Windows.bat",
+  "ja": "安装或卸载-Windows.bat"
+ },
+ "安装或卸载-macOS.command": {
+  "zh-CN": "安装或卸载-macOS.command",
+  "zh-TW": "安装或卸载-macOS.command",
+  "en": "安装或卸载-macOS.command",
+  "ja": "安装或卸载-macOS.command"
+ },
+ "bash 安装或卸载-Linux.sh": {
+  "zh-CN": "bash 安装或卸载-Linux.sh",
+  "zh-TW": "bash 安装或卸载-Linux.sh",
+  "en": "bash 安装或卸载-Linux.sh",
+  "ja": "bash 安装或卸载-Linux.sh"
+ },
+ "，输入": {
+  "zh-CN": "，输入",
+  "zh-TW": "，輸入",
+  "en": " and enter",
+  "ja": " をダブルクリックし、メニューで次の番号を入力："
+ },
+ "打开 PowerPoint，在「视图」右侧找到「矢印」": {
+  "zh-CN": "打开 PowerPoint，在「视图」右侧找到「矢印」",
+  "zh-TW": "開啟 PowerPoint，在「檢視」右側找到「矢印」",
+  "en": "Open PowerPoint – the 矢印 / VecStamp tab is right of View",
+  "ja": "PowerPoint を開くと「表示」の右に「矢印」タブがある"
+ },
+ "实验性": {
+  "zh-CN": "实验性",
+  "zh-TW": "實驗性",
+  "en": "experimental",
+  "ja": "試験的"
+ },
+ "PowerPoint for Mac 16.82 及以上": {
+  "zh-CN": "PowerPoint for Mac 16.82 及以上",
+  "zh-TW": "PowerPoint for Mac 16.82 及以上",
+  "en": "PowerPoint for Mac 16.82 or later",
+  "ja": "PowerPoint for Mac 16.82 以降"
+ },
+ "退出 PowerPoint": {
+  "zh-CN": "退出 PowerPoint",
+  "zh-TW": "退出 PowerPoint",
+  "en": "Quit PowerPoint",
+  "ja": "PowerPoint を終了する"
+ },
+ "；首次运行请在访达中右键选择「打开」": {
+  "zh-CN": "；首次运行请在访达中右键选择「打开」",
+  "zh-TW": "；首次執行請在 Finder 中右鍵選擇「開啟」",
+  "en": "; the first time, right-click it in Finder and choose Open",
+  "ja": "（初回は Finder で右クリックして「開く」を選ぶ）"
+ },
+ "在「工具 › PowerPoint 加载项」中添加": {
+  "zh-CN": "在「工具 › PowerPoint 加载项」中添加",
+  "zh-TW": "在「工具 › PowerPoint 載入項」中新增",
+  "en": "In Tools › PowerPoint Add-ins, add",
+  "ja": "「ツール › PowerPoint アドイン」で"
+ },
+ "，并选择启用宏": {
+  "zh-CN": "，并选择启用宏",
+  "zh-TW": "，並選擇啟用宏",
+  "en": " and enable macros",
+  "ja": " を追加し、マクロを有効にする"
+ },
+ "LibreOffice 6.4 及以上（Impress / Draw），无需 sudo": {
+  "zh-CN": "LibreOffice 6.4 及以上（Impress / Draw），无需 sudo",
+  "zh-TW": "LibreOffice 6.4 及以上（Impress / Draw），無需 sudo",
+  "en": "LibreOffice 6.4 or later (Impress / Draw), no sudo needed",
+  "ja": "LibreOffice 6.4 以降（Impress / Draw）、sudo 不要"
+ },
+ "关闭 LibreOffice": {
+  "zh-CN": "关闭 LibreOffice",
+  "zh-TW": "關閉 LibreOffice",
+  "en": "Close LibreOffice",
+  "ja": "LibreOffice を閉じる"
+ },
+ "在终端运行": {
+  "zh-CN": "在终端运行",
+  "zh-TW": "在終端執行",
+  "en": "In a terminal, run",
+  "ja": "ターミナルで"
+ },
+ "，在菜单中输入": {
+  "zh-CN": "，在菜单中输入",
+  "zh-TW": "，在選單中輸入",
+  "en": " and enter",
+  "ja": " を実行し、メニューで次の番号を入力："
+ },
+ "重新打开 Impress，使用菜单栏的「矢印」": {
+  "zh-CN": "重新打开 Impress，使用菜单栏的「矢印」",
+  "zh-TW": "重新開啟 Impress，使用選單欄的「矢印」",
+  "en": "Open Impress again and use the VecStamp menu",
+  "ja": "Impress を開き直し、メニューバーの「矢印」を使う"
+ },
+ "也可以在 LibreOffice 的「工具 › 扩展管理器」中添加": {
+  "zh-CN": "也可以在 LibreOffice 的「工具 › 扩展管理器」中添加",
+  "zh-TW": "也可以在 LibreOffice 的「工具 › 擴充套件管理器」中新增",
+  "en": "You can also add",
+  "ja": "LibreOffice の「ツール › 拡張機能マネージャー」で"
+ },
+ "。": {
+  "zh-CN": "。",
+  "zh-TW": "。",
+  "en": " in LibreOffice under Tools › Extension Manager.",
+  "ja": " を追加することもできます。"
+ },
+ "只改当前用户，敏感操作先征得同意。": {
+  "zh-CN": "只改当前用户，敏感操作先征得同意。",
+  "zh-TW": "只改目前使用者，敏感操作先徵得同意。",
+  "en": "Current user only; nothing sensitive without your consent.",
+  "ja": "変更は現在のユーザーだけ。重要な操作は先に確認します。"
+ },
+ "安装器不会修改系统安全设置：Windows 上需要临时开启的 VBA 工程访问会先询问并在完成后恢复，「受信任位置」只在你主动选择时才添加；macOS 不会移除隔离属性；Linux 以用户模式安装，拒绝以 root 运行。": {
+  "zh-CN": "安装器不会修改系统安全设置：Windows 上需要临时开启的 VBA 工程访问会先询问并在完成后恢复，「受信任位置」只在你主动选择时才添加；macOS 不会移除隔离属性；Linux 以用户模式安装，拒绝以 root 运行。",
+  "zh-TW": "安裝器不會修改系統安全設定：Windows 上需要臨時開啟的 VBA 工程訪問會先詢問並在完成後恢復，「受信任位置」只在你主動選擇時才新增；macOS 不會移除隔離屬性；Linux 以使用者模式安裝，拒絕以 root 執行。",
+  "en": " The installers never change system security settings: on Windows the temporary VBA project access is asked for first and restored afterwards, and a trusted location is only added when you choose it; on macOS the quarantine attribute is not removed; on Linux the extension is installed in user mode and running as root is refused.",
+  "ja": "インストーラーはシステムのセキュリティ設定を変更しません。Windows で一時的に必要な VBA プロジェクトへのアクセスは事前に確認し、完了後に元に戻します。「信頼できる場所」は自分で選んだときだけ追加します。macOS では検疫属性を削除しません。Linux ではユーザーモードでインストールし、root での実行は拒否します。"
+ },
+ "矢印收费吗？会收集我的数据吗？": {
+  "zh-CN": "矢印收费吗？会收集我的数据吗？",
+  "zh-TW": "矢印收費嗎？會收集我的資料嗎？",
+  "en": "Does VecStamp cost anything? Does it collect data?",
+  "ja": "矢印は有料ですか？データを収集しますか？"
+ },
+ "不收费，永久开源免费，也没有广告。矢印在本机完成全部导出，不联网、不收集任何数据；只有你点击「反馈」或「项目主页」时，才会打开邮件程序或浏览器。": {
+  "zh-CN": "不收费，永久开源免费，也没有广告。矢印在本机完成全部导出，不联网、不收集任何数据；只有你点击「反馈」或「项目主页」时，才会打开邮件程序或浏览器。",
+  "zh-TW": "不收費，永久開源免費，也沒有廣告。矢印在本機完成全部匯出，不聯網、不收集任何資料；只有你點選「意見回饋」或「專案首頁」時，才會開啟郵件程式或瀏覽器。",
+  "en": "No. It is free and open source forever, without ads. Everything is exported on your computer – no network access, no data collection; only Feedback and Project page open your mail program or browser when you click them.",
+  "ja": "いいえ。ずっと無料・オープンソースで、広告もありません。エクスポートはすべてお使いのパソコン上で行い、ネットに接続することもデータを収集することもありません。「フィードバック」や「プロジェクトページ」をクリックしたときだけ、メールソフトやブラウザーを開きます。"
+ },
+ "我的 PowerPoint 是 2016 / 2019，能导出 SVG 吗？": {
+  "zh-CN": "我的 PowerPoint 是 2016 / 2019，能导出 SVG 吗？",
+  "zh-TW": "我的 PowerPoint 是 2016 / 2019，能匯出 SVG 嗎？",
+  "en": "I have PowerPoint 2016 / 2019 – can I export SVG?",
+  "ja": "PowerPoint 2016 / 2019 でも SVG をエクスポートできますか？"
+ },
+ "能。Microsoft 365 和 Office 2024（版本 2302 及以上）直接使用 PowerPoint 的 SVG 导出；更早的 Windows 版本（2013 – 2021）会把图形打印成 XPS，再由矢印内置的转换脚本生成 SVG，路径、渐变、图片和文字都会保留。转换在后台进行，进度窗口显示百分比，按 Esc 可随时取消。整个过程在本机完成，不需要安装其他软件。": {
+  "zh-CN": "能。Microsoft 365 和 Office 2024（版本 2302 及以上）直接使用 PowerPoint 的 SVG 导出；更早的 Windows 版本（2013 – 2021）会把图形打印成 XPS，再由矢印内置的转换脚本生成 SVG，路径、渐变、图片和文字都会保留。转换在后台进行，进度窗口显示百分比，按 Esc 可随时取消。整个过程在本机完成，不需要安装其他软件。",
+  "zh-TW": "能。Microsoft 365 和 Office 2024（版本 2302 及以上）直接使用 PowerPoint 的 SVG 匯出；更早的 Windows 版本（2013 – 2021）會把圖形列印成 XPS，再由矢印內建的轉換指令碼產生 SVG，路徑、漸變、圖片和文字都會保留。轉換在背景進行，進度視窗顯示百分比，按 Esc 可隨時取消。整個過程在本機完成，不需要安裝其他軟體。",
+  "en": "Yes. Microsoft 365 and Office 2024 (version 2302 or later) use PowerPoint's own SVG export; older Windows versions (2013–2021) print the shapes to XPS and VecStamp's built-in converter turns that into SVG, keeping paths, gradients, pictures and text. The conversion runs in the background with a percentage, and Esc cancels it at any time. Everything happens on your computer – nothing else to install.",
+  "ja": "はい。Microsoft 365 と Office 2024（バージョン 2302 以降）は PowerPoint 自身の SVG エクスポートを使います。それより前の Windows 版（2013～2021）では図形を XPS に印刷し、矢印に内蔵の変換スクリプトで SVG を作成します。パス、グラデーション、画像、文字は保持されます。変換はバックグラウンドで行われ、進行状況ウィンドウに割合が表示され、Esc でいつでも中止できます。処理はすべてお使いのパソコンで行い、ほかのソフトは不要です。"
+ },
+ "导出的 VSDX 在 Visio 里能编辑吗？": {
+  "zh-CN": "导出的 VSDX 在 Visio 里能编辑吗？",
+  "zh-TW": "匯出的 VSDX 在 Visio 裡能編輯嗎？",
+  "en": "Can I edit the exported VSDX in Visio?",
+  "ja": "エクスポートした VSDX は Visio で編集できますか？"
+ },
+ "能。矩形、圆角矩形、椭圆、箭头、连接线、自由曲线和文本框都会转成 Visio 原生形状，1.2.2 起圆角和弧线保持为真正的曲线；填充、线条、箭头和文字格式尽量保持一致，文字可以直接修改。图表、SmartArt、艺术字等无法转换的对象会作为 EMF 矢量图片保留在原位。": {
+  "zh-CN": "能。矩形、圆角矩形、椭圆、箭头、连接线、自由曲线和文本框都会转成 Visio 原生形状，1.2.2 起圆角和弧线保持为真正的曲线；填充、线条、箭头和文字格式尽量保持一致，文字可以直接修改。图表、SmartArt、艺术字等无法转换的对象会作为 EMF 矢量图片保留在原位。",
+  "zh-TW": "能。矩形、圓角矩形、橢圓、箭頭、連線線、自由曲線和文字框都會轉成 Visio 原生形狀，1.2.2 起圓角和弧線保持為真正的曲線；填充、線條、箭頭和文字格式儘量保持一致，文字可以直接修改。圖表、SmartArt、藝術字等無法轉換的物件會作為 EMF 向量圖片保留在原位。",
+  "en": "Yes. Rectangles, rounded rectangles, ellipses, arrows, connectors, freeforms and text boxes become native Visio shapes, and since 1.2.2 rounded corners and arcs stay true curves; fills, lines, arrowheads and text formatting are kept as closely as possible, and the text is editable. Charts, SmartArt, WordArt and other objects that cannot be converted stay in place as EMF vector pictures.",
+  "ja": "はい。四角形、角丸四角形、楕円、矢印、コネクタ、フリーフォーム、テキストボックスは Visio のネイティブ図形に変換され、1.2.2 からは角丸や円弧も本物の曲線のままです。塗りつぶし、線、矢印、文字の書式もできるだけ保持し、文字はそのまま編集できます。グラフ、SmartArt、ワードアートなど変換できないものは EMF ベクター画像として元の位置に残ります。"
+ },
+ "如果更想要一张整体的矢量图，可以在「导出设置」中取消勾选「VSDX 原生形状」。": {
+  "zh-CN": "如果更想要一张整体的矢量图，可以在「导出设置」中取消勾选「VSDX 原生形状」。",
+  "zh-TW": "如果更想要一張整體的向量圖，可以在「匯出設定」中取消勾選「VSDX 原生形狀」。",
+  "en": "If you prefer one picture for the whole drawing, clear \"VSDX native shapes\" in the export settings.",
+  "ja": "図全体を 1 枚のベクター画像にしたい場合は、エクスポート設定で「VSDX ネイティブ図形」のチェックを外してください。"
+ },
+ "界面可以切换成英文、繁体中文或日文吗？": {
+  "zh-CN": "界面可以切换成英文、繁体中文或日文吗？",
+  "zh-TW": "介面可以切換成英文、繁體中文或日文嗎？",
+  "en": "Can I use VecStamp in English?",
+  "ja": "日本語で使えますか？"
+ },
+ "可以。在 PowerPoint 的「矢印」选项卡最右侧「关于」组中打开语言菜单，选择简体中文、繁体中文、英文或日文，整个选项卡和之后的提示立即切换，不需要重启。LibreOffice 版在「矢印 › 界面语言」中切换。": {
+  "zh-CN": "可以。在 PowerPoint 的「矢印」选项卡最右侧「关于」组中打开语言菜单，选择简体中文、繁体中文、英文或日文，整个选项卡和之后的提示立即切换，不需要重启。LibreOffice 版在「矢印 › 界面语言」中切换。",
+  "zh-TW": "可以。在 PowerPoint 的「矢印」選項卡最右側「關於」組中開啟語言選單，選擇簡體中文、繁體中文、英文或日文，整個選項卡和之後的提示立即切換，不需要重新啟動。LibreOffice 版在「矢印 › 介面語言」中切換。",
+  "en": "Yes. Open the language menu in the About group at the right end of the 矢印 / VecStamp tab (it shows \"简体中文\") and choose English – the whole tab and all messages switch at once, no restart needed. In LibreOffice use VecStamp › Language.",
+  "ja": "はい。PowerPoint の「矢印」タブの右端、「关于」（矢印について）グループの言語メニュー（「简体中文」と表示）で「日本語」を選ぶと、タブ全体と以降のメッセージがすぐに日本語になります。再起動は不要です。LibreOffice 版は「矢印 › 表示言語」で切り替えます。"
+ },
+ "看不到「矢印」选项卡，或提示宏已被禁用？": {
+  "zh-CN": "看不到「矢印」选项卡，或提示宏已被禁用？",
+  "zh-TW": "看不到「矢印」選項卡，或提示宏已被禁用？",
+  "en": "No VecStamp tab, or macros are disabled?",
+  "ja": "「矢印」タブが表示されない、またはマクロが無効と表示される"
+ },
+ "在 PowerPoint 中打开「文件 › 选项 › 加载项」，管理「PowerPoint 加载项」，确认 VecStamp 已勾选。如果显示宏被禁用，重新运行 Windows 安装器并选择": {
+  "zh-CN": "在 PowerPoint 中打开「文件 › 选项 › 加载项」，管理「PowerPoint 加载项」，确认 VecStamp 已勾选。如果显示宏被禁用，重新运行 Windows 安装器并选择",
+  "zh-TW": "在 PowerPoint 中開啟「檔案 › 選項 › 載入項」，管理「PowerPoint 載入項」，確認 VecStamp 已勾選。如果顯示宏被禁用，重新執行 Windows 安裝器並選擇",
+  "en": "In PowerPoint open File › Options › Add-ins, manage PowerPoint Add-ins and make sure VecStamp is ticked. If macros are disabled, run the Windows installer again and choose",
+  "ja": "PowerPoint で「ファイル › オプション › アドイン」を開き、「PowerPoint アドイン」を管理して VecStamp にチェックが入っているか確認してください。マクロが無効と表示される場合は、Windows インストーラーをもう一度実行して"
+ },
+ "，把加载项所在的文件夹添加为受信任位置；卸载时会一并移除。": {
+  "zh-CN": "，把加载项所在的文件夹添加为受信任位置；卸载时会一并移除。",
+  "zh-TW": "，把載入項所在的資料夾新增為受信任位置；解除安裝時會一併移除。",
+  "en": " to add the add-in folder as a trusted location; it is removed again when uninstalling.",
+  "ja": " を選び、アドインのフォルダーを信頼できる場所に追加します（アンインストール時に一緒に削除されます）。"
+ },
+ "导出的 EMF 在别人电脑上字体变了？": {
+  "zh-CN": "导出的 EMF 在别人电脑上字体变了？",
+  "zh-TW": "匯出的 EMF 在別人電腦上字型變了？",
+  "en": "Fonts change when the EMF is opened on another computer?",
+  "ja": "エクスポートした EMF のフォントが他のパソコンで変わる"
+ },
+ "EMF 和 SVG 记录的是字体名称，对方电脑缺少这个字体时会被替换。需要固定字体时请导出 PDF（字体随文件嵌入），或在投稿前用 Inkscape、Illustrator 把文字转为曲线。": {
+  "zh-CN": "EMF 和 SVG 记录的是字体名称，对方电脑缺少这个字体时会被替换。需要固定字体时请导出 PDF（字体随文件嵌入），或在投稿前用 Inkscape、Illustrator 把文字转为曲线。",
+  "zh-TW": "EMF 和 SVG 記錄的是字型名稱，對方電腦缺少這個字型時會被替換。需要固定字型時請匯出 PDF（字型隨檔案嵌入），或在投稿前用 Inkscape、Illustrator 把文字轉為曲線。",
+  "en": "EMF and SVG store font names; a computer without the font substitutes another one. Export PDF when the fonts must not change (they are embedded), or convert the text to outlines with Inkscape or Illustrator before submitting.",
+  "ja": "EMF と SVG はフォント名を記録しているため、相手のパソコンにそのフォントがないと置き換えられます。フォントを固定したい場合は PDF（フォントを埋め込み）でエクスポートするか、投稿前に Inkscape や Illustrator で文字をアウトライン化してください。"
+ },
+ "3000 DPI 的 PNG 为什么会提示文件过大？": {
+  "zh-CN": "3000 DPI 的 PNG 为什么会提示文件过大？",
+  "zh-TW": "3000 DPI 的 PNG 為什麼會提示檔案過大？",
+  "en": "Why does a 3000 DPI PNG trigger a size warning?",
+  "ja": "3000 DPI の PNG でサイズの警告が出るのはなぜ？"
+ },
+ "像素数随 DPI 的平方增长：一张 10 × 6 英寸的图在 3000 DPI 下有 5.4 亿像素。超过约 1.2 亿像素时矢印会先请你确认。论文插图通常 600 – 1200 DPI 就足够，需要更清晰时优先选择矢量格式。": {
+  "zh-CN": "像素数随 DPI 的平方增长：一张 10 × 6 英寸的图在 3000 DPI 下有 5.4 亿像素。超过约 1.2 亿像素时矢印会先请你确认。论文插图通常 600 – 1200 DPI 就足够，需要更清晰时优先选择矢量格式。",
+  "zh-TW": "畫素數隨 DPI 的平方增長：一張 10 × 6 英寸的圖在 3000 DPI 下有 5.4 億畫素。超過約 1.2 億畫素時矢印會先請你確認。論文插圖通常 600 – 1200 DPI 就足夠，需要更清晰時優先選擇向量格式。",
+  "en": "The pixel count grows with the square of the DPI: a 10 × 6 inch figure at 3000 DPI has 540 million pixels. VecStamp asks before creating more than about 120 megapixels. 600–1200 DPI is usually plenty for papers – prefer a vector format when you need more.",
+  "ja": "ピクセル数は DPI の 2 乗で増えます。10 × 6 インチの図は 3000 DPI で 5 億 4000 万ピクセルです。約 1 億 2000 万ピクセルを超える場合は確認を求めます。論文の図なら通常 600～1200 DPI で十分で、さらに高精細が必要ならベクター形式をおすすめします。"
+ },
+ "遇到问题怎么反馈？": {
+  "zh-CN": "遇到问题怎么反馈？",
+  "zh-TW": "遇到問題怎麼意見回饋？",
+  "en": "How do I report a problem?",
+  "ja": "問題を報告するには？"
+ },
+ "在「矢印」选项卡点「反馈」，可以选择发邮件或在 GitHub 提交 Issue；也可以直接写信到": {
+  "zh-CN": "在「矢印」选项卡点「反馈」，可以选择发邮件或在 GitHub 提交 Issue；也可以直接写信到",
+  "zh-TW": "在「矢印」選項卡點「意見回饋」，可以選擇發郵件或在 GitHub 提交 Issue；也可以直接寫信到",
+  "en": "Click Feedback on the VecStamp tab to send an e-mail or open a GitHub issue; you can also write to",
+  "ja": "「矢印」タブの「フィードバック」から、メールを送るか GitHub で Issue を作成できます。直接"
+ },
+ "，或": {
+  "zh-CN": "，或",
+  "zh-TW": "，或",
+  "en": ", or",
+  "ja": " 宛てにメールするか、"
+ },
+ "新建 Issue": {
+  "zh-CN": "新建 Issue",
+  "zh-TW": "新增 Issue",
+  "en": "open a new issue",
+  "ja": "新しい Issue を作成"
+ },
+ "。附上 PowerPoint 版本号（「文件 › 账户 › 关于 PowerPoint」）和出问题的文件，会更快找到原因。": {
+  "zh-CN": "。附上 PowerPoint 版本号（「文件 › 账户 › 关于 PowerPoint」）和出问题的文件，会更快找到原因。",
+  "zh-TW": "。附上 PowerPoint 版本號（「檔案 › 賬戶 › 關於 PowerPoint」）和出問題的檔案，會更快找到原因。",
+  "en": ". Please include your PowerPoint version (File › Account › About PowerPoint) and the file in question – that helps find the cause faster.",
+  "ja": "してください。PowerPoint のバージョン（「ファイル › アカウント › PowerPoint のバージョン情報」）と問題のファイルを添えていただくと、原因を早く特定できます。"
+ },
+ "永久开源，自愿赞赏": {
+  "zh-CN": "永久开源，自愿赞赏",
+  "zh-TW": "永久開源，自願贊助",
+  "en": "Free forever, support if you like",
+  "ja": "ずっとオープンソース、支援は任意"
+ },
+ "矢印以 MIT 协议开源，永久免费，没有广告，也不会推出收费版本，所有功能对每个人开放。": {
+  "zh-CN": "矢印以 MIT 协议开源，永久免费，没有广告，也不会推出收费版本，所有功能对每个人开放。",
+  "zh-TW": "矢印以 MIT 授權開源，永久免費，沒有廣告，也不會推出收費版本，所有功能對每個人開放。",
+  "en": "VecStamp is MIT-licensed open source and free forever – no ads and no paid edition; every feature is for everyone.",
+  "ja": "矢印は MIT ライセンスのオープンソースで、ずっと無料です。広告も有料版もなく、すべての機能を誰でも使えます。"
+ },
+ "如果它帮你省下了时间，欢迎扫码请作者喝杯咖啡。赞赏完全自愿，不影响任何功能；在 GitHub 点个 Star、提出建议，或者把矢印分享给需要的人，同样是很大的支持。": {
+  "zh-CN": "如果它帮你省下了时间，欢迎扫码请作者喝杯咖啡。赞赏完全自愿，不影响任何功能；在 GitHub 点个 Star、提出建议，或者把矢印分享给需要的人，同样是很大的支持。",
+  "zh-TW": "如果它幫你省下了時間，歡迎掃碼請作者喝杯咖啡。贊助完全自願，不影響任何功能；在 GitHub 點個 Star、提出建議，或者把矢印分享給需要的人，同樣是很大的支援。",
+  "en": "If it saves you time, you are welcome to buy the author a coffee. It is entirely voluntary and nothing depends on it; a star on GitHub, a suggestion or recommending VecStamp to others helps just as much.",
+  "ja": "時間の節約になったら、QR コードから作者にコーヒーをごちそうしていただけるとうれしいです。支援は任意で、機能には一切影響しません。GitHub での Star、提案、必要な方への紹介も大きな励みになります。"
+ },
+ "永久免费": {
+  "zh-CN": "永久免费",
+  "zh-TW": "永久免費",
+  "en": "Free forever",
+  "ja": "ずっと無料"
+ },
+ "MIT 开源": {
+  "zh-CN": "MIT 开源",
+  "zh-TW": "MIT 開源",
+  "en": "MIT open source",
+  "ja": "MIT オープンソース"
+ },
+ "无广告": {
+  "zh-CN": "无广告",
+  "zh-TW": "無廣告",
+  "en": "No ads",
+  "ja": "広告なし"
+ },
+ "不联网": {
+  "zh-CN": "不联网",
+  "zh-TW": "不聯網",
+  "en": "Offline",
+  "ja": "ネット接続なし"
+ },
+ "支付宝": {
+  "zh-CN": "支付宝",
+  "zh-TW": "支付寶",
+  "en": "Alipay",
+  "ja": "Alipay（支付宝）"
+ },
+ "支付宝赞赏二维码": {
+  "zh-CN": "支付宝赞赏二维码",
+  "zh-TW": "支付寶贊助QR Code",
+  "en": "Alipay QR code",
+  "ja": "Alipay の QR コード"
+ },
+ "打开支付宝扫一扫": {
+  "zh-CN": "打开支付宝扫一扫",
+  "zh-TW": "開啟支付寶掃一掃",
+  "en": "Scan with the Alipay app",
+  "ja": "Alipay アプリでスキャン"
+ },
+ "微信支付": {
+  "zh-CN": "微信支付",
+  "zh-TW": "微信支付",
+  "en": "WeChat Pay",
+  "ja": "WeChat Pay（微信支付）"
+ },
+ "微信赞赏二维码": {
+  "zh-CN": "微信赞赏二维码",
+  "zh-TW": "微信贊助QR Code",
+  "en": "WeChat Pay QR code",
+  "ja": "WeChat Pay の QR コード"
+ },
+ "打开微信扫一扫": {
+  "zh-CN": "打开微信扫一扫",
+  "zh-TW": "開啟微信掃一掃",
+  "en": "Scan with the WeChat app",
+  "ja": "WeChat アプリでスキャン"
+ },
+ "以": {
+  "zh-CN": "以",
+  "zh-TW": "以",
+  "en": "Open source under the ",
+  "ja": ""
+ },
+ "MIT 协议": {
+  "zh-CN": "MIT 协议",
+  "zh-TW": "MIT 授權",
+  "en": "MIT licence",
+  "ja": "MIT ライセンス"
+ },
+ "开源。Copyright © 2026 vluckyzhang": {
+  "zh-CN": "开源。Copyright © 2026 vluckyzhang",
+  "zh-TW": "開源。Copyright © 2026 vluckyzhang",
+  "en": ". Copyright © 2026 vluckyzhang",
+  "ja": "で公開しているオープンソースです。Copyright © 2026 vluckyzhang"
+ },
+ "链接": {
+  "zh-CN": "链接",
+  "zh-TW": "連結",
+  "en": "Links",
+  "ja": "リンク"
+ },
+ "源码": {
+  "zh-CN": "源码",
+  "zh-TW": "原始碼",
+  "en": "Source",
+  "ja": "ソースコード"
+ },
+ "更新日志": {
+  "zh-CN": "更新日志",
+  "zh-TW": "更新日誌",
+  "en": "Change log",
+  "ja": "更新履歴"
+ },
+ "提交 Issue": {
+  "zh-CN": "提交 Issue",
+  "zh-TW": "提交 Issue",
+  "en": "Report an issue",
+  "ja": "Issue を作成"
+ },
+ "邮件反馈": {
+  "zh-CN": "邮件反馈",
+  "zh-TW": "郵件意見回饋",
+  "en": "E-mail feedback",
+  "ja": "メールでフィードバック"
+ },
+ "Microsoft、PowerPoint、Visio、Windows 是 Microsoft Corporation 的商标；macOS 是 Apple Inc. 的商标；LibreOffice 是 The Document Foundation 的商标；支付宝、微信是其各自所有者的商标。本项目与上述公司无隶属关系。": {
+  "zh-CN": "Microsoft、PowerPoint、Visio、Windows 是 Microsoft Corporation 的商标；macOS 是 Apple Inc. 的商标；LibreOffice 是 The Document Foundation 的商标；支付宝、微信是其各自所有者的商标。本项目与上述公司无隶属关系。",
+  "zh-TW": "Microsoft、PowerPoint、Visio、Windows 是 Microsoft Corporation 的商標；macOS 是 Apple Inc. 的商標；LibreOffice 是 The Document Foundation 的商標；支付寶、微信是其各自所有者的商標。本專案與上述公司無隸屬關係。",
+  "en": "Microsoft, PowerPoint, Visio and Windows are trademarks of Microsoft Corporation; macOS is a trademark of Apple Inc.; LibreOffice is a trademark of The Document Foundation; Alipay and WeChat are trademarks of their respective owners. This project is not affiliated with any of them.",
+  "ja": "Microsoft、PowerPoint、Visio、Windows は Microsoft Corporation の商標です。macOS は Apple Inc. の商標です。LibreOffice は The Document Foundation の商標です。Alipay（支付宝）、WeChat（微信）はそれぞれの所有者の商標です。本プロジェクトはこれらの企業と提携関係にありません。"
+ },
+ "矢印 VecStamp 反馈": {
+  "zh-CN": "矢印 VecStamp 反馈",
+  "zh-TW": "矢印 VecStamp 意見回饋",
+  "en": "VecStamp feedback",
+  "ja": "矢印 VecStamp フィードバック"
+ },
+ "左侧截图占 {0}%": {
+  "zh-CN": "左侧截图占 {0}%",
+  "zh-TW": "左側截圖佔 {0}%",
+  "en": "Screenshot side: {0}%",
+  "ja": "スクリーンショット側：{0}%"
+ },
+ "{0} 倍": {
+  "zh-CN": "{0} 倍",
+  "zh-TW": "{0} 倍",
+  "en": "{0}×",
+  "ja": "{0} 倍"
+ }
+}

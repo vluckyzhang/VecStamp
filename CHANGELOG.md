@@ -2,6 +2,36 @@
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.2.2] - 2026-10-11
+
+### 修复
+- **导出 SVG 一直停在「转换为 SVG」阶段，按 Esc 也无法取消**（Windows，PowerPoint 2013 – 2021 的 XPS 转换）：
+  - 外部程序（PowerShell 转换脚本、Inkscape、LibreOffice、gzip / 打包）改为后台运行（`CreateProcessW`，不再阻塞 PowerPoint），等待期间进度窗口持续刷新，**按 Esc 立即终止**转换进程；
+  - PowerShell 改用普通的 `-Command` 参数启动（不再使用 `-WindowStyle Hidden` 和 `-EncodedCommand`，避免被安全软件当作可疑命令拦截而挂起），窗口由进程创建参数隐藏；
+  - 转换设有超时：内置 SVG 转换 180 秒，其他外部程序 120 – 180 秒；超时后询问是否改用 Inkscape / LibreOffice 或导出 EMF，同一次导出中不再重复等待；
+  - 转换脚本 `xps2svg.ps1` 写出进度（读取 XPS → 转换图形元素 n / N → 嵌入字体 → 写出 SVG），字体表按需解析，超过 6 MB 的字体只引用名称不再嵌入，图片尺寸只读取文件头，大文件转换明显加快；
+  - 临时幻灯片在转换开始前删除，取消或超时后不会留下临时页面。
+
+### 改进
+- **VSDX 圆角保持为曲线**：新的 DrawingML 预设形状引擎按 ECMA-376 `presetShapeDefinitions.xml` 的公式（guide、调整控点、`arcTo`、二次 / 三次贝塞尔）计算 **177 种预设形状**的几何，弧线写成 Visio `EllipticalArcTo`（每段不超过 90°），圆角矩形、对角圆角矩形、圆角箭头、云形、波浪、弧形、饼形、同心圆等不再变成多边形；自由曲线节点类型的判断更准确。预设数据由 `build/make_presets.py` 编译进加载项，`tests/test_vsdx_presets.py` 用 LibreOffice 渲染逐一比对。
+- **导出进度更详细**：进度窗口显示**百分比**、当前文件 / 幻灯片（第 i / n 个）、当前步骤（准备图形、合成背景与边距、PowerPoint 生成 EMF、渲染 PNG（宽 × 高像素）、生成 Visio 形状 i / n：名称、通过 XPS 生成 SVG：转换图形元素 i / n……）和已用时间。
+  - Windows：原生进度窗口新增百分比；按 Esc 取消后列出已经完成的文件。
+  - macOS：辅助脚本的进度对话框显示百分比和步骤，并提供「取消」按钮。
+  - LibreOffice：新增进度窗口（任务、当前文件、步骤、进度条、百分比、已用时间、「取消」按钮，Esc 同样可以取消），状态栏同步显示。
+- **背景菜单内置取色面板**：
+  - 功能区「背景」下拉框改为「背景」菜单：透明 / 白色 / 米色 / 网格（坐标纸）四个选项，以及「**自定义颜色**」——即原来的「背景颜色」面板（主题颜色、标准色、最近使用的颜色、其他颜色…、取色器）；移除单独的「背景颜色」按钮。
+  - 「背景」前新增**颜色预览方块**，随时显示当前背景（透明为棋盘格、网格为坐标纸、其余为颜色），点击直接打开颜色面板。
+  - PowerPoint 的「其他颜色」对话框无法调用时，自动换用矢印自带的**颜色面板**（原生窗口：主题颜色及深浅变化、标准色、最近使用的颜色、R,G,B / #RRGGBB 输入与预览、系统颜色对话框按钮）；再不可用时依次回退到系统颜色对话框和颜色列表。
+  - macOS：「自定义颜色…」打开 macOS 颜色面板（即 PowerPoint for Mac「其他颜色」所用的面板），辅助脚本不可用时使用颜色列表；预览方块显示当前背景类型的图标。
+  - LibreOffice：「导出设置」中「背景」前加入预览方块，选择「自定义颜色…」时直接打开取色器，取色器不可用时换用矢印自带的颜色面板；记住最近使用的颜色。
+- **多语言界面**：加载项、LibreOffice 扩展的全部界面（功能区标签与提示、下拉选项、对话框、进度窗口、颜色面板、提示信息、文件名中的「第 n 页」）支持**简体中文、繁體中文、English、日本語**，默认简体中文。
+  - PowerPoint：「关于」组新增语言菜单，选择后整个选项卡立即刷新，无需重启；语言保存在当前用户设置中，「恢复默认设置」不改变语言。
+  - LibreOffice：「矢印 → 界面语言（Language）…」、「导出设置 → 界面语言」和「关于」对话框中切换，之后的对话框立即使用新语言；菜单和扩展说明提供四种语言（跟随 LibreOffice 界面语言）。
+  - 字符串表：`src/i18n/strings.json`（加载项，构建时生成 `LoadStrings`）和 `libreoffice/extension/pythonpath/vecstamp_strings.json`；`build/i18n_tool.py` 检查完整性与占位符，并可用 OpenCC 生成繁体初稿；`tests/test_i18n.py` 核对生成的 VBA 代码。
+- **多语言 README 与官网 SEO**：README 提供简体中文、繁體中文、English、日本語四个版本（配图同样有四种语言）；宣传网站生成四种语言页面（`/`、`/zh-TW/`、`/en/`、`/ja/`），加入语言切换菜单、`canonical` / `hreflang`、Open Graph、结构化数据（SoftwareApplication、FAQPage）、`sitemap.xml` 和 `robots.txt` 中的 Sitemap；网站地址在 `website/config.js` 的 `siteUrl` 中配置。
+- 快速开始说明新增 `Quick-Start.txt`、`快速開始.txt`、`クイックスタート.txt`。
+- 修正宣传网站导航中的「失印 VecStamp」笔误。
+
 ## [1.2.1] - 2026-10-09
 
 ### 新增

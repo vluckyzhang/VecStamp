@@ -305,7 +305,7 @@ def _template_entries():
     return entries
 
 
-def save(out_path, page_w, page_h, shapes, version='1.2.1', title='VecStamp drawing'):
+def save(out_path, page_w, page_h, shapes, version='1.2.2', title='VecStamp drawing'):
     """Writes a one-page .vsdx with the given shapes."""
     writer = Writer()
     shapes_xml = writer.page_xml(shapes)
@@ -341,7 +341,7 @@ def emf_frame_inches(emf_bytes):
     return max(right - left, 1) / 2540.0, max(bottom - top, 1) / 2540.0
 
 
-def build_vsdx(emf_path, out_path, version='1.2.1', title='VecStamp drawing', size_in=None):
+def build_vsdx(emf_path, out_path, version='1.2.2', title='VecStamp drawing', size_in=None):
     """Picture mode: the whole drawing as one embedded EMF picture."""
     data = open(emf_path, 'rb').read()
     w, h = size_in or emf_frame_inches(data)

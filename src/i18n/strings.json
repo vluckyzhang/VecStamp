@@ -1,0 +1,1544 @@
+{
+ "app.title": {
+  "zh-CN": "矢印 VecStamp",
+  "zh-TW": "矢印 VecStamp",
+  "en": "VecStamp",
+  "ja": "矢印 VecStamp"
+ },
+ "btn.ok": {
+  "zh-CN": "确定",
+  "zh-TW": "確定",
+  "en": "OK",
+  "ja": "OK"
+ },
+ "btn.cancel": {
+  "zh-CN": "取消",
+  "zh-TW": "取消",
+  "en": "Cancel",
+  "ja": "キャンセル"
+ },
+ "fmt.emf": {
+  "zh-CN": "EMF 增强型图元文件",
+  "zh-TW": "EMF 增強型圖元檔案",
+  "en": "EMF Enhanced Metafile",
+  "ja": "EMF 拡張メタファイル"
+ },
+ "fmt.emz": {
+  "zh-CN": "EMZ 压缩的增强型图元文件",
+  "zh-TW": "EMZ 壓縮的增強型圖元檔案",
+  "en": "EMZ Compressed Enhanced Metafile",
+  "ja": "EMZ 圧縮拡張メタファイル"
+ },
+ "fmt.svg": {
+  "zh-CN": "SVG 可缩放矢量图形",
+  "zh-TW": "SVG 可縮放向量圖形",
+  "en": "SVG Scalable Vector Graphics",
+  "ja": "SVG スケーラブル ベクター グラフィックス"
+ },
+ "fmt.wmf": {
+  "zh-CN": "WMF Windows 图元文件",
+  "zh-TW": "WMF Windows 圖元檔案",
+  "en": "WMF Windows Metafile",
+  "ja": "WMF Windows メタファイル"
+ },
+ "fmt.png": {
+  "zh-CN": "PNG 高分辨率位图",
+  "zh-TW": "PNG 高解析度點陣圖",
+  "en": "PNG High-resolution bitmap",
+  "ja": "PNG 高解像度ビットマップ"
+ },
+ "fmt.pdf": {
+  "zh-CN": "PDF 矢量文档",
+  "zh-TW": "PDF 向量文件",
+  "en": "PDF Vector document",
+  "ja": "PDF ベクター文書"
+ },
+ "fmt.vsdx": {
+  "zh-CN": "VSDX Visio 绘图",
+  "zh-TW": "VSDX Visio 繪圖",
+  "en": "VSDX Visio drawing",
+  "ja": "VSDX Visio 図面"
+ },
+ "bg.none": {
+  "zh-CN": "透明",
+  "zh-TW": "透明",
+  "en": "Transparent",
+  "ja": "透明"
+ },
+ "bg.white": {
+  "zh-CN": "白色",
+  "zh-TW": "白色",
+  "en": "White",
+  "ja": "白"
+ },
+ "bg.beige": {
+  "zh-CN": "米色",
+  "zh-TW": "米色",
+  "en": "Beige",
+  "ja": "ベージュ"
+ },
+ "bg.grid": {
+  "zh-CN": "网格",
+  "zh-TW": "格線",
+  "en": "Grid",
+  "ja": "方眼"
+ },
+ "bg.custom": {
+  "zh-CN": "自定义颜色",
+  "zh-TW": "自訂顏色",
+  "en": "Custom colour",
+  "ja": "ユーザー設定の色"
+ },
+ "bg.gridValue": {
+  "zh-CN": "网格（间距 {0} 磅）",
+  "zh-TW": "格線（間距 {0} 磅）",
+  "en": "Grid ({0} pt spacing)",
+  "ja": "方眼（間隔 {0} pt）"
+ },
+ "bg.customValue": {
+  "zh-CN": "自定义颜色 {0}",
+  "zh-TW": "自訂顏色 {0}",
+  "en": "Custom colour {0}",
+  "ja": "ユーザー設定の色 {0}"
+ },
+ "mode.merge": {
+  "zh-CN": "合并为一个文件",
+  "zh-TW": "合併為一個檔案",
+  "en": "One file for all",
+  "ja": "1 つのファイルにまとめる"
+ },
+ "mode.split": {
+  "zh-CN": "每个图形一个文件",
+  "zh-TW": "每個圖形一個檔案",
+  "en": "One file per shape",
+  "ja": "図形ごとに 1 ファイル"
+ },
+ "naming.ask": {
+  "zh-CN": "每次选择保存位置",
+  "zh-TW": "每次選擇儲存位置",
+  "en": "Ask where to save",
+  "ja": "毎回保存先を選ぶ"
+ },
+ "naming.auto": {
+  "zh-CN": "自动保存到默认文件夹",
+  "zh-TW": "自動儲存到預設資料夾",
+  "en": "Save to the default folder",
+  "ja": "既定のフォルダーに自動保存"
+ },
+ "dpi.custom": {
+  "zh-CN": "自定义",
+  "zh-TW": "自訂",
+  "en": "Custom",
+  "ja": "ユーザー設定"
+ },
+ "file.page": {
+  "zh-CN": "第{0}页",
+  "zh-TW": "第{0}頁",
+  "en": "slide{0}",
+  "ja": "スライド{0}"
+ },
+ "fm.mac": {
+  "zh-CN": "访达",
+  "zh-TW": "Finder",
+  "en": "Finder",
+  "ja": "Finder"
+ },
+ "fm.win": {
+  "zh-CN": "资源管理器",
+  "zh-TW": "檔案總管",
+  "en": "File Explorer",
+  "ja": "エクスプローラー"
+ },
+ "dlg.saveTitle": {
+  "zh-CN": "导出选中图形",
+  "zh-TW": "匯出選取圖形",
+  "en": "Export selected shapes",
+  "ja": "選択した図形をエクスポート"
+ },
+ "dlg.saveAs": {
+  "zh-CN": "导出为 {0}",
+  "zh-TW": "匯出為 {0}",
+  "en": "Export as {0}",
+  "ja": "{0} としてエクスポート"
+ },
+ "dlg.pickFolder": {
+  "zh-CN": "选择导出文件夹",
+  "zh-TW": "選擇匯出資料夾",
+  "en": "Choose the export folder",
+  "ja": "エクスポート先フォルダーを選択"
+ },
+ "dlg.pickFolderEach": {
+  "zh-CN": "选择导出文件夹（每个图形一个文件）",
+  "zh-TW": "選擇匯出資料夾（每個圖形一個檔案）",
+  "en": "Choose the export folder (one file per shape)",
+  "ja": "エクスポート先フォルダーを選択（図形ごとに 1 ファイル）"
+ },
+ "dlg.pickFolderBatch": {
+  "zh-CN": "选择逐页导出的文件夹（格式：{0}）",
+  "zh-TW": "選擇逐頁匯出的資料夾（格式：{0}）",
+  "en": "Choose the folder for the slide files (format: {0})",
+  "ja": "スライドごとのファイルの保存先を選択（形式：{0}）"
+ },
+ "dlg.fileName": {
+  "zh-CN": "文件名（不含扩展名）：",
+  "zh-TW": "檔名（不含副檔名）：",
+  "en": "File name (without extension):",
+  "ja": "ファイル名（拡張子なし）："
+ },
+ "set.pickDefaultFolder": {
+  "zh-CN": "选择“自动保存”使用的默认文件夹",
+  "zh-TW": "選擇「自動儲存」使用的預設資料夾",
+  "en": "Choose the default folder for automatic saving",
+  "ja": "自動保存に使う既定のフォルダーを選択"
+ },
+ "set.current": {
+  "zh-CN": "当前设置",
+  "zh-TW": "目前設定",
+  "en": "Current settings",
+  "ja": "現在の設定"
+ },
+ "set.folderNone": {
+  "zh-CN": "（未设置：使用演示文稿所在文件夹；未保存或在云端时使用桌面）",
+  "zh-TW": "（未設定：使用簡報所在資料夾；未儲存或在雲端時使用桌面）",
+  "en": "(not set: the folder of the presentation; the desktop for unsaved or cloud presentations)",
+  "ja": "（未設定：プレゼンテーションのフォルダー。未保存またはクラウド上の場合はデスクトップ）"
+ },
+ "msg.home": {
+  "zh-CN": "项目主页：{0}",
+  "zh-TW": "專案首頁：{0}",
+  "en": "Project page: {0}",
+  "ja": "プロジェクトページ：{0}"
+ },
+ "msg.noFolderYet": {
+  "zh-CN": "还没有导出过文件。导出一次后，这里会打开最近使用的文件夹。",
+  "zh-TW": "還沒有匯出過檔案。匯出一次後，這裡會開啟最近使用的資料夾。",
+  "en": "Nothing has been exported yet. After the first export this opens the most recent folder.",
+  "ja": "まだエクスポートしていません。一度エクスポートすると、ここから最近使用したフォルダーを開けます。"
+ },
+ "msg.badMargin": {
+  "zh-CN": "边距请输入 0～500 之间的数字（单位：磅）。",
+  "zh-TW": "邊界請輸入 0～500 之間的數字（單位：磅）。",
+  "en": "Please enter a margin from 0 to 500 (points).",
+  "ja": "余白には 0～500 の数値（単位：pt）を入力してください。"
+ },
+ "msg.badDpi": {
+  "zh-CN": "自定义分辨率请输入 1～{0} 之间的整数（DPI）。",
+  "zh-TW": "自訂解析度請輸入 1～{0} 之間的整數（DPI）。",
+  "en": "Please enter a resolution from 1 to {0} (DPI).",
+  "ja": "解像度には 1～{0} の整数（DPI）を入力してください。"
+ },
+ "msg.badAlpha": {
+  "zh-CN": "背景透明度请输入 0～100 之间的数字（%）。",
+  "zh-TW": "背景透明度請輸入 0～100 之間的數字（%）。",
+  "en": "Please enter a background transparency from 0 to 100 (%).",
+  "ja": "背景の透明度には 0～100 の数値（%）を入力してください。"
+ },
+ "msg.badGrid": {
+  "zh-CN": "网格间距请输入 2～200 之间的数字（单位：磅）。",
+  "zh-TW": "格線間距請輸入 2～200 之間的數字（單位：磅）。",
+  "en": "Please enter a grid spacing from 2 to 200 (points).",
+  "ja": "方眼の間隔には 2～200 の数値（単位：pt）を入力してください。"
+ },
+ "msg.askReset": {
+  "zh-CN": "确定把所有导出设置恢复为默认值吗？",
+  "zh-TW": "確定把所有匯出設定恢復為預設值嗎？",
+  "en": "Reset all export settings to their defaults?",
+  "ja": "すべてのエクスポート設定を既定値に戻しますか？"
+ },
+ "msg.exportFailed": {
+  "zh-CN": "导出失败：{0}",
+  "zh-TW": "匯出失敗：{0}",
+  "en": "Export failed: {0}",
+  "ja": "エクスポートに失敗しました：{0}"
+ },
+ "msg.batchFailed": {
+  "zh-CN": "逐页导出失败：{0}",
+  "zh-TW": "逐頁匯出失敗：{0}",
+  "en": "Exporting the slides failed: {0}",
+  "ja": "スライドごとのエクスポートに失敗しました：{0}"
+ },
+ "msg.pictureFailed": {
+  "zh-CN": "生成 EMF 图片副本失败：{0}",
+  "zh-TW": "產生 EMF 圖片副本失敗：{0}",
+  "en": "Could not create the EMF picture copy: {0}",
+  "ja": "EMF 画像コピーを作成できませんでした：{0}"
+ },
+ "msg.colorFailed": {
+  "zh-CN": "无法打开颜色选择器：{0}\n也可以直接在“RGB”框中输入颜色。",
+  "zh-TW": "無法開啟顏色選擇器：{0}\n也可以直接在「RGB」框中輸入顏色。",
+  "en": "The colour picker could not be opened: {0}\nYou can also type the colour into the RGB box.",
+  "ja": "色の選択画面を開けませんでした：{0}\n「RGB」ボックスに色を直接入力することもできます。"
+ },
+ "msg.openPres": {
+  "zh-CN": "请先打开演示文稿。",
+  "zh-TW": "請先開啟簡報。",
+  "en": "Please open a presentation first.",
+  "ja": "先にプレゼンテーションを開いてください。"
+ },
+ "msg.openAndSelect": {
+  "zh-CN": "请先打开演示文稿，并选中要导出的图形。",
+  "zh-TW": "請先開啟簡報，並選取要匯出的圖形。",
+  "en": "Please open a presentation and select the shapes to export.",
+  "ja": "プレゼンテーションを開き、エクスポートする図形を選択してください。"
+ },
+ "msg.selectFirst": {
+  "zh-CN": "请先选中图形。",
+  "zh-TW": "請先選取圖形。",
+  "en": "Please select shapes first.",
+  "ja": "先に図形を選択してください。"
+ },
+ "msg.normalView": {
+  "zh-CN": "请在普通视图中选中要导出的图形。",
+  "zh-TW": "請在普通檢視中選取要匯出的圖形。",
+  "en": "Please select the shapes to export in Normal view.",
+  "ja": "標準表示でエクスポートする図形を選択してください。"
+ },
+ "msg.noShapesSlide": {
+  "zh-CN": "当前幻灯片上没有可导出的图形。",
+  "zh-TW": "目前投影片上沒有可匯出的圖形。",
+  "en": "There are no shapes to export on this slide.",
+  "ja": "このスライドにはエクスポートできる図形がありません。"
+ },
+ "msg.noShapesSlides": {
+  "zh-CN": "所选幻灯片上没有可导出的图形。",
+  "zh-TW": "所選投影片上沒有可匯出的圖形。",
+  "en": "There are no shapes to export on the chosen slides.",
+  "ja": "選択したスライドにはエクスポートできる図形がありません。"
+ },
+ "msg.noSlides": {
+  "zh-CN": "演示文稿中没有幻灯片。",
+  "zh-TW": "簡報中沒有投影片。",
+  "en": "The presentation has no slides.",
+  "ja": "プレゼンテーションにスライドがありません。"
+ },
+ "msg.askWholeSlide": {
+  "zh-CN": "没有选中任何图形。\n是否导出当前幻灯片上的全部图形？",
+  "zh-TW": "沒有選取任何圖形。\n是否匯出目前投影片上的全部圖形？",
+  "en": "No shapes are selected.\nExport all shapes on this slide?",
+  "ja": "図形が選択されていません。\nこのスライドのすべての図形をエクスポートしますか？"
+ },
+ "msg.askWhich": {
+  "zh-CN": "要导出哪些幻灯片？\n\n是：只导出所选的 {0} 页\n否：导出全部 {1} 页",
+  "zh-TW": "要匯出哪些投影片？\n\n是：只匯出所選的 {0} 頁\n否：匯出全部 {1} 頁",
+  "en": "Which slides should be exported?\n\nYes: only the {0} selected slides\nNo: all {1} slides",
+  "ja": "どのスライドをエクスポートしますか？\n\nはい：選択した {0} 枚だけ\nいいえ：全 {1} 枚"
+ },
+ "msg.skipped": {
+  "zh-CN": "已跳过 {0} 张空白幻灯片。",
+  "zh-TW": "已跳過 {0} 張空白投影片。",
+  "en": "{0} empty slide(s) skipped.",
+  "ja": "空白のスライド {0} 枚をスキップしました。"
+ },
+ "msg.exported": {
+  "zh-CN": "已导出 {0} 个文件：",
+  "zh-TW": "已匯出 {0} 個檔案：",
+  "en": "{0} file(s) exported:",
+  "ja": "{0} 個のファイルをエクスポートしました："
+ },
+ "msg.cancelled": {
+  "zh-CN": "已取消导出。",
+  "zh-TW": "已取消匯出。",
+  "en": "Export cancelled.",
+  "ja": "エクスポートを中止しました。"
+ },
+ "msg.cancelledPartial": {
+  "zh-CN": "已取消导出。已完成的 {0} 个文件已保留：",
+  "zh-TW": "已取消匯出。已完成的 {0} 個檔案已保留：",
+  "en": "Export cancelled. The {0} file(s) already finished were kept:",
+  "ja": "エクスポートを中止しました。完了した {0} 個のファイルは残してあります："
+ },
+ "msg.bigPng": {
+  "zh-CN": "按 {0} DPI 导出，这张图约为 {1} × {2} 像素（约 {3} 百万像素），可能很慢或内存不足。仍然继续吗？",
+  "zh-TW": "按 {0} DPI 匯出，這張圖約為 {1} × {2} 畫素（約 {3} 百萬畫素），可能很慢或記憶體不足。仍然繼續嗎？",
+  "en": "At {0} DPI this picture would be about {1} × {2} pixels ({3} megapixels) and may be slow or run out of memory. Continue anyway?",
+  "ja": "{0} DPI では約 {1} × {2} ピクセル（約 {3} メガピクセル）になり、時間がかかったりメモリが不足したりする可能性があります。続行しますか？"
+ },
+ "msg.svgTimeout": {
+  "zh-CN": "内置的 SVG 转换超过 {0} 秒仍未完成，已停止。\n\n图形非常复杂（大量文字、图片或节点）时可能出现这种情况。\n是否改用 Inkscape / LibreOffice 转换（如果已安装）或导出 EMF？",
+  "zh-TW": "內建的 SVG 轉換超過 {0} 秒仍未完成，已停止。\n\n圖形非常複雜（大量文字、圖片或節點）時可能出現這種情況。\n是否改用 Inkscape / LibreOffice 轉換（如果已安裝）或匯出 EMF？",
+  "en": "The built-in SVG conversion did not finish within {0} seconds and was stopped.\n\nThis can happen with very complex drawings (lots of text, pictures or points).\nConvert with Inkscape / LibreOffice instead (if installed), or export EMF?",
+  "ja": "内蔵の SVG 変換が {0} 秒以内に終わらなかったため停止しました。\n\n図形が非常に複雑な場合（大量の文字・画像・頂点）に起こることがあります。\nInkscape / LibreOffice で変換（インストール済みの場合）するか、EMF でエクスポートしますか？"
+ },
+ "msg.noSvg": {
+  "zh-CN": "没能生成 SVG：这个 PowerPoint 不能直接导出 SVG，内置转换也没有成功（需要系统自带的 Windows PowerShell），电脑上也没有可用于转换的 Inkscape 或 LibreOffice。\n\n是否改为导出 EMF？（也可以导出 PDF 后用其他软件转换）",
+  "zh-TW": "沒能產生 SVG：這個 PowerPoint 不能直接匯出 SVG，內建轉換也沒有成功（需要系統自帶的 Windows PowerShell），電腦上也沒有可用於轉換的 Inkscape 或 LibreOffice。\n\n是否改為匯出 EMF？（也可以匯出 PDF 後用其他軟體轉換）",
+  "en": "No SVG could be created: this PowerPoint cannot export SVG itself, the built-in conversion did not succeed (it needs the Windows PowerShell that comes with Windows), and neither Inkscape nor LibreOffice is installed.\n\nExport EMF instead? (You can also export a PDF and convert it with another program.)",
+  "ja": "SVG を作成できませんでした。この PowerPoint は SVG を直接エクスポートできず、内蔵の変換も成功しませんでした（Windows 付属の Windows PowerShell が必要です）。変換に使える Inkscape や LibreOffice もありません。\n\n代わりに EMF でエクスポートしますか？（PDF でエクスポートして他のソフトで変換することもできます）"
+ },
+ "msg.eyedropperView": {
+  "zh-CN": "取色器需要在普通视图中打开一张幻灯片。\n请切换到普通视图后再点“取色器”，然后在幻灯片上点击要拾取的颜色。",
+  "zh-TW": "取色器需要在普通檢視中開啟一張投影片。\n請切換到普通檢視後再點「取色器」，然後在投影片上點選要拾取的顏色。",
+  "en": "The eyedropper needs a slide open in Normal view.\nSwitch to Normal view, click Eyedropper again, then click the colour on the slide.",
+  "ja": "スポイトを使うには標準表示でスライドを開いている必要があります。\n標準表示に切り替えてから「スポイト」をクリックし、スライド上の色をクリックしてください。"
+ },
+ "prog.export1": {
+  "zh-CN": "正在导出 {0}",
+  "zh-TW": "正在匯出 {0}",
+  "en": "Exporting {0}",
+  "ja": "{0} をエクスポートしています"
+ },
+ "prog.exportN": {
+  "zh-CN": "正在导出 {0} 个 {1} 文件",
+  "zh-TW": "正在匯出 {0} 個 {1} 檔案",
+  "en": "Exporting {0} {1} files",
+  "ja": "{0} 個の {1} ファイルをエクスポートしています"
+ },
+ "prog.item": {
+  "zh-CN": "第 {0} / {1} 个：{2}",
+  "zh-TW": "第 {0} / {1} 個：{2}",
+  "en": "Shape {0} of {1}: {2}",
+  "ja": "図形 {0} / {1}：{2}"
+ },
+ "prog.batch": {
+  "zh-CN": "逐页导出（{0} 页，{1}）",
+  "zh-TW": "逐頁匯出（{0} 頁，{1}）",
+  "en": "Exporting slides ({0} slides, {1})",
+  "ja": "スライドごとにエクスポート（{0} 枚、{1}）"
+ },
+ "prog.page": {
+  "zh-CN": "第 {0} / {1} 页（幻灯片 {2}）",
+  "zh-TW": "第 {0} / {1} 頁（投影片 {2}）",
+  "en": "Slide {0} of {1} (slide {2})",
+  "ja": "スライド {0} / {1}（スライド番号 {2}）"
+ },
+ "prog.preparing": {
+  "zh-CN": "准备中…",
+  "zh-TW": "準備中…",
+  "en": "Preparing…",
+  "ja": "準備しています…"
+ },
+ "prog.elapsed": {
+  "zh-CN": "（已用 {0} 秒）",
+  "zh-TW": "（已用 {0} 秒）",
+  "en": " ({0} s elapsed)",
+  "ja": "（経過 {0} 秒）"
+ },
+ "prog.escHint": {
+  "zh-CN": "按 Esc 可取消",
+  "zh-TW": "按 Esc 可取消",
+  "en": "Press Esc to cancel",
+  "ja": "Esc キーで中止"
+ },
+ "prog.eyedropper": {
+  "zh-CN": "取色器",
+  "zh-TW": "取色器",
+  "en": "Eyedropper",
+  "ja": "スポイト"
+ },
+ "step.prepare": {
+  "zh-CN": "准备图形（{0} 个对象）",
+  "zh-TW": "準備圖形（{0} 個物件）",
+  "en": "Preparing the shapes ({0} objects)",
+  "ja": "図形を準備しています（{0} 個のオブジェクト）"
+ },
+ "step.compose": {
+  "zh-CN": "在临时幻灯片上合成图形、背景与边距",
+  "zh-TW": "在臨時投影片上合成圖形、背景與邊界",
+  "en": "Combining shapes, background and margin on a temporary slide",
+  "ja": "一時スライドで図形・背景・余白を合成しています"
+ },
+ "step.composed": {
+  "zh-CN": "合成完成",
+  "zh-TW": "合成完成",
+  "en": "Combined",
+  "ja": "合成が完了しました"
+ },
+ "step.ppEmf": {
+  "zh-CN": "PowerPoint 正在生成 EMF 矢量图",
+  "zh-TW": "PowerPoint 正在產生 EMF 向量圖",
+  "en": "PowerPoint is creating the EMF vector picture",
+  "ja": "PowerPoint が EMF ベクター画像を作成しています"
+ },
+ "step.ppWmf": {
+  "zh-CN": "PowerPoint 正在生成 WMF 图元文件",
+  "zh-TW": "PowerPoint 正在產生 WMF 圖元檔案",
+  "en": "PowerPoint is creating the WMF metafile",
+  "ja": "PowerPoint が WMF メタファイルを作成しています"
+ },
+ "step.emz": {
+  "zh-CN": "压缩为 EMZ（gzip）",
+  "zh-TW": "壓縮為 EMZ（gzip）",
+  "en": "Compressing to EMZ (gzip)",
+  "ja": "EMZ に圧縮しています（gzip）"
+ },
+ "step.png": {
+  "zh-CN": "渲染 PNG：{0} × {1} 像素（{2} DPI）",
+  "zh-TW": "渲染 PNG：{0} × {1} 畫素（{2} DPI）",
+  "en": "Rendering the PNG: {0} × {1} pixels ({2} DPI)",
+  "ja": "PNG をレンダリングしています：{0} × {1} ピクセル（{2} DPI）"
+ },
+ "step.analyze": {
+  "zh-CN": "分析图形结构",
+  "zh-TW": "分析圖形結構",
+  "en": "Analysing the drawing",
+  "ja": "図形の構造を解析しています"
+ },
+ "step.doneFile": {
+  "zh-CN": "完成：{0}",
+  "zh-TW": "完成：{0}",
+  "en": "Done: {0}",
+  "ja": "完了：{0}"
+ },
+ "step.ppSvg": {
+  "zh-CN": "PowerPoint 正在导出 SVG",
+  "zh-TW": "PowerPoint 正在匯出 SVG",
+  "en": "PowerPoint is exporting the SVG",
+  "ja": "PowerPoint が SVG をエクスポートしています"
+ },
+ "step.fixSvg": {
+  "zh-CN": "检查并修复 SVG",
+  "zh-TW": "檢查並修復 SVG",
+  "en": "Checking and repairing the SVG",
+  "ja": "SVG を確認・修復しています"
+ },
+ "step.emf2svg": {
+  "zh-CN": "使用 Inkscape / LibreOffice 把 EMF 转换为 SVG",
+  "zh-TW": "使用 Inkscape / LibreOffice 把 EMF 轉換為 SVG",
+  "en": "Converting EMF to SVG with Inkscape / LibreOffice",
+  "ja": "Inkscape / LibreOffice で EMF を SVG に変換しています"
+ },
+ "step.inkscape": {
+  "zh-CN": "Inkscape 正在把 EMF 转换为 SVG",
+  "zh-TW": "Inkscape 正在把 EMF 轉換為 SVG",
+  "en": "Inkscape is converting the EMF to SVG",
+  "ja": "Inkscape が EMF を SVG に変換しています"
+ },
+ "step.libreoffice": {
+  "zh-CN": "LibreOffice 正在把 EMF 转换为 SVG",
+  "zh-TW": "LibreOffice 正在把 EMF 轉換為 SVG",
+  "en": "LibreOffice is converting the EMF to SVG",
+  "ja": "LibreOffice が EMF を SVG に変換しています"
+ },
+ "step.pdfDoc": {
+  "zh-CN": "创建与图形同样大小的临时文档",
+  "zh-TW": "建立與圖形同樣大小的臨時文件",
+  "en": "Creating a temporary document of the drawing's size",
+  "ja": "図形と同じ大きさの一時文書を作成しています"
+ },
+ "step.pdfPaste": {
+  "zh-CN": "以矢量图形式粘贴",
+  "zh-TW": "以向量圖形式貼上",
+  "en": "Pasting as a vector picture",
+  "ja": "ベクター画像として貼り付けています"
+ },
+ "step.pdfWrite": {
+  "zh-CN": "PowerPoint 正在生成 PDF",
+  "zh-TW": "PowerPoint 正在產生 PDF",
+  "en": "PowerPoint is creating the PDF",
+  "ja": "PowerPoint が PDF を作成しています"
+ },
+ "step.vsdxPicture": {
+  "zh-CN": "生成 EMF 矢量图（图片模式）",
+  "zh-TW": "產生 EMF 向量圖（圖片模式）",
+  "en": "Creating the EMF vector picture (picture mode)",
+  "ja": "EMF ベクター画像を作成しています（画像モード）"
+ },
+ "step.vsdxWrite0": {
+  "zh-CN": "写出 Visio 文件",
+  "zh-TW": "寫出 Visio 檔案",
+  "en": "Writing the Visio file",
+  "ja": "Visio ファイルを書き出しています"
+ },
+ "step.vsdxWrite": {
+  "zh-CN": "写出 Visio 文件（{0} 个原生形状，{1} 张图片）",
+  "zh-TW": "寫出 Visio 檔案（{0} 個原生形狀，{1} 張圖片）",
+  "en": "Writing the Visio file ({0} native shapes, {1} pictures)",
+  "ja": "Visio ファイルを書き出しています（ネイティブ図形 {0} 個、画像 {1} 枚）"
+ },
+ "step.vsdxShape": {
+  "zh-CN": "生成 Visio 形状 {0} / {1}：{2}",
+  "zh-TW": "產生 Visio 形狀 {0} / {1}：{2}",
+  "en": "Creating Visio shape {0} of {1}: {2}",
+  "ja": "Visio 図形を作成しています {0} / {1}：{2}"
+ },
+ "step.xpsPrep": {
+  "zh-CN": "准备临时幻灯片（隐藏母版和背景）",
+  "zh-TW": "準備臨時投影片（隱藏母版和背景）",
+  "en": "Preparing a temporary slide (master and background hidden)",
+  "ja": "一時スライドを準備しています（マスターと背景は非表示）"
+ },
+ "step.xpsPrint": {
+  "zh-CN": "PowerPoint 正在打印为 XPS",
+  "zh-TW": "PowerPoint 正在列印為 XPS",
+  "en": "PowerPoint is printing to XPS",
+  "ja": "PowerPoint が XPS に印刷しています"
+ },
+ "step.xps": {
+  "zh-CN": "通过 XPS 生成 SVG：{0}",
+  "zh-TW": "透過 XPS 產生 SVG：{0}",
+  "en": "SVG via XPS: {0}",
+  "ja": "XPS 経由で SVG を作成：{0}"
+ },
+ "xps.start": {
+  "zh-CN": "启动转换程序",
+  "zh-TW": "啟動轉換程式",
+  "en": "starting the converter",
+  "ja": "変換プログラムを起動しています"
+ },
+ "xps.open": {
+  "zh-CN": "读取 XPS 文件",
+  "zh-TW": "讀取 XPS 檔案",
+  "en": "reading the XPS file",
+  "ja": "XPS ファイルを読み込んでいます"
+ },
+ "xps.page": {
+  "zh-CN": "分析页面：共 {0} 个图形元素",
+  "zh-TW": "分析頁面：共 {0} 個圖形元素",
+  "en": "analysing the page: {0} elements",
+  "ja": "ページを解析しています：要素 {0} 個"
+ },
+ "xps.elem": {
+  "zh-CN": "转换图形元素 {0} / {1}",
+  "zh-TW": "轉換圖形元素 {0} / {1}",
+  "en": "converting element {0} of {1}",
+  "ja": "要素を変換しています {0} / {1}"
+ },
+ "xps.font": {
+  "zh-CN": "嵌入字体（第 {0} 个）",
+  "zh-TW": "嵌入字型（第 {0} 個）",
+  "en": "embedding font {0}",
+  "ja": "フォントを埋め込んでいます（{0} 個目）"
+ },
+ "xps.write": {
+  "zh-CN": "写出 SVG 文件",
+  "zh-TW": "寫出 SVG 檔案",
+  "en": "writing the SVG file",
+  "ja": "SVG ファイルを書き出しています"
+ },
+ "xps.done": {
+  "zh-CN": "转换完成",
+  "zh-TW": "轉換完成",
+  "en": "conversion finished",
+  "ja": "変換が完了しました"
+ },
+ "step.zip": {
+  "zh-CN": "打包 VSDX",
+  "zh-TW": "打包 VSDX",
+  "en": "Packing the VSDX",
+  "ja": "VSDX をパッケージ化しています"
+ },
+ "step.eyedropper": {
+  "zh-CN": "在幻灯片上点击要拾取的颜色（60 秒内有效）",
+  "zh-TW": "在投影片上點選要拾取的顏色（60 秒內有效）",
+  "en": "Click the colour to pick on the slide (within 60 seconds)",
+  "ja": "スライド上で取り込む色をクリックしてください（60 秒以内）"
+ },
+ "err.emz": {
+  "zh-CN": "EMZ 压缩失败。",
+  "zh-TW": "EMZ 壓縮失敗。",
+  "en": "EMZ compression failed.",
+  "ja": "EMZ の圧縮に失敗しました。"
+ },
+ "err.noFile": {
+  "zh-CN": "没有生成文件：{0}",
+  "zh-TW": "沒有產生檔案：{0}",
+  "en": "No file was written: {0}",
+  "ja": "ファイルが作成されませんでした：{0}"
+ },
+ "err.pdf": {
+  "zh-CN": "PDF 导出失败：{0}",
+  "zh-TW": "PDF 匯出失敗：{0}",
+  "en": "PDF export failed: {0}",
+  "ja": "PDF のエクスポートに失敗しました：{0}"
+ },
+ "err.group": {
+  "zh-CN": "所选对象无法组合导出。",
+  "zh-TW": "所選物件無法組合匯出。",
+  "en": "The selected objects cannot be exported together.",
+  "ja": "選択したオブジェクトはまとめてエクスポートできません。"
+ },
+ "err.clipboard": {
+  "zh-CN": "无法通过剪贴板复制所选图形（剪贴板可能被其他程序占用），请重试。",
+  "zh-TW": "無法透過剪貼簿複製所選圖形（剪貼簿可能被其他程式佔用），請重試。",
+  "en": "The selected shapes could not be copied through the clipboard (another program may be using it). Please try again.",
+  "ja": "選択した図形をクリップボード経由でコピーできませんでした（他のプログラムが使用中の可能性があります）。もう一度お試しください。"
+ },
+ "err.macVersion": {
+  "zh-CN": "（PowerPoint for Mac 需要 16.82 或更高版本才能导出图形）",
+  "zh-TW": "（PowerPoint for Mac 需要 16.82 或更高版本才能匯出圖形）",
+  "en": "(PowerPoint for Mac 16.82 or later is needed to export shapes)",
+  "ja": "（図形をエクスポートするには PowerPoint for Mac 16.82 以降が必要です）"
+ },
+ "err.zip": {
+  "zh-CN": "打包 VSDX 失败。",
+  "zh-TW": "打包 VSDX 失敗。",
+  "en": "Packing the VSDX failed.",
+  "ja": "VSDX のパッケージ化に失敗しました。"
+ },
+ "err.zipPs": {
+  "zh-CN": "打包 VSDX 失败（需要系统自带的 Windows PowerShell）。",
+  "zh-TW": "打包 VSDX 失敗（需要系統自帶的 Windows PowerShell）。",
+  "en": "Packing the VSDX failed (it needs the Windows PowerShell that comes with Windows).",
+  "ja": "VSDX のパッケージ化に失敗しました（Windows 付属の Windows PowerShell が必要です）。"
+ },
+ "err.macHelper": {
+  "zh-CN": "找不到 macOS 辅助脚本 {0}，请重新运行 macOS 安装器。",
+  "zh-TW": "找不到 macOS 輔助指令碼 {0}，請重新執行 macOS 安裝器。",
+  "en": "The macOS helper script {0} was not found. Please run the macOS installer again.",
+  "ja": "macOS 補助スクリプト {0} が見つかりません。macOS インストーラーをもう一度実行してください。"
+ },
+ "err.macWrite": {
+  "zh-CN": "无法把文件写入：{0}",
+  "zh-TW": "無法把檔案寫入：{0}",
+  "en": "The file could not be written: {0}",
+  "ja": "ファイルを書き込めませんでした：{0}"
+ },
+ "col.title": {
+  "zh-CN": "自定义颜色",
+  "zh-TW": "自訂顏色",
+  "en": "Custom colour",
+  "ja": "ユーザー設定の色"
+ },
+ "col.theme": {
+  "zh-CN": "主题颜色",
+  "zh-TW": "主題顏色",
+  "en": "Theme colours",
+  "ja": "テーマの色"
+ },
+ "col.standard": {
+  "zh-CN": "标准色",
+  "zh-TW": "標準色",
+  "en": "Standard colours",
+  "ja": "標準の色"
+ },
+ "col.recent": {
+  "zh-CN": "最近使用的颜色",
+  "zh-TW": "最近使用的顏色",
+  "en": "Recent colours",
+  "ja": "最近使用した色"
+ },
+ "col.value": {
+  "zh-CN": "颜色值",
+  "zh-TW": "顏色值",
+  "en": "Colour",
+  "ja": "色の値"
+ },
+ "col.system": {
+  "zh-CN": "系统颜色…",
+  "zh-TW": "系統顏色…",
+  "en": "System colours…",
+  "ja": "システムの色…"
+ },
+ "col.systemPicked": {
+  "zh-CN": "系统颜色",
+  "zh-TW": "系統顏色",
+  "en": "System colour",
+  "ja": "システムの色"
+ },
+ "col.hint": {
+  "zh-CN": "单击色块选色，双击直接确定；也可输入 R,G,B 或 #RRGGBB。",
+  "zh-TW": "按一下色塊選色，按兩下直接確定；也可輸入 R,G,B 或 #RRGGBB。",
+  "en": "Click a swatch to choose it, double-click to confirm; or type R,G,B or #RRGGBB.",
+  "ja": "色をクリックして選択、ダブルクリックで確定。R,G,B または #RRGGBB も入力できます。"
+ },
+ "col.bad": {
+  "zh-CN": "颜色格式示例：255,248,235 或 #FFF8EB",
+  "zh-TW": "顏色格式示例：255,248,235 或 #FFF8EB",
+  "en": "Colour examples: 255,248,235 or #FFF8EB",
+  "ja": "色の入力例：255,248,235 または #FFF8EB"
+ },
+ "col.listPrompt": {
+  "zh-CN": "输入编号选择颜色，或输入 R,G,B / #RRGGBB：",
+  "zh-TW": "輸入編號選擇顏色，或輸入 R,G,B / #RRGGBB：",
+  "en": "Type a number to choose a colour, or R,G,B / #RRGGBB:",
+  "ja": "番号を入力して色を選ぶか、R,G,B / #RRGGBB を入力してください："
+ },
+ "col.themeNames": {
+  "zh-CN": "白色，背景 1|黑色，文字 1|背景 2|文字 2|个性色 1|个性色 2|个性色 3|个性色 4|个性色 5|个性色 6",
+  "zh-TW": "白色，背景 1|黑色，文字 1|背景 2|文字 2|輔色 1|輔色 2|輔色 3|輔色 4|輔色 5|輔色 6",
+  "en": "White, Background 1|Black, Text 1|Background 2|Text 2|Accent 1|Accent 2|Accent 3|Accent 4|Accent 5|Accent 6",
+  "ja": "白、背景 1|黒、テキスト 1|背景 2|テキスト 2|アクセント 1|アクセント 2|アクセント 3|アクセント 4|アクセント 5|アクセント 6"
+ },
+ "col.stdNames": {
+  "zh-CN": "深红|红色|橙色|黄色|浅绿|绿色|浅蓝|蓝色|深蓝|紫色",
+  "zh-TW": "深紅|紅色|橙色|黃色|淺綠|綠色|淺藍|藍色|深藍|紫色",
+  "en": "Dark Red|Red|Orange|Yellow|Light Green|Green|Light Blue|Blue|Dark Blue|Purple",
+  "ja": "濃い赤|赤|オレンジ|黄|薄い緑|緑|薄い青|青|濃い青|紫"
+ },
+ "col.tint": {
+  "zh-CN": "{0}，{1}",
+  "zh-TW": "{0}，{1}",
+  "en": "{0}, {1}",
+  "ja": "{0}、{1}"
+ },
+ "col.lighter": {
+  "zh-CN": "淡色 {0}%",
+  "zh-TW": "淡色 {0}%",
+  "en": "Lighter {0}%",
+  "ja": "明るさ +{0}%"
+ },
+ "col.darker": {
+  "zh-CN": "深色 {0}%",
+  "zh-TW": "深色 {0}%",
+  "en": "Darker {0}%",
+  "ja": "明るさ -{0}%"
+ },
+ "col.stdItem": {
+  "zh-CN": "标准色：{0}",
+  "zh-TW": "標準色：{0}",
+  "en": "Standard colour: {0}",
+  "ja": "標準の色：{0}"
+ },
+ "col.recentItem": {
+  "zh-CN": "最近使用的颜色：{0}",
+  "zh-TW": "最近使用的顏色：{0}",
+  "en": "Recent colour: {0}",
+  "ja": "最近使用した色：{0}"
+ },
+ "col.withValue": {
+  "zh-CN": "{0}（{1}）",
+  "zh-TW": "{0}（{1}）",
+  "en": "{0} ({1})",
+  "ja": "{0}（{1}）"
+ },
+ "sum.head": {
+  "zh-CN": "按当前设置导出选中图形",
+  "zh-TW": "按目前設定匯出選取圖形",
+  "en": "Exports the selected shapes with the current settings",
+  "ja": "現在の設定で選択した図形をエクスポートします"
+ },
+ "sum.format": {
+  "zh-CN": "默认格式：{0}",
+  "zh-TW": "預設格式：{0}",
+  "en": "Default format: {0}",
+  "ja": "既定の形式：{0}"
+ },
+ "sum.mode": {
+  "zh-CN": "多个图形：{0}",
+  "zh-TW": "多個圖形：{0}",
+  "en": "Several shapes: {0}",
+  "ja": "複数の図形：{0}"
+ },
+ "sum.naming": {
+  "zh-CN": "保存方式：{0}",
+  "zh-TW": "儲存方式：{0}",
+  "en": "Saving: {0}",
+  "ja": "保存方法：{0}"
+ },
+ "sum.dpi": {
+  "zh-CN": "PNG 分辨率：{0} DPI",
+  "zh-TW": "PNG 解析度：{0} DPI",
+  "en": "PNG resolution: {0} DPI",
+  "ja": "PNG 解像度：{0} DPI"
+ },
+ "sum.bg": {
+  "zh-CN": "背景：{0}",
+  "zh-TW": "背景：{0}",
+  "en": "Background: {0}",
+  "ja": "背景：{0}"
+ },
+ "sum.alpha": {
+  "zh-CN": "，透明度 {0}%",
+  "zh-TW": "，透明度 {0}%",
+  "en": ", transparency {0}%",
+  "ja": "、透明度 {0}%"
+ },
+ "sum.margin": {
+  "zh-CN": "边距：{0} 磅",
+  "zh-TW": "邊界：{0} 磅",
+  "en": "Margin: {0} pt",
+  "ja": "余白：{0} pt"
+ },
+ "sum.vsdxNative": {
+  "zh-CN": "VSDX：Visio 原生形状（文字可编辑）",
+  "zh-TW": "VSDX：Visio 原生形狀（文字可編輯）",
+  "en": "VSDX: native Visio shapes (editable text)",
+  "ja": "VSDX：Visio のネイティブ図形（文字を編集可能）"
+ },
+ "sum.vsdxPicture": {
+  "zh-CN": "VSDX：嵌入 EMF 矢量图片",
+  "zh-TW": "VSDX：嵌入 EMF 向量圖片",
+  "en": "VSDX: embedded EMF vector picture",
+  "ja": "VSDX：EMF ベクター画像を埋め込み"
+ },
+ "sum.lang": {
+  "zh-CN": "界面语言：{0}",
+  "zh-TW": "介面語言：{0}",
+  "en": "Language: {0}",
+  "ja": "表示言語：{0}"
+ },
+ "fb.title": {
+  "zh-CN": "反馈",
+  "zh-TW": "意見回饋",
+  "en": "Feedback",
+  "ja": "フィードバック"
+ },
+ "fb.ask": {
+  "zh-CN": "请选择反馈方式：\n\n【是】发送邮件给作者（{0}）\n【否】在 GitHub 提交 Issue（需要 GitHub 账号，问题会公开显示）\n【取消】返回",
+  "zh-TW": "請選擇意見回饋方式：\n\n【是】傳送郵件給作者（{0}）\n【否】在 GitHub 提交 Issue（需要 GitHub 帳號，問題會公開顯示）\n【取消】返回",
+  "en": "How would you like to send feedback?\n\n[Yes] E-mail the author ({0})\n[No] Open a GitHub issue (needs a GitHub account; issues are public)\n[Cancel] Back",
+  "ja": "フィードバックの方法を選択してください：\n\n［はい］作者にメールを送る（{0}）\n［いいえ］GitHub で Issue を作成（GitHub アカウントが必要。内容は公開されます）\n［キャンセル］戻る"
+ },
+ "fb.mailTitle": {
+  "zh-CN": "邮件反馈",
+  "zh-TW": "郵件意見回饋",
+  "en": "Feedback by e-mail",
+  "ja": "メールでフィードバック"
+ },
+ "fb.mailCopied": {
+  "zh-CN": "作者邮箱已复制到剪贴板：{0}\n\n你可以在任何邮箱（网页邮箱、QQ 邮箱、Outlook 等）中新建邮件、粘贴收件人后发送。\n\n要现在打开电脑上的默认邮件程序吗？\n（如果没有设置邮件程序，可以选择“否”，直接用网页邮箱发送）",
+  "zh-TW": "作者信箱已複製到剪貼簿：{0}\n\n你可以在任何信箱（網頁信箱、QQ 信箱、Outlook 等）中新增郵件、貼上收件人後傳送。\n\n要現在開啟電腦上的預設郵件程式嗎？\n（如果沒有設定郵件程式，可以選擇「否」，直接用網頁信箱傳送）",
+  "en": "The author's address has been copied to the clipboard: {0}\n\nYou can paste it as the recipient in any mail service (web mail, Outlook, ...).\n\nOpen your default mail program now?\n(If none is set up, choose No and use your web mail.)",
+  "ja": "作者のメールアドレスをクリップボードにコピーしました：{0}\n\n任意のメールサービス（Web メール、Outlook など）で宛先に貼り付けて送信できます。\n\n既定のメールソフトを今すぐ開きますか？\n（メールソフトを設定していない場合は「いいえ」を選び、Web メールから送信してください）"
+ },
+ "fb.mailPlain": {
+  "zh-CN": "作者邮箱：{0}\n\n你可以在任何邮箱（网页邮箱、QQ 邮箱、Outlook 等）中新建邮件后发送。\n\n要现在打开电脑上的默认邮件程序吗？\n（如果没有设置邮件程序，可以选择“否”，直接用网页邮箱发送）",
+  "zh-TW": "作者信箱：{0}\n\n你可以在任何信箱（網頁信箱、QQ 信箱、Outlook 等）中新增郵件後傳送。\n\n要現在開啟電腦上的預設郵件程式嗎？\n（如果沒有設定郵件程式，可以選擇「否」，直接用網頁信箱傳送）",
+  "en": "The author's address: {0}\n\nYou can write to it from any mail service (web mail, Outlook, ...).\n\nOpen your default mail program now?\n(If none is set up, choose No and use your web mail.)",
+  "ja": "作者のメールアドレス：{0}\n\n任意のメールサービス（Web メール、Outlook など）から送信できます。\n\n既定のメールソフトを今すぐ開きますか？\n（メールソフトを設定していない場合は「いいえ」を選び、Web メールから送信してください）"
+ },
+ "fb.subject": {
+  "zh-CN": "矢印 VecStamp {0} 反馈",
+  "zh-TW": "矢印 VecStamp {0} 意見回饋",
+  "en": "VecStamp {0} feedback",
+  "ja": "矢印 VecStamp {0} フィードバック"
+ },
+ "fb.noMailApp": {
+  "zh-CN": "无法打开邮件程序，请直接发邮件到：{0}",
+  "zh-TW": "無法開啟郵件程式，請直接發郵件到：{0}",
+  "en": "No mail program could be opened. Please write to: {0}",
+  "ja": "メールソフトを開けませんでした。次のアドレスに直接送信してください：{0}"
+ },
+ "fb.issueTitle": {
+  "zh-CN": "[反馈] ",
+  "zh-TW": "[意見回饋] ",
+  "en": "[Feedback] ",
+  "ja": "[フィードバック] "
+ },
+ "fb.issueBody": {
+  "zh-CN": "**问题描述 / 建议：**\n\n\n**复现步骤：**\n1. \n\n**运行环境：**\n```\n{0}\n```\n",
+  "zh-TW": "**問題描述 / 建議：**\n\n\n**復現步驟：**\n1. \n\n**執行環境：**\n```\n{0}\n```\n",
+  "en": "**Problem / suggestion:**\n\n\n**Steps to reproduce:**\n1. \n\n**Environment:**\n```\n{0}\n```\n",
+  "ja": "**問題 / 提案：**\n\n\n**再現手順：**\n1. \n\n**動作環境：**\n```\n{0}\n```\n"
+ },
+ "fb.noBrowser": {
+  "zh-CN": "无法打开浏览器，请手动访问：\n{0}",
+  "zh-TW": "無法開啟瀏覽器，請手動訪問：\n{0}",
+  "en": "No browser could be opened. Please visit:\n{0}",
+  "ja": "ブラウザーを開けませんでした。次のページを開いてください：\n{0}"
+ },
+ "about.title": {
+  "zh-CN": "关于 {0}",
+  "zh-TW": "關於 {0}",
+  "en": "About {0}",
+  "ja": "{0} について"
+ },
+ "about.text": {
+  "zh-CN": "矢印 VecStamp  v{0}\n选中即印 —— 图形一键导出 EMF / SVG / PDF / VSDX / PNG 等格式\n\n作者：{1}\n邮箱：{2}\n主页：{3}\n开源协议：MIT License\nCopyright (c) {4} {1}\n\n矢印承诺永久开源、永久免费：没有收费功能，没有广告，不联网收集任何信息，全部源码在 GitHub 公开。\n\n如果它为你节省了时间，欢迎点击功能区“关于”组的“赞赏作者”，用微信或支付宝扫码请作者喝杯咖啡。赞赏完全自愿，不影响任何功能；你的支持会用于持续维护和改进矢印。",
+  "zh-TW": "矢印 VecStamp  v{0}\n選取即印 —— 圖形一鍵匯出 EMF / SVG / PDF / VSDX / PNG 等格式\n\n作者：{1}\n信箱：{2}\n首頁：{3}\n開源授權：MIT License\nCopyright (c) {4} {1}\n\n矢印承諾永久開源、永久免費：沒有收費功能，沒有廣告，不聯網收集任何資訊，全部原始碼在 GitHub 公開。\n\n如果它為你節省了時間，歡迎點選功能區「關於」組的「贊助作者」，用微信或支付寶掃碼請作者喝杯咖啡。贊助完全自願，不影響任何功能；你的支援會用於持續維護和改進矢印。",
+  "en": "VecStamp  v{0}\nSelect and stamp — export shapes to EMF / SVG / PDF / VSDX / PNG in one click\n\nAuthor: {1}\nE-mail: {2}\nHome page: {3}\nLicence: MIT License\nCopyright (c) {4} {1}\n\nVecStamp is and will stay free and open source: no paid features, no ads, no data collection, all source code on GitHub.\n\nIf it saves you time, you can buy the author a coffee with \"Support the author\" in the About group (WeChat Pay or Alipay). It is entirely voluntary and nothing depends on it; support goes into maintaining and improving VecStamp.",
+  "ja": "矢印 VecStamp  v{0}\n選んで押すだけ —— 図形を EMF / SVG / PDF / VSDX / PNG にワンクリックでエクスポート\n\n作者：{1}\nメール：{2}\nホームページ：{3}\nライセンス：MIT License\nCopyright (c) {4} {1}\n\n矢印はずっとオープンソース・無料です。有料機能も広告もなく、情報を収集することもありません。ソースコードはすべて GitHub で公開しています。\n\n役に立ったら、リボンの「矢印について」グループにある「作者を支援」から、WeChat Pay または Alipay で作者にコーヒーをごちそうしていただけるとうれしいです。支援は任意で、機能には一切影響しません。いただいた支援は矢印の保守と改良に使います。"
+ },
+ "about.lang": {
+  "zh-CN": "界面语言：{0}（可在功能区“关于”组的语言菜单中切换）",
+  "zh-TW": "介面語言：{0}（可在功能區「關於」組的語言選單中切換）",
+  "en": "Language: {0} (change it with the language menu in the About group)",
+  "ja": "表示言語：{0}（リボンの「矢印について」グループの言語メニューで切り替えられます）"
+ },
+ "don.title": {
+  "zh-CN": "赞赏",
+  "zh-TW": "贊助",
+  "en": "Support",
+  "ja": "支援"
+ },
+ "don.alipay": {
+  "zh-CN": "支付宝",
+  "zh-TW": "支付寶",
+  "en": "Alipay",
+  "ja": "Alipay（支付宝）"
+ },
+ "don.wechat": {
+  "zh-CN": "微信",
+  "zh-TW": "微信",
+  "en": "WeChat",
+  "ja": "WeChat（微信）"
+ },
+ "don.thanks": {
+  "zh-CN": "谢谢你愿意支持矢印！\n\n请用{0}扫描“赞赏作者”中对应的二维码，金额随意。\n赞赏完全自愿，矢印的所有功能都永久免费、开源。\n\n如果方便，也欢迎在 GitHub 给项目点一个 Star，或把它推荐给需要的同学和同事。",
+  "zh-TW": "謝謝你願意支援矢印！\n\n請用{0}掃描「贊助作者」中對應的QR Code，金額隨意。\n贊助完全自願，矢印的所有功能都永久免費、開源。\n\n如果方便，也歡迎在 GitHub 給專案點一個 Star，或把它推薦給需要的同學和同事。",
+  "en": "Thank you for wanting to support VecStamp!\n\nScan the matching QR code in \"Support the author\" with {0}; any amount is welcome.\nSupport is entirely voluntary: every feature of VecStamp is and stays free and open source.\n\nA star for the project on GitHub, or recommending it to colleagues, helps a lot too.",
+  "ja": "矢印を支援しようと思っていただき、ありがとうございます！\n\n「作者を支援」の QR コードを {0} で読み取ってください。金額は自由です。\n支援は任意で、矢印のすべての機能はずっと無料・オープンソースです。\n\nGitHub でプロジェクトに Star を付けたり、必要な方に紹介したりしていただけるのも大きな励みになります。"
+ },
+ "help.ppt": {
+  "zh-CN": "矢印 VecStamp 使用说明\n\n① 选中一个或多个图形，点“导出”，或直接点各格式按钮。没有选中图形时，可以导出整页。\n② 逐页导出：每页幻灯片一个文件；在左侧缩略图中多选页面则只导出所选页。\n③ EMF 图片副本：把所选图形复制成矢量图片放在旁边，原图形不变。\n\n· EMF / EMZ / WMF / SVG：矢量图。PowerPoint 2013 及以上都能导出 SVG（2302 之前的版本经 XPS 内置转换）。\n· PDF：页面大小与图形一致的矢量 PDF，适合 LaTeX。\n· VSDX：Visio 文件，图形为 Visio 原生形状、文字可编辑，无需安装 Visio。\n· PNG：150 / 300 / 600 DPI 或自定义（最高 {0} DPI）。\n· 背景：在“背景”菜单中选择透明、白色、米色、网格或自定义颜色（主题色 / 标准色 / 其他颜色 / 取色器 / RGB），可设透明度和边距。\n· 导出时会显示进度窗口（当前步骤和百分比），按 Esc 可以取消。\n· 界面语言：在“关于”组的语言菜单中切换简体中文、繁體中文、English、日本語，立即生效。\n\n合并导出、加背景、PDF 和逐页导出时会临时借用剪贴板，并在文末临时插入一页（完成后自动删除）。",
+  "zh-TW": "矢印 VecStamp 使用說明\n\n① 選取一個或多個圖形，點「匯出」，或直接點各格式按鈕。沒有選取圖形時，可以匯出整頁。\n② 逐頁匯出：每頁投影片一個檔案；在左側縮圖中多選頁面則只匯出所選頁。\n③ EMF 圖片副本：把所選圖形複製成向量圖片放在旁邊，原圖形不變。\n\n· EMF / EMZ / WMF / SVG：向量圖。PowerPoint 2013 及以上都能匯出 SVG（2302 之前的版本經 XPS 內建轉換）。\n· PDF：頁面大小與圖形一致的向量 PDF，適合 LaTeX。\n· VSDX：Visio 檔案，圖形為 Visio 原生形狀、文字可編輯，無需安裝 Visio。\n· PNG：150 / 300 / 600 DPI 或自訂（最高 {0} DPI）。\n· 背景：在「背景」選單中選擇透明、白色、米色、格線或自訂顏色（主題色 / 標準色 / 其他顏色 / 取色器 / RGB），可設透明度和邊界。\n· 匯出時會顯示進度視窗（目前步驟和百分比），按 Esc 可以取消。\n· 介面語言：在「關於」組的語言選單中切換簡體中文、繁體中文、English、日本語，立即生效。\n\n合併匯出、加背景、PDF 和逐頁匯出時會臨時借用剪貼簿，並在文末臨時插入一頁（完成後自動刪除）。",
+  "en": "VecStamp – quick guide\n\n① Select one or more shapes and click Export, or one of the format buttons. With nothing selected you can export the whole slide.\n② Export every slide: one file per slide; select slides in the thumbnail pane to export only those.\n③ EMF picture copy: places a vector picture of the selection next to it; the shapes stay unchanged.\n\n· EMF / EMZ / WMF / SVG: vector pictures. Every PowerPoint 2013 or later can export SVG (versions before 2302 through the built-in XPS conversion).\n· PDF: a vector PDF exactly as large as the drawing, ideal for LaTeX.\n· VSDX: a Visio file with native Visio shapes and editable text; Visio is not needed.\n· PNG: 150 / 300 / 600 DPI or custom (up to {0} DPI).\n· Background: in the Background menu choose transparent, white, beige, grid or a custom colour (theme / standard colours, More Colours, Eyedropper, RGB), with transparency and margin.\n· A progress window shows the current step and percentage; press Esc to cancel.\n· Language: switch between 简体中文, 繁體中文, English and 日本語 in the About group; it takes effect at once.\n\nCombined exports, backgrounds, PDF and slide-by-slide export briefly use the clipboard and a temporary slide at the end (removed automatically).",
+  "ja": "矢印 VecStamp の使い方\n\n① 図形を 1 つ以上選択して「エクスポート」または各形式のボタンをクリックします。何も選択していないときはスライド全体をエクスポートできます。\n② スライドごとにエクスポート：1 枚につき 1 ファイル。サムネイルでスライドを複数選択すると、選択したスライドだけをエクスポートします。\n③ EMF 画像コピー：選択した図形のベクター画像を隣に作成します（元の図形はそのまま）。\n\n· EMF / EMZ / WMF / SVG：ベクター画像。PowerPoint 2013 以降ならどれでも SVG をエクスポートできます（2302 より前は内蔵の XPS 変換を使用）。\n· PDF：図形と同じ大きさのベクター PDF。LaTeX に最適です。\n· VSDX：Visio ファイル。図形は Visio のネイティブ図形で文字を編集でき、Visio は不要です。\n· PNG：150 / 300 / 600 DPI またはユーザー設定（最大 {0} DPI）。\n· 背景：「背景」メニューで透明・白・ベージュ・方眼・ユーザー設定の色（テーマの色 / 標準の色 / その他の色 / スポイト / RGB）を選び、透明度と余白も設定できます。\n· エクスポート中は進行状況ウィンドウに現在の処理と割合が表示され、Esc キーで中止できます。\n· 表示言語：「矢印について」グループの言語メニューで 简体中文・繁體中文・English・日本語 を切り替えられます（すぐに反映）。\n\nまとめてのエクスポート、背景の追加、PDF、スライドごとのエクスポートでは、クリップボードと末尾の一時スライドを一時的に使用します（完了後に自動で削除）。"
+ },
+ "rb.vsTab": {
+  "zh-CN": "矢印",
+  "zh-TW": "矢印",
+  "en": "VecStamp",
+  "ja": "矢印"
+ },
+ "rb.vsGrpExport": {
+  "zh-CN": "导出选中图形",
+  "zh-TW": "匯出選取圖形",
+  "en": "Export selection",
+  "ja": "選択範囲をエクスポート"
+ },
+ "rb.vsBtnExport": {
+  "zh-CN": "导出 {0}",
+  "zh-TW": "匯出 {0}",
+  "en": "Export {0}",
+  "ja": "{0} をエクスポート"
+ },
+ "rb.vsBtnExport.tip": {
+  "zh-CN": "导出选中图形",
+  "zh-TW": "匯出選取圖形",
+  "en": "Export the selected shapes",
+  "ja": "選択した図形をエクスポート"
+ },
+ "rb.vsMnuSepVector": {
+  "zh-CN": "矢量图",
+  "zh-TW": "向量圖",
+  "en": "Vector pictures",
+  "ja": "ベクター画像"
+ },
+ "rb.vsMnuSepDoc": {
+  "zh-CN": "文档",
+  "zh-TW": "文件",
+  "en": "Documents",
+  "ja": "文書"
+ },
+ "rb.vsMnuSepRaster": {
+  "zh-CN": "位图",
+  "zh-TW": "點陣圖",
+  "en": "Bitmaps",
+  "ja": "ビットマップ"
+ },
+ "rb.vsMnuEMF.desc": {
+  "zh-CN": "Word / WPS / PowerPoint 通用的矢量图，论文插图首选。",
+  "zh-TW": "Word / WPS / PowerPoint 通用的向量圖，論文插圖首選。",
+  "en": "Vector picture for Word / WPS / PowerPoint – the first choice for papers.",
+  "ja": "Word / WPS / PowerPoint で使えるベクター画像。論文の図に最適です。"
+ },
+ "rb.vsMnuEMZ.desc": {
+  "zh-CN": "gzip 压缩的 EMF，内容相同，体积更小。",
+  "zh-TW": "gzip 壓縮的 EMF，內容相同，體積更小。",
+  "en": "EMF compressed with gzip: same content, smaller file.",
+  "ja": "gzip で圧縮した EMF。内容は同じでサイズが小さくなります。"
+ },
+ "rb.vsMnuSVG.desc": {
+  "zh-CN": "网页、Illustrator、Inkscape 通用；PowerPoint 2013 及以上都能导出。",
+  "zh-TW": "網頁、Illustrator、Inkscape 通用；PowerPoint 2013 及以上都能匯出。",
+  "en": "For the web, Illustrator and Inkscape; works with every PowerPoint 2013 or later.",
+  "ja": "Web・Illustrator・Inkscape で使えます。PowerPoint 2013 以降ならエクスポートできます。"
+ },
+ "rb.vsMnuWMF.desc": {
+  "zh-CN": "兼容老软件；不支持透明和渐变。",
+  "zh-TW": "相容老軟體；不支援透明和漸變。",
+  "en": "For older programs; no transparency or gradients.",
+  "ja": "古いソフト向け。透明とグラデーションには対応しません。"
+ },
+ "rb.vsMnuPDF.desc": {
+  "zh-CN": "页面大小与图形一致，适合 LaTeX 和投稿系统。",
+  "zh-TW": "頁面大小與圖形一致，適合 LaTeX 和投稿系統。",
+  "en": "Page exactly as large as the drawing – for LaTeX and submission systems.",
+  "ja": "ページが図形と同じ大きさ。LaTeX や投稿システムに最適です。"
+ },
+ "rb.vsMnuVSDX.desc": {
+  "zh-CN": "Visio 原生形状，文字可直接编辑；无需安装 Visio。",
+  "zh-TW": "Visio 原生形狀，文字可直接編輯；無需安裝 Visio。",
+  "en": "Native Visio shapes with editable text; Visio is not needed.",
+  "ja": "Visio のネイティブ図形で、文字をそのまま編集できます。Visio は不要です。"
+ },
+ "rb.vsMnuPNG.desc": {
+  "zh-CN": "150 / 300 / 600 DPI 或自定义（最高 3000 DPI）。",
+  "zh-TW": "150 / 300 / 600 DPI 或自訂（最高 3000 DPI）。",
+  "en": "150 / 300 / 600 DPI or custom (up to 3000 DPI).",
+  "ja": "150 / 300 / 600 DPI またはユーザー設定（最大 3000 DPI）。"
+ },
+ "rb.vsBtnEMF.tip": {
+  "zh-CN": "导出为 EMF",
+  "zh-TW": "匯出為 EMF",
+  "en": "Export as EMF",
+  "ja": "EMF としてエクスポート"
+ },
+ "rb.vsBtnEMF.sup": {
+  "zh-CN": "增强型图元文件，Word / WPS / PowerPoint 通用，论文插图首选。",
+  "zh-TW": "增強型圖元檔案，Word / WPS / PowerPoint 通用，論文插圖首選。",
+  "en": "Enhanced Metafile for Word / WPS / PowerPoint – the first choice for papers.",
+  "ja": "拡張メタファイル。Word / WPS / PowerPoint で使え、論文の図に最適です。"
+ },
+ "rb.vsBtnEMZ.tip": {
+  "zh-CN": "导出为 EMZ",
+  "zh-TW": "匯出為 EMZ",
+  "en": "Export as EMZ",
+  "ja": "EMZ としてエクスポート"
+ },
+ "rb.vsBtnEMZ.sup": {
+  "zh-CN": "gzip 压缩的 EMF，内容与 EMF 相同，文件更小。",
+  "zh-TW": "gzip 壓縮的 EMF，內容與 EMF 相同，檔案更小。",
+  "en": "EMF compressed with gzip: the same content in a smaller file.",
+  "ja": "gzip で圧縮した EMF。内容は EMF と同じで、ファイルが小さくなります。"
+ },
+ "rb.vsBtnSVG.tip": {
+  "zh-CN": "导出为 SVG",
+  "zh-TW": "匯出為 SVG",
+  "en": "Export as SVG",
+  "ja": "SVG としてエクスポート"
+ },
+ "rb.vsBtnSVG.sup": {
+  "zh-CN": "可缩放矢量图形，浏览器可直接打开。PowerPoint 2013 及以上都能导出：新版本直接导出，旧版本自动经 XPS 内置转换（文字仍是文字），并在导出后检查文件。",
+  "zh-TW": "可縮放向量圖形，瀏覽器可直接開啟。PowerPoint 2013 及以上都能匯出：新版本直接匯出，舊版本自動經 XPS 內建轉換（文字仍是文字），並在匯出後檢查檔案。",
+  "en": "Scalable Vector Graphics that any browser can open. Works with every PowerPoint 2013 or later: newer versions export it directly, older ones through the built-in XPS conversion (text stays text); the file is checked afterwards.",
+  "ja": "ブラウザーで直接開けるスケーラブル ベクター グラフィックス。PowerPoint 2013 以降ならエクスポートできます。新しいバージョンは直接、古いバージョンは内蔵の XPS 変換を自動で使用し（文字は文字のまま）、エクスポート後にファイルを確認します。"
+ },
+ "rb.vsBtnPDF.tip": {
+  "zh-CN": "导出为 PDF",
+  "zh-TW": "匯出為 PDF",
+  "en": "Export as PDF",
+  "ja": "PDF としてエクスポート"
+ },
+ "rb.vsBtnPDF.sup": {
+  "zh-CN": "页面大小与图形一致的矢量 PDF。",
+  "zh-TW": "頁面大小與圖形一致的向量 PDF。",
+  "en": "A vector PDF exactly as large as the drawing.",
+  "ja": "図形と同じ大きさのベクター PDF。"
+ },
+ "rb.vsBtnVSDX.tip": {
+  "zh-CN": "导出为 VSDX",
+  "zh-TW": "匯出為 VSDX",
+  "en": "Export as VSDX",
+  "ja": "VSDX としてエクスポート"
+ },
+ "rb.vsBtnVSDX.sup": {
+  "zh-CN": "Visio 绘图文件：每个图形都转换为 Visio 原生形状（形状、颜色、线条、箭头、组合），文字可直接编辑，无需安装 Visio。图片、图表等无法转换的对象以矢量图片嵌入。",
+  "zh-TW": "Visio 繪圖檔案：每個圖形都轉換為 Visio 原生形狀（形狀、顏色、線條、箭頭、組合），文字可直接編輯，無需安裝 Visio。圖片、圖表等無法轉換的物件以向量圖片嵌入。",
+  "en": "Visio drawing: every shape becomes a native Visio shape (geometry, colours, lines, arrows, groups) with editable text – Visio is not needed. Pictures, charts and other objects without a Visio equivalent are embedded as vector pictures.",
+  "ja": "Visio 図面：各図形を Visio のネイティブ図形（形状・色・線・矢印・グループ）に変換し、文字はそのまま編集できます。Visio は不要です。画像やグラフなど変換できないオブジェクトはベクター画像として埋め込みます。"
+ },
+ "rb.vsBtnPNG.tip": {
+  "zh-CN": "导出为 PNG",
+  "zh-TW": "匯出為 PNG",
+  "en": "Export as PNG",
+  "ja": "PNG としてエクスポート"
+ },
+ "rb.vsBtnPNG.sup": {
+  "zh-CN": "高分辨率位图；分辨率在“导出设置 → PNG 分辨率”中选择。",
+  "zh-TW": "高解析度點陣圖；解析度在「匯出設定 → PNG 解析度」中選擇。",
+  "en": "High-resolution bitmap; choose the resolution under Export settings → PNG resolution.",
+  "ja": "高解像度ビットマップ。解像度は「エクスポート設定 → PNG 解像度」で選びます。"
+ },
+ "rb.vsGrpTools": {
+  "zh-CN": "批量与工具",
+  "zh-TW": "批次與工具",
+  "en": "Batch & tools",
+  "ja": "一括処理とツール"
+ },
+ "rb.vsBtnBatch": {
+  "zh-CN": "逐页导出",
+  "zh-TW": "逐頁匯出",
+  "en": "Export every slide",
+  "ja": "スライドごとにエクスポート"
+ },
+ "rb.vsBtnBatch.sup": {
+  "zh-CN": "每张幻灯片导出为一个文件（使用“默认格式”）。在左侧缩略图中多选页面时只导出所选页；空白页和空的标题占位符会被跳过。",
+  "zh-TW": "每張投影片匯出為一個檔案（使用「預設格式」）。在左側縮圖中多選頁面時只匯出所選頁；空白頁和空的標題預留位置會被跳過。",
+  "en": "Exports every slide as one file (in the default format). With several slides selected in the thumbnail pane only those are exported; empty slides and empty title placeholders are skipped.",
+  "ja": "各スライドを 1 つのファイルとしてエクスポートします（既定の形式）。サムネイルでスライドを複数選択すると選択したスライドだけをエクスポートします。空白のスライドと空のタイトル プレースホルダーはスキップします。"
+ },
+ "rb.vsBtnPicture": {
+  "zh-CN": "EMF 图片副本",
+  "zh-TW": "EMF 圖片副本",
+  "en": "EMF picture copy",
+  "ja": "EMF 画像コピー"
+ },
+ "rb.vsBtnPicture.sup": {
+  "zh-CN": "把所选图形复制成一张矢量图片放在旁边，用来“冻结”排版；原图形保持不变。",
+  "zh-TW": "把所選圖形複製成一張向量圖片放在旁邊，用來「凍結」排版；原圖形保持不變。",
+  "en": "Places a vector picture of the selection next to it to \"freeze\" the layout; the shapes stay unchanged.",
+  "ja": "選択した図形をベクター画像として隣にコピーし、レイアウトを「固定」します。元の図形はそのままです。"
+ },
+ "rb.vsBtnOpenFolder": {
+  "zh-CN": "打开导出文件夹",
+  "zh-TW": "開啟匯出資料夾",
+  "en": "Open export folder",
+  "ja": "エクスポート先を開く"
+ },
+ "rb.vsBtnOpenFolder.sup": {
+  "zh-CN": "在{0}中打开最近一次导出所在的文件夹。",
+  "zh-TW": "在{0}中開啟最近一次匯出所在的資料夾。",
+  "en": "Opens the folder of the last export in {0}.",
+  "ja": "最後にエクスポートしたフォルダーを{0}で開きます。"
+ },
+ "rb.vsGrpBackground": {
+  "zh-CN": "背景",
+  "zh-TW": "背景",
+  "en": "Background",
+  "ja": "背景"
+ },
+ "rb.vsMnuBg": {
+  "zh-CN": "背景：{0}",
+  "zh-TW": "背景：{0}",
+  "en": "Background: {0}",
+  "ja": "背景：{0}"
+ },
+ "rb.vsMnuBg.tip": {
+  "zh-CN": "背景",
+  "zh-TW": "背景",
+  "en": "Background",
+  "ja": "背景"
+ },
+ "rb.vsMnuBg.sup": {
+  "zh-CN": "当前背景：{0}\n导出时垫在图形下面的背景：透明、白色、米色、网格（坐标纸）或自定义颜色。“自定义颜色”中可从主题颜色、标准色、最近使用的颜色中选择，或用“其他颜色”“取色器”。点击颜色方块可直接打开颜色面板。",
+  "zh-TW": "目前背景：{0}\n匯出時墊在圖形下面的背景：透明、白色、米色、格線（座標紙）或自訂顏色。「自訂顏色」中可從主題顏色、標準色、最近使用的顏色中選擇，或用「其他顏色」「取色器」。點選顏色方塊可直接開啟顏色面板。",
+  "en": "Current background: {0}\nThe background placed under the shapes when exporting: transparent, white, beige, grid (graph paper) or a custom colour. Under Custom colour pick a theme, standard or recent colour, or use More Colours or the Eyedropper. Click the colour square to open the colour panel.",
+  "ja": "現在の背景：{0}\nエクスポート時に図形の下に敷く背景：透明・白・ベージュ・方眼（グラフ用紙）・ユーザー設定の色。「ユーザー設定の色」ではテーマの色・標準の色・最近使用した色から選ぶか、「その他の色」「スポイト」を使えます。色の四角をクリックすると色の選択画面が開きます。"
+ },
+ "rb.vsBgNone": {
+  "zh-CN": "透明",
+  "zh-TW": "透明",
+  "en": "Transparent",
+  "ja": "透明"
+ },
+ "rb.vsBgWhite": {
+  "zh-CN": "白色",
+  "zh-TW": "白色",
+  "en": "White",
+  "ja": "白"
+ },
+ "rb.vsBgBeige": {
+  "zh-CN": "米色",
+  "zh-TW": "米色",
+  "en": "Beige",
+  "ja": "ベージュ"
+ },
+ "rb.vsBgGrid": {
+  "zh-CN": "网格（坐标纸）",
+  "zh-TW": "格線（座標紙）",
+  "en": "Grid (graph paper)",
+  "ja": "方眼（グラフ用紙）"
+ },
+ "rb.vsBgSepCustom": {
+  "zh-CN": "自定义颜色",
+  "zh-TW": "自訂顏色",
+  "en": "Custom colour",
+  "ja": "ユーザー設定の色"
+ },
+ "rb.vsGalColor": {
+  "zh-CN": "自定义颜色",
+  "zh-TW": "自訂顏色",
+  "en": "Custom colour",
+  "ja": "ユーザー設定の色"
+ },
+ "rb.vsGalColor.sup": {
+  "zh-CN": "当前自定义背景色：{0}\n从主题颜色、标准色、最近使用的颜色中选择，或用“其他颜色”“取色器”；也可以在 RGB 框中输入 R,G,B（如 255,248,235）或十六进制（如 #FFF8EB）。选色后背景自动切换为“自定义颜色”。",
+  "zh-TW": "目前自訂背景色：{0}\n從主題顏色、標準色、最近使用的顏色中選擇，或用「其他顏色」「取色器」；也可以在 RGB 框中輸入 R,G,B（如 255,248,235）或十六進位（如 #FFF8EB）。選色後背景自動切換為「自訂顏色」。",
+  "en": "Current custom background colour: {0}\nPick a theme, standard or recent colour, or use More Colours or the Eyedropper; you can also type R,G,B (e.g. 255,248,235) or hex (e.g. #FFF8EB) into the RGB box. Picking a colour switches the background to Custom colour.",
+  "ja": "現在のユーザー設定の背景色：{0}\nテーマの色・標準の色・最近使用した色から選ぶか、「その他の色」「スポイト」を使います。「RGB」ボックスに R,G,B（例：255,248,235）または 16 進数（例：#FFF8EB）を入力することもできます。色を選ぶと背景は「ユーザー設定の色」に切り替わります。"
+ },
+ "rb.vsBgCustomMac": {
+  "zh-CN": "自定义颜色…",
+  "zh-TW": "自訂顏色…",
+  "en": "Custom colour…",
+  "ja": "ユーザー設定の色…"
+ },
+ "rb.vsBtnMoreColors": {
+  "zh-CN": "其他颜色(M)…",
+  "zh-TW": "其他顏色(M)…",
+  "en": "More Colours…",
+  "ja": "その他の色(M)…"
+ },
+ "rb.vsBtnEyedropper": {
+  "zh-CN": "取色器(E)",
+  "zh-TW": "取色器(E)",
+  "en": "Eyedropper",
+  "ja": "スポイト(E)"
+ },
+ "rb.vsEbRgb.tip": {
+  "zh-CN": "自定义背景色",
+  "zh-TW": "自訂背景色",
+  "en": "Custom background colour",
+  "ja": "ユーザー設定の背景色"
+ },
+ "rb.vsEbAlpha": {
+  "zh-CN": "透明度%",
+  "zh-TW": "透明度%",
+  "en": "Transp. %",
+  "ja": "透明度%"
+ },
+ "rb.vsEbAlpha.tip": {
+  "zh-CN": "背景透明度",
+  "zh-TW": "背景透明度",
+  "en": "Background transparency",
+  "ja": "背景の透明度"
+ },
+ "rb.vsEbAlpha.sup": {
+  "zh-CN": "0 表示不透明，100 表示完全透明；只影响背景，不影响图形本身。",
+  "zh-TW": "0 表示不透明，100 表示完全透明；隻影響背景，不影響圖形本身。",
+  "en": "0 = opaque, 100 = fully transparent; only the background, not the shapes.",
+  "ja": "0 は不透明、100 は完全に透明。背景だけに適用され、図形には影響しません。"
+ },
+ "rb.vsEbGrid": {
+  "zh-CN": "网格(磅)",
+  "zh-TW": "格線(磅)",
+  "en": "Grid (pt)",
+  "ja": "方眼(pt)"
+ },
+ "rb.vsEbGrid.tip": {
+  "zh-CN": "网格间距",
+  "zh-TW": "格線間距",
+  "en": "Grid spacing",
+  "ja": "方眼の間隔"
+ },
+ "rb.vsEbGrid.sup": {
+  "zh-CN": "网格背景的格子大小，单位为磅；每 5 格一条深色线。",
+  "zh-TW": "格線背景的格子大小，單位為磅；每 5 格一條深色線。",
+  "en": "Size of the grid squares in points; every 5th line is darker.",
+  "ja": "方眼のマス目の大きさ（単位：pt）。5 マスごとに濃い線になります。"
+ },
+ "rb.vsEbMargin": {
+  "zh-CN": "边距(磅)",
+  "zh-TW": "邊界(磅)",
+  "en": "Margin (pt)",
+  "ja": "余白(pt)"
+ },
+ "rb.vsEbMargin.tip": {
+  "zh-CN": "边距",
+  "zh-TW": "邊界",
+  "en": "Margin",
+  "ja": "余白"
+ },
+ "rb.vsEbMargin.sup": {
+  "zh-CN": "图形四周留白的宽度，单位为磅（1 磅 ≈ 0.35 毫米）。0 表示紧贴图形。",
+  "zh-TW": "圖形四周留白的寬度，單位為磅（1 磅 ≈ 0.35 毫米）。0 表示緊貼圖形。",
+  "en": "Space around the shapes in points (1 pt ≈ 0.35 mm). 0 = tight.",
+  "ja": "図形の周りの余白（単位：pt、1 pt ≈ 0.35 mm）。0 は図形にぴったり合わせます。"
+ },
+ "rb.vsGrpSettings": {
+  "zh-CN": "导出设置",
+  "zh-TW": "匯出設定",
+  "en": "Export settings",
+  "ja": "エクスポート設定"
+ },
+ "rb.vsDdFormat": {
+  "zh-CN": "默认格式",
+  "zh-TW": "預設格式",
+  "en": "Default format",
+  "ja": "既定の形式"
+ },
+ "rb.vsDdFormat.sup": {
+  "zh-CN": "“导出”和“逐页导出”使用的格式（保存对话框中也可以临时更改）。",
+  "zh-TW": "「匯出」和「逐頁匯出」使用的格式（儲存對話方塊中也可以臨時更改）。",
+  "en": "The format used by Export and Export every slide (it can also be changed in the save dialog).",
+  "ja": "「エクスポート」と「スライドごとにエクスポート」で使う形式（保存ダイアログでも一時的に変更できます）。"
+ },
+ "rb.vsDdMode": {
+  "zh-CN": "多个图形",
+  "zh-TW": "多個圖形",
+  "en": "Several shapes",
+  "ja": "複数の図形"
+ },
+ "rb.vsDdMode.tip": {
+  "zh-CN": "选中多个图形时",
+  "zh-TW": "選取多個圖形時",
+  "en": "With several shapes selected",
+  "ja": "複数の図形を選択したとき"
+ },
+ "rb.vsDdMode.sup": {
+  "zh-CN": "合并为一个文件，或每个图形分别导出（文件名取自“选择窗格”中的图形名称）。",
+  "zh-TW": "合併為一個檔案，或每個圖形分別匯出（檔名取自「選擇窗格」中的圖形名稱）。",
+  "en": "One file for all, or one file per shape (named after the shapes in the Selection Pane).",
+  "ja": "1 つのファイルにまとめるか、図形ごとにエクスポートします（ファイル名は「選択ウィンドウ」の図形名）。"
+ },
+ "rb.vsDdNaming": {
+  "zh-CN": "保存方式",
+  "zh-TW": "儲存方式",
+  "en": "Saving",
+  "ja": "保存方法"
+ },
+ "rb.vsDdNaming.sup": {
+  "zh-CN": "每次弹出对话框选择位置，或直接保存到默认文件夹（文件名自动带时间）。",
+  "zh-TW": "每次跳出對話方塊選擇位置，或直接儲存到預設資料夾（檔名自動帶時間）。",
+  "en": "Ask every time, or save straight to the default folder (file names get the time).",
+  "ja": "毎回ダイアログで保存先を選ぶか、既定のフォルダーに直接保存します（ファイル名に時刻が付きます）。"
+ },
+ "rb.vsDdDpi": {
+  "zh-CN": "PNG 分辨率",
+  "zh-TW": "PNG 解析度",
+  "en": "PNG resolution",
+  "ja": "PNG 解像度"
+ },
+ "rb.vsDdDpi.sup": {
+  "zh-CN": "只影响 PNG 导出。期刊印刷通常要求 300 DPI 以上，线条图可选 600 DPI；也可以自定义（最高 3000 DPI）。",
+  "zh-TW": "隻影響 PNG 匯出。期刊印刷通常要求 300 DPI 以上，線條圖可選 600 DPI；也可以自訂（最高 3000 DPI）。",
+  "en": "Only for PNG. Journals usually ask for 300 DPI or more, line art 600 DPI; custom values up to 3000 DPI are possible.",
+  "ja": "PNG のエクスポートだけに適用されます。学術誌の印刷では通常 300 DPI 以上、線画は 600 DPI。ユーザー設定（最大 3000 DPI）も可能です。"
+ },
+ "rb.vsEbDpi": {
+  "zh-CN": "自定义 DPI",
+  "zh-TW": "自訂 DPI",
+  "en": "Custom DPI",
+  "ja": "ユーザー設定 DPI"
+ },
+ "rb.vsEbDpi.tip": {
+  "zh-CN": "自定义分辨率",
+  "zh-TW": "自訂解析度",
+  "en": "Custom resolution",
+  "ja": "ユーザー設定の解像度"
+ },
+ "rb.vsEbDpi.sup": {
+  "zh-CN": "1～3000 之间的整数。“PNG 分辨率”选“自定义”时生效。分辨率越高文件越大。",
+  "zh-TW": "1～3000 之間的整數。「PNG 解析度」選「自訂」時生效。解析度越高檔案越大。",
+  "en": "A whole number from 1 to 3000, used when PNG resolution is Custom. Higher means larger files.",
+  "ja": "1～3000 の整数。「PNG 解像度」が「ユーザー設定」のときに使います。解像度が高いほどファイルは大きくなります。"
+ },
+ "rb.vsChkVsdx": {
+  "zh-CN": "VSDX 原生形状",
+  "zh-TW": "VSDX 原生形狀",
+  "en": "VSDX native shapes",
+  "ja": "VSDX ネイティブ図形"
+ },
+ "rb.vsChkVsdx.sup": {
+  "zh-CN": "勾选：VSDX 中的图形是 Visio 原生形状，文字可直接编辑（无需安装 Visio）。\n不勾选：整个图形作为一张 EMF 矢量图片嵌入 VSDX，外观与 PowerPoint 完全一致。",
+  "zh-TW": "勾選：VSDX 中的圖形是 Visio 原生形狀，文字可直接編輯（無需安裝 Visio）。\n不勾選：整個圖形作為一張 EMF 向量圖片嵌入 VSDX，外觀與 PowerPoint 完全一致。",
+  "en": "On: the shapes in the VSDX are native Visio shapes with editable text (Visio is not needed).\nOff: the whole drawing is embedded as one EMF vector picture and looks exactly as in PowerPoint.",
+  "ja": "オン：VSDX の図形は Visio のネイティブ図形になり、文字をそのまま編集できます（Visio は不要）。\nオフ：図形全体を 1 つの EMF ベクター画像として埋め込み、PowerPoint とまったく同じ見た目になります。"
+ },
+ "rb.vsChkOpen": {
+  "zh-CN": "完成后打开文件夹",
+  "zh-TW": "完成後開啟資料夾",
+  "en": "Open folder when done",
+  "ja": "完了後にフォルダーを開く"
+ },
+ "rb.vsChkOpen.sup": {
+  "zh-CN": "导出完成后在资源管理器 / 访达中定位到导出的文件。",
+  "zh-TW": "匯出完成後在檔案總管 / Finder 中定位到匯出的檔案。",
+  "en": "Shows the exported file in File Explorer / Finder when done.",
+  "ja": "エクスポート後、エクスプローラー / Finder でファイルを表示します。"
+ },
+ "rb.vsBtnFolder": {
+  "zh-CN": "默认文件夹…",
+  "zh-TW": "預設資料夾…",
+  "en": "Default folder…",
+  "ja": "既定のフォルダー…"
+ },
+ "rb.vsBtnFolder.sup": {
+  "zh-CN": "“自动保存”和“逐页导出”默认使用的文件夹：\n{0}",
+  "zh-TW": "「自動儲存」和「逐頁匯出」預設使用的資料夾：\n{0}",
+  "en": "The folder used for automatic saving and Export every slide:\n{0}",
+  "ja": "自動保存と「スライドごとにエクスポート」で使うフォルダー：\n{0}"
+ },
+ "rb.vsBtnReset": {
+  "zh-CN": "恢复默认设置",
+  "zh-TW": "恢復預設設定",
+  "en": "Reset settings",
+  "ja": "設定を既定に戻す"
+ },
+ "rb.vsBtnReset.sup": {
+  "zh-CN": "把所有导出和背景设置恢复为默认值（界面语言保持不变）。",
+  "zh-TW": "把所有匯出和背景設定恢復為預設值（介面語言保持不變）。",
+  "en": "Resets all export and background settings to their defaults (the language is kept).",
+  "ja": "すべてのエクスポート設定と背景の設定を既定値に戻します（表示言語はそのまま）。"
+ },
+ "rb.vsBtnLauncher.tip": {
+  "zh-CN": "查看当前设置",
+  "zh-TW": "檢視目前設定",
+  "en": "Show the current settings",
+  "ja": "現在の設定を表示"
+ },
+ "rb.vsBtnLauncher.sup": {
+  "zh-CN": "显示当前所有导出设置。",
+  "zh-TW": "顯示目前所有匯出設定。",
+  "en": "Shows all current export settings.",
+  "ja": "現在のすべてのエクスポート設定を表示します。"
+ },
+ "rb.vsGrpAbout": {
+  "zh-CN": "关于",
+  "zh-TW": "關於",
+  "en": "About",
+  "ja": "矢印について"
+ },
+ "rb.vsBtnAbout": {
+  "zh-CN": "关于矢印",
+  "zh-TW": "關於矢印",
+  "en": "About VecStamp",
+  "ja": "矢印について"
+ },
+ "rb.vsBtnAbout.tip": {
+  "zh-CN": "关于 矢印 VecStamp",
+  "zh-TW": "關於 矢印 VecStamp",
+  "en": "About VecStamp",
+  "ja": "矢印 VecStamp について"
+ },
+ "rb.vsBtnAbout.sup": {
+  "zh-CN": "版本、作者、MIT 开源协议；矢印永久开源、永久免费。",
+  "zh-TW": "版本、作者、MIT 開源授權；矢印永久開源、永久免費。",
+  "en": "Version, author, MIT licence – VecStamp is and stays free and open source.",
+  "ja": "バージョン、作者、MIT ライセンス。矢印はずっとオープンソース・無料です。"
+ },
+ "rb.vsGalDonate": {
+  "zh-CN": "赞赏作者",
+  "zh-TW": "贊助作者",
+  "en": "Support the author",
+  "ja": "作者を支援"
+ },
+ "rb.vsGalDonate.sup": {
+  "zh-CN": "矢印永久免费、开源。如果它帮到了你，可以用支付宝或微信扫码请作者喝杯咖啡（完全自愿，不影响任何功能）。",
+  "zh-TW": "矢印永久免費、開源。如果它幫到了你，可以用支付寶或微信掃碼請作者喝杯咖啡（完全自願，不影響任何功能）。",
+  "en": "VecStamp is free and open source. If it helps you, you can buy the author a coffee with Alipay or WeChat Pay (entirely voluntary; nothing depends on it).",
+  "ja": "矢印は無料・オープンソースです。役に立ったら、Alipay または WeChat Pay で作者にコーヒーをごちそうしていただけます（任意です。機能には一切影響しません）。"
+ },
+ "rb.vsBtnDonateInfo": {
+  "zh-CN": "关于赞赏…",
+  "zh-TW": "關於贊助…",
+  "en": "About support…",
+  "ja": "支援について…"
+ },
+ "rb.vsMnuLang.tip": {
+  "zh-CN": "界面语言 / Language",
+  "zh-TW": "介面語言 / Language",
+  "en": "Language",
+  "ja": "表示言語 / Language"
+ },
+ "rb.vsMnuLang.sup": {
+  "zh-CN": "当前：{0}。切换矢印的界面语言（简体中文、繁體中文、English、日本語），立即生效。",
+  "zh-TW": "目前：{0}。切換矢印的介面語言（簡體中文、繁體中文、English、日本語），立即生效。",
+  "en": "Current: {0}. Switches the language of VecStamp (简体中文, 繁體中文, English, 日本語) at once.",
+  "ja": "現在：{0}。矢印の表示言語（简体中文・繁體中文・English・日本語）を切り替えます。すぐに反映されます。"
+ },
+ "rb.vsBtnHelp": {
+  "zh-CN": "使用说明",
+  "zh-TW": "使用說明",
+  "en": "Help",
+  "ja": "使い方"
+ },
+ "rb.vsBtnHelp.sup": {
+  "zh-CN": "各按钮和设置的简要说明。",
+  "zh-TW": "各按鈕和設定的簡要說明。",
+  "en": "A short guide to the buttons and settings.",
+  "ja": "ボタンと設定の簡単な説明。"
+ },
+ "rb.vsBtnFeedback": {
+  "zh-CN": "反馈",
+  "zh-TW": "意見回饋",
+  "en": "Feedback",
+  "ja": "フィードバック"
+ },
+ "rb.vsBtnFeedback.tip": {
+  "zh-CN": "反馈问题或建议",
+  "zh-TW": "意見回饋問題或建議",
+  "en": "Report a problem or suggest an idea",
+  "ja": "問題の報告・提案"
+ },
+ "rb.vsBtnFeedback.sup": {
+  "zh-CN": "选择发送邮件给作者，或在 GitHub 提交 Issue。",
+  "zh-TW": "選擇傳送郵件給作者，或在 GitHub 提交 Issue。",
+  "en": "E-mail the author or open an issue on GitHub.",
+  "ja": "作者にメールを送るか、GitHub で Issue を作成します。"
+ },
+ "rb.vsBtnHome": {
+  "zh-CN": "项目主页",
+  "zh-TW": "專案首頁",
+  "en": "Project page",
+  "ja": "プロジェクトページ"
+ },
+ "rb.vsBtnHome.sup": {
+  "zh-CN": "在浏览器中打开矢印的 GitHub 页面：下载新版本、查看源码和更新日志。",
+  "zh-TW": "在瀏覽器中開啟矢印的 GitHub 頁面：下載新版本、檢視原始碼和更新日誌。",
+  "en": "Opens the VecStamp page on GitHub: new versions, source code and change log.",
+  "ja": "ブラウザーで矢印の GitHub ページを開きます。新しいバージョン、ソースコード、更新履歴を確認できます。"
+ }
+}

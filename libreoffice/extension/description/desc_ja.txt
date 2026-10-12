@@ -1,0 +1,2 @@
+矢印 VecStamp —— Impress / Draw で選択した図形を EMF、EMZ、SVG、WMF、PDF、VSDX、高解像度 PNG にワンクリックでエクスポート。白・ベージュ・方眼・ユーザー設定の色の背景、透明度、余白に対応し、スライドごとの一括エクスポートもできます。表示言語：簡体字中国語・繁体字中国語・英語・日本語。
+作者：vluckyzhang（vluckyzhang@gmail.com）。MIT ライセンス。

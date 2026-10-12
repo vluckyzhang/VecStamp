@@ -10,10 +10,18 @@ CJK SC (Regular / Medium / Bold / Black) and DejaVu Sans - on Debian / Ubuntu
 assets/screenshots/*.png are real captures of LibreOffice Impress on Linux with
 the extension installed (see docs/DEVELOPMENT.md); this script only frames and
 arranges them. Images that show the PowerPoint ribbon are labelled as mock-ups.
+
+Languages: the images are drawn in Simplified Chinese (<name>.png) and again in Traditional
+Chinese, English and Japanese (<name>.zh-TW.png, <name>.en.png, <name>.ja.png) for the README
+of each language; the texts come from build/promo_i18n.json (keyed by the Chinese text, every
+text drawn with T() is looked up). The ribbon and the Linux screenshot show the Chinese
+interface and exist only once.
 """
 import base64
 import io
+import json
 import os
+import re
 import subprocess
 import sys
 
@@ -43,8 +51,32 @@ LATIN = 'DejaVu Sans'
 MONO = 'DejaVu Sans Mono'
 
 
+# ------------------------------------------------------------------ languages
+LANG = 'zh-CN'                     # language of the images being drawn
+LOCALIZED = ('zh-TW', 'en', 'ja')
+CJK_FONT = {'zh-CN': 'Noto Sans CJK SC', 'zh-TW': 'Noto Sans CJK TC', 'en': 'Noto Sans CJK SC', 'ja': 'Noto Sans CJK JP'}
+_TABLE = None
+MISSING = []
+
+
+def L(s):
+    """s in the current language (the Chinese text itself for zh-CN)."""
+    global _TABLE
+    if LANG == 'zh-CN' or not re.search(r'[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]', s):
+        return s
+    if _TABLE is None:
+        _TABLE = json.load(open(os.path.join(HERE, 'promo_i18n.json'), encoding='utf-8'))
+    entry = _TABLE.get(s)
+    if entry is None:
+        if any(e.get(LANG) == s for e in _TABLE.values()):       # already translated
+            return s
+        if s not in MISSING:
+            MISSING.append(s)
+        return s
+    return entry[LANG]
+
+
 def version():
-    import re
     src = open(os.path.join(ROOT, 'libreoffice', 'extension', 'pythonpath', 'vecstamp_core.py'), encoding='utf-8').read()
     return re.search(r"^VERSION = '([^']+)'", src, re.M).group(1)
 
@@ -72,6 +104,7 @@ def _font(family, size):
 
 def tw(s, size, family=F):
     """Width of a text run in px (measured with the real font when available)."""
+    s = L(s)
     f = _font(family, int(round(size)))
     if f is not None:
         return f.getlength(s)
@@ -79,6 +112,7 @@ def tw(s, size, family=F):
 
 
 def T(x, y, s, size=20, fill=INK, family=F, anchor='start', opacity=None, weight=None):
+    s = L(s)
     op = f' opacity="{opacity}"' if opacity is not None else ''
     if family == FBOLD:
         family, weight = F, 'bold'
@@ -213,6 +247,13 @@ def top_band(x, y, w, r, color, cid, hb=7):
             f'<rect x="{x}" y="{y}" width="{w}" height="{hb}" fill="{color}" clip-path="url(#{cid})"/>')
 
 
+def shrink(s, size, width, family=F, smallest=11.0):
+    """The largest font size <= size at which s fits into width (longer translations)."""
+    while size > smallest and tw(s, size, family) > width:
+        size -= 0.5
+    return size
+
+
 def fit(s, size, width, family=F, where=''):
     if tw(s, size, family) > width:
         print(f'warning: text too wide ({tw(s, size, family):.0f} > {width:.0f}px) {where}: {s}')
@@ -220,6 +261,7 @@ def fit(s, size, width, family=F, where=''):
 
 
 def svg_doc(w, h, body):
+    body = body.replace('Noto Sans CJK SC', CJK_FONT[LANG])      # Japanese / Traditional glyph shapes
     return (f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
             f'width="{w}" height="{h}" viewBox="0 0 {w} {h}">{body}</svg>')
 
@@ -233,6 +275,8 @@ def render(name, w, h, body, scale=1.5):
     os.makedirs(PROMO, exist_ok=True)
     if WEB_BG:
         name += '-web'
+    if LANG != 'zh-CN':
+        name += '.' + LANG
     out = os.path.join(PROMO, name + '.png')
     cairosvg.svg2png(bytestring=svg_doc(w, h, body).encode('utf-8'), write_to=out,
                      output_width=int(w * scale), output_height=int(h * scale))
@@ -266,7 +310,7 @@ def hero():
     b.append(icon(mi.logo_body(), 72, 70, 118))
     b.append(T(212, 158, '矢印', 84, INK, FB))
     b.append(T(212 + tw('矢印', 84, FB) + 16, 158, 'VecStamp', 50, SEAL, LATIN, weight='bold'))
-    b.append(T(76, 262, '选中即印，一键导出矢量图', 42, INK, FBOLD))
+    b.append(T(76, 262, '选中即印，一键导出矢量图', shrink('选中即印，一键导出矢量图', 42, 640, FBOLD), INK, FBOLD))
     b.append(T(78, 306, 'PowerPoint 加载项 · LibreOffice 扩展', 19, MUTED, F))
     b.append(T(78 + tw('PowerPoint 加载项 · LibreOffice 扩展', 19) + 20, 306, 'Windows · macOS · Linux', 19, SEAL, FM))
     x = 76
@@ -274,12 +318,12 @@ def hero():
         p, pw = pill(x, 340, ext.upper(), FMT[ext], h=38, size=17, family=LATIN)
         b.append(p.replace(f'font-family="{LATIN}"', f'font-family="{LATIN}" font-weight="bold"'))
         x += pw + 10
-    feats = ['透明 · 白色 · 米色 · 网格 · 自定义背景（色盘 / RGB / 透明度）',
-             'PNG 150 – 3000 DPI 任意分辨率，图形之外不留白',
-             'Visio 原生形状 VSDX，文字可编辑 · SVG 支持 PowerPoint 2013+']
+    feats = ['透明 · 白色 · 米色 · 网格 · 自定义颜色（面板 / 取色器 / RGB）',
+             'Visio 原生形状，圆角保持曲线 · PNG 最高 3000 DPI',
+             '进度百分比，按 Esc 取消 · 简体 / 繁體 / English / 日本語']
     for i, f in enumerate(feats):
         y = 425 + i * 40
-        b.append(check(88, y - 7, SEAL, 10) + T(110, y, f, 19, INK, F))
+        b.append(check(88, y - 7, SEAL, 10) + T(110, y, f, shrink(f, 19, 610), INK, F))
     x = 76
     for label, fill, fg, stroke in (('v' + version(), SEAL, '#FFFFFF', None), ('MIT 开源', PAPER, INK, INK),
                                     ('永久免费 · 开源 · 无广告', PAPER, INK, INK)):
@@ -331,7 +375,7 @@ def workflow():
     b.append(f'<rect x="{x0 + 22}" y="{y0 + 56}" width="92" height="118" rx="8" fill="#FBE9E7" '
              f'stroke="{SEAL}" stroke-width="1.5"/>')
     b.append(ribbon_icon('export64', x0 + 36, y0 + 66, 64))
-    b.append(T(x0 + 68, y0 + 150, '导出 SVG', 14, INK, FM, 'middle') + caret(x0 + 68, y0 + 162, 4.5))
+    b.append(T(x0 + 68, y0 + 150, '导出 SVG', shrink('导出 SVG', 14, 86, FM), INK, FM, 'middle') + caret(x0 + 68, y0 + 162, 4.5))
     for i, ext in enumerate(('emf', 'pdf', 'png')):
         yy = y0 + 64 + i * 38
         b.append(ribbon_icon(ext + '32', x0 + 134, yy, 24) + T(x0 + 166, yy + 18, ext.upper(), 15, INK, LATIN))
@@ -350,10 +394,10 @@ def workflow():
 FORMAT_CARDS = [
     ('emf', '增强型图元文件', ['Word / WPS / PPT 插图首选', '放大不失真，可取消组合编辑'], ['矢量']),
     ('emz', '压缩的 EMF', ['与 EMF 同样清晰，体积更小', '便于邮件、网盘传输'], ['矢量']),
-    ('svg', '可缩放矢量图形', ['网页、Inkscape、Illustrator', 'PowerPoint 2013+ 内置转换'], ['矢量', 'v1.2.1 增强']),
+    ('svg', '可缩放矢量图形', ['网页、Inkscape、Illustrator', 'PowerPoint 2013+ 内置转换'], ['矢量', 'v1.2.2 不再卡住']),
     ('wmf', 'Windows 图元文件', ['兼容只认 WMF 的老旧软件', '不支持透明和渐变'], ['矢量']),
     ('pdf', '矢量文档', ['页面尺寸与图形完全一致', '期刊投稿、LaTeX 插图、打印'], ['文档']),
-    ('vsdx', 'Visio 绘图', ['Visio 原生形状，文字可编辑', '无需安装 Visio 即可生成'], ['文档', 'v1.2.1 原生']),
+    ('vsdx', 'Visio 绘图', ['Visio 原生形状，文字可编辑', '圆角与弧线保持为曲线'], ['文档', 'v1.2.2 曲线']),
     ('png', '高分辨率位图', ['150 / 300 / 600 DPI 一键切换', '自定义分辨率，最高 3000 DPI'], ['位图']),
 ]
 
@@ -373,7 +417,8 @@ def formats():
             b.append(T(x + 117, y + 92, '批量与工具', 16, '#C9CDD3', F))
             for k, line in enumerate(['逐页导出整份演示文稿', '一键生成 EMF 图片副本', '自动命名 · 默认文件夹',
                                       '边距 · 合并或逐个导出']):
-                b.append(check(x + 32, y + 145 + k * 32, SEAL, 8) + T(x + 50, y + 151 + k * 32, line, 16, '#FFFFFF', F))
+                b.append(check(x + 32, y + 145 + k * 32, SEAL, 8)
+                         + T(x + 50, y + 151 + k * 32, line, shrink(line, 16, cw - 64), '#FFFFFF', F))
             continue
         ext, sub, lines, tags = FORMAT_CARDS[i]
         col = FMT[ext]
@@ -381,11 +426,11 @@ def formats():
         b.append(top_band(x, y, cw, 20, col, f'band{i}'))
         b.append(icon(mi.doc_body(col, ext.upper()), x + 18, y + 22, 84))
         b.append(T(x + 112, y + 66, ext.upper(), 32, INK, LATIN, weight='bold'))
-        b.append(T(x + 113, y + 94, sub, 16, MUTED, F))
+        b.append(T(x + 113, y + 94, sub, shrink(sub, 16, cw - 127), MUTED, F))
         b.append(f'<line x1="{x + 22}" y1="{y + 124}" x2="{x + cw - 22}" y2="{y + 124}" stroke="#EFE8E2" stroke-width="1.5"/>')
         for k, line in enumerate(lines):
             b.append(f'<circle cx="{x + 28}" cy="{y + 155 + k * 32}" r="3.5" fill="{col}"/>'
-                     + T(x + 40, y + 161 + k * 32, fit(line, 15.5, cw - 58, where=ext), 15.5, INK, F))
+                     + T(x + 40, y + 161 + k * 32, line, shrink(line, 15.5, cw - 58), INK, F))
         tx = x + 22
         for t in tags:
             new = t.startswith('v1.2')
@@ -442,7 +487,7 @@ def backgrounds():
          '<rect x="8" y="8" width="8" height="8" fill="#E6E8EC"/></pattern></defs>']
     items = [('none', '透明', 'PNG 保留 Alpha 通道'), ('white', '白色', 'RGB 255, 255, 255'),
              ('beige', '米色', 'RGB 245, 240, 225'), ('grid', '网格', '细线 + 每 5 格粗线，间距可调'),
-             ('custom', '自定义', '色盘 · RGB · 透明度')]
+             ('custom', '自定义', '颜色面板 · RGB · 透明度')]
     s, gap = 220, 25
     x0 = (w - 5 * s - 4 * gap) / 2
     for i, (kind, title, sub) in enumerate(items):
@@ -450,7 +495,7 @@ def backgrounds():
         b.append(shadow(x, 34, s, s, 16, alpha=0.022))
         b.append(bg_tile(x, 34, s, kind, f'tile{i}'))
         b.append(T(x + s / 2, 300, title, 24, INK, FBOLD, 'middle'))
-        b.append(T(x + s / 2, 330, sub, 15, MUTED, F, 'middle'))
+        b.append(T(x + s / 2, 330, sub, shrink(sub, 15, s + 16), MUTED, F, 'middle'))
     render('backgrounds', w, h, ''.join(b))
 
 
@@ -601,8 +646,30 @@ def theme_column(hexrgb):
     return out
 
 
+def bg_menu(x, y):
+    """The 背景 menu: preset backgrounds, then the 自定义颜色 entry that opens the colour panel."""
+    w = 236
+    items = [('bgnone32', '透明'), ('bgwhite32', '白色'), ('bgbeige32', '米色'), ('bggrid32', '网格（坐标纸）')]
+    hgt = len(items) * 34 + 30 + 40 + 14
+    b = [shadow(x, y, w, hgt, 6, depth=10, alpha=0.035, dy=6),
+         f'<rect x="{x}" y="{y}" width="{w}" height="{hgt}" rx="6" fill="#FFFFFF" stroke="#C8C6C4"/>']
+    yy = y + 8
+    for img, label in items:
+        b.append(ribbon_icon(img, x + 14, yy + 6, 20) + T(x + 46, yy + 22, label, 14.5, INK, F))
+        yy += 34
+    b.append(f'<rect x="{x + 1}" y="{yy + 2}" width="{w - 2}" height="26" fill="#F3F2F1"/>'
+             + T(x + 14, yy + 20, '自定义颜色', 13.5, '#323130', FBOLD))
+    yy += 34
+    entry_y = yy
+    b.append(f'<rect x="{x + 4}" y="{yy}" width="{w - 8}" height="34" rx="4" fill="#FBE9E7" stroke="{SEAL}" stroke-width="1"/>'
+             f'<rect x="{x + 15}" y="{yy + 8}" width="18" height="18" fill="#FFF8EB" stroke="#8A8886"/>'
+             + T(x + 46, yy + 23, '自定义颜色  ✓', 14.5, INK, F)
+             + f'<path d="M{x + w - 22},{yy + 11} l6,6 l-6,6" fill="none" stroke="{MUTED}" stroke-width="1.6"/>')
+    return ''.join(b), w, hgt, entry_y
+
+
 def color_gallery(x, y):
-    """The drop-down of the 背景颜色 gallery (same layout as PowerPoint's colour picker)."""
+    """The colour panel inside 背景 → 自定义颜色 (same layout as PowerPoint's colour picker)."""
     sw, gap = 18, 5
     w = 10 * sw + 9 * gap + 28
     hgt = 368
@@ -661,16 +728,15 @@ def ribbon():
     x += r.big(x, 'pages64', ['逐页导出'], 70) + 10
     cw = max(r.small(x, y1, 'picture32', 'EMF 图片副本'), r.small(x, y2, 'folder32', '打开导出文件夹'))
     x = r.group_end(g0, x + cw, '批量与工具')
-    # group: background (dropDown, RGB box, colour gallery | alpha, grid, margin)
+    # group: background (colour square + 背景 menu, RGB box | alpha, grid, margin)
     g0 = x
     gal_x = x
-    fw = 120
-    c1 = max(r.field(x, y1, '背景', '自定义颜色', fw, drop=True, swatch='bgcustom32'),
-             r.field(x, y2, 'RGB', '255,248,235', fw + tw('背景', 14.5) - tw('RGB', 14.5)))
-    r.b.append(f'<rect x="{x - 4}" y="{y3 - 1}" width="{tw("背景颜色", 14.5) + 56}" height="28" rx="3" '
+    label = '背景：自定义颜色'
+    r.b.append(f'<rect x="{x - 4}" y="{y1 - 1}" width="{tw(label, 14.5) + 60}" height="28" rx="3" '
                f'fill="#F3F2F1" stroke="#C8C6C4"/>')
-    r.b.append(f'<rect x="{x + 1}" y="{y3 + 5}" width="16" height="16" fill="#FFF8EB" stroke="#8A8886"/>'
-               + T(x + 25, y3 + 18, '背景颜色', 14.5, INK, F) + caret(x + 37 + tw('背景颜色', 14.5), y3 + 13, 4.5))
+    r.b.append(f'<rect x="{x + 1}" y="{y1 + 5}" width="16" height="16" fill="#FFF8EB" stroke="#8A8886"/>'
+               + T(x + 25, y1 + 18, label, 14.5, INK, F) + caret(x + 39 + tw(label, 14.5), y1 + 13, 4.5))
+    c1 = max(tw(label, 14.5) + 56, r.field(x, y2, 'RGB', '255,248,235', 104))
     x += c1 + 22
     lw = tw('透明度%', 14.5)
     c2 = max(r.field(x, y1, '透明度%', '0', 46), r.field(x, y2, '网格(磅)', '10', 46 + lw - tw('网格(磅)', 14.5)),
@@ -697,16 +763,23 @@ def ribbon():
     g0 = x
     x += r.big(x, 'logo64', ['关于矢印'], 74) + 8
     x += r.big(x, 'donate64', ['赞赏作者', 'CARET'], 74) + 10
-    cw = max(r.small(x, y1, 'help32', '使用说明'), r.small(x, y2, 'mail32', '反馈'), r.small(x, y3, 'home32', '项目主页'))
-    x += cw
+    cw = r.small(x, y1, 'lang32', '简体中文')
+    r.b.append(caret(x + cw + 9, y1 + 13, 4.5))
+    cw = max(cw + 16, r.small(x, y2, 'help32', '使用说明'), r.small(x, y3, 'mail32', '反馈'))
+    x += cw + 14
+    x += r.small(x, y1, 'home32', '项目主页')
     r.b.append(T((g0 + x) / 2, r.y + r.h - 12, '关于', 13.5, MUTED, F, 'middle'))
 
     # frame sized to the content
     rw = x + 28 - rx
     w = int(rx * 2 + rw)
-    pop_y = y3 + 30
-    popup, pop_w = color_gallery(gal_x - 4, pop_y)
-    h = int(pop_y + 368 + 30)
+    pop_y = y1 + 30
+    menu, menu_w, menu_h, entry_y = bg_menu(gal_x - 4, pop_y)
+    gal_y = entry_y - 40
+    gallery, gal_w = color_gallery(gal_x - 4 + menu_w - 6, gal_y)
+    popup = menu + gallery
+    pop_w = menu_w - 6 + gal_w
+    h = int(max(pop_y + menu_h, gal_y + 368) + 30)
     b = [background(w, h), card(rx, ry, rw, 214, 12, '#FFFFFF'),
          f'<path d="M{rx},{ry + 12} a12,12 0 0 1 12,-12 H{rx + rw - 12} a12,12 0 0 1 12,12 V{ry + 46} H{rx} Z" '
          'fill="#F3F2F1"/>']
@@ -725,10 +798,10 @@ def ribbon():
     # notes beside the open gallery
     nx = gal_x + pop_w + 40
     ny = ry + 214 + 54
-    notes = [('背景颜色', '与 PowerPoint 相同的取色面板：主题颜色、标准色、最近使用的颜色'),
-             ('其他颜色 / 取色器', '打开 PowerPoint 自带的「颜色」对话框，或从幻灯片上直接吸取颜色'),
-             ('VSDX 原生形状', '导出的 Visio 绘图由原生形状组成，文字可直接编辑'),
-             ('赞赏作者', '矢印永久免费开源；觉得好用可以扫码请作者喝杯咖啡')]
+    notes = [('背景', '颜色方块预览当前背景；自定义颜色面板就在「背景」菜单里'),
+             ('其他颜色 / 取色器', 'PowerPoint 自带的「颜色」对话框或取色器；不可用时换用矢印自己的颜色面板'),
+             ('界面语言', '简体中文 / 繁體中文 / English / 日本語，在「关于」组中即时切换'),
+             ('VSDX 原生形状', '导出的 Visio 绘图由原生形状组成，圆角等曲线保持为曲线')]
     for k, (head, line) in enumerate(notes):
         yy = ny + k * 66
         b.append(f'<circle cx="{nx + 6}" cy="{yy - 6}" r="5" fill="{SEAL}"/>' + T(nx + 22, yy, head, 17, INK, FBOLD))
@@ -769,9 +842,10 @@ def linux_showcase():
 
 def social():
     """1280 x 640 social preview (GitHub: Settings -> Social preview) - same artwork as the hero."""
-    src = os.path.join(PROMO, 'hero.png')
-    Image.open(src).resize((1280, 640), Image.LANCZOS).save(os.path.join(PROMO, 'social-preview.png'), optimize=True)
-    print('wrote assets/promo/social-preview.png')
+    sfx = '' if LANG == 'zh-CN' else '.' + LANG
+    src = os.path.join(PROMO, f'hero{sfx}.png')
+    Image.open(src).resize((1280, 640), Image.LANCZOS).save(os.path.join(PROMO, f'social-preview{sfx}.png'), optimize=True)
+    print(f'wrote assets/promo/social-preview{sfx}.png')
 
 
 def main():
@@ -792,6 +866,26 @@ def main():
     if os.path.exists(os.path.join(SHOTS, 'libreoffice-menu.png')):
         linux_showcase()
     WEB_BG = None
+    localized()
+
+
+def localized():
+    """The language-independent images again in Traditional Chinese, English and Japanese."""
+    global LANG
+    for LANG in LOCALIZED:
+        hero()
+        workflow()
+        formats()
+        backgrounds()
+        vector_vs_bitmap()
+        platforms()
+        social()
+    LANG = 'zh-CN'
+    if MISSING:
+        print('texts missing in build/promo_i18n.json:')
+        for t in MISSING:
+            print('   ', t)
+        raise SystemExit(1)
 
 
 if __name__ == '__main__':

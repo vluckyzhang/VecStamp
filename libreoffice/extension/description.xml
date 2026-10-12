@@ -14,6 +14,8 @@
   </publisher>
   <display-name>
     <name lang="zh-CN">矢印 VecStamp</name>
+    <name lang="zh-TW">矢印 VecStamp</name>
+    <name lang="ja">矢印 VecStamp</name>
     <name lang="en">VecStamp</name>
   </display-name>
   <icon>
@@ -21,6 +23,8 @@
   </icon>
   <extension-description>
     <src lang="zh-CN" xlink:href="description/desc_zh-CN.txt"/>
+    <src lang="zh-TW" xlink:href="description/desc_zh-TW.txt"/>
+    <src lang="ja" xlink:href="description/desc_ja.txt"/>
     <src lang="en" xlink:href="description/desc_en.txt"/>
   </extension-description>
 </description>

@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="ja" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>矢印 VecStamp：PowerPoint の図形を EMF・SVG・PDF・Visio にワンクリックでエクスポート（無料・オープンソース）</title>
+<meta name="description" content="矢印 VecStamp は無料・オープンソースの PowerPoint アドインと LibreOffice 拡張機能です。スライドの図形を選んで、EMF・EMZ・SVG・PDF・Visio VSDX・高解像度 PNG・WMF にワンクリックでエクスポート。論文の図、提案書、技術文書に最適です。Windows・macOS・Linux 対応、表示言語は日本語・英語・中国語（簡体字 / 繁体字）。">
+<meta name="keywords" content="PowerPoint SVG 書き出し,PowerPoint EMF 保存,パワポ ベクター画像,PowerPoint Visio 変換,VSDX,PowerPoint アドイン,図形 PDF 保存,高解像度 PNG,論文 図,LibreOffice 拡張機能,VecStamp,矢印">
+<meta name="author" content="vluckyzhang">
+<meta name="theme-color" content="#C8372D">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="矢印 VecStamp：PowerPoint の図形を EMF・SVG・PDF・Visio にワンクリックでエクスポート">
+<meta property="og:description" content="選んで押すだけ。PowerPoint / LibreOffice 向けの無料・オープンソースのベクター書き出しツール。EMF・SVG・PDF・Visio など 7 形式に対応。">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<!-- SEO:BEGIN (canonical, hreflang, Open Graph, structured data: written by build/make_website.py) -->
+<link rel="canonical" href="https://vluckyzhang.cn/shiyin/ja/">
+<link rel="alternate" hreflang="zh-CN" href="https://vluckyzhang.cn/shiyin/">
+<link rel="alternate" hreflang="zh-TW" href="https://vluckyzhang.cn/shiyin/zh-TW/">
+<link rel="alternate" hreflang="en" href="https://vluckyzhang.cn/shiyin/en/">
+<link rel="alternate" hreflang="ja" href="https://vluckyzhang.cn/shiyin/ja/">
+<link rel="alternate" hreflang="x-default" href="https://vluckyzhang.cn/shiyin/">
+<meta property="og:url" content="https://vluckyzhang.cn/shiyin/ja/">
+<meta property="og:site_name" content="矢印 VecStamp">
+<meta property="og:image" content="https://vluckyzhang.cn/shiyin/assets/og-ja.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="600">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="zh_TW">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="矢印 VecStamp：PowerPoint の図形を EMF・SVG・PDF・Visio にワンクリックでエクスポート（無料・オープンソース）">
+<meta name="twitter:description" content="矢印 VecStamp は無料・オープンソースの PowerPoint アドインと LibreOffice 拡張機能です。スライドの図形を選んで、EMF・EMZ・SVG・PDF・Visio VSDX・高解像度 PNG・WMF にワンクリックでエクスポート。論文の図、提案書、技術文書に最適です。Windows・macOS・Linux 対応、表示言語は日本語・英語・中国語（簡体字 / 繁体字）。">
+<meta name="twitter:image" content="https://vluckyzhang.cn/shiyin/assets/og-ja.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "矢印 VecStamp", "alternateName": ["VecStamp", "矢印", "Shi Yin"], "description": "矢印 VecStamp は無料・オープンソースの PowerPoint アドインと LibreOffice 拡張機能です。スライドの図形を選んで、EMF・EMZ・SVG・PDF・Visio VSDX・高解像度 PNG・WMF にワンクリックでエクスポート。論文の図、提案書、技術文書に最適です。Windows・macOS・Linux 対応、表示言語は日本語・英語・中国語（簡体字 / 繁体字）。", "url": "https://vluckyzhang.cn/shiyin/ja/", "inLanguage": "ja", "applicationCategory": "MultimediaApplication", "applicationSubCategory": "PowerPoint add-in / LibreOffice extension", "operatingSystem": "Windows, macOS, Linux", "softwareVersion": "1.2.2", "softwareRequirements": "Microsoft PowerPoint 2013+ (Windows), PowerPoint for Mac 16.82+, LibreOffice 6.4+", "downloadUrl": "https://github.com/vluckyzhang/VecStamp/releases/latest", "image": "https://vluckyzhang.cn/shiyin/assets/og-ja.png", "screenshot": "https://vluckyzhang.cn/shiyin/assets/ribbon.png", "license": "https://opensource.org/licenses/MIT", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "vluckyzhang", "email": "vluckyzhang@gmail.com", "url": "https://github.com/vluckyzhang"}, "sameAs": ["https://github.com/vluckyzhang/VecStamp"], "featureList": ["SVG エクスポートが止まらない", "角丸は曲線のまま", "進行状況をパーセント表示", "背景メニューに色パネル", "4 つの表示言語", "多言語のドキュメントとサイト"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "矢印は有料ですか？データを収集しますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。ずっと無料・オープンソースで、広告もありません。エクスポートはすべてお使いのパソコン上で行い、ネットに接続することもデータを収集することもありません。「フィードバック」や「プロジェクトページ」をクリックしたときだけ、メールソフトやブラウザーを開きます。"}}, {"@type": "Question", "name": "PowerPoint 2016 / 2019 でも SVG をエクスポートできますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。Microsoft 365 と Office 2024（バージョン 2302 以降）は PowerPoint 自身の SVG エクスポートを使います。それより前の Windows 版（2013～2021）では図形を XPS に印刷し、矢印に内蔵の変換スクリプトで SVG を作成します。パス、グラデーション、画像、文字は保持されます。変換はバックグラウンドで行われ、進行状況ウィンドウに割合が表示され、Esc でいつでも中止できます。処理はすべてお使いのパソコンで行い、ほかのソフトは不要です。"}}, {"@type": "Question", "name": "エクスポートした VSDX は Visio で編集できますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。四角形、角丸四角形、楕円、矢印、コネクタ、フリーフォーム、テキストボックスは Visio のネイティブ図形に変換され、1.2.2 からは角丸や円弧も本物の曲線のままです。塗りつぶし、線、矢印、文字の書式もできるだけ保持し、文字はそのまま編集できます。グラフ、SmartArt、ワードアートなど変換できないものは EMF ベクター画像として元の位置に残ります。 図全体を 1 枚のベクター画像にしたい場合は、エクスポート設定で「VSDX ネイティブ図形」のチェックを外してください。"}}, {"@type": "Question", "name": "日本語で使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。PowerPoint の「矢印」タブの右端、「关于」（矢印について）グループの言語メニュー（「简体中文」と表示）で「日本語」を選ぶと、タブ全体と以降のメッセージがすぐに日本語になります。再起動は不要です。LibreOffice 版は「矢印 › 表示言語」で切り替えます。"}}, {"@type": "Question", "name": "「矢印」タブが表示されない、またはマクロが無効と表示される", "acceptedAnswer": {"@type": "Answer", "text": "PowerPoint で「ファイル › オプション › アドイン」を開き、「PowerPoint アドイン」を管理して VecStamp にチェックが入っているか確認してください。マクロが無効と表示される場合は、Windows インストーラーをもう一度実行して 3 を選び、アドインのフォルダーを信頼できる場所に追加します（アンインストール時に一緒に削除されます）。"}}, {"@type": "Question", "name": "エクスポートした EMF のフォントが他のパソコンで変わる", "acceptedAnswer": {"@type": "Answer", "text": "EMF と SVG はフォント名を記録しているため、相手のパソコンにそのフォントがないと置き換えられます。フォントを固定したい場合は PDF（フォントを埋め込み）でエクスポートするか、投稿前に Inkscape や Illustrator で文字をアウトライン化してください。"}}, {"@type": "Question", "name": "3000 DPI の PNG でサイズの警告が出るのはなぜ？", "acceptedAnswer": {"@type": "Answer", "text": "ピクセル数は DPI の 2 乗で増えます。10 × 6 インチの図は 3000 DPI で 5 億 4000 万ピクセルです。約 1 億 2000 万ピクセルを超える場合は確認を求めます。論文の図なら通常 600～1200 DPI で十分で、さらに高精細が必要ならベクター形式をおすすめします。"}}, {"@type": "Question", "name": "問題を報告するには？", "acceptedAnswer": {"@type": "Answer", "text": "「矢印」タブの「フィードバック」から、メールを送るか GitHub で Issue を作成できます。直接 vluckyzhang@gmail.com 宛てにメールするか、 新しい Issue を作成してください。PowerPoint のバージョン（「ファイル › アカウント › PowerPoint のバージョン情報」）と問題のファイルを添えていただくと、原因を早く特定できます。"}}]}</script>
+<!-- SEO:END -->
+<script>
+  /* 在首屏绘制前应用已保存的主题，避免闪烁 */
+  try { var t = localStorage.getItem('vs-theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+<style>
+/* ------------------------------------------------------------------ tokens */
+:root {
+  --paper: #FAFBFC;
+  --paper-2: #F2F4F7;
+  --card: #FFFFFF;
+  --ink: #1D2430;
+  --muted: #566275;
+  --rule: #E3E7EC;
+  --grid: rgba(222, 226, 232, .85);       /* 与矢印「网格」背景相同的细线 */
+  --grid-bold: rgba(176, 184, 196, .45);  /* 每 5 格一条粗线 */
+  --seal: #C8372D;                        /* Logo 的朱砂印色 */
+  --seal-text: #B32F26;
+  --seal-wash: #FBEDEB;
+  --sel: #2F6FB0;                         /* PowerPoint 选择框的蓝色 */
+  --shadow: 0 1px 2px rgba(29, 36, 48, .06), 0 18px 40px -24px rgba(29, 36, 48, .35);
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Sans CJK JP", "Source Han Sans JP", sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  --wrap: 1180px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0F1A2B; --paper-2: #13213A; --card: #172741; --ink: #E8EDF4; --muted: #A5B1C4; --rule: #24365A;
+    --grid: rgba(140, 170, 215, .10); --grid-bold: rgba(140, 170, 215, .20);
+    --seal-text: #F0786E; --seal-wash: rgba(200, 55, 45, .16); --sel: #7DB2EA;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 18px 40px -20px rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0F1A2B; --paper-2: #13213A; --card: #172741; --ink: #E8EDF4; --muted: #A5B1C4; --rule: #24365A;
+  --grid: rgba(140, 170, 215, .10); --grid-bold: rgba(140, 170, 215, .20);
+  --seal-text: #F0786E; --seal-wash: rgba(200, 55, 45, .16); --sel: #7DB2EA;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 18px 40px -20px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------ base */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 76px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 17px/1.75 var(--sans); text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: var(--seal-text); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+code, kbd { font-family: var(--mono); font-size: .88em; }
+code { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 4px; padding: .08em .38em; white-space: nowrap; }
+h1, h2, h3 { margin: 0; line-height: 1.25; font-weight: 800; letter-spacing: -.005em; text-wrap: balance; }
+h2 { font-size: clamp(28px, 3.4vw, 40px); }
+h3 { font-size: 21px; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--sel); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -60px; background: var(--ink); color: var(--paper); padding: 8px 14px; border-radius: 6px; z-index: 50; }
+.skip:focus { top: 12px; }
+section { padding: 104px 0; }
+.lead { color: var(--muted); font-size: 18px; max-width: 40em; margin-top: 14px; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 24px; border-radius: 10px;
+  font: 700 17px/1 var(--sans); text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
+  transition: background-color .15s, border-color .15s, transform .15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--seal); color: #FFF; }
+.btn-primary:hover { background: #B02F26; }
+.btn-ghost { color: var(--ink); border-color: var(--ink); background: transparent; }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+
+/* ------------------------------------------------------------------ nav */
+.nav {
+  position: sticky; top: 0; z-index: 20; backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  background: color-mix(in srgb, var(--paper) 86%, transparent); border-bottom: 1px solid transparent; transition: border-color .2s;
+}
+@supports not (background: color-mix(in srgb, red 50%, transparent)) { .nav { background: var(--paper); } }
+.nav.is-stuck { border-bottom-color: var(--rule); }
+.nav .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 800; font-size: 19px; white-space: nowrap; }
+.brand img { width: 34px; height: 34px; }
+.brand span { color: var(--muted); font-weight: 600; font-size: 15px; }
+.nav-links { display: flex; gap: 22px; margin: 0; padding: 0; list-style: none; font-size: 15.5px; }
+.nav-links a { color: var(--muted); text-decoration: none; }
+.nav-links a:hover { color: var(--ink); }
+.nav-tools { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.icon-btn {
+  width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; border: 1px solid var(--rule);
+  background: transparent; color: var(--ink); cursor: pointer;
+}
+.icon-btn:hover { background: var(--paper-2); }
+.icon-btn svg { width: 20px; height: 20px; }
+.theme-dark-icon { display: none; }
+:root[data-theme="dark"] .theme-dark-icon { display: block; }
+:root[data-theme="dark"] .theme-light-icon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-dark-icon { display: block; }
+  :root:not([data-theme="light"]) .theme-light-icon { display: none; }
+}
+.nav .btn { height: 40px; padding: 0 16px; font-size: 15px; border-radius: 8px; }
+.nav-src { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-size: 15.5px; }
+.nav-src::before { content: ""; flex: 0 0 18px; width: 18px; height: 18px; background: currentColor; -webkit-mask: url("../assets/GitHub_图标.png") center / contain no-repeat; mask: url("../assets/GitHub_图标.png") center / contain no-repeat; }
+.nav-src:hover { color: var(--ink); }
+.lang { position: relative; }
+.lang summary {
+  list-style: none; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 10px;
+  border: 1px solid var(--rule); border-radius: 8px; cursor: pointer; color: var(--ink); font-size: 15px; white-space: nowrap;
+}
+.lang summary::-webkit-details-marker { display: none; }
+.lang summary:hover { background: var(--paper-2); }
+.lang summary svg { width: 18px; height: 18px; flex: none; }
+.lang ul {
+  position: absolute; right: 0; top: 46px; margin: 0; padding: 6px; list-style: none; min-width: 148px; z-index: 30;
+  background: var(--card); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow);
+}
+.lang li a { display: block; padding: 7px 12px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 15px; white-space: nowrap; }
+.lang li a:hover { background: var(--paper-2); }
+.lang li a[aria-current] { color: var(--seal-text); font-weight: 700; }
+@media (max-width: 980px) { .nav-links { display: none; } }
+@media (max-width: 520px) { .brand span, .nav-src, .lang summary span { display: none; } .nav .wrap { gap: 12px; } }
+
+/* ------------------------------------------------------------------ hero */
+.hero { position: relative; padding: 72px 0 96px; isolation: isolate; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background-image:
+    linear-gradient(var(--grid-bold) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-bold) 1px, transparent 1px),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  background-position: -1px -1px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+          mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(56px, 7vw, 104px); line-height: 1.02; font-weight: 900; letter-spacing: -.02em; white-space: nowrap; }
+.hero h1:lang(en), .hero h1:lang(ja) { white-space: normal; font-size: clamp(44px, 5.2vw, 76px); line-height: 1.08; text-wrap: balance; }
+:lang(ja) h1, :lang(ja) h2, :lang(ja) h3, :lang(ja) .sub, :lang(ja) dt { word-break: auto-phrase; }
+.hero .sub { font-size: clamp(19px, 2.1vw, 26px); font-weight: 700; line-height: 1.45; margin-top: 20px; max-width: 17em; text-wrap: balance; }
+.hero .lead { margin-top: 18px; max-width: 30em; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero-note { margin-top: 18px; font-size: 15px; color: var(--muted); }
+
+/* the zoom comparison */
+.demo { margin: 0; }
+.demo-frame {
+  position: relative; aspect-ratio: 5 / 3; background: #FFF; border-radius: 12px; overflow: hidden;
+  box-shadow: var(--shadow); outline: 1px solid rgba(29, 36, 48, .08); user-select: none; -webkit-user-select: none;
+  touch-action: pan-y;
+}
+.demo-frame.is-zoomed { cursor: grab; }
+.demo-frame.is-panning { cursor: grabbing; }
+.demo-frame > svg, .demo-vec { position: absolute; inset: 0; width: 100%; height: 100%; }
+.demo-bmp { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; image-rendering: pixelated; image-rendering: crisp-edges; transform-origin: 0 0; visibility: hidden; }
+.demo-frame.has-bitmap .demo-bmp { visibility: visible; }
+.demo-vec { background: #FFF; }
+.demo-tag {
+  position: absolute; top: 12px; z-index: 3; font-size: 13px; line-height: 1; padding: 7px 10px; border-radius: 6px;
+  background: rgba(255, 255, 255, .92); color: #1D2430; border: 1px solid rgba(29, 36, 48, .12); pointer-events: none;
+}
+.demo-tag.left { left: 12px; }
+.demo-tag.right { right: 12px; color: #FFF; background: var(--seal); border-color: var(--seal); }
+.demo-handle {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 44px; margin-left: -22px; z-index: 4; cursor: ew-resize;
+  touch-action: none; display: grid; place-items: center; background: none; border: 0; padding: 0;
+}
+.demo-handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: 21px; width: 2px; background: #FFF; box-shadow: 0 0 0 1px rgba(29, 36, 48, .45); }
+.demo-handle span {
+  position: relative; width: 36px; height: 36px; border-radius: 50%; background: #FFF; color: var(--seal);
+  display: grid; place-items: center; box-shadow: 0 0 0 1px rgba(29, 36, 48, .25), 0 3px 10px rgba(0, 0, 0, .3);
+}
+.demo-handle svg { width: 18px; height: 18px; }
+.demo-handle:focus-visible { outline: none; }
+.demo-handle:focus-visible span { outline: 3px solid var(--sel); outline-offset: 2px; }
+.demo-frame:not(.has-bitmap) .demo-handle, .demo-frame:not(.has-bitmap) .demo-tag.left { display: none; }
+.demo-controls { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-size: 15px; color: var(--muted); flex-wrap: wrap; }
+.demo-controls label { color: var(--ink); font-weight: 600; }
+.demo-controls output { min-width: 4.2em; font-variant-numeric: tabular-nums; color: var(--ink); }
+.demo-controls input[type="range"] { flex: 1 1 180px; max-width: 280px; accent-color: var(--seal); }
+.link-btn { background: none; border: 0; padding: 4px 2px; color: var(--seal-text); font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: .2em; }
+.demo-hint .touch { display: none; }
+@media (hover: none) { .demo-hint .mouse { display: none; } .demo-hint .touch { display: inline; } }
+.demo figcaption { margin-top: 10px; font-size: 14.5px; color: var(--muted); }
+
+@media (max-width: 920px) {
+  .hero { padding-top: 48px; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 48px; }
+  .hero h1 { font-size: clamp(60px, 17vw, 112px); }
+  .hero h1:lang(en), .hero h1:lang(ja) { font-size: clamp(40px, 10.5vw, 76px); }
+}
+
+/* ------------------------------------------------------------------ steps */
+.steps { padding: 24px 0 104px; }
+.steps ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; counter-reset: step; }
+.steps li { counter-increment: step; position: relative; padding-top: 64px; }
+.steps li::before {
+  content: counter(step); position: absolute; left: 0; top: 0; width: 44px; height: 44px; display: grid; place-items: center;
+  border: 2px solid var(--seal); color: var(--seal-text); border-radius: 8px; font-weight: 800; font-size: 20px;
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4.5px var(--seal);
+}
+.steps li:not(:last-child)::after {
+  content: ""; position: absolute; top: 22px; left: 60px; right: -24px; border-top: 2px dashed var(--rule);
+}
+.steps h3 { margin-bottom: 8px; }
+.steps p { color: var(--muted); }
+@media (max-width: 760px) {
+  .steps ol { grid-template-columns: 1fr; gap: 28px; }
+  .steps li { padding: 0 0 0 64px; }
+  .steps li:not(:last-child)::after { display: none; }
+}
+
+/* ------------------------------------------------------------------ what's new */
+.new { background: var(--paper-2); }
+.new .wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 56px; }
+.new-head p { color: var(--muted); margin-top: 10px; }
+.new-head a { display: inline-block; margin-top: 18px; }
+.new-list { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; }
+.new-list div { padding: 22px 0 24px; border-top: 1px solid var(--rule); }
+.new-list dt { font-weight: 800; font-size: 18.5px; }
+.new-list dd { margin: 6px 0 0; color: var(--muted); }
+@media (max-width: 920px) { .new .wrap { grid-template-columns: 1fr; gap: 24px; } }
+@media (max-width: 640px) { .new-list { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------------ formats */
+.formats-table { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 16.5px; }
+.formats-table th { text-align: left; font-size: 14px; font-weight: 600; color: var(--muted); padding: 0 16px 12px 0; border-bottom: 2px solid var(--ink); }
+.formats-table td { padding: 18px 16px 18px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.formats-table td:nth-child(2) { font-weight: 700; width: 30%; }
+.formats-table td:nth-child(3) { color: var(--muted); }
+.formats-table td[data-badge]::after {
+  content: attr(data-badge); margin-left: 8px; font-size: 12.5px; color: var(--seal-text); background: var(--seal-wash);
+  padding: 2px 7px; border-radius: 4px; white-space: nowrap; font-weight: 600;
+}
+.fmt {
+  --c: var(--seal);
+  display: inline-grid; place-items: center; min-width: 66px; height: 32px; padding: 0 12px; border-radius: 5px;
+  background: var(--c); color: #FFF; font-weight: 800; font-size: 14.5px; letter-spacing: .03em; position: relative;
+  clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 0 100%);
+}
+.fmt::after { content: ""; position: absolute; right: 0; top: 0; width: 11px; height: 11px; background: rgba(255, 255, 255, .5); clip-path: polygon(0 0, 0 100%, 100% 100%); }
+@media (max-width: 720px) {
+  .formats-table thead { display: none; }
+  .formats-table, .formats-table tbody, .formats-table tr, .formats-table td { display: block; width: auto !important; }
+  .formats-table tr { padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 82px 1fr; column-gap: 14px; }
+  .formats-table td { border: 0; padding: 0; }
+  .formats-table td:first-child { grid-row: span 2; }
+  .formats-table td:nth-child(3) { margin-top: 4px; }
+}
+
+/* ------------------------------------------------------------------ backgrounds */
+.bg .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center; }
+.bg-preview {
+  border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 648 / 408;
+  background-color: #FFF;
+  background-image: linear-gradient(45deg, #E6E9EE 25%, transparent 25%), linear-gradient(-45deg, #E6E9EE 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #E6E9EE 75%), linear-gradient(-45deg, transparent 75%, #E6E9EE 75%);
+  background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+.bg-preview svg { width: 100%; height: 100%; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 18px; border: 0; padding: 0; }
+.seg legend { font-weight: 700; margin-bottom: 10px; padding: 0; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span {
+  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 8px; border: 1.5px solid var(--rule);
+  background: var(--card); font-size: 15.5px; cursor: pointer;
+}
+.seg i { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(29, 36, 48, .25); display: inline-block; }
+.seg input:checked + span { border-color: var(--seal); box-shadow: inset 0 0 0 1px var(--seal); font-weight: 700; }
+.seg input:focus-visible + span { outline: 2px solid var(--sel); outline-offset: 2px; }
+.sw-none { background: conic-gradient(#D7DCE3 25%, #FFF 0 50%, #D7DCE3 0 75%, #FFF 0) 0 0 / 8px 8px; }
+.sw-white { background: #FFF; }
+.sw-beige { background: #F5F0E1; }
+.sw-grid { background: #FFF linear-gradient(#B0B8C4 1px, transparent 1px) 0 0 / 5px 5px, linear-gradient(90deg, #B0B8C4 1px, transparent 1px) 0 0 / 5px 5px; }
+.sw-custom { background: conic-gradient(#E5484D, #F5A524, #2EB872, #2F6FB0, #8B5CF6, #E5484D); }
+.bg-caption { color: var(--muted); min-height: 3.5em; }
+.bg-custom { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px 16px; margin-top: 18px; font-size: 15.5px; }
+.bg-custom[hidden] { display: none; }
+.bg-custom input[type="color"] { width: 52px; height: 36px; padding: 2px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); cursor: pointer; }
+.bg-custom input[type="range"] { width: 100%; max-width: 260px; accent-color: var(--seal); }
+.bg-custom output { font-variant-numeric: tabular-nums; color: var(--muted); }
+@media (max-width: 920px) { .bg .wrap { grid-template-columns: 1fr; gap: 32px; } .bg .bg-preview { order: 2; } }
+
+/* ------------------------------------------------------------------ screens */
+.screens { background: var(--paper-2); }
+.shot { margin: 40px 0 0; }
+.shot-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+.shot picture { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--rule); background: #EEF1F5; box-shadow: var(--shadow); }
+.shot-scroll picture { min-width: 860px; box-shadow: none; }
+.shot img { width: 100%; height: auto; }
+.shot figcaption { margin-top: 12px; font-size: 14.5px; color: var(--muted); }
+.screens-linux { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; align-items: center; margin-top: 88px; }
+.screens-linux .shot { margin: 0; }
+.screens-linux p + p { margin-top: 12px; }
+.screens-linux p { color: var(--muted); }
+@media (max-width: 920px) { .screens-linux { grid-template-columns: 1fr; gap: 24px; margin-top: 64px; } }
+
+/* ------------------------------------------------------------------ install */
+.install-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 44px; border-top: 2px solid var(--ink); }
+.platform { padding: 28px 28px 8px 0; }
+.platform + .platform { padding-left: 28px; border-left: 1px solid var(--rule); }
+.platform .req { color: var(--muted); font-size: 15.5px; margin-top: 6px; min-height: 3.4em; }
+.platform ol { margin: 18px 0 0; padding-left: 1.3em; }
+.platform li { margin-bottom: 8px; }
+.platform li::marker { color: var(--seal-text); font-weight: 700; }
+.platform .tag { font-size: 13px; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 1px 6px; margin-left: 6px; vertical-align: 3px; font-weight: 500; }
+.platform .alt { font-size: 15px; color: var(--muted); margin-top: 14px; }
+.safety { margin-top: 36px; padding: 18px 22px; border-left: 3px solid var(--sel); background: var(--paper-2); border-radius: 0 8px 8px 0; color: var(--muted); font-size: 15.5px; }
+.safety strong { color: var(--ink); }
+@media (max-width: 920px) {
+  .install-grid { grid-template-columns: 1fr; }
+  .platform, .platform + .platform { padding: 24px 0; border-left: 0; }
+  .platform + .platform { border-top: 1px solid var(--rule); }
+  .platform .req { min-height: 0; }
+}
+
+/* ------------------------------------------------------------------ faq */
+.faq h2, .faq details { max-width: 860px; }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq details:first-of-type { margin-top: 32px; border-top: 1px solid var(--rule); }
+.faq summary { cursor: pointer; list-style: none; padding: 20px 40px 20px 0; font-weight: 700; font-size: 17.5px; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; position: absolute; right: 6px; top: 50%; width: 10px; height: 10px; margin-top: -7px;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .2s;
+}
+.faq details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+.faq details > div { padding: 0 0 22px; color: var(--muted); }
+.faq details > div p + p { margin-top: 10px; }
+
+/* ------------------------------------------------------------------ donate */
+.donate { background: var(--paper-2); }
+.donate .wrap { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 56px; align-items: center; }
+.donate .lead + .lead { margin-top: 12px; }
+.free-line { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 26px 0 0; padding: 0; list-style: none; font-weight: 700; }
+.free-line li { display: flex; align-items: center; gap: 8px; }
+.free-line svg { width: 18px; height: 18px; color: var(--seal); flex: none; }
+.qr-pair { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.qr { margin: 0; width: 220px; background: #FFF; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); color: #1D2430; text-align: center; }
+.qr figcaption { font-weight: 700; font-size: 15.5px; color: #FFF; padding: 10px 0; }
+.qr.alipay figcaption { background: #1677FF; }
+.qr.wechat figcaption { background: #07C160; }
+.qr img { width: 100%; height: auto; padding: 14px 14px 6px; }
+.qr p { font-size: 13.5px; color: #566275; padding: 0 12px 14px; }
+@media (max-width: 920px) { .donate .wrap { grid-template-columns: 1fr; gap: 36px; } .qr-pair { justify-content: flex-start; } }
+@media (max-width: 520px) { .qr { width: calc(50% - 12px); } .qr img { padding: 10px 10px 4px; } }
+
+/* ------------------------------------------------------------------ footer */
+footer { padding: 56px 0 48px; border-top: 1px solid var(--rule); font-size: 14.5px; color: var(--muted); }
+footer .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; }
+footer .brand { font-size: 17px; }
+footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+footer a { color: var(--muted); }
+footer a:hover { color: var(--ink); }
+.legal { grid-column: 1 / -1; font-size: 13px; line-height: 1.7; }
+#police:not([hidden]) { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+#police img { flex: 0 0 20px; width: 20px; height: 20px; }
+.beian { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; }
+.beian a[hidden] { display: none; }
+@media (max-width: 720px) { footer .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="矢印 VecStamp ホーム"><img src="../assets/logo.svg" alt="" width="34" height="34">矢印 <span>VecStamp</span></a>
+    <ul class="nav-links">
+      <li><a href="#new">新機能</a></li>
+      <li><a href="#formats">形式</a></li>
+      <li><a href="#backgrounds">背景</a></li>
+      <li><a href="#install">インストール</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+      <li><a href="#donate">支援</a></li>
+    </ul>
+    <div class="nav-tools">
+      <a class="nav-src" data-link="repo" href="https://github.com/vluckyzhang/VecStamp" rel="noopener">GitHub</a>
+      <!-- LANG:BEGIN (written by build/make_website.py) -->
+      <details class="lang" id="lang">
+        <summary aria-label="言語 / Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3Z"/></svg><span>日本語</span></summary>
+        <ul>
+          <li><a href="../" hreflang="zh-CN" lang="zh-CN">简体中文</a></li>
+          <li><a href="../zh-TW/" hreflang="zh-TW" lang="zh-TW">繁體中文</a></li>
+          <li><a href="../en/" hreflang="en" lang="en">English</a></li>
+          <li><a href="../ja/" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        </ul>
+      </details>
+      <!-- LANG:END -->
+      <button class="icon-btn" id="theme" type="button" aria-label="ダーク / ライト表示の切り替え">
+        <svg class="theme-light-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="theme-dark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      </button>
+      <a class="btn btn-primary" data-link="download" href="https://github.com/vluckyzhang/VecStamp/releases/latest" rel="noopener">ダウンロード</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ================================================================ hero -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <h1 id="hero-title">選んで、押すだけ。</h1>
+      <p class="sub">PowerPoint の図形を EMF・SVG・PDF・Visio などのベクター形式にワンクリックで</p>
+      <p class="lead">論文の図、提案書、技術文書に。スライドで描いた図を選んでクリックするだけで、拡大しても印刷しても劣化しないベクターファイルが手に入ります。</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" data-link="download" href="https://github.com/vluckyzhang/VecStamp/releases/latest" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
+          <span>ダウンロード v<span data-v>1.2.2</span></span>
+        </a>
+        <a class="btn btn-ghost" data-link="repo" href="https://github.com/vluckyzhang/VecStamp" rel="noopener">ソースコード</a>
+      </div>
+      <p class="hero-note">Windows / macOS の PowerPoint（2013 以降）と Linux の LibreOffice に対応。ずっと無料、MIT ライセンスのオープンソースで、オフラインで動作します。表示言語は日本語・英語・中国語（簡体字 / 繁体字）。</p>
+    </div>
+
+    <figure class="demo">
+      <div class="demo-frame" id="demo">
+        <canvas class="demo-bmp" id="demo-bmp" width="600" height="360" aria-hidden="true"></canvas>
+        <div class="demo-vec" id="demo-vec-wrap">
+          <svg id="demo-vec" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="サンプル図：グリーン物流の相乗効果フレームワーク">
+            <rect width="600" height="360" fill="#FFFFFF"/>
+            <g id="dg-art" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC','WenQuanYi Micro Hei',sans-serif" text-anchor="middle">
+              <text x="300" y="42" font-size="19" font-weight="700" fill="#2B2F36">物流業の脱炭素・汚染削減・緑化・成長の協同枠組み</text>
+              <g fill="none" stroke="#6B7280" stroke-width="2" stroke-linejoin="round">
+                <path d="M170 106H196V254H170M196 180H204"/>
+                <path d="M430 106H404V254H430M404 180H396"/>
+              </g>
+              <path d="M213 180l-11-6v12zM387 180l11-6v12z" fill="#6B7280"/>
+              <rect x="40" y="80" width="130" height="52" rx="8" fill="#2F6FB0"/>
+              <rect x="40" y="228" width="130" height="52" rx="8" fill="#138D90"/>
+              <rect x="430" y="80" width="130" height="52" rx="8" fill="#2E8B57"/>
+              <rect x="430" y="228" width="130" height="52" rx="8" fill="#D98324"/>
+              <ellipse cx="300" cy="180" rx="86" ry="44" fill="#C8372D"/>
+              <g fill="#FFFFFF" font-size="19" font-weight="700">
+                <text x="105" y="113">脱炭素</text>
+                <text x="105" y="261">緑化</text>
+                <text x="495" y="113">汚染削減</text>
+                <text x="495" y="261">成長</text>
+                <text x="300" y="187" font-size="21">相乗効果</text>
+              </g>
+              <g fill="none" stroke="#B0B8C4" stroke-width="1.2">
+                <rect x="108" y="300" width="84" height="28" rx="14"/>
+                <rect x="208" y="300" width="84" height="28" rx="14"/>
+                <rect x="308" y="300" width="84" height="28" rx="14"/>
+                <rect x="408" y="300" width="84" height="28" rx="14"/>
+              </g>
+              <g fill="#566275" font-size="14">
+                <text x="150" y="319">政策</text>
+                <text x="250" y="319">技術</text>
+                <text x="350" y="319">市場</text>
+                <text x="450" y="319">デジタル</text>
+              </g>
+              <text x="300" y="350" font-size="10.5" fill="#8A93A3">図 3-2　政策・技術・市場・デジタル化の 4 要素による相乗効果への支え</text>
+            </g>
+          </svg>
+        </div>
+        <span class="demo-tag left">スクリーンショット</span>
+        <span class="demo-tag right">矢印のベクター</span>
+        <button class="demo-handle" id="demo-handle" type="button" role="slider" aria-label="比較用の区切り線" aria-valuemin="5" aria-valuemax="95" aria-valuenow="50">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg></span>
+        </button>
+      </div>
+      <div class="demo-controls">
+        <label for="zoom">拡大</label>
+        <input id="zoom" type="range" min="1" max="12" step="0.1" value="1">
+        <output id="zoom-val" for="zoom">1.0 倍</output>
+        <button class="link-btn" id="zoom-reset" type="button">リセット</button>
+      </div>
+      <figcaption>同じ図の左側は 96 DPI のスクリーンショット、右側は矢印でエクスポートしたベクター画像です。拡大するとスクリーンショットはギザギザになりますが、ベクター画像の線と小さな文字はくっきりしたままです。<span class="demo-hint"><span class="mouse">区切り線をドラッグして比較。拡大中は画像をドラッグして移動できます。</span><span class="touch">区切り線をドラッグして左右を比較できます。</span></span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================================================================ steps -->
+<section class="steps" aria-labelledby="steps-title">
+  <div class="wrap">
+    <h2 id="steps-title" class="sr-only">使い方</h2>
+    <ol>
+      <li>
+        <h3>図形を選ぶ</h3>
+        <p>1 つの図形でも、複数の図形やグループでも OK。何も選ばなければスライドのすべての図形をエクスポートできます。</p>
+      </li>
+      <li>
+        <h3>「エクスポート」をクリック</h3>
+        <p>「矢印」タブの大きなボタンをクリックするか、メニューから形式を選びます。エクスポート中は割合と現在の処理が表示され、Esc キーでいつでも中止できます。</p>
+      </li>
+      <li>
+        <h3>文書に挿入</h3>
+        <p>Word・LaTeX・Visio・Web ページに挿入しましょう。拡大・印刷・再レイアウトしても、線と文字はくっきりしたままです。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================================================================ what's new -->
+<section class="new" id="new" aria-labelledby="new-title">
+  <div class="wrap">
+    <div class="new-head">
+      <h2 id="new-title"><span data-v>1.2.2</span> の更新</h2>
+      <p>2026 年 10 月リリース</p>
+      <a data-link="changelog" href="https://github.com/vluckyzhang/VecStamp/blob/main/CHANGELOG.md" rel="noopener">更新履歴（全文）</a>
+    </div>
+    <dl class="new-list">
+      <div>
+        <dt>SVG エクスポートが止まらない</dt>
+        <dd>古い PowerPoint 向けの SVG 変換はバックグラウンドで動き、進行状況が更新され続けます。Esc ですぐに停止でき、180 秒を超えると自動で停止して代わりの方法を提案します。</dd>
+      </div>
+      <div>
+        <dt>角丸は曲線のまま</dt>
+        <dd>角丸四角形、角丸矢印、雲、円弧など 177 種類のプリセット図形を標準の数式で計算し、角を Visio の楕円弧として書き出します。多角形にはなりません。</dd>
+      </div>
+      <div>
+        <dt>進行状況をパーセント表示</dt>
+        <dd>進行状況ウィンドウに割合、現在のファイルまたはスライド、現在の処理、経過時間を表示。Windows・macOS・LibreOffice のどれでもいつでも中止できます。</dd>
+      </div>
+      <div>
+        <dt>背景メニューに色パネル</dt>
+        <dd>ユーザー設定の色パネルを「背景」メニューに統合し、「背景」の前の四角で現在の背景をプレビューできます。PowerPoint の色ダイアログを使えないときは矢印独自の色パネルに切り替わります。</dd>
+      </div>
+      <div>
+        <dt>4 つの表示言語</dt>
+        <dd>日本語・英語・簡体字中国語・繁体字中国語。「矢印について」グループの言語メニューですぐに切り替えられ、PowerPoint の再起動は不要です。</dd>
+      </div>
+      <div>
+        <dt>多言語のドキュメントとサイト</dt>
+        <dd>README とこのサイトも 4 言語で用意しました。</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================================================================ formats -->
+<section id="formats" aria-labelledby="formats-title">
+  <div class="wrap">
+    <h2 id="formats-title">7 つの形式を用途に合わせて</h2>
+    <p class="lead">ボタンは 1 つ、行き先はさまざま。既定の形式はリボンで設定でき、メニューからいつでも切り替えられます。</p>
+    <table class="formats-table">
+      <thead><tr><th scope="col">形式</th><th scope="col">用途</th><th scope="col">説明</th></tr></thead>
+      <tbody>
+        <tr><td><span class="fmt" style="--c:#C8372D">EMF</span></td><td>Word / WPS の論文・レポート</td><td>挿入後もベクターのまま。ダブルクリックでグループを解除して編集できます。</td></tr>
+        <tr><td><span class="fmt" style="--c:#2E8B57">EMZ</span></td><td>メール、クラウドストレージ</td><td>圧縮した EMF。内容は同じでサイズが小さく、Office にそのまま挿入できます。</td></tr>
+        <tr><td><span class="fmt" style="--c:#2F6FB0">SVG</span></td><td>Web、Inkscape、Illustrator、Figma</td><td data-badge="1.2.2 で更新">汎用のベクター形式で、ブラウザーで直接開けます。PowerPoint 2013 以降ならエクスポート可能。</td></tr>
+        <tr><td><span class="fmt" style="--c:#B0306A">PDF</span></td><td>学術誌への投稿、LaTeX、印刷</td><td>ページは図形と同じ大きさで余白なし。フォントも埋め込まれます。</td></tr>
+        <tr><td><span class="fmt" style="--c:#138D90">VSDX</span></td><td>Visio での編集</td><td data-badge="1.2.2 で更新">Visio のネイティブ図形で、文字は編集でき、角丸も曲線のまま。変換できないオブジェクトはベクター画像として残ります。</td></tr>
+        <tr><td><span class="fmt" style="--c:#D98324">PNG</span></td><td>ビットマップしか受け付けない投稿システム</td><td>150 / 300 / 600 DPI またはユーザー設定（最大 3000 DPI）。透明背景に対応。</td></tr>
+        <tr><td><span class="fmt" style="--c:#7A4FB0">WMF</span></td><td>古い形式しか読めないソフト</td><td>互換性は最も高いものの、透明とグラデーションには非対応。必要なときだけ。</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================================================================ backgrounds -->
+<section class="bg" id="backgrounds" aria-labelledby="bg-title">
+  <div class="wrap">
+    <div class="bg-preview" id="bg-preview">
+      <svg viewBox="-24 -24 648 408" role="img" aria-label="背景のプレビュー">
+        <defs>
+          <pattern id="grid-fine" width="12" height="12" patternUnits="userSpaceOnUse" x="-24" y="-24"><path d="M12 0H0V12" fill="none" stroke="#DEE2E8" stroke-width="1"/></pattern>
+          <pattern id="grid-bold" width="60" height="60" patternUnits="userSpaceOnUse" x="-24" y="-24"><path d="M60 0H0V60" fill="none" stroke="#B0B8C4" stroke-width="1.2"/></pattern>
+        </defs>
+        <rect id="bg-solid" x="-24" y="-24" width="648" height="408" fill="#FFFFFF" visibility="hidden"/>
+        <g id="bg-grid" visibility="hidden">
+          <rect x="-24" y="-24" width="648" height="408" fill="#FFFFFF"/>
+          <rect x="-24" y="-24" width="648" height="408" fill="url(#grid-fine)"/>
+          <rect x="-24" y="-24" width="648" height="408" fill="url(#grid-bold)"/>
+        </g>
+        <use href="#dg-art" xlink:href="#dg-art"/>
+      </svg>
+    </div>
+    <div>
+      <h2 id="bg-title">背景もベクター</h2>
+      <p class="lead">エクスポート時に背景と余白を付けられます（7 形式すべて）。ベクター形式では背景自体もベクターの四角形と線で、画像にはなりません。</p>
+      <fieldset class="seg">
+        <legend>試してみる</legend>
+        <label><input type="radio" name="bg" value="none" checked><span><i class="sw-none"></i>透明</span></label>
+        <label><input type="radio" name="bg" value="white"><span><i class="sw-white"></i>白</span></label>
+        <label><input type="radio" name="bg" value="beige"><span><i class="sw-beige"></i>ベージュ</span></label>
+        <label><input type="radio" name="bg" value="grid"><span><i class="sw-grid"></i>方眼</span></label>
+        <label><input type="radio" name="bg" value="custom"><span><i class="sw-custom"></i>ユーザー設定</span></label>
+      </fieldset>
+      <p class="bg-caption" id="bg-caption" aria-live="polite">既定値。PNG はアルファチャンネルを保持し、ベクター形式には下地を付けません。</p>
+      <div class="bg-custom" id="bg-custom" hidden>
+        <label for="bg-color">色</label>
+        <div><input id="bg-color" type="color" value="#EAF2FB"> <output id="bg-rgb" for="bg-color">RGB 234, 242, 251</output></div>
+        <label for="bg-alpha">透明度</label>
+        <div><input id="bg-alpha" type="range" min="0" max="100" value="0"> <output id="bg-alpha-val" for="bg-alpha">0 %</output></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ screens -->
+<section class="screens" aria-labelledby="screens-title">
+  <div class="wrap">
+    <h2 id="screens-title">すべての機能を 1 つのタブに</h2>
+    <p class="lead">インストールすると、PowerPoint の「表示」の右に「矢印」タブが追加されます。エクスポート、一括処理、背景、エクスポート設定、「矢印について」（言語メニューを含む）にワンクリックでアクセスできます。</p>
+    <figure class="shot">
+      <div class="shot-scroll">
+        <picture>
+          <source srcset="../assets/ribbon.webp" type="image/webp">
+          <img src="../assets/ribbon.png" alt="PowerPoint の「矢印」タブ。「背景」メニューを開き、ユーザー設定の色パネル（テーマの色・標準の色・最近使用した色・その他の色・スポイト）を表示" loading="lazy" decoding="async" width="1600" height="547">
+        </picture>
+      </div>
+      <figcaption>アドインの実際のリボン レイアウトをもとに描いたイメージ図（中国語表示）です。Office のバージョンによって見た目が少し異なります。</figcaption>
+    </figure>
+
+    <div class="screens-linux">
+      <div>
+        <h3>Linux では LibreOffice で</h3>
+        <p>PowerPoint には Linux 版がないため、Linux では LibreOffice Impress / Draw の拡張機能として提供しています。同じ 7 形式、5 種類の背景、ユーザー設定の解像度、スライドごとのエクスポート、Visio ネイティブ図形、4 つの表示言語に対応しています。</p>
+        <p>この拡張機能は OS に依存せず、Windows や macOS の LibreOffice にもインストールできます。</p>
+      </div>
+      <figure class="shot">
+        <picture>
+          <source srcset="../assets/linux.webp" type="image/webp">
+          <img src="../assets/linux.png" alt="LibreOffice Impress の矢印メニュー、エクスポート設定ダイアログ、カラーピッカー（Linux の実機スクリーンショット、中国語表示）" loading="lazy" decoding="async" width="1400" height="907">
+        </picture>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ install -->
+<section id="install" aria-labelledby="install-title">
+  <div class="wrap">
+    <h2 id="install-title">インストール</h2>
+    <p class="lead">ダウンロードしたら、まず<strong>すべて展開</strong>してから、お使いの OS のインストーラーを実行し、メニューで 1（インストール / 更新）または 2（アンインストール）を選びます（メニューは中国語です）。</p>
+    <div class="install-grid">
+      <div class="platform">
+        <h3>Windows</h3>
+        <p class="req">PowerPoint 2013 以降（2016、2019、2021、2024、Microsoft 365 を含む）</p>
+        <ol>
+          <li>PowerPoint のウィンドウをすべて保存して閉じる</li>
+          <li> <code>安装或卸载-Windows.bat</code> をダブルクリックし、メニューで次の番号を入力： <kbd>1</kbd></li>
+          <li>PowerPoint を開くと「表示」の右に「矢印」タブがある</li>
+        </ol>
+      </div>
+      <div class="platform">
+        <h3>macOS <span class="tag">試験的</span></h3>
+        <p class="req">PowerPoint for Mac 16.82 以降</p>
+        <ol>
+          <li>PowerPoint を終了する</li>
+          <li> <code>安装或卸载-macOS.command</code> をダブルクリックし、メニューで次の番号を入力： <kbd>1</kbd>（初回は Finder で右クリックして「開く」を選ぶ）</li>
+          <li>「ツール › PowerPoint アドイン」で <code>VecStamp.ppam</code> を追加し、マクロを有効にする</li>
+        </ol>
+      </div>
+      <div class="platform">
+        <h3>Linux</h3>
+        <p class="req">LibreOffice 6.4 以降（Impress / Draw）、sudo 不要</p>
+        <ol>
+          <li>LibreOffice を閉じる</li>
+          <li>ターミナルで <code>bash 安装或卸载-Linux.sh</code> を実行し、メニューで次の番号を入力： <kbd>1</kbd></li>
+          <li>Impress を開き直し、メニューバーの「矢印」を使う</li>
+        </ol>
+        <p class="alt">LibreOffice の「ツール › 拡張機能マネージャー」で <code>VecStamp-LibreOffice.oxt</code> を追加することもできます。</p>
+      </div>
+    </div>
+    <p class="safety"><strong>変更は現在のユーザーだけ。重要な操作は先に確認します。</strong>インストーラーはシステムのセキュリティ設定を変更しません。Windows で一時的に必要な VBA プロジェクトへのアクセスは事前に確認し、完了後に元に戻します。「信頼できる場所」は自分で選んだときだけ追加します。macOS では検疫属性を削除しません。Linux ではユーザーモードでインストールし、root での実行は拒否します。</p>
+  </div>
+</section>
+
+<!-- ================================================================ faq -->
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">よくある質問</h2>
+    <details>
+      <summary>矢印は有料ですか？データを収集しますか？</summary>
+      <div><p>いいえ。ずっと無料・オープンソースで、広告もありません。エクスポートはすべてお使いのパソコン上で行い、ネットに接続することもデータを収集することもありません。「フィードバック」や「プロジェクトページ」をクリックしたときだけ、メールソフトやブラウザーを開きます。</p></div>
+    </details>
+    <details>
+      <summary>PowerPoint 2016 / 2019 でも SVG をエクスポートできますか？</summary>
+      <div><p>はい。Microsoft 365 と Office 2024（バージョン 2302 以降）は PowerPoint 自身の SVG エクスポートを使います。それより前の Windows 版（2013～2021）では図形を XPS に印刷し、矢印に内蔵の変換スクリプトで SVG を作成します。パス、グラデーション、画像、文字は保持されます。変換はバックグラウンドで行われ、進行状況ウィンドウに割合が表示され、Esc でいつでも中止できます。処理はすべてお使いのパソコンで行い、ほかのソフトは不要です。</p></div>
+    </details>
+    <details>
+      <summary>エクスポートした VSDX は Visio で編集できますか？</summary>
+      <div><p>はい。四角形、角丸四角形、楕円、矢印、コネクタ、フリーフォーム、テキストボックスは Visio のネイティブ図形に変換され、1.2.2 からは角丸や円弧も本物の曲線のままです。塗りつぶし、線、矢印、文字の書式もできるだけ保持し、文字はそのまま編集できます。グラフ、SmartArt、ワードアートなど変換できないものは EMF ベクター画像として元の位置に残ります。</p>
+      <p>図全体を 1 枚のベクター画像にしたい場合は、エクスポート設定で「VSDX ネイティブ図形」のチェックを外してください。</p></div>
+    </details>
+    <details>
+      <summary>日本語で使えますか？</summary>
+      <div><p>はい。PowerPoint の「矢印」タブの右端、「关于」（矢印について）グループの言語メニュー（「简体中文」と表示）で「日本語」を選ぶと、タブ全体と以降のメッセージがすぐに日本語になります。再起動は不要です。LibreOffice 版は「矢印 › 表示言語」で切り替えます。</p></div>
+    </details>
+    <details>
+      <summary>「矢印」タブが表示されない、またはマクロが無効と表示される</summary>
+      <div><p>PowerPoint で「ファイル › オプション › アドイン」を開き、「PowerPoint アドイン」を管理して VecStamp にチェックが入っているか確認してください。マクロが無効と表示される場合は、Windows インストーラーをもう一度実行して <kbd>3</kbd> を選び、アドインのフォルダーを信頼できる場所に追加します（アンインストール時に一緒に削除されます）。</p></div>
+    </details>
+    <details>
+      <summary>エクスポートした EMF のフォントが他のパソコンで変わる</summary>
+      <div><p>EMF と SVG はフォント名を記録しているため、相手のパソコンにそのフォントがないと置き換えられます。フォントを固定したい場合は PDF（フォントを埋め込み）でエクスポートするか、投稿前に Inkscape や Illustrator で文字をアウトライン化してください。</p></div>
+    </details>
+    <details>
+      <summary>3000 DPI の PNG でサイズの警告が出るのはなぜ？</summary>
+      <div><p>ピクセル数は DPI の 2 乗で増えます。10 × 6 インチの図は 3000 DPI で 5 億 4000 万ピクセルです。約 1 億 2000 万ピクセルを超える場合は確認を求めます。論文の図なら通常 600～1200 DPI で十分で、さらに高精細が必要ならベクター形式をおすすめします。</p></div>
+    </details>
+    <details>
+      <summary>問題を報告するには？</summary>
+      <div><p>「矢印」タブの「フィードバック」から、メールを送るか GitHub で Issue を作成できます。直接 <a data-link="mailto" href="mailto:vluckyzhang@gmail.com"><span data-email>vluckyzhang@gmail.com</span></a> 宛てにメールするか、 <a data-link="issues" href="https://github.com/vluckyzhang/VecStamp/issues/new" rel="noopener">新しい Issue を作成</a>してください。PowerPoint のバージョン（「ファイル › アカウント › PowerPoint のバージョン情報」）と問題のファイルを添えていただくと、原因を早く特定できます。</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- ================================================================ donate -->
+<section class="donate" id="donate" aria-labelledby="donate-title">
+  <div class="wrap">
+    <div>
+      <h2 id="donate-title">ずっとオープンソース、支援は任意</h2>
+      <p class="lead">矢印は MIT ライセンスのオープンソースで、ずっと無料です。広告も有料版もなく、すべての機能を誰でも使えます。</p>
+      <p class="lead">時間の節約になったら、QR コードから作者にコーヒーをごちそうしていただけるとうれしいです。支援は任意で、機能には一切影響しません。GitHub での Star、提案、必要な方への紹介も大きな励みになります。</p>
+      <ul class="free-line">
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg>ずっと無料</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg>MIT オープンソース</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg>広告なし</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg>ネット接続なし</li>
+      </ul>
+    </div>
+    <div class="qr-pair">
+      <figure class="qr alipay">
+        <figcaption>Alipay（支付宝）</figcaption>
+        <img src="../assets/qr-alipay.png" alt="Alipay の QR コード" decoding="async" width="440" height="500">
+        <p>Alipay アプリでスキャン</p>
+      </figure>
+      <figure class="qr wechat">
+        <figcaption>WeChat Pay（微信支付）</figcaption>
+        <img src="../assets/qr-wechat.png" alt="WeChat Pay の QR コード" decoding="async" width="440" height="514">
+        <p>WeChat アプリでスキャン</p>
+      </figure>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top"><img src="../assets/logo.svg" alt="" width="28" height="28">矢印 <span>VecStamp</span></a>
+      <p style="margin-top:10px"> <a data-link="license" href="https://github.com/vluckyzhang/VecStamp/blob/main/LICENSE" rel="noopener">MIT ライセンス</a>で公開しているオープンソースです。Copyright © 2026 vluckyzhang</p>
+    </div>
+    <ul aria-label="リンク">
+      <li><a data-link="download" href="https://github.com/vluckyzhang/VecStamp/releases/latest" rel="noopener">ダウンロード</a></li>
+      <li><a data-link="repo" href="https://github.com/vluckyzhang/VecStamp" rel="noopener">ソースコード</a></li>
+      <li><a data-link="changelog" href="https://github.com/vluckyzhang/VecStamp/blob/main/CHANGELOG.md" rel="noopener">更新履歴</a></li>
+      <li><a data-link="issues" href="https://github.com/vluckyzhang/VecStamp/issues/new" rel="noopener">Issue を作成</a></li>
+      <li><a data-link="mailto" href="mailto:vluckyzhang@gmail.com">メールでフィードバック</a></li>
+    </ul>
+    <div class="legal">
+      Microsoft、PowerPoint、Visio、Windows は Microsoft Corporation の商標です。macOS は Apple Inc. の商標です。LibreOffice は The Document Foundation の商標です。Alipay（支付宝）、WeChat（微信）はそれぞれの所有者の商標です。本プロジェクトはこれらの企業と提携関係にありません。
+      <div class="beian">
+        <a id="icp" href="https://beian.miit.gov.cn/" rel="noopener" hidden></a>
+        <a id="police" href="https://beian.mps.gov.cn/" rel="noopener" hidden><img src="../assets/公安备案图标.png" alt="" width="20" height="20"><span></span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../config.js"></script>
+<!-- page texts used by the script (translated by build/make_website.py) -->
+<script type="application/json" id="i18n">{"mailSubject": "矢印 VecStamp フィードバック", "split": "スクリーンショット側：{0}%", "times": "{0} 倍", "none": "既定値。PNG はアルファチャンネルを保持し、ベクター形式には下地を付けません。", "white": "真っ白な下地。暗いテンプレートや色付きのページに貼ってもすっきり見えます。", "beige": "ベージュ（RGB 245, 240, 225）。紙のような風合いになります。", "grid": "白地の方眼紙：1 マスごとに細線、5 マスごとに太線。間隔は 2～200 pt で調整できます。", "custom": "「背景」メニューの色パネルで色を選ぶか、RGB / 16 進数を入力。透明度は 0～100 % で調整できます。"}</script>
+<script>
+(function () {
+  'use strict';
+  var SITE = window.SITE || {};
+  var L = {};
+  try { L = JSON.parse(document.getElementById('i18n').textContent); } catch (e) {}
+  function tr(key, arg) { return String(L[key] || '').replace('{0}', arg); }
+
+  /* ---------------------------------------------------------- config -> links */
+  var repo = (SITE.repo || '').replace(/\/+$/, '');
+  var links = {};
+  /* a relative download path (e.g. 'download/VecStamp.zip') is relative to the site root, also on /en/ etc. */
+  var siteRoot = document.documentElement.getAttribute('data-root') || '';
+  if (SITE.download) links.download = /^([a-z][a-z0-9+.-]*:|\/)/i.test(SITE.download) ? SITE.download : siteRoot + SITE.download;
+  if (repo) {
+    links.repo = repo;
+    links.issues = repo + '/issues/new';
+    links.changelog = repo + '/blob/main/CHANGELOG.md';
+    links.license = repo + '/blob/main/LICENSE';
+  }
+  if (SITE.email) links.mailto = 'mailto:' + SITE.email + '?subject=' + encodeURIComponent(L.mailSubject || 'VecStamp');
+  document.querySelectorAll('[data-link]').forEach(function (a) {
+    var href = links[a.getAttribute('data-link')];
+    if (href) a.href = href;
+  });
+  if (SITE.version) document.querySelectorAll('[data-v]').forEach(function (el) { el.textContent = SITE.version; });
+  if (SITE.email) document.querySelectorAll('[data-email]').forEach(function (el) { el.textContent = SITE.email; });
+  if (SITE.icp) { var icp = document.getElementById('icp'); icp.textContent = SITE.icp; icp.hidden = false; }
+  if (SITE.police) {
+    var pol = document.getElementById('police'), code = (SITE.police.match(/\d{6,}/) || [''])[0];
+    pol.querySelector('span').textContent = SITE.police; pol.hidden = false;
+    if (code) pol.href = 'https://beian.mps.gov.cn/#/query/webSearch?code=' + code;
+  }
+
+  /* ---------------------------------------------------------- language menu: close when clicking elsewhere */
+  var langMenu = document.getElementById('lang');
+  if (langMenu) document.addEventListener('click', function (e) { if (!langMenu.contains(e.target)) langMenu.open = false; });
+
+  /* ---------------------------------------------------------- theme toggle */
+  var root = document.documentElement;
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  document.getElementById('theme').addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme') || (mq && mq.matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('vs-theme', next); } catch (e) {}
+  });
+
+  /* ---------------------------------------------------------- sticky nav rule */
+  var nav = document.getElementById('nav');
+  function onScroll() { nav.classList.toggle('is-stuck', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------------------------------------------------- zoom comparison */
+  var frame = document.getElementById('demo');
+  var vec = document.getElementById('demo-vec');
+  var vecWrap = document.getElementById('demo-vec-wrap');
+  var cvs = document.getElementById('demo-bmp');
+  var handle = document.getElementById('demo-handle');
+  var zoomInput = document.getElementById('zoom');
+  var zoomOut = document.getElementById('zoom-val');
+  var W0 = 600, H0 = 360;
+  var z = 1, cx = 300, cy = 180, split = 50, touched = false;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function clampView() {
+    var vw = W0 / z, vh = H0 / z;
+    cx = Math.min(Math.max(cx, vw / 2), W0 - vw / 2);
+    cy = Math.min(Math.max(cy, vh / 2), H0 - vh / 2);
+  }
+  function render() {
+    clampView();
+    var vw = W0 / z, vh = H0 / z, x0 = cx - vw / 2, y0 = cy - vh / 2;
+    var W = frame.clientWidth, H = frame.clientHeight;
+    vec.setAttribute('viewBox', x0.toFixed(3) + ' ' + y0.toFixed(3) + ' ' + vw.toFixed(3) + ' ' + vh.toFixed(3));
+    cvs.style.width = (W * z) + 'px';
+    cvs.style.height = (H * z) + 'px';
+    cvs.style.transform = 'translate(' + (-x0 / W0 * W * z).toFixed(2) + 'px,' + (-y0 / H0 * H * z).toFixed(2) + 'px)';
+    var clip = 'inset(0 0 0 ' + split.toFixed(2) + '%)';
+    vecWrap.style.clipPath = clip;
+    vecWrap.style.webkitClipPath = clip;
+    handle.style.left = split + '%';
+    handle.setAttribute('aria-valuenow', String(Math.round(split)));
+    handle.setAttribute('aria-valuetext', tr('split', Math.round(split)));
+    zoomInput.value = z.toFixed(1);
+    zoomOut.textContent = tr('times', z.toFixed(1));
+    frame.classList.toggle('is-zoomed', z > 1.01);
+  }
+
+  /* a 96 DPI "screenshot" of the same drawing, rendered by the browser itself so that
+     fonts match the vector side exactly */
+  function makeBitmap(done) {
+    try {
+      var art = document.getElementById('dg-art');
+      var xml = '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">' +
+                '<rect width="600" height="360" fill="#FFFFFF"/>' + new XMLSerializer().serializeToString(art) + '</svg>';
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var ctx = cvs.getContext('2d');
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, 600, 360);
+          ctx.drawImage(img, 0, 0, 600, 360);
+          frame.classList.add('has-bitmap');
+          done();
+        } catch (e) { /* the vector side alone still works */ }
+      };
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+    } catch (e) {}
+  }
+
+  function setZoom(v) { z = Math.min(12, Math.max(1, v)); render(); }
+  zoomInput.addEventListener('input', function () { touched = true; setZoom(parseFloat(zoomInput.value)); });
+  document.getElementById('zoom-reset').addEventListener('click', function () {
+    touched = true; z = 1; cx = 300; cy = 180; split = 50; render();
+  });
+
+  var hDrag = false;
+  handle.addEventListener('pointerdown', function (e) {
+    e.preventDefault(); hDrag = true; touched = true;
+    try { handle.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  handle.addEventListener('pointermove', function (e) {
+    if (!hDrag) return;
+    var r = frame.getBoundingClientRect();
+    split = Math.min(95, Math.max(5, (e.clientX - r.left) / r.width * 100));
+    render();
+  });
+  ['pointerup', 'pointercancel'].forEach(function (t) { handle.addEventListener(t, function () { hDrag = false; }); });
+  handle.addEventListener('keydown', function (e) {
+    var k = e.key, step = e.shiftKey ? 10 : 5;
+    if (k === 'ArrowLeft' || k === 'ArrowDown') split -= step;
+    else if (k === 'ArrowRight' || k === 'ArrowUp') split += step;
+    else if (k === 'Home') split = 5;
+    else if (k === 'End') split = 95;
+    else return;
+    e.preventDefault(); touched = true;
+    split = Math.min(95, Math.max(5, split));
+    render();
+  });
+
+  var pan = null;
+  frame.addEventListener('pointerdown', function (e) {
+    if (e.target.closest('#demo-handle') || e.pointerType === 'touch' || z <= 1.01) return;
+    pan = { x: e.clientX, y: e.clientY, cx: cx, cy: cy }; touched = true;
+    frame.classList.add('is-panning');
+    try { frame.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  frame.addEventListener('pointermove', function (e) {
+    if (!pan) return;
+    cx = pan.cx - (e.clientX - pan.x) * (W0 / z) / frame.clientWidth;
+    cy = pan.cy - (e.clientY - pan.y) * (H0 / z) / frame.clientHeight;
+    render();
+  });
+  ['pointerup', 'pointercancel'].forEach(function (t) {
+    frame.addEventListener(t, function () { pan = null; frame.classList.remove('is-panning'); });
+  });
+  window.addEventListener('resize', render);
+
+  /* the page's one orchestrated moment: zoom into the centre of the drawing */
+  function intro() {
+    if (touched) return;
+    var target = 3.5, fx = 285, fy = 182;
+    if (reduce) { z = target; cx = fx; cy = fy; render(); return; }
+    var t0 = null, dur = 1700;
+    function step(t) {
+      if (touched) return;
+      if (t0 === null) t0 = t;
+      var k = Math.min(1, (t - t0) / dur);
+      var e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      z = Math.pow(target, e); cx = fx; cy = fy;
+      render();
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  render();
+  makeBitmap(function () { render(); setTimeout(intro, reduce ? 0 : 600); });
+
+  /* ---------------------------------------------------------- background picker */
+  var solid = document.getElementById('bg-solid');
+  var gridBg = document.getElementById('bg-grid');
+  var caption = document.getElementById('bg-caption');
+  var custom = document.getElementById('bg-custom');
+  var color = document.getElementById('bg-color');
+  var alpha = document.getElementById('bg-alpha');
+  var captions = { none: L.none, white: L.white, beige: L.beige, grid: L.grid, custom: L.custom };
+  function hexToRgb(h) { var n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+  function applyBg() {
+    var v = (document.querySelector('input[name="bg"]:checked') || {}).value || 'none';
+    solid.setAttribute('visibility', v === 'white' || v === 'beige' || v === 'custom' ? 'visible' : 'hidden');
+    gridBg.setAttribute('visibility', v === 'grid' ? 'visible' : 'hidden');
+    solid.setAttribute('fill', v === 'beige' ? '#F5F0E1' : v === 'custom' ? color.value : '#FFFFFF');
+    solid.setAttribute('fill-opacity', v === 'custom' ? String(1 - alpha.value / 100) : '1');
+    custom.hidden = v !== 'custom';
+    caption.textContent = captions[v];
+    document.getElementById('bg-rgb').textContent = 'RGB ' + hexToRgb(color.value).join(', ');
+    document.getElementById('bg-alpha-val').textContent = alpha.value + ' %';
+  }
+  document.querySelectorAll('input[name="bg"]').forEach(function (r) { r.addEventListener('change', applyBg); });
+  color.addEventListener('input', applyBg);
+  alpha.addEventListener('input', applyBg);
+  applyBg();
+})();
+</script>
+</body>
+</html>

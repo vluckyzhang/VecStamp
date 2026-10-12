@@ -1,18 +1,35 @@
 # 矢印 VecStamp 宣传网站
 
-一个纯静态的单页网站：`index.html` 内联了全部样式和脚本，不依赖任何 CDN、Google Fonts 或第三方统计，放到任何静态服务器上都能直接访问，国内服务器也不受外网资源影响。
+一个纯静态的单页网站，提供**简体中文（默认）、繁體中文、English、日本語**四个版本：每个页面都内联了全部样式和脚本，不依赖任何 CDN、Google Fonts 或第三方统计，放到任何静态服务器上都能直接访问，国内服务器也不受外网资源影响。
 
 ```
 website/
-├── index.html          页面（样式和脚本已内联）
-├── config.js           站点配置：版本号、下载地址、仓库、邮箱、备案号
+├── index.html          简体中文页面（四种语言的源文件，样式和脚本已内联）
+├── zh-TW/index.html    繁體中文页面   ┐
+├── en/index.html       English 页面   ├ 由 build/make_website.py 根据 index.html 和 i18n.json 生成，不要手改
+├── ja/index.html       日本語页面     ┘
+├── i18n.json           页面文字的翻译表（以简体中文原文为键）
+├── config.js           站点配置：版本号、网站地址、下载地址、仓库、邮箱、备案号
+├── sitemap.xml         站点地图（四种语言，含 hreflang），自动生成
+├── robots.txt          自动生成，指向 sitemap.xml
 ├── favicon.ico
-├── robots.txt
 ├── assets/             Logo、功能区示意图、Linux 截图、赞赏二维码、分享图
 └── download/           可选：放发布包，供国内用户直接下载
 ```
 
-页面包含：首屏的「截图 vs 矢量」放大对比演示、使用步骤、1.2.1 更新内容、七种格式说明、可交互的背景预览、功能区示意图与 Linux 截图、安装说明、常见问题和赞赏二维码。自动适配手机和深色模式，右上角也可以手动切换深浅色。
+页面包含：首屏的「截图 vs 矢量」放大对比演示、使用步骤、最新版本更新内容、七种格式说明、可交互的背景预览、功能区示意图与 Linux 截图、安装说明、常见问题和赞赏二维码。自动适配手机和深色模式，右上角可以切换语言和深浅色。
+
+## SEO（搜索引擎优化）
+
+`build/make_website.py` 为每个语言页面写入：
+
+- `<html lang>`、对应语言的 `<title>`、`description`、`keywords`；
+- `canonical` 和全部语言的 `hreflang`（含 `x-default`），让搜索引擎把四个页面识别为同一内容的不同语言版本；
+- Open Graph / Twitter 分享卡片（带域名的 `og:image`、`og:url`、`og:locale`）；
+- 结构化数据（JSON-LD）：`SoftwareApplication`（名称、版本、平台、免费、下载地址、功能列表）和 `FAQPage`（来自页面上的常见问题）；
+- `sitemap.xml`（四种语言及其 hreflang 对应关系）和 `robots.txt` 中的 `Sitemap:` 行。
+
+上线后建议把 `sitemap.xml` 提交到 [百度搜索资源平台](https://ziyuan.baidu.com/)、[Google Search Console](https://search.google.com/search-console) 和 [Bing Webmaster Tools](https://www.bing.com/webmasters)。
 
 ## 1. 修改配置
 
@@ -21,7 +38,8 @@ website/
 | 字段 | 作用 |
 | --- | --- |
 | `version` | 页面上显示的版本号（`python build/make_website.py` 会自动同步） |
-| `download` | 「下载」按钮地址。默认指向 GitHub Releases；国内访问 GitHub 较慢时，把发布包放进 `download/`，改成 `'download/VecStamp-v1.2.1.zip'` |
+| `siteUrl` | 网站的公开地址，以 `/` 结尾，例如 `'https://vecstamp.example.com/'`。canonical、hreflang、分享图、结构化数据和 sitemap 都用它生成；修改后重新运行 `python build/make_website.py --pages` |
+| `download` | 「下载」按钮地址。默认指向 GitHub Releases；国内访问 GitHub 较慢时，把发布包放进 `download/`，改成 `'download/VecStamp-v1.2.2.zip'`（相对网站根目录，四种语言页面都能用） |
 | `repo` | 源码仓库地址，「查看源码」「提交 Issue」「更新日志」「MIT 协议」链接都由它生成 |
 | `email` | 反馈邮箱 |
 | `icp` | ICP 备案号，例如 `'京ICP备12345678号-1'`。服务器在中国大陆时必须在页脚展示，留空则不显示 |
@@ -29,7 +47,7 @@ website/
 
 `index.html` 里的链接都写有默认值，即使 `config.js` 没有加载，页面也能正常使用。
 
-如果希望微信、QQ 等分享卡片显示预览图，把 `index.html` 中 `og:image` 的 `assets/og.png` 改成带域名的完整地址，例如 `https://vecstamp.example.com/assets/og.png`。
+分享卡片的预览图 `og:image` 会按 `siteUrl` 自动写成带域名的完整地址。
 
 ## 2. 本地预览
 
@@ -133,11 +151,13 @@ Caddy 会自动申请和续期 HTTPS 证书。
 
 ```bash
 python build/make_promo.py      # 重新生成配图（需要 Noto Sans CJK 字体）
-python build/make_website.py    # 复制配图、二维码到 website/assets，同步版本号
+python build/make_website.py    # 复制配图、二维码到 website/assets，同步版本号，生成四种语言页面和 sitemap
 ```
 
-然后把 `website` 文件夹重新上传即可。页面文字（更新内容、常见问题等）直接编辑 `index.html`。
+然后把 `website` 文件夹重新上传即可。
+
+修改页面文字：直接编辑 `index.html`（简体中文），再在 `i18n.json` 中为新的或改动过的文字加上翻译（键是简体中文原文，值是 `zh-CN` / `zh-TW` / `en` / `ja` 四种写法）。繁体可以先用 `python build/i18n_tool.py fill-tw` 自动转换再人工检查。运行 `python build/make_website.py --pages` 时，任何缺少翻译的文字都会被列出并停止生成，不会产生半翻译的页面。
 
 ## 6. 隐私
 
-页面不加载任何第三方脚本、字体或统计代码，不使用 Cookie；只有「切换深浅色」的选择保存在访问者自己浏览器的 localStorage 中。如果需要访问统计，建议使用服务器日志或自建统计工具。
+页面不加载任何第三方脚本、字体或统计代码，不使用 Cookie；只有「切换深浅色」的选择保存在访问者自己浏览器的 localStorage 中。语言切换是普通链接，不做自动跳转。如果需要访问统计，建议使用服务器日志或自建统计工具。

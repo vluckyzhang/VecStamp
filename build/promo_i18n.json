@@ -1,0 +1,506 @@
+{
+ "矢印": {
+  "zh-CN": "矢印",
+  "zh-TW": "矢印",
+  "en": "矢印",
+  "ja": "矢印"
+ },
+ "矢": {
+  "zh-CN": "矢",
+  "zh-TW": "矢",
+  "en": "矢",
+  "ja": "矢"
+ },
+ "印": {
+  "zh-CN": "印",
+  "zh-TW": "印",
+  "en": "印",
+  "ja": "印"
+ },
+ "选中即印，一键导出矢量图": {
+  "zh-CN": "选中即印，一键导出矢量图",
+  "zh-TW": "選取即印，一鍵匯出向量圖",
+  "en": "Select, click – get vector graphics",
+  "ja": "選んで押すだけ、ベクター画像に"
+ },
+ "PowerPoint 加载项 · LibreOffice 扩展": {
+  "zh-CN": "PowerPoint 加载项 · LibreOffice 扩展",
+  "zh-TW": "PowerPoint 載入項 · LibreOffice 擴充套件",
+  "en": "PowerPoint add-in · LibreOffice extension",
+  "ja": "PowerPoint アドイン · LibreOffice 拡張機能"
+ },
+ "透明 · 白色 · 米色 · 网格 · 自定义颜色（面板 / 取色器 / RGB）": {
+  "zh-CN": "透明 · 白色 · 米色 · 网格 · 自定义颜色（面板 / 取色器 / RGB）",
+  "zh-TW": "透明 · 白色 · 米色 · 格線 · 自訂顏色（面板 / 取色器 / RGB）",
+  "en": "Transparent · white · beige · grid · any colour (panel / eyedropper / RGB)",
+  "ja": "透明 · 白 · ベージュ · 方眼 · 任意の色（パネル / スポイト / RGB）"
+ },
+ "Visio 原生形状，圆角保持曲线 · PNG 最高 3000 DPI": {
+  "zh-CN": "Visio 原生形状，圆角保持曲线 · PNG 最高 3000 DPI",
+  "zh-TW": "Visio 原生形狀，圓角保持曲線 · PNG 最高 3000 DPI",
+  "en": "Native Visio shapes with true curves · PNG up to 3000 DPI",
+  "ja": "Visio ネイティブ図形、角丸も曲線のまま · PNG 最大 3000 DPI"
+ },
+ "进度百分比，按 Esc 取消 · 简体 / 繁體 / English / 日本語": {
+  "zh-CN": "进度百分比，按 Esc 取消 · 简体 / 繁體 / English / 日本語",
+  "zh-TW": "進度百分比，按 Esc 取消 · 簡體 / 繁體 / English / 日本語",
+  "en": "Progress in %, Esc cancels · English / 日本語 / 简体 / 繁體",
+  "ja": "進行状況を % 表示、Esc で中止 · 日本語 / English / 简体 / 繁體"
+ },
+ "MIT 开源": {
+  "zh-CN": "MIT 开源",
+  "zh-TW": "MIT 開源",
+  "en": "MIT open source",
+  "ja": "MIT オープンソース"
+ },
+ "永久免费 · 开源 · 无广告": {
+  "zh-CN": "永久免费 · 开源 · 无广告",
+  "zh-TW": "永久免費 · 開源 · 無廣告",
+  "en": "Free forever · no ads",
+  "ja": "ずっと無料 · 広告なし"
+ },
+ "物流业降碳减污扩绿增长协同框架": {
+  "zh-CN": "物流业降碳减污扩绿增长协同框架",
+  "zh-TW": "物流業降碳減汙擴綠增長協同框架",
+  "en": "Synergy Framework for Green Logistics",
+  "ja": "グリーン物流の相乗効果フレームワーク"
+ },
+ "协同框架": {
+  "zh-CN": "协同框架",
+  "zh-TW": "協同框架",
+  "en": "Synergy framework",
+  "ja": "相乗効果の枠組み"
+ },
+ "降碳": {
+  "zh-CN": "降碳",
+  "zh-TW": "降碳",
+  "en": "Carbon",
+  "ja": "脱炭素"
+ },
+ "减污": {
+  "zh-CN": "减污",
+  "zh-TW": "減汙",
+  "en": "Clean",
+  "ja": "汚染削減"
+ },
+ "扩绿": {
+  "zh-CN": "扩绿",
+  "zh-TW": "擴綠",
+  "en": "Green",
+  "ja": "緑化"
+ },
+ "增长": {
+  "zh-CN": "增长",
+  "zh-TW": "增長",
+  "en": "Growth",
+  "ja": "成長"
+ },
+ "协同增效": {
+  "zh-CN": "协同增效",
+  "zh-TW": "協同增效",
+  "en": "Synergy",
+  "ja": "相乗効果"
+ },
+ "政策 · 技术 · 市场 · 数字": {
+  "zh-CN": "政策 · 技术 · 市场 · 数字",
+  "zh-TW": "政策 · 技術 · 市場 · 數字",
+  "en": "Policy · technology · market · digital",
+  "ja": "政策 · 技術 · 市場 · デジタル"
+ },
+ "选中图形": {
+  "zh-CN": "选中图形",
+  "zh-TW": "選取圖形",
+  "en": "Select shapes",
+  "ja": "図形を選ぶ"
+ },
+ "单个、多个或组合形状均可，也可整页导出": {
+  "zh-CN": "单个、多个或组合形状均可，也可整页导出",
+  "zh-TW": "單個、多個或組合形狀均可，也可整頁匯出",
+  "en": "One, several or a group – or the whole slide",
+  "ja": "1 つでも複数でもグループでも、スライド全体でも"
+ },
+ "点击「矢印」": {
+  "zh-CN": "点击「矢印」",
+  "zh-TW": "點選「矢印」",
+  "en": "Click VecStamp",
+  "ja": "「矢印」をクリック"
+ },
+ "功能区一键导出，或从下拉菜单选格式": {
+  "zh-CN": "功能区一键导出，或从下拉菜单选格式",
+  "zh-TW": "功能區一鍵匯出，或從下拉選單選格式",
+  "en": "One click on the ribbon, or pick a format",
+  "ja": "リボンでワンクリック、またはメニューで形式を選択"
+ },
+ "得到矢量文件": {
+  "zh-CN": "得到矢量文件",
+  "zh-TW": "得到向量檔案",
+  "en": "Get a vector file",
+  "ja": "ベクターファイルの完成"
+ },
+ "插入 Word / LaTeX / Visio，放大不失真": {
+  "zh-CN": "插入 Word / LaTeX / Visio，放大不失真",
+  "zh-TW": "插入 Word / LaTeX / Visio，放大不失真",
+  "en": "For Word / LaTeX / Visio – sharp at any size",
+  "ja": "Word / LaTeX / Visio に。拡大しても劣化なし"
+ },
+ "开始": {
+  "zh-CN": "开始",
+  "zh-TW": "開始",
+  "en": "Home",
+  "ja": "ホーム"
+ },
+ "插入": {
+  "zh-CN": "插入",
+  "zh-TW": "插入",
+  "en": "Insert",
+  "ja": "挿入"
+ },
+ "设计": {
+  "zh-CN": "设计",
+  "zh-TW": "設計",
+  "en": "Design",
+  "ja": "デザイン"
+ },
+ "导出 SVG": {
+  "zh-CN": "导出 SVG",
+  "zh-TW": "匯出 SVG",
+  "en": "Export SVG",
+  "ja": "SVG をエクスポート"
+ },
+ "无限放大依然锐利": {
+  "zh-CN": "无限放大依然锐利",
+  "zh-TW": "無限放大依然銳利",
+  "en": "Sharp at any zoom",
+  "ja": "どこまで拡大してもくっきり"
+ },
+ "增强型图元文件": {
+  "zh-CN": "增强型图元文件",
+  "zh-TW": "增強型圖元檔案",
+  "en": "Enhanced Metafile",
+  "ja": "拡張メタファイル"
+ },
+ "Word / WPS / PPT 插图首选": {
+  "zh-CN": "Word / WPS / PPT 插图首选",
+  "zh-TW": "Word / WPS / PPT 插圖首選",
+  "en": "First choice for Word / WPS / PPT",
+  "ja": "Word / WPS / PPT の図に最適"
+ },
+ "放大不失真，可取消组合编辑": {
+  "zh-CN": "放大不失真，可取消组合编辑",
+  "zh-TW": "放大不失真，可取消組合編輯",
+  "en": "Scales cleanly, can be ungrouped",
+  "ja": "劣化せず拡大、グループ解除も可"
+ },
+ "矢量": {
+  "zh-CN": "矢量",
+  "zh-TW": "向量",
+  "en": "Vector",
+  "ja": "ベクター"
+ },
+ "压缩的 EMF": {
+  "zh-CN": "压缩的 EMF",
+  "zh-TW": "壓縮的 EMF",
+  "en": "Compressed EMF",
+  "ja": "圧縮した EMF"
+ },
+ "与 EMF 同样清晰，体积更小": {
+  "zh-CN": "与 EMF 同样清晰，体积更小",
+  "zh-TW": "與 EMF 同樣清晰，體積更小",
+  "en": "As sharp as EMF, smaller file",
+  "ja": "EMF と同じ画質でサイズは小さく"
+ },
+ "便于邮件、网盘传输": {
+  "zh-CN": "便于邮件、网盘传输",
+  "zh-TW": "便於郵件、網盤傳輸",
+  "en": "Handy for e-mail and cloud drives",
+  "ja": "メールやクラウドでの共有に便利"
+ },
+ "可缩放矢量图形": {
+  "zh-CN": "可缩放矢量图形",
+  "zh-TW": "可縮放向量圖形",
+  "en": "Scalable Vector Graphics",
+  "ja": "ベクター グラフィックス"
+ },
+ "网页、Inkscape、Illustrator": {
+  "zh-CN": "网页、Inkscape、Illustrator",
+  "zh-TW": "網頁、Inkscape、Illustrator",
+  "en": "Web, Inkscape, Illustrator",
+  "ja": "Web、Inkscape、Illustrator"
+ },
+ "PowerPoint 2013+ 内置转换": {
+  "zh-CN": "PowerPoint 2013+ 内置转换",
+  "zh-TW": "PowerPoint 2013+ 內建轉換",
+  "en": "Built-in for PowerPoint 2013+",
+  "ja": "PowerPoint 2013+ は内蔵変換"
+ },
+ "v1.2.2 不再卡住": {
+  "zh-CN": "v1.2.2 不再卡住",
+  "zh-TW": "v1.2.2 不再卡住",
+  "en": "v1.2.2 no more hangs",
+  "ja": "v1.2.2 止まらない"
+ },
+ "Windows 图元文件": {
+  "zh-CN": "Windows 图元文件",
+  "zh-TW": "Windows 圖元檔案",
+  "en": "Windows Metafile",
+  "ja": "Windows メタファイル"
+ },
+ "兼容只认 WMF 的老旧软件": {
+  "zh-CN": "兼容只认 WMF 的老旧软件",
+  "zh-TW": "相容只認 WMF 的老舊軟體",
+  "en": "For old programs that need WMF",
+  "ja": "WMF しか読めない古いソフト向け"
+ },
+ "不支持透明和渐变": {
+  "zh-CN": "不支持透明和渐变",
+  "zh-TW": "不支援透明和漸變",
+  "en": "No transparency or gradients",
+  "ja": "透明とグラデーションは非対応"
+ },
+ "矢量文档": {
+  "zh-CN": "矢量文档",
+  "zh-TW": "向量文件",
+  "en": "Vector document",
+  "ja": "ベクター文書"
+ },
+ "页面尺寸与图形完全一致": {
+  "zh-CN": "页面尺寸与图形完全一致",
+  "zh-TW": "頁面尺寸與圖形完全一致",
+  "en": "Page size = drawing size",
+  "ja": "ページ = 図形の大きさ"
+ },
+ "期刊投稿、LaTeX 插图、打印": {
+  "zh-CN": "期刊投稿、LaTeX 插图、打印",
+  "zh-TW": "期刊投稿、LaTeX 插圖、列印",
+  "en": "Journals, LaTeX figures, printing",
+  "ja": "学術誌への投稿、LaTeX の図、印刷"
+ },
+ "文档": {
+  "zh-CN": "文档",
+  "zh-TW": "文件",
+  "en": "Document",
+  "ja": "文書"
+ },
+ "Visio 绘图": {
+  "zh-CN": "Visio 绘图",
+  "zh-TW": "Visio 繪圖",
+  "en": "Visio drawing",
+  "ja": "Visio 図面"
+ },
+ "Visio 原生形状，文字可编辑": {
+  "zh-CN": "Visio 原生形状，文字可编辑",
+  "zh-TW": "Visio 原生形狀，文字可編輯",
+  "en": "Native Visio shapes, editable text",
+  "ja": "Visio 図形、文字も編集可"
+ },
+ "圆角与弧线保持为曲线": {
+  "zh-CN": "圆角与弧线保持为曲线",
+  "zh-TW": "圓角與弧線保持為曲線",
+  "en": "Rounded corners stay curved",
+  "ja": "角丸と円弧は曲線のまま"
+ },
+ "v1.2.2 曲线": {
+  "zh-CN": "v1.2.2 曲线",
+  "zh-TW": "v1.2.2 曲線",
+  "en": "v1.2.2 curves",
+  "ja": "v1.2.2 曲線"
+ },
+ "高分辨率位图": {
+  "zh-CN": "高分辨率位图",
+  "zh-TW": "高解析度點陣圖",
+  "en": "High-resolution bitmap",
+  "ja": "高解像度ビットマップ"
+ },
+ "150 / 300 / 600 DPI 一键切换": {
+  "zh-CN": "150 / 300 / 600 DPI 一键切换",
+  "zh-TW": "150 / 300 / 600 DPI 一鍵切換",
+  "en": "150 / 300 / 600 DPI in one click",
+  "ja": "150 / 300 / 600 DPI を切り替え"
+ },
+ "自定义分辨率，最高 3000 DPI": {
+  "zh-CN": "自定义分辨率，最高 3000 DPI",
+  "zh-TW": "自訂解析度，最高 3000 DPI",
+  "en": "Custom resolution up to 3000 DPI",
+  "ja": "ユーザー設定で最大 3000 DPI"
+ },
+ "位图": {
+  "zh-CN": "位图",
+  "zh-TW": "點陣圖",
+  "en": "Bitmap",
+  "ja": "ビットマップ"
+ },
+ "还有更多": {
+  "zh-CN": "还有更多",
+  "zh-TW": "還有更多",
+  "en": "And more",
+  "ja": "さらに"
+ },
+ "批量与工具": {
+  "zh-CN": "批量与工具",
+  "zh-TW": "批次與工具",
+  "en": "Batch & tools",
+  "ja": "一括処理とツール"
+ },
+ "逐页导出整份演示文稿": {
+  "zh-CN": "逐页导出整份演示文稿",
+  "zh-TW": "逐頁匯出整份簡報",
+  "en": "Export every slide at once",
+  "ja": "スライドを一括エクスポート"
+ },
+ "一键生成 EMF 图片副本": {
+  "zh-CN": "一键生成 EMF 图片副本",
+  "zh-TW": "一鍵產生 EMF 圖片副本",
+  "en": "EMF picture copy in one click",
+  "ja": "EMF 画像コピーをワンクリックで"
+ },
+ "自动命名 · 默认文件夹": {
+  "zh-CN": "自动命名 · 默认文件夹",
+  "zh-TW": "自動命名 · 預設資料夾",
+  "en": "Automatic names · default folder",
+  "ja": "自動命名 · 既定のフォルダー"
+ },
+ "边距 · 合并或逐个导出": {
+  "zh-CN": "边距 · 合并或逐个导出",
+  "zh-TW": "邊界 · 合併或逐個匯出",
+  "en": "Margins · one file or one per shape",
+  "ja": "余白 · まとめて / 図形ごと"
+ },
+ "输入": {
+  "zh-CN": "输入",
+  "zh-TW": "輸入",
+  "en": "Input",
+  "ja": "入力"
+ },
+ "处理": {
+  "zh-CN": "处理",
+  "zh-TW": "處理",
+  "en": "Process",
+  "ja": "処理"
+ },
+ "Figure 1  示例图": {
+  "zh-CN": "Figure 1  示例图",
+  "zh-TW": "Figure 1  示例圖",
+  "en": "Figure 1  Sample",
+  "ja": "図 1  サンプル"
+ },
+ "透明": {
+  "zh-CN": "透明",
+  "zh-TW": "透明",
+  "en": "Transparent",
+  "ja": "透明"
+ },
+ "PNG 保留 Alpha 通道": {
+  "zh-CN": "PNG 保留 Alpha 通道",
+  "zh-TW": "PNG 保留 Alpha 通道",
+  "en": "PNG keeps the alpha channel",
+  "ja": "PNG はアルファチャンネルを保持"
+ },
+ "白色": {
+  "zh-CN": "白色",
+  "zh-TW": "白色",
+  "en": "White",
+  "ja": "白"
+ },
+ "米色": {
+  "zh-CN": "米色",
+  "zh-TW": "米色",
+  "en": "Beige",
+  "ja": "ベージュ"
+ },
+ "网格": {
+  "zh-CN": "网格",
+  "zh-TW": "格線",
+  "en": "Grid",
+  "ja": "方眼"
+ },
+ "细线 + 每 5 格粗线，间距可调": {
+  "zh-CN": "细线 + 每 5 格粗线，间距可调",
+  "zh-TW": "細線 + 每 5 格粗線，間距可調",
+  "en": "Fine + bold lines, adjustable",
+  "ja": "細線 + 5 マスごとに太線、間隔は調整可"
+ },
+ "自定义": {
+  "zh-CN": "自定义",
+  "zh-TW": "自訂",
+  "en": "Custom",
+  "ja": "ユーザー設定"
+ },
+ "颜色面板 · RGB · 透明度": {
+  "zh-CN": "颜色面板 · RGB · 透明度",
+  "zh-TW": "顏色面板 · RGB · 透明度",
+  "en": "Colour panel · RGB · alpha",
+  "ja": "色パネル · RGB · 透明度"
+ },
+ "截图 / 粘贴为图片": {
+  "zh-CN": "截图 / 粘贴为图片",
+  "zh-TW": "截圖 / 貼上為圖片",
+  "en": "Screenshot / pasted as picture",
+  "ja": "スクリーンショット / 図として貼り付け"
+ },
+ "矢印导出  EMF · SVG · PDF": {
+  "zh-CN": "矢印导出  EMF · SVG · PDF",
+  "zh-TW": "矢印匯出  EMF · SVG · PDF",
+  "en": "VecStamp export  EMF · SVG · PDF",
+  "ja": "矢印でエクスポート  EMF · SVG · PDF"
+ },
+ "示意：同一图形放大 6 倍后的边缘（左：96 DPI 截图；右：矢量重新渲染）": {
+  "zh-CN": "示意：同一图形放大 6 倍后的边缘（左：96 DPI 截图；右：矢量重新渲染）",
+  "zh-TW": "示意：同一圖形放大 6 倍後的邊緣（左：96 DPI 截圖；右：向量重新渲染）",
+  "en": "Illustration: the same shape zoomed 6× (left: 96 DPI screenshot; right: vector re-rendered)",
+  "ja": "イメージ：同じ図形を 6 倍に拡大した輪郭（左：96 DPI のスクリーンショット、右：ベクターを再描画）"
+ },
+ "PowerPoint 2013 及以上": {
+  "zh-CN": "PowerPoint 2013 及以上",
+  "zh-TW": "PowerPoint 2013 及以上",
+  "en": "PowerPoint 2013 or later",
+  "ja": "PowerPoint 2013 以降"
+ },
+ "安装或卸载-Windows.bat": {
+  "zh-CN": "安装或卸载-Windows.bat",
+  "zh-TW": "安装或卸载-Windows.bat",
+  "en": "安装或卸载-Windows.bat",
+  "ja": "安装或卸载-Windows.bat"
+ },
+ "安装或卸载-macOS.command": {
+  "zh-CN": "安装或卸载-macOS.command",
+  "zh-TW": "安装或卸载-macOS.command",
+  "en": "安装或卸载-macOS.command",
+  "ja": "安装或卸载-macOS.command"
+ },
+ "安装或卸载-Linux.sh": {
+  "zh-CN": "安装或卸载-Linux.sh",
+  "zh-TW": "安装或卸载-Linux.sh",
+  "en": "安装或卸载-Linux.sh",
+  "ja": "安装或卸载-Linux.sh"
+ },
+ "双击运行，菜单中自选安装或卸载": {
+  "zh-CN": "双击运行，菜单中自选安装或卸载",
+  "zh-TW": "按兩下執行，選單中自選安裝或解除安裝",
+  "en": "Double-click; choose install or uninstall",
+  "ja": "ダブルクリックしてメニューで選択"
+ },
+ "PowerPoint for Mac 16.82 及以上": {
+  "zh-CN": "PowerPoint for Mac 16.82 及以上",
+  "zh-TW": "PowerPoint for Mac 16.82 及以上",
+  "en": "PowerPoint for Mac 16.82 or later",
+  "ja": "PowerPoint for Mac 16.82 以降"
+ },
+ "辅助脚本处理沙盒内的保存与打包": {
+  "zh-CN": "辅助脚本处理沙盒内的保存与打包",
+  "zh-TW": "輔助指令碼處理沙盒內的儲存與打包",
+  "en": "A helper script saves and packs files",
+  "ja": "補助スクリプトが保存とパッケージ化を担当"
+ },
+ "矢印 LibreOffice 扩展（.oxt）": {
+  "zh-CN": "矢印 LibreOffice 扩展（.oxt）",
+  "zh-TW": "矢印 LibreOffice 擴充套件（.oxt）",
+  "en": "VecStamp LibreOffice extension (.oxt)",
+  "ja": "矢印 LibreOffice 拡張機能（.oxt）"
+ },
+ "也可在任意系统的 LibreOffice 中双击 .oxt": {
+  "zh-CN": "也可在任意系统的 LibreOffice 中双击 .oxt",
+  "zh-TW": "也可在任意系統的 LibreOffice 中按兩下 .oxt",
+  "en": "Or double-click the .oxt in any LibreOffice",
+  "ja": "どの OS の LibreOffice でも .oxt をダブルクリック"
+ }
+}

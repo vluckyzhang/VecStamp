@@ -12,7 +12,7 @@
 
 set -u
 
-VERSION="1.2.1"
+VERSION="1.2.2"
 EXT_ID="com.vluckyzhang.vecstamp"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$HERE/../.." && pwd)"

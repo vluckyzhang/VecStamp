@@ -162,6 +162,27 @@ def run(tmp):
         items = menu.getByName('com.vluckyzhang.vecstamp.menu').getByName('Submenu').getElementNames()
         print(f'  menu entries: {len(items)}   extension version: {report["version"]}   '
               f'about dialog controls: {len(report["about"])}')
+        # progress reporting: increasing fractions ending at 1.0, a step text for every call
+        for ext, steps in report['steps'].items():
+            fr = [f for f, _ in steps]
+            if not steps or fr != sorted(fr) or fr[-1] != 1.0 or not all(d for _, d in steps):
+                print(f'  FAIL progress steps of {ext}: {steps}')
+                failures += 1
+        print('  progress steps:', '  '.join(f'{e}={len(s)}' for e, s in report['steps'].items()))
+        print('  e.g. vsdx:', ' / '.join(d for _, d in report['steps']['vsdx']))
+        pr = report['progress']
+        print(f'  progress window: shown={pr["window"]} percent={pr["percent"]} cancel={pr["cancel"]}')
+        if pr['percent'] != 25 or not pr['cancel']:
+            print('  FAIL progress window')
+            failures += 1
+        if report['color'] != 71:
+            print(f'  FAIL colour dialog swatches: {report["color"]}')
+            failures += 1
+        titles = {code: v[0] for code, v in report['langs'].items()}
+        print('  languages:', ' | '.join(f'{c}: {" / ".join(v)}' for c, v in report['langs'].items()))
+        if len(set(titles.values())) != 4:
+            print('  FAIL settings dialog title is not translated')
+            failures += 1
         return failures
     finally:
         try:                                  # also on failure: never leave an office running

@@ -4,10 +4,14 @@
  */
 window.SITE = {
   // 当前版本号（build/make_website.py 会自动同步）
-  version: '1.2.1',
+  version: '1.2.2',
+
+  // 网站的公开地址（以 / 结尾）。build/make_website.py 用它生成 canonical、hreflang、
+  // Open Graph、结构化数据和 sitemap.xml；更换域名或启用 https 后改这里并重新运行
+  siteUrl: 'https://vluckyzhang.cn/shiyin/',
 
   // 「下载」按钮的地址。国内访问 GitHub 较慢时，可以把发布包放到 download/ 文件夹，
-  // 改成例如 'download/VecStamp-v1.2.1.zip'
+  // 改成例如 'download/VecStamp-v1.2.2.zip'
   download: 'https://github.com/vluckyzhang/VecStamp/releases/latest',
 
   // 源码仓库（「查看源码」「提交 Issue」「更新日志」都由它生成）

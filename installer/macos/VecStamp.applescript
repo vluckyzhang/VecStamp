@@ -27,7 +27,7 @@ on partOf(parts, n)
 end partOf
 
 on helperVersion(paramString)
-	return "1.2.1"
+	return "1.2.2"
 end helperVersion
 
 -- "prompt|*|default name|*|default folder" -> POSIX path, or "" when cancelled
@@ -219,22 +219,59 @@ on chooseColor(paramString)
 	end try
 	try
 		set c to choose color default color startColor
-	on error
-		return ""
+	on error number errNum
+		if errNum is -128 then return ""
+		return "error"
 	end try
 	return ((round ((item 1 of c) / 257)) as text) & "," & ((round ((item 2 of c) / 257)) as text) & "," & ((round ((item 3 of c) / 257)) as text)
 end chooseColor
 
 -- Shows a small "please wait" dialog in a separate process; returns its process id.
 -- (AppleScriptTask blocks PowerPoint while it runs, so the dialog must not belong to this script.)
-on progressShow(msg)
+-- Shows a small progress dialog in the background; returns its process id.
+-- Parameter: "<text>" or "<text>|*|<button label>" (clicking the button cancels the export).
+on progressShow(param)
+	set msg to param
+	set btn to "OK"
+	if param contains "|*|" then
+		set AppleScript's text item delimiters to "|*|"
+		set parts to text items of param
+		set AppleScript's text item delimiters to ""
+		set msg to item 1 of parts
+		set btn to item 2 of parts
+	end if
 	try
-		set cmd to "/usr/bin/osascript -e 'on run argv' -e 'display dialog (item 1 of argv) with title \"VecStamp\" buttons {\"OK\"} default button 1 giving up after 600' -e 'end run' " & quoted form of msg & " >/dev/null 2>&1 & echo $!"
+		set cmd to "/usr/bin/osascript -e 'on run argv' -e 'display dialog (item 1 of argv) with title \"VecStamp\" buttons {(item 2 of argv)} default button 1 giving up after 3600' -e 'end run' " & quoted form of msg & " " & quoted form of btn & " >/dev/null 2>&1 & echo $!"
 		return do shell script cmd
 	on error
 		return ""
 	end try
 end progressShow
+
+-- Replaces the progress dialog with a new text (a dialog cannot be updated in place).
+-- Parameter: "<old pid>|*|<text>|*|<button label>"; returns the new pid.
+on progressUpdate(param)
+	set AppleScript's text item delimiters to "|*|"
+	set parts to text items of param
+	set AppleScript's text item delimiters to ""
+	if (count of parts) < 2 then return ""
+	set btn to "OK"
+	if (count of parts) > 2 then set btn to item 3 of parts
+	set newPid to progressShow((item 2 of parts) & "|*|" & btn)
+	progressHide(item 1 of parts)
+	return newPid
+end progressUpdate
+
+-- "1" while the progress dialog is still open, "0" after the user closed it.
+on progressAlive(pidText)
+	try
+		set n to pidText as integer
+		do shell script "/bin/kill -0 " & (n as text)
+		return "1"
+	on error
+		return "0"
+	end try
+end progressAlive
 
 on progressHide(pidText)
 	try

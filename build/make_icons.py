@@ -224,6 +224,17 @@ def home_body():
             f'<rect x="108" y="150" width="40" height="64" rx="4" fill="{SEAL}"/>')
 
 
+def language_body():
+    """Interface language: a globe with a speech bubble (generic glyph, no text)."""
+    return (f'<circle cx="104" cy="112" r="84" fill="#FFFFFF" stroke="{INK}" stroke-width="12"/>'
+            f'<ellipse cx="104" cy="112" rx="36" ry="84" fill="none" stroke="{INK}" stroke-width="10"/>'
+            f'<path d="M24,84 H184 M24,140 H184" fill="none" stroke="{INK}" stroke-width="10"/>'
+            f'<path d="M150,138 h82 a12,12 0 0 1 12,12 v52 a12,12 0 0 1 -12,12 h-36 l-26,24 v-24 h-20 '
+            f'a12,12 0 0 1 -12,-12 v-52 a12,12 0 0 1 12,-12 Z" fill="{SEAL}" stroke="{SEAL}" stroke-width="6" '
+            f'stroke-linejoin="round"/>'
+            f'<path d="M168,166 h46 M168,188 h30" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>')
+
+
 DONATE = os.path.join(ASSETS, 'donate')
 DONATE_CARDS = {
     # name: (source file, crop box of QR code + name in the original image, header colour, header text)
@@ -282,7 +293,8 @@ def write_lo_icons():
     os.makedirs(LO_ICONS, exist_ok=True)
     items = {'logo': logo_body(detail=False), 'export': export_body(), 'pages': pages_body(),
              'picture': picture_body(), 'settings': settings_body(), 'help': help_body(),
-             'folder': folder_body('open'), 'mail': mail_body(), 'donate': donate_body(), 'home': home_body()}
+             'folder': folder_body('open'), 'mail': mail_body(), 'donate': donate_body(), 'home': home_body(),
+             'lang': language_body()}
     for fmt, color in FMT_COLORS.items():
         items[fmt] = doc_body(color)
     for name, body in items.items():
@@ -291,6 +303,9 @@ def write_lo_icons():
                              output_width=s, output_height=s)
     cairosvg.svg2png(bytestring=svg(logo_body(), 64).encode(), write_to=os.path.join(LO_ICONS, 'logo_64.png'),
                      output_width=64, output_height=64)
+    for kind in ('none', 'grid'):        # background preview square of the settings dialog
+        cairosvg.svg2png(bytestring=svg(swatch_body(kind), 32).encode(), write_to=os.path.join(LO_ICONS, f'bg_{kind}.png'),
+                         output_width=32, output_height=32)
 
 
 def banner():
@@ -339,6 +354,7 @@ def main():
     write('eyedropper', eyedropper_body(), [32])
     write('donate', donate_body(), [64])
     write('home', home_body(), [32])
+    write('lang', language_body(), [32])
     write_lo_icons()
     write_donate()
     banner()

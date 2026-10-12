@@ -99,7 +99,71 @@ Private Declare PtrSafe Function CreateFontW Lib "gdi32" (ByVal nHeight As Long,
     ByVal fdwClipPrecision As Long, ByVal fdwQuality As Long, ByVal fdwPitchAndFamily As Long, ByVal lpszFace As LongPtr) As LongPtr
 Private Declare PtrSafe Function DeleteObject Lib "gdi32" (ByVal hObject As LongPtr) As Long
 Private Declare PtrSafe Function InitCommonControlsEx Lib "comctl32" (ByRef icc As INITCOMMONCONTROLSEX_T) As Long
+Private Type STARTUPINFOW
+    cb As Long
+    lpReserved As LongPtr
+    lpDesktop As LongPtr
+    lpTitle As LongPtr
+    dwX As Long
+    dwY As Long
+    dwXSize As Long
+    dwYSize As Long
+    dwXCountChars As Long
+    dwYCountChars As Long
+    dwFillAttribute As Long
+    dwFlags As Long
+    wShowWindow As Integer
+    cbReserved2 As Integer
+    lpReserved2 As LongPtr
+    hStdInput As LongPtr
+    hStdOutput As LongPtr
+    hStdError As LongPtr
+End Type
+Private Type PROCESS_INFORMATION
+    hProcess As LongPtr
+    hThread As LongPtr
+    dwProcessId As Long
+    dwThreadId As Long
+End Type
+Private Declare PtrSafe Function CreateProcessW Lib "kernel32" (ByVal lpApplicationName As LongPtr, ByVal lpCommandLine As LongPtr, _
+    ByVal lpProcessAttributes As LongPtr, ByVal lpThreadAttributes As LongPtr, ByVal bInheritHandles As Long, _
+    ByVal dwCreationFlags As Long, ByVal lpEnvironment As LongPtr, ByVal lpCurrentDirectory As LongPtr, _
+    ByRef lpStartupInfo As STARTUPINFOW, ByRef lpProcessInformation As PROCESS_INFORMATION) As Long
+Private Declare PtrSafe Function WaitForSingleObject Lib "kernel32" (ByVal hHandle As LongPtr, ByVal dwMilliseconds As Long) As Long
+Private Declare PtrSafe Function GetExitCodeProcess Lib "kernel32" (ByVal hProcess As LongPtr, ByRef lpExitCode As Long) As Long
+Private Declare PtrSafe Function TerminateProcess Lib "kernel32" (ByVal hProcess As LongPtr, ByVal uExitCode As Long) As Long
+Private Declare PtrSafe Function CloseHandle Lib "kernel32" (ByVal hObject As LongPtr) As Long
+' colour panel (a native window driven by a message loop in ColorPanel)
+Private Type MSG_T
+    hwnd As LongPtr
+    message As Long
+    wParam As LongPtr
+    lParam As LongPtr
+    msgTime As Long
+    ptX As Long
+    ptY As Long
+End Type
+Private Declare PtrSafe Function PeekMessageW Lib "user32" (ByRef lpMsg As MSG_T, ByVal hwnd As LongPtr, _
+    ByVal wMsgFilterMin As Long, ByVal wMsgFilterMax As Long, ByVal wRemoveMsg As Long) As Long
+Private Declare PtrSafe Function TranslateMessage Lib "user32" (ByRef lpMsg As MSG_T) As Long
+Private Declare PtrSafe Function DispatchMessageW Lib "user32" (ByRef lpMsg As MSG_T) As LongPtr
+Private Declare PtrSafe Function IsDialogMessageW Lib "user32" (ByVal hDlg As LongPtr, ByRef lpMsg As MSG_T) As Long
+Private Declare PtrSafe Function EnableWindow Lib "user32" (ByVal hwnd As LongPtr, ByVal bEnable As Long) As Long
+Private Declare PtrSafe Function SetFocusW Lib "user32" Alias "SetFocus" (ByVal hwnd As LongPtr) As LongPtr
+Private Declare PtrSafe Function GetFocus Lib "user32" () As LongPtr
+Private Declare PtrSafe Function GetClientRect Lib "user32" (ByVal hwnd As LongPtr, ByRef lpRect As RECT) As Long
+Private Declare PtrSafe Function GetWindowTextW Lib "user32" (ByVal hwnd As LongPtr, ByVal lpString As LongPtr, _
+    ByVal nMaxCount As Long) As Long
+Private Declare PtrSafe Function LoadImageW Lib "user32" (ByVal hInst As LongPtr, ByVal lpszName As LongPtr, _
+    ByVal uType As Long, ByVal cxDesired As Long, ByVal cyDesired As Long, ByVal fuLoad As Long) As LongPtr
+Private Declare PtrSafe Function GetSysColor Lib "user32" (ByVal nIndex As Long) As Long
+Private Declare PtrSafe Function GetDoubleClickTime Lib "user32" () As Long
+Private Declare PtrSafe Function PostQuitMessage Lib "user32" (ByVal nExitCode As Long) As Long
+Private Declare PtrSafe Sub SleepX Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)
+Private Declare PtrSafe Function AdjustWindowRectEx Lib "user32" (ByRef lpRect As RECT, ByVal dwStyle As Long, _
+    ByVal bMenu As Long, ByVal dwExStyle As Long) As Long
 Private gPgWnd As LongPtr, gPgMsg As LongPtr, gPgBar As LongPtr, gPgSub As LongPtr, gPgFont As LongPtr, gPgFontB As LongPtr
+Private gPgPct As LongPtr
 #Else
 Private Type OPENFILENAMEW
     lStructSize As Long
@@ -173,13 +237,76 @@ Private Declare Function CreateFontW Lib "gdi32" (ByVal nHeight As Long, ByVal n
     ByVal fdwClipPrecision As Long, ByVal fdwQuality As Long, ByVal fdwPitchAndFamily As Long, ByVal lpszFace As Long) As Long
 Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Private Declare Function InitCommonControlsEx Lib "comctl32" (ByRef icc As INITCOMMONCONTROLSEX_T) As Long
+Private Type STARTUPINFOW
+    cb As Long
+    lpReserved As Long
+    lpDesktop As Long
+    lpTitle As Long
+    dwX As Long
+    dwY As Long
+    dwXSize As Long
+    dwYSize As Long
+    dwXCountChars As Long
+    dwYCountChars As Long
+    dwFillAttribute As Long
+    dwFlags As Long
+    wShowWindow As Integer
+    cbReserved2 As Integer
+    lpReserved2 As Long
+    hStdInput As Long
+    hStdOutput As Long
+    hStdError As Long
+End Type
+Private Type PROCESS_INFORMATION
+    hProcess As Long
+    hThread As Long
+    dwProcessId As Long
+    dwThreadId As Long
+End Type
+Private Declare Function CreateProcessW Lib "kernel32" (ByVal lpApplicationName As Long, ByVal lpCommandLine As Long, _
+    ByVal lpProcessAttributes As Long, ByVal lpThreadAttributes As Long, ByVal bInheritHandles As Long, _
+    ByVal dwCreationFlags As Long, ByVal lpEnvironment As Long, ByVal lpCurrentDirectory As Long, _
+    ByRef lpStartupInfo As STARTUPINFOW, ByRef lpProcessInformation As PROCESS_INFORMATION) As Long
+Private Declare Function WaitForSingleObject Lib "kernel32" (ByVal hHandle As Long, ByVal dwMilliseconds As Long) As Long
+Private Declare Function GetExitCodeProcess Lib "kernel32" (ByVal hProcess As Long, ByRef lpExitCode As Long) As Long
+Private Declare Function TerminateProcess Lib "kernel32" (ByVal hProcess As Long, ByVal uExitCode As Long) As Long
+Private Declare Function CloseHandle Lib "kernel32" (ByVal hObject As Long) As Long
+Private Type MSG_T
+    hwnd As Long
+    message As Long
+    wParam As Long
+    lParam As Long
+    msgTime As Long
+    ptX As Long
+    ptY As Long
+End Type
+Private Declare Function PeekMessageW Lib "user32" (ByRef lpMsg As MSG_T, ByVal hwnd As Long, _
+    ByVal wMsgFilterMin As Long, ByVal wMsgFilterMax As Long, ByVal wRemoveMsg As Long) As Long
+Private Declare Function TranslateMessage Lib "user32" (ByRef lpMsg As MSG_T) As Long
+Private Declare Function DispatchMessageW Lib "user32" (ByRef lpMsg As MSG_T) As Long
+Private Declare Function IsDialogMessageW Lib "user32" (ByVal hDlg As Long, ByRef lpMsg As MSG_T) As Long
+Private Declare Function EnableWindow Lib "user32" (ByVal hwnd As Long, ByVal bEnable As Long) As Long
+Private Declare Function SetFocusW Lib "user32" Alias "SetFocus" (ByVal hwnd As Long) As Long
+Private Declare Function GetFocus Lib "user32" () As Long
+Private Declare Function GetClientRect Lib "user32" (ByVal hwnd As Long, ByRef lpRect As RECT) As Long
+Private Declare Function GetWindowTextW Lib "user32" (ByVal hwnd As Long, ByVal lpString As Long, _
+    ByVal nMaxCount As Long) As Long
+Private Declare Function LoadImageW Lib "user32" (ByVal hInst As Long, ByVal lpszName As Long, _
+    ByVal uType As Long, ByVal cxDesired As Long, ByVal cyDesired As Long, ByVal fuLoad As Long) As Long
+Private Declare Function GetSysColor Lib "user32" (ByVal nIndex As Long) As Long
+Private Declare Function GetDoubleClickTime Lib "user32" () As Long
+Private Declare Function PostQuitMessage Lib "user32" (ByVal nExitCode As Long) As Long
+Private Declare Sub SleepX Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)
+Private Declare Function AdjustWindowRectEx Lib "user32" (ByRef lpRect As RECT, ByVal dwStyle As Long, _
+    ByVal bMenu As Long, ByVal dwExStyle As Long) As Long
 Private gPgWnd As Long, gPgMsg As Long, gPgBar As Long, gPgSub As Long, gPgFont As Long, gPgFontB As Long
+Private gPgPct As Long
 #End If
 #End If
 
 ' ---- product information
 Private Const VS_NAME As String = "VecStamp"
-Private Const VS_VERSION As String = "1.2.1"
+Private Const VS_VERSION As String = "1.2.2"
 Private Const VS_AUTHOR As String = "vluckyzhang"
 Private Const VS_EMAIL As String = "vluckyzhang@gmail.com"
 Private Const VS_YEAR As String = "2026"
@@ -211,6 +338,8 @@ Private Const MSO_LINE As Long = 9
 Private Const MSO_TEXTEFFECT As Long = 15
 Private Const MSO_TEXTBOX As Long = 17
 Private Const KAPPA As Double = 0.552284749830794
+Private Const PI2 As Double = 6.28318530717959
+Private Const PDEG As Double = 2.90888208665722E-07     ' radians per DrawingML angle unit (1/60000 degree)
 Private Const MSO_SEND_TO_BACK As Long = 1
 Private Const MSO_PLACEHOLDER As Long = 14
 Private Const MSO_FOLDER_PICKER As Long = 4
@@ -234,6 +363,7 @@ Private Const BG_CUSTOM As Long = 4
 Private Const DEF_CUSTOM_COLOR As String = "255,248,235"
 
 Private Const DPI_MAX As Long = 3000
+Private Const SVG_TIMEOUT As Long = 180          ' seconds for the built-in XPS -> SVG conversion
 Private Const PNG_WARN_PIXELS As Double = 120000000#
 
 #If Mac Then
@@ -261,19 +391,59 @@ Private Const SW_SHOWNOACTIVATE As Long = 4
 Private Const LOGPIXELSY As Long = 90
 Private Const VK_ESCAPE As Long = &H1B
 Private Const ICC_PROGRESS_CLASS As Long = &H20
+Private Const SS_RIGHT As Long = &H2
+Private Const CREATE_NO_WINDOW As Long = &H8000000
+Private Const STARTF_USESHOWWINDOW As Long = &H1
+Private Const WAIT_TIMEOUT As Long = &H102
+Private Const PM_REMOVE As Long = 1
+Private Const WM_QUIT As Long = &H12
+Private Const WM_KEYDOWN As Long = &H100
+Private Const WM_KEYUP As Long = &H101
+Private Const WM_LBUTTONDOWN As Long = &H201
+Private Const WM_LBUTTONUP As Long = &H202
+Private Const WM_LBUTTONDBLCLK As Long = &H203
+Private Const VK_RETURN As Long = &HD
+Private Const VK_SPACE As Long = &H20
+Private Const WS_TABSTOP As Long = &H10000
+Private Const WS_BORDER As Long = &H800000
+Private Const WS_EX_CONTROLPARENT As Long = &H10000
+Private Const SS_NOTIFY As Long = &H100
+Private Const SS_BITMAP As Long = &HE
+Private Const STM_SETIMAGE As Long = &H172
+Private Const IMAGE_BITMAP As Long = 0
+Private Const LR_LOADFROMFILE As Long = &H10
+Private Const BS_DEFPUSHBUTTON As Long = &H1
+Private Const ES_AUTOHSCROLL As Long = &H80
+Private Const EM_LIMITTEXT As Long = &HC5
+Private Const EM_SETSEL As Long = &HB1
+Private Const WS_EX_CLIENTEDGE As Long = &H200
+Private Const SW_SHOW As Long = 5
+Private Const COLOR_BTNFACE As Long = 15
 #End If
 
+' ---- results of RunHidden besides the program's own exit code
+Private Const RUN_FAILED As Long = -1
+Private Const RUN_CANCELLED As Long = -2
+Private Const RUN_TIMEOUT As Long = -3
+Private Const ERR_CANCEL As Long = vbObjectError + 599
+
 Private gRibbon As Object
+Private gLang As String             ' interface language (zh-CN, zh-TW, en, ja)
+Private gStr As Collection          ' key -> text in gLang
 Private gSvgFallback As Long        ' per run: 0 = not asked yet, 1 = save EMF instead, 2 = skip
 Private gSvgNative As Long          ' per run: 0 = untested, 1 = PowerPoint writes valid SVG, 2 = it does not
+Private gSvgXpsOff As Boolean       ' per run: the XPS -> SVG conversion timed out, use the other methods
 Private gBigPngOk As Boolean        ' per run: user accepted a very large PNG
 Private gCustColors(0 To 15) As Long
 Private gBusy As Boolean            ' an export is running (ribbon clicks during DoEvents are ignored)
-' progress window
-Private gPgActive As Boolean, gPgPos As Long, gPgTotal As Long, gPgTitle As String
+' progress window: items (shapes, files or slides) and the position inside the current item
+Private gPgActive As Boolean, gPgItems As Long, gPgItem As Long, gPgFrac As Double, gPgTitle As String
+Private gPgLabel As String, gPgDetail As String, gPgCancel As Boolean, gPgFile As String
 #If Mac Then
-Private gPgMacPid As String
+Private gPgMacPid As String, gPgMacPct As Long, gPgMacTime As Double, gPgMacText As String, gPgMacCheck As Double
 #End If
+' native VSDX progress
+Private gVxTotal As Long, gVxDone As Long
 ' native VSDX writer
 Private gVxSb() As String, gVxSbN As Long, gVxId As Long, gVxMedia As Collection
 Private gVxScratch As Object, gVxPres As Object, gVxNative As Long, gVxPictures As Long, gVxCopy As Long
@@ -281,6 +451,9 @@ Private gGeo As String, gGeoSec As String, gGeoIx As Long, gGeoRow As Long
 Private gGeoW As Double, gGeoH As Double, gGeoFlipH As Boolean, gGeoFlipV As Boolean
 Private gGeoX0 As Double, gGeoY0 As Double, gGeoLX As Double, gGeoLY As Double
 Private gGeoNoFill As Boolean, gGeoNoLine As Boolean, gGeoOpenOnly As Boolean, gGeoTextBox As Boolean
+Private gGeoCU As Double, gGeoCV As Double, gGeoSU As Double, gGeoSV As Double, gGeoClosed As Boolean
+' preset geometry engine: guide values, adjust values (DrawingML units), shape size
+Private gPv() As Double, gPa() As Double, gPw As Double, gPh As Double
 
 
 ' =====================================================================
@@ -345,6 +518,9 @@ End Sub
 
 ' =====================================================================
 '  Ribbon callbacks
+'  Every text comes from the string tables ("rb.<control id>" = label, ".tip" = screentip,
+'  ".sup" = supertip, ".desc" = description), so the whole tab switches language at once when
+'  the ribbon is invalidated (VS_OnCheck on a language entry).
 ' =====================================================================
 Public Sub VS_OnLoad(ribbon As Object)
     Set gRibbon = ribbon
@@ -383,7 +559,87 @@ Public Sub VS_OnEyedropper(control As Object)
     DoEyedropper
 End Sub
 
-' ---- background colour gallery (theme / standard / recent colours)
+' ---- texts
+Public Sub VS_GetLabel(control As Object, ByRef label)
+    Dim id As String
+    id = control.Id
+    Select Case id
+        Case "vsBtnExport"
+            label = Tx("rb.vsBtnExport", UCase$(FmtExt(GetIdx("Format", FMT_LAST))))
+        Case "vsMnuBg"
+            label = Tx("rb.vsMnuBg", BgShortName(BgTypeIdx()))
+        Case "vsGalColor", "vsBgCustomMac"
+            label = Tx("rb." & id)
+            If BgTypeIdx() = BG_CUSTOM Then label = label & "  " & ChrW$(&H2713)
+        Case "vsMnuLang"
+            label = LangName(CurLang())
+        Case "vsMnuEMF", "vsMnuEMZ", "vsMnuSVG", "vsMnuWMF", "vsMnuPDF", "vsMnuVSDX", "vsMnuPNG"
+            label = Tx("fmt." & LCase$(Mid$(id, 6)))
+        Case Else
+            label = Tx("rb." & id)
+    End Select
+End Sub
+
+Public Sub VS_GetScreentip(control As Object, ByRef tip)
+    Dim id As String
+    id = control.Id
+    If Left$(id, 6) = "vsBgSw" Then id = "vsMnuBg"
+    If TxHas("rb." & id & ".tip") Then tip = Tx("rb." & id & ".tip") Else VS_GetLabel control, tip
+End Sub
+
+Public Sub VS_GetSupertip(control As Object, ByRef tip)
+    Dim id As String
+    id = control.Id
+    If Left$(id, 6) = "vsBgSw" Then id = "vsMnuBg"
+    Select Case id
+        Case "vsBtnFolder": tip = Tx("rb.vsBtnFolder.sup", FolderSettingText())
+        Case "vsBtnOpenFolder": tip = Tx("rb.vsBtnOpenFolder.sup", FileManagerName())
+        Case "vsGalColor", "vsEbRgb", "vsBgCustomMac": tip = Tx("rb.vsGalColor.sup", ColorSettingText())
+        Case "vsMnuBg": tip = Tx("rb.vsMnuBg.sup", BgName(BgTypeIdx()))
+        Case "vsMnuLang": tip = Tx("rb.vsMnuLang.sup", LangName(CurLang()))
+        Case Else
+            If TxHas("rb." & id & ".sup") Then tip = Tx("rb." & id & ".sup") Else tip = SettingsSummary()
+    End Select
+End Sub
+
+Public Sub VS_GetDescription(control As Object, ByRef desc)
+    If TxHas("rb." & control.Id & ".desc") Then desc = Tx("rb." & control.Id & ".desc") Else desc = ""
+End Sub
+
+Public Sub VS_GetTitle(control As Object, ByRef title)
+    title = Tx("rb." & control.Id)
+End Sub
+
+' ---- background: preview square (Windows: drawn; macOS: one of the static icons) and menu
+Public Sub VS_GetVisible(control As Object, ByRef visible)
+    Dim mac As Boolean, bg As Long
+#If Mac Then
+    mac = True
+#End If
+    bg = BgTypeIdx()
+    Select Case control.Id
+        Case "vsBgSwatch", "vsGalColor": visible = Not mac
+        Case "vsBgCustomMac": visible = mac
+        Case "vsBgSwNone": visible = mac And bg = BG_NONE
+        Case "vsBgSwWhite": visible = mac And bg = BG_WHITE
+        Case "vsBgSwBeige": visible = mac And bg = BG_BEIGE
+        Case "vsBgSwGrid": visible = mac And bg = BG_GRID
+        Case "vsBgSwCustom": visible = mac And bg = BG_CUSTOM
+        Case Else: visible = True
+    End Select
+End Sub
+
+Public Sub VS_GetImage(control As Object, ByRef image)
+#If Mac Then
+#Else
+    Select Case control.Id
+        Case "vsBgSwatch": Set image = BgPicture(BgTypeIdx(), 16)
+        Case "vsGalColor": Set image = BgPicture(BG_CUSTOM, 32)
+    End Select
+#End If
+End Sub
+
+' ---- background colour gallery (theme / standard / recent colours), Windows
 Public Sub VS_GalColorCount(control As Object, ByRef count)
     Dim rc As Variant
     rc = RecentColors()
@@ -407,16 +663,32 @@ Public Sub VS_GalColorPick(control As Object, id As String, index As Integer)
     SetBgColor GalColor(index)
 End Sub
 
-Public Sub VS_GalColorMainImage(control As Object, ByRef image)
-#If Mac Then
-#Else
-    Set image = SwatchPicture(BgColorValue(BG_CUSTOM), 32)
-#End If
+' ---- drop-downs with translated items
+Public Sub VS_GetItemCount(control As Object, ByRef count)
+    Select Case control.Id
+        Case "vsDdMode", "vsDdNaming": count = 2
+        Case "vsDdDpi": count = 4
+        Case Else: count = 0
+    End Select
+End Sub
+
+Public Sub VS_GetItemLabel(control As Object, index As Integer, ByRef label)
+    Select Case control.Id
+        Case "vsDdMode": label = Tx(IIf(index = 0, "mode.merge", "mode.split"))
+        Case "vsDdNaming": label = Tx(IIf(index = 0, "naming.ask", "naming.auto"))
+        Case "vsDdDpi"
+            If index < 3 Then label = CStr(Array(150, 300, 600)(index)) & " DPI" Else label = Tx("dpi.custom")
+        Case Else: label = ""
+    End Select
+End Sub
+
+Public Sub VS_GetItemID(control As Object, index As Integer, ByRef id)
+    id = control.Id & "_" & index
 End Sub
 
 ' ---- donations, project page
 Public Sub VS_OnDonate(control As Object, id As String, index As Integer)
-    If index = 0 Then DoDonateThanks "支付宝" Else DoDonateThanks "微信"
+    If index = 0 Then DoDonateThanks Tx("don.alipay") Else DoDonateThanks Tx("don.wechat")
 End Sub
 
 Public Sub VS_OnDonateInfo(control As Object)
@@ -424,7 +696,7 @@ Public Sub VS_OnDonateInfo(control As Object)
 End Sub
 
 Public Sub VS_OnHome(control As Object)
-    If Not OpenUrlX(VS_REPO) Then MsgBox "项目主页：" & VS_REPO, vbInformation, AppTitle()
+    If Not OpenUrlX(VS_REPO) Then MsgBox Tx("msg.home", VS_REPO), vbInformation, AppTitle()
 End Sub
 
 Public Sub VS_OnOpenFolder(control As Object)
@@ -432,14 +704,10 @@ Public Sub VS_OnOpenFolder(control As Object)
     f = GetSet("LastFolder", "")
     If Len(f) = 0 Or Not FolderExistsX(f) Then f = GetSet("Folder", "")
     If Len(f) = 0 Or Not FolderExistsX(f) Then
-        MsgBox "还没有导出过文件。导出一次后，这里会打开最近使用的文件夹。", vbInformation, AppTitle()
+        MsgBox Tx("msg.noFolderYet"), vbInformation, AppTitle()
         Exit Sub
     End If
     OpenPathX f
-End Sub
-
-Public Sub VS_GetExportLabel(control As Object, ByRef label)
-    label = "导出 " & UCase$(FmtExt(GetIdx("Format", FMT_LAST)))
 End Sub
 
 Public Sub VS_GetIndex(control As Object, ByRef index)
@@ -448,7 +716,6 @@ Public Sub VS_GetIndex(control As Object, ByRef index)
         Case "vsDdMode": index = GetIdx("Mode", 1)
         Case "vsDdNaming": index = GetIdx("Naming", 1)
         Case "vsDdDpi": index = GetIdx("Dpi", 3, 1)
-        Case "vsDdBg": index = BgTypeIdx()
         Case Else: index = 0
     End Select
 End Sub
@@ -459,15 +726,24 @@ Public Sub VS_OnDropDown(control As Object, id As String, index As Integer)
         Case "vsDdMode": PutSet "Mode", CStr(index)
         Case "vsDdNaming": PutSet "Naming", CStr(index)
         Case "vsDdDpi": PutSet "Dpi", CStr(index)
-        Case "vsDdBg": PutSet "BgType", CStr(index)
     End Select
     RefreshRibbon
 End Sub
 
+' ---- check boxes and toggle buttons (background entries, languages)
 Public Sub VS_GetPressed(control As Object, ByRef returnedVal)
     Select Case control.Id
         Case "vsChkOpen": returnedVal = GetFlag("OpenFolder", "0")
         Case "vsChkVsdx": returnedVal = GetFlag("VsdxNative", "1")
+        Case "vsBgNone": returnedVal = (BgTypeIdx() = BG_NONE)
+        Case "vsBgWhite": returnedVal = (BgTypeIdx() = BG_WHITE)
+        Case "vsBgBeige": returnedVal = (BgTypeIdx() = BG_BEIGE)
+        Case "vsBgGrid": returnedVal = (BgTypeIdx() = BG_GRID)
+        Case "vsBgCustomMac": returnedVal = (BgTypeIdx() = BG_CUSTOM)
+        Case "vsLangZhCN": returnedVal = (CurLang() = "zh-CN")
+        Case "vsLangZhTW": returnedVal = (CurLang() = "zh-TW")
+        Case "vsLangEn": returnedVal = (CurLang() = "en")
+        Case "vsLangJa": returnedVal = (CurLang() = "ja")
         Case Else: returnedVal = False
     End Select
 End Sub
@@ -478,6 +754,15 @@ Public Sub VS_OnCheck(control As Object, pressed As Boolean)
     Select Case control.Id
         Case "vsChkOpen": PutSet "OpenFolder", v
         Case "vsChkVsdx": PutSet "VsdxNative", v
+        Case "vsBgNone": PutSet "BgType", CStr(BG_NONE)
+        Case "vsBgWhite": PutSet "BgType", CStr(BG_WHITE)
+        Case "vsBgBeige": PutSet "BgType", CStr(BG_BEIGE)
+        Case "vsBgGrid": PutSet "BgType", CStr(BG_GRID)
+        Case "vsBgCustomMac": DoMoreColors
+        Case "vsLangZhCN": SetLang "zh-CN"
+        Case "vsLangZhTW": SetLang "zh-TW"
+        Case "vsLangEn": SetLang "en"
+        Case "vsLangJa": SetLang "ja"
     End Select
     RefreshRibbon
 End Sub
@@ -507,53 +792,34 @@ Public Sub VS_OnChange(control As Object, strText As String)
     Select Case control.Id
         Case "vsEbMargin"
             If ReadNumber(strText, 0, 500, v) Then PutSet "Margin", NumText(v) _
-                Else MsgBox "边距请输入 0～500 之间的数字（单位：磅）。", vbExclamation, AppTitle()
+                Else MsgBox Tx("msg.badMargin"), vbExclamation, AppTitle()
         Case "vsEbDpi"
             If ReadNumber(strText, 1, DPI_MAX, v) Then
                 PutSet "DpiCustom", CStr(CLng(v))
             Else
-                MsgBox "自定义分辨率请输入 1～" & DPI_MAX & " 之间的整数（DPI）。", vbExclamation, AppTitle()
+                MsgBox Tx("msg.badDpi", DPI_MAX), vbExclamation, AppTitle()
             End If
         Case "vsEbAlpha"
             If ReadNumber(strText, 0, 100, v) Then PutSet "BgAlpha", CStr(CLng(v)) _
-                Else MsgBox "背景透明度请输入 0～100 之间的数字（%）。", vbExclamation, AppTitle()
+                Else MsgBox Tx("msg.badAlpha"), vbExclamation, AppTitle()
         Case "vsEbGrid"
             If ReadNumber(strText, 2, 200, v) Then PutSet "GridStep", NumText(v) _
-                Else MsgBox "网格间距请输入 2～200 之间的数字（单位：磅）。", vbExclamation, AppTitle()
+                Else MsgBox Tx("msg.badGrid"), vbExclamation, AppTitle()
         Case "vsEbRgb"
             If ParseColor(strText, r, g, b) Then
-                PutSet "BgColor", r & "," & g & "," & b
-                PutSet "BgType", CStr(BG_CUSTOM)
+                SetBgColor RGB(r, g, b)
             Else
-                MsgBox "颜色格式示例：255,248,235 或 #FFF8EB", vbExclamation, AppTitle()
+                MsgBox Tx("col.bad"), vbExclamation, AppTitle()
             End If
     End Select
     RefreshRibbon
-End Sub
-
-Public Sub VS_GetSupertip(control As Object, ByRef tip)
-    Select Case control.Id
-        Case "vsBtnFolder"
-            tip = "“自动保存”和“逐页导出”默认使用的文件夹：" & vbCrLf & FolderSettingText()
-        Case "vsBtnOpenFolder"
-            tip = "在" & FileManagerName() & "中打开最近一次导出所在的文件夹。"
-        Case "vsGalColor", "vsEbRgb"
-            tip = "当前自定义背景色：" & ColorSettingText() & vbCrLf & _
-                  "从主题颜色、标准色、最近使用的颜色中选择，或用“其他颜色”“取色器”；" & _
-                  "也可以在 RGB 框中输入 R,G,B（如 255,248,235）或十六进制（如 #FFF8EB）。选色后背景自动切换为“自定义颜色”。"
-        Case "vsChkVsdx"
-            tip = "勾选：VSDX 中的图形是 Visio 原生形状，文字可直接编辑（无需安装 Visio）。" & vbCrLf & _
-                  "不勾选：整个图形作为一张 EMF 矢量图片嵌入 VSDX，外观与 PowerPoint 完全一致。"
-        Case Else
-            tip = SettingsSummary()
-    End Select
 End Sub
 
 Public Sub VS_OnFolder(control As Object)
     Dim cur As String, f As String
     cur = GetSet("Folder", "")
     If Len(cur) = 0 Or Not FolderExistsX(cur) Then cur = DesktopPathX()
-    f = PickFolderX(cur, "选择“自动保存”使用的默认文件夹")
+    f = PickFolderX(cur, Tx("set.pickDefaultFolder"))
     If Len(f) > 0 Then
         PutSet "Folder", f
         RefreshRibbon
@@ -561,13 +827,13 @@ Public Sub VS_OnFolder(control As Object)
 End Sub
 
 Public Sub VS_OnReset(control As Object)
-    If MsgBox("确定把所有导出设置恢复为默认值吗？", vbQuestion + vbYesNo, AppTitle()) <> vbYes Then Exit Sub
+    If MsgBox(Tx("msg.askReset"), vbQuestion + vbYesNo, AppTitle()) <> vbYes Then Exit Sub
     ResetSettings
     RefreshRibbon
 End Sub
 
 Public Sub VS_OnSettings(control As Object)
-    MsgBox SettingsSummary(), vbInformation, AppTitle() & " - " & "当前设置"
+    MsgBox SettingsSummary(), vbInformation, AppTitle() & " - " & Tx("set.current")
 End Sub
 
 Public Sub VS_OnAbout(control As Object)
@@ -579,18 +845,7 @@ Public Sub VS_OnFeedback(control As Object)
 End Sub
 
 Public Sub VS_OnHelp(control As Object)
-    MsgBox "矢印 VecStamp 使用说明" & vbCrLf & vbCrLf & _
-        "① 选中一个或多个图形，点“导出”，或直接点各格式按钮。没有选中图形时，可以导出整页。" & vbCrLf & _
-        "② 逐页导出：每页幻灯片一个文件；在左侧缩略图中多选页面则只导出所选页。" & vbCrLf & _
-        "③ EMF 图片副本：把所选图形复制成矢量图片放在旁边，原图形不变。" & vbCrLf & vbCrLf & _
-        "· EMF / EMZ / WMF / SVG：矢量图。PowerPoint 2013 及以上都能导出 SVG（2302 之前的版本经 XPS 内置转换）。" & vbCrLf & _
-        "· PDF：页面大小与图形一致的矢量 PDF，适合 LaTeX。" & vbCrLf & _
-        "· VSDX：Visio 文件，图形为 Visio 原生形状、文字可编辑，无需安装 Visio。" & vbCrLf & _
-        "· PNG：150 / 300 / 600 DPI 或自定义（最高 3000 DPI）。" & vbCrLf & _
-        "· 背景：透明、白色、米色、网格或自定义颜色（主题色 / 标准色 / 其他颜色 / 取色器 / RGB），可设透明度和边距。" & vbCrLf & _
-        "· 导出时会显示进度窗口，按 Esc 可以取消。" & vbCrLf & vbCrLf & _
-        "合并导出、加背景、PDF 和逐页导出时会临时借用剪贴板，并在文末临时插入一页（完成后自动删除）。", _
-        vbInformation, AppTitle()
+    MsgBox Tx("help.ppt", DPI_MAX), vbInformation, AppTitle()
 End Sub
 
 
@@ -616,13 +871,14 @@ Private Sub DoExport(ByVal fmt As Long)
         If autoSave Then
             folder = DefaultFolder(pres)
         Else
-            folder = PickFolderX(InitialFolder(pres), "选择导出文件夹（每个图形一个文件）")
+            folder = PickFolderX(InitialFolder(pres), Tx("dlg.pickFolderEach"))
             If Len(folder) = 0 Then Exit Sub
         End If
         gBusy = True
-        ProgressBegin "正在导出 " & sr.Count & " 个 " & UCase$(FmtExt(fmt)) & " 文件", sr.Count * 4
+        ProgressBegin Tx("prog.exportN", sr.Count, UCase$(FmtExt(fmt))), sr.Count
         For i = 1 To sr.Count
-            If ProgressCancelled() Then Exit For
+            ProgressItem i, Tx("prog.item", i, sr.Count, ShortName(sr.Item(i).Name))
+            CheckCancel
             path = UniquePath(folder, baseName & "_" & SafeName(sr.Item(i).Name), FmtExt(fmt))
             p = ExportItem(pres, sr.Item(i), path, fmt)
             If Len(p) > 0 Then files.Add p
@@ -635,7 +891,8 @@ Private Sub DoExport(ByVal fmt As Long)
             If Len(path) = 0 Then Exit Sub
         End If
         gBusy = True
-        ProgressBegin "正在导出 " & UCase$(FmtExt(fmt)), 4
+        ProgressBegin Tx("prog.export1", UCase$(FmtExt(fmt))), 1
+        ProgressItem 1, ""
         p = ExportItem(pres, sr, path, fmt)
         If Len(p) > 0 Then files.Add p
     End If
@@ -647,7 +904,11 @@ Private Sub DoExport(ByVal fmt As Long)
 EH:
     ProgressEnd
     gBusy = False
-    If Err.Number <> vbObjectError + 599 Then MsgBox "导出失败：" & Err.Description, vbExclamation, AppTitle()
+    If Err.Number = ERR_CANCEL Then
+        ReportCancelled files
+    Else
+        MsgBox Tx("msg.exportFailed", Err.Description), vbExclamation, AppTitle()
+    End If
 End Sub
 
 ' One file per slide: all slides, or only the slides selected in the thumbnail pane.
@@ -661,7 +922,7 @@ Private Sub DoBatch()
     Set win = Application.ActiveWindow
     On Error GoTo EH
     If win Is Nothing Then
-        MsgBox "请先打开演示文稿。", vbInformation, AppTitle()
+        MsgBox Tx("msg.openPres"), vbInformation, AppTitle()
         Exit Sub
     End If
     Set pres = win.Presentation
@@ -669,9 +930,7 @@ Private Sub DoBatch()
 
     If win.Selection.Type = PP_SEL_SLIDES Then
         If win.Selection.SlideRange.Count > 1 Then
-            ans = MsgBox("要导出哪些幻灯片？" & vbCrLf & vbCrLf & _
-                         "是：只导出所选的 " & win.Selection.SlideRange.Count & " 页" & vbCrLf & _
-                         "否：导出全部 " & pres.Slides.Count & " 页", _
+            ans = MsgBox(Tx("msg.askWhich", win.Selection.SlideRange.Count, pres.Slides.Count), _
                          vbQuestion + vbYesNoCancel, AppTitle())
             If ans = vbCancel Then Exit Sub
             If ans = vbYes Then
@@ -687,14 +946,14 @@ Private Sub DoBatch()
         Next i
     End If
     If slideList.Count = 0 Then
-        MsgBox "演示文稿中没有幻灯片。", vbInformation, AppTitle()
+        MsgBox Tx("msg.noSlides"), vbInformation, AppTitle()
         Exit Sub
     End If
 
     If GetIdx("Naming", 1) = 1 Then
         folder = DefaultFolder(pres)
     Else
-        folder = PickFolderX(InitialFolder(pres), "选择逐页导出的文件夹（格式：" & UCase$(FmtExt(fmt)) & "）")
+        folder = PickFolderX(InitialFolder(pres), Tx("dlg.pickFolderBatch", UCase$(FmtExt(fmt))))
         If Len(folder) = 0 Then Exit Sub
     End If
 
@@ -702,16 +961,16 @@ Private Sub DoBatch()
     baseName = SafeName(BaseNameOf(pres.Name))
     If gBusy Then Exit Sub
     gBusy = True
-    ProgressBegin "逐页导出（" & slideList.Count & " 页，" & UCase$(FmtExt(fmt)) & "）", slideList.Count * 4
+    ProgressBegin Tx("prog.batch", slideList.Count, UCase$(FmtExt(fmt))), slideList.Count
     For i = 1 To slideList.Count
-        If ProgressCancelled() Then Exit For
         Set sld = slideList(i)
-        ProgressStep "第 " & i & " / " & slideList.Count & " 页"
+        ProgressItem i, Tx("prog.page", i, slideList.Count, sld.SlideIndex)
+        CheckCancel
         Set rng = ExportableRange(sld)
         If rng Is Nothing Then
             skipped = skipped + 1
         Else
-            path = UniquePath(folder, baseName & "_第" & sld.SlideIndex & "页", FmtExt(fmt))
+            path = UniquePath(folder, baseName & "_" & Tx("file.page", sld.SlideIndex), FmtExt(fmt))
             p = ExportItem(pres, rng, path, fmt)
             If Len(p) > 0 Then files.Add p
         End If
@@ -720,18 +979,22 @@ Private Sub DoBatch()
     gBusy = False
 
     If files.Count = 0 Then
-        MsgBox "所选幻灯片上没有可导出的图形。", vbInformation, AppTitle()
+        MsgBox Tx("msg.noShapesSlides"), vbInformation, AppTitle()
         Exit Sub
     End If
     If skipped > 0 Then
-        MsgBox "已跳过 " & skipped & " 张空白幻灯片。", vbInformation, AppTitle()
+        MsgBox Tx("msg.skipped", skipped), vbInformation, AppTitle()
     End If
     Report files, True
     Exit Sub
 EH:
     ProgressEnd
     gBusy = False
-    If Err.Number <> vbObjectError + 599 Then MsgBox "逐页导出失败：" & Err.Description, vbExclamation, AppTitle()
+    If Err.Number = ERR_CANCEL Then
+        ReportCancelled files
+    Else
+        MsgBox Tx("msg.batchFailed", Err.Description), vbExclamation, AppTitle()
+    End If
 End Sub
 
 ' Pastes an EMF picture copy of the selection next to it (the original stays untouched).
@@ -745,42 +1008,437 @@ Private Sub DoPictureCopy()
     pic.Select
     Exit Sub
 EH:
-    MsgBox "生成 EMF 图片副本失败：" & Err.Description, vbExclamation, AppTitle()
+    MsgBox Tx("msg.pictureFailed", Err.Description), vbExclamation, AppTitle()
 End Sub
 
-' Colour picker for the custom background (Windows: system colour dialog, macOS: system colour picker).
+' The system colour dialog for the custom background (Windows: the common colour dialog,
+' macOS: the macOS colour panel). Public macro VS_PickColor.
 Private Sub DoPickColor()
-    Dim r As Long, g As Long, b As Long
+    Dim c As Long
     On Error GoTo EH
-    If Not ParseColor(GetSet("BgColor", DEF_CUSTOM_COLOR), r, g, b) Then ParseColor DEF_CUSTOM_COLOR, r, g, b
+    c = BgColorValue(BG_CUSTOM)
 #If Mac Then
-    Dim res As String
-    res = MacScript2("chooseColor", r & "," & g & "," & b)
-    If Len(res) = 0 Then Exit Sub
-    If Not ParseColor(res, r, g, b) Then Exit Sub
+    If MacColorPicker(c) Then SetBgColor c
 #Else
-    Dim cc As CHOOSECOLORW
-    cc.lStructSize = LenB(cc)
-    cc.hwndOwner = GetActiveWindow()
-    cc.rgbResult = RGB(r, g, b)
-    cc.lpCustColors = VarPtr(gCustColors(0))
-    cc.Flags = CC_RGBINIT Or CC_FULLOPEN Or CC_ANYCOLOR
-    If ChooseColorW(cc) = 0 Then Exit Sub
-    r = cc.rgbResult And &HFF&
-    g = (cc.rgbResult \ &H100&) And &HFF&
-    b = (cc.rgbResult \ &H10000) And &HFF&
+    If SysColorDialog(c, GetActiveWindow()) Then SetBgColor c
 #End If
-    PutSet "BgColor", r & "," & g & "," & b
-    PutSet "BgType", CStr(BG_CUSTOM)
-    RefreshRibbon
     Exit Sub
 EH:
-    MsgBox "无法打开颜色选择器：" & Err.Description & vbCrLf & "也可以直接在“RGB”框中输入颜色。", vbExclamation, AppTitle()
+    MsgBox Tx("msg.colorFailed", Err.Description), vbExclamation, AppTitle()
 End Sub
+
+#If Mac Then
+' macOS colour panel (the same panel PowerPoint's "More Colors" opens on the Mac). Without the
+' helper script VecStamp's own colour list is used instead.
+Private Function MacColorPicker(ByRef c As Long) As Boolean
+    Dim res As String, r As Long, g As Long, b As Long
+    On Error GoTo Fallback
+    res = MacScript2("chooseColor", (c And &HFF&) & "," & ((c \ &H100&) And &HFF&) & "," & ((c \ &H10000) And &HFF&))
+    If res = "error" Then GoTo Fallback
+    If Len(res) = 0 Then Exit Function                  ' cancelled
+    If ParseColor(res, r, g, b) Then
+        c = RGB(r, g, b)
+        MacColorPicker = True
+    End If
+    Exit Function
+Fallback:
+    MacColorPicker = ColorListPanel(c)
+End Function
+#Else
+Private Function SysColorDialog(ByRef c As Long, ByVal owner As LongPtr) As Boolean
+    Dim cc As CHOOSECOLORW
+    cc.lStructSize = LenB(cc)
+    cc.hwndOwner = owner
+    cc.rgbResult = c
+    cc.lpCustColors = VarPtr(gCustColors(0))
+    cc.Flags = CC_RGBINIT Or CC_FULLOPEN Or CC_ANYCOLOR
+    If ChooseColorW(cc) = 0 Then Exit Function
+    c = cc.rgbResult And &HFFFFFF
+    SysColorDialog = True
+End Function
+
+' VecStamp's own colour panel, used when PowerPoint's "More Colors" dialog cannot be opened:
+' theme colours with tints and shades, standard and recent colours, a colour value field
+' (R,G,B or #RRGGBB) with a preview, the system colour dialog, OK and Cancel. It is a native
+' window driven by the message loop below - clicks are read from the messages, so no window
+' procedure is needed. Returns 1 (c = chosen colour), 0 (cancelled) or -1 (no window).
+Private Function ColorPanel(ByRef c As Long) As Long
+    Dim owner As LongPtr, hwnd As LongPtr, hdc As LongPtr, font As LongPtr, fontB As LongPtr
+    Dim hTheme As LongPtr, hStd As LongPtr, hRecent As LongPtr, hEdit As LongPtr, hPrev As LongPtr, hInfo As LongPtr
+    Dim hOk As LongPtr, hCancel As LongPtr, hSys As LongPtr, clicked As LongPtr, f As LongPtr
+    Dim bmp(0 To 2) As LongPtr, i As Long
+    Dim m As MSG_T, r As RECT, k As Double, dpi As Long, cs As Long, gp As Long, rowGap As Long, lm As Long
+    Dim x As Long, y As Long, w As Long, h As Long, cw As Long, ch As Long, px As Long, py As Long, pw As Long, ph As Long
+    Dim idx As Long, act As Long, cur As Long, txt As String, lastTxt As String, handled As Boolean
+    Dim rc As Variant, nRecent As Long, lastClick As Double, lastIdx As Long, lbl As String
+    Dim rr As Long, gg As Long, bb As Long, cls As String, cap As String, face As String, cols() As Long
+
+    On Error GoTo Failed
+    ColorPanel = -1
+    owner = GetActiveWindow()
+    hdc = GetDC(0)
+    dpi = GetDeviceCaps(hdc, LOGPIXELSY)
+    ReleaseDC 0, hdc
+    If dpi < 72 Then dpi = 96
+    k = dpi / 96#
+    cs = CLng(18 * k): gp = CLng(4 * k): rowGap = CLng(5 * k): lm = CLng(16 * k)
+    rc = RecentColors()
+    nRecent = UBound(rc) + 1
+    cur = c
+    lastIdx = -1
+
+    ' layout (client coordinates)
+    cw = 2 * lm + 10 * cs + 9 * gp
+    If cw < CLng(320 * k) Then cw = CLng(320 * k)
+    pw = CLng(64 * k): ph = CLng(24 * k)
+    y = CLng(12 * k)
+    ch = y + CLng(20 * k) + 6 * cs + rowGap + CLng(10 * k) + CLng(20 * k) + cs + CLng(10 * k)
+    If nRecent > 0 Then ch = ch + CLng(20 * k) + cs + CLng(10 * k)
+    ch = ch + CLng(32 * k) + CLng(42 * k) + CLng(42 * k)
+
+    r.Left = 0: r.Top = 0: r.Right = cw: r.Bottom = ch
+    AdjustWindowRectEx r, WS_POPUP Or WS_CAPTION, 0, WS_EX_DLGMODALFRAME Or WS_EX_CONTROLPARENT
+    w = r.Right - r.Left
+    h = r.Bottom - r.Top
+    If owner <> 0 And GetWindowRect(owner, r) <> 0 Then
+        x = r.Left + (r.Right - r.Left - w) \ 2
+        y = r.Top + (r.Bottom - r.Top - h) \ 3
+    Else
+        x = (GetSystemMetrics(0) - w) \ 2
+        y = (GetSystemMetrics(1) - h) \ 3
+    End If
+    cls = "#32770"
+    cap = AppTitle() & " - " & Tx("col.title")
+    hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME Or WS_EX_CONTROLPARENT, StrPtr(cls), StrPtr(cap), _
+                           WS_POPUP Or WS_CAPTION, x, y, w, h, owner, 0, 0, 0)
+    If hwnd = 0 Then Exit Function
+    face = UiFontName()
+    font = CreateFontW(-CLng(9 * dpi / 72), 0, 0, 0, 400, 0, 0, 0, 1, 0, 0, 5, 0, StrPtr(face))
+    fontB = CreateFontW(-CLng(9 * dpi / 72), 0, 0, 0, 700, 0, 0, 0, 1, 0, 0, 5, 0, StrPtr(face))
+
+    ' theme colours (row 0) with their tints and shades (rows 1-5)
+    y = CLng(12 * k)
+    PanelChild hwnd, "Static", Tx("col.theme"), SS_NOPREFIX, lm, y, cw - 2 * lm, CLng(18 * k), fontB
+    y = y + CLng(20 * k)
+    ReDim cols(0 To 59)
+    For i = 0 To 59: cols(i) = GalColor(i): Next i
+    hTheme = PanelChild(hwnd, "Static", "", SS_BITMAP Or SS_NOTIFY, lm, y, 0, 0, 0)
+    bmp(0) = PanelBitmap(hTheme, "theme", 10, 6, cols, cs, cs, gp, rowGap)
+    y = y + 6 * cs + rowGap + CLng(10 * k)
+    ' standard colours
+    PanelChild hwnd, "Static", Tx("col.standard"), SS_NOPREFIX, lm, y, cw - 2 * lm, CLng(18 * k), fontB
+    y = y + CLng(20 * k)
+    ReDim cols(0 To 9)
+    For i = 0 To 9: cols(i) = GalColor(60 + i): Next i
+    hStd = PanelChild(hwnd, "Static", "", SS_BITMAP Or SS_NOTIFY, lm, y, 0, 0, 0)
+    bmp(1) = PanelBitmap(hStd, "std", 10, 1, cols, cs, cs, gp, 0)
+    y = y + cs + CLng(10 * k)
+    ' recent colours
+    If nRecent > 0 Then
+        PanelChild hwnd, "Static", Tx("col.recent"), SS_NOPREFIX, lm, y, cw - 2 * lm, CLng(18 * k), fontB
+        y = y + CLng(20 * k)
+        ReDim cols(0 To nRecent - 1)
+        For i = 0 To nRecent - 1: cols(i) = CLng(rc(i)): Next i
+        hRecent = PanelChild(hwnd, "Static", "", SS_BITMAP Or SS_NOTIFY, lm, y, 0, 0, 0)
+        bmp(2) = PanelBitmap(hRecent, "recent", nRecent, 1, cols, cs, cs, gp, 0)
+        y = y + cs + CLng(10 * k)
+    End If
+    ' colour value, preview and the name of the colour
+    PanelChild hwnd, "Static", Tx("col.value"), SS_NOPREFIX, lm, y + CLng(4 * k), CLng(80 * k), CLng(18 * k), font
+    hEdit = PanelChild(hwnd, "Edit", HexRGB(cur), WS_TABSTOP Or ES_AUTOHSCROLL, lm + CLng(84 * k), y, _
+                       CLng(110 * k), ph, font, WS_EX_CLIENTEDGE)
+    SendMessageW hEdit, EM_LIMITTEXT, 24, 0
+    hPrev = PanelChild(hwnd, "Static", "", SS_BITMAP, lm + CLng(202 * k), y, 0, 0, 0)
+    PanelPreview hPrev, cur, pw, ph
+    y = y + CLng(32 * k)
+    hInfo = PanelChild(hwnd, "Static", Tx("col.hint"), SS_NOPREFIX, lm, y, cw - 2 * lm, CLng(36 * k), font)
+    y = y + CLng(42 * k)
+    hSys = PanelChild(hwnd, "Button", Tx("col.system"), WS_TABSTOP, lm, y, CLng(128 * k), CLng(28 * k), font)
+    hOk = PanelChild(hwnd, "Button", Tx("btn.ok"), WS_TABSTOP Or BS_DEFPUSHBUTTON, cw - lm - CLng(176 * k), y, _
+                     CLng(84 * k), CLng(28 * k), font)
+    hCancel = PanelChild(hwnd, "Button", Tx("btn.cancel"), WS_TABSTOP, cw - lm - CLng(84 * k), y, _
+                         CLng(84 * k), CLng(28 * k), font)
+
+    ' modal loop
+    If owner <> 0 Then EnableWindow owner, 0
+    ShowWindow hwnd, SW_SHOW
+    UpdateWindow hwnd
+    SetFocusW hEdit
+    SendMessageW hEdit, EM_SETSEL, 0, -1
+    lastTxt = HexRGB(cur)
+    ColorPanel = 0
+    Do
+        If IsWindow(hwnd) = 0 Then Exit Do
+        If PeekMessageW(m, 0, 0, 0, PM_REMOVE) <> 0 Then
+            handled = False
+            Select Case m.message
+                Case WM_QUIT
+                    PostQuitMessage CLng(m.wParam)
+                    act = 2
+                    handled = True
+                Case WM_LBUTTONDOWN, WM_LBUTTONDBLCLK
+                    px = CLng(m.lParam And &HFFFF&)
+                    py = CLng((m.lParam \ &H10000) And &HFFFF&)
+                    idx = -1
+                    If m.hwnd = hTheme And hTheme <> 0 Then idx = PanelHit(px, py, 10, 6, cs, gp, rowGap, 0)
+                    If m.hwnd = hStd And hStd <> 0 Then idx = PanelHit(px, py, 10, 1, cs, gp, 0, 60)
+                    If m.hwnd = hRecent And hRecent <> 0 Then idx = PanelHit(px, py, nRecent, 1, cs, gp, 0, 70)
+                    If idx >= 0 Then
+                        cur = GalColor(idx, lbl)
+                        lastTxt = HexRGB(cur)
+                        SetWindowTextW hEdit, StrPtr(lastTxt)
+                        PanelPreview hPrev, cur, pw, ph
+                        SetWindowTextW hInfo, StrPtr(lbl)
+                        If m.message = WM_LBUTTONDBLCLK Or (idx = lastIdx And Abs(Timer - lastClick) < GetDoubleClickTime() / 1000#) Then act = 1
+                        lastIdx = idx
+                        lastClick = Timer
+                        handled = True
+                    End If
+                Case WM_LBUTTONUP
+                    If m.hwnd = hOk Or m.hwnd = hCancel Or m.hwnd = hSys Then
+                        GetClientRect m.hwnd, r
+                        px = CLng(m.lParam And &HFFFF&)
+                        py = CLng((m.lParam \ &H10000) And &HFFFF&)
+                        If px < r.Right And py < r.Bottom Then clicked = m.hwnd
+                    End If
+                Case WM_KEYDOWN
+                    Select Case CLng(m.wParam)
+                        Case VK_ESCAPE
+                            act = 2
+                            handled = True
+                        Case VK_RETURN
+                            f = GetFocus()
+                            If f = hCancel Then
+                                act = 2
+                            ElseIf f = hSys Then
+                                clicked = hSys
+                            Else
+                                act = 1
+                            End If
+                            handled = True
+                    End Select
+                Case WM_KEYUP
+                    If CLng(m.wParam) = VK_SPACE Then
+                        f = GetFocus()
+                        If f = hOk Or f = hCancel Or f = hSys Then clicked = f
+                    End If
+            End Select
+            If Not handled Then
+                If IsDialogMessageW(hwnd, m) = 0 Then
+                    TranslateMessage m
+                    DispatchMessageW m
+                End If
+            End If
+            If clicked <> 0 Then
+                If clicked = hOk Then act = 1
+                If clicked = hCancel Then act = 2
+                If clicked = hSys Then
+                    If SysColorDialog(cur, hwnd) Then
+                        lastTxt = HexRGB(cur)
+                        SetWindowTextW hEdit, StrPtr(lastTxt)
+                        PanelPreview hPrev, cur, pw, ph
+                        lbl = Tx("col.withValue", Tx("col.systemPicked"), ColorText(cur))
+                        SetWindowTextW hInfo, StrPtr(lbl)
+                    End If
+                End If
+                clicked = 0
+            End If
+        Else
+            SleepX 10
+        End If
+        txt = WindowText(hEdit)
+        If txt <> lastTxt Then                      ' typed colour value
+            lastTxt = txt
+            If ParseColor(txt, rr, gg, bb) Then
+                cur = RGB(rr, gg, bb)
+                PanelPreview hPrev, cur, pw, ph
+                SetWindowTextW hInfo, StrPtr(ColorText(cur))
+            End If
+        End If
+        If act = 1 Then
+            If ParseColor(WindowText(hEdit), rr, gg, bb) Then
+                c = RGB(rr, gg, bb)
+                ColorPanel = 1
+                Exit Do
+            End If
+            lbl = Tx("col.bad")
+            SetWindowTextW hInfo, StrPtr(lbl)
+            act = 0
+        ElseIf act = 2 Then
+            Exit Do
+        End If
+    Loop
+
+Cleanup:
+    On Error Resume Next
+    If owner <> 0 Then EnableWindow owner, 1
+    If hPrev <> 0 Then DeleteObject SendMessageW(hPrev, STM_SETIMAGE, IMAGE_BITMAP, 0)
+    If hwnd <> 0 Then DestroyWindow hwnd
+    For i = 0 To 2
+        If bmp(i) <> 0 Then DeleteObject bmp(i)
+    Next i
+    If font <> 0 Then DeleteObject font
+    If fontB <> 0 Then DeleteObject fontB
+    Exit Function
+Failed:
+    If hwnd = 0 Then ColorPanel = -1 Else ColorPanel = 0
+    Resume Cleanup
+End Function
+
+Private Function PanelChild(ByVal parent As LongPtr, ByVal cls As String, ByVal text As String, ByVal style As Long, _
+                            ByVal x As Long, ByVal y As Long, ByVal w As Long, ByVal h As Long, ByVal font As LongPtr, _
+                            Optional ByVal exStyle As Long = 0) As LongPtr
+    Dim hw As LongPtr
+    hw = CreateWindowExW(exStyle, StrPtr(cls), StrPtr(text), WS_CHILD Or WS_VISIBLE Or style, x, y, w, h, parent, 0, 0, 0)
+    If hw <> 0 And font <> 0 Then SendMessageW hw, WM_SETFONT, font, 1
+    PanelChild = hw
+End Function
+
+Private Function WindowText(ByVal hw As LongPtr) As String
+    Dim buf As String, n As Long
+    buf = String$(128, vbNullChar)
+    n = GetWindowTextW(hw, StrPtr(buf), 128)
+    If n > 0 Then WindowText = Left$(buf, n)
+End Function
+
+' Index of the colour cell at (x, y) of a palette bitmap (first = index of its first cell), or -1.
+Private Function PanelHit(ByVal x As Long, ByVal y As Long, ByVal cols As Long, ByVal rows As Long, ByVal cs As Long, _
+                          ByVal gp As Long, ByVal rowGap As Long, ByVal first As Long) As Long
+    Dim col As Long, row As Long
+    PanelHit = -1
+    If x Mod (cs + gp) >= cs Then Exit Function
+    col = x \ (cs + gp)
+    If col >= cols Then Exit Function
+    If y < cs Then
+        row = 0
+    ElseIf rows > 1 And y >= cs + rowGap Then
+        row = 1 + (y - cs - rowGap) \ cs
+    Else
+        Exit Function
+    End If
+    If row >= rows Then Exit Function
+    PanelHit = first + row * cols + col
+End Function
+
+' Shows a palette (cols x rows colour cells) in a bitmap static control; returns the bitmap.
+Private Function PanelBitmap(ByVal hStatic As LongPtr, ByVal name As String, ByVal cols As Long, ByVal rows As Long, _
+                             ByRef colors() As Long, ByVal cellW As Long, ByVal cellH As Long, ByVal gp As Long, _
+                             ByVal rowGap As Long) As LongPtr
+    Dim p As String, hb As LongPtr
+    p = JoinPath(TempDirX(), "panel_" & name & "_" & cellW & ".bmp")
+    CellsBmp p, cols, rows, colors, cellW, cellH, gp, rowGap
+    hb = LoadImageW(0, StrPtr(p), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE)
+    If hb <> 0 Then SendMessageW hStatic, STM_SETIMAGE, IMAGE_BITMAP, hb
+    PanelBitmap = hb
+End Function
+
+Private Sub PanelPreview(ByVal hStatic As LongPtr, ByVal c As Long, ByVal w As Long, ByVal h As Long)
+    Dim p As String, hb As LongPtr, old As LongPtr, one(0 To 0) As Long
+    one(0) = c
+    p = JoinPath(TempDirX(), "panel_preview_" & w & ".bmp")
+    CellsBmp p, 1, 1, one, w, h, 0, 0
+    hb = LoadImageW(0, StrPtr(p), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE)
+    If hb = 0 Then Exit Sub
+    old = SendMessageW(hStatic, STM_SETIMAGE, IMAGE_BITMAP, hb)
+    If old <> 0 Then DeleteObject old
+End Sub
+
+' Writes a 24-bit BMP of colour cells (row 0 is separated from the other rows by rowGap) on the
+' dialog background colour; every cell has a grey frame.
+Private Sub CellsBmp(ByVal p As String, ByVal cols As Long, ByVal rows As Long, ByRef colors() As Long, _
+                     ByVal cellW As Long, ByVal cellH As Long, ByVal gp As Long, ByVal rowGap As Long)
+    Dim b() As Byte, w As Long, h As Long, rowBytes As Long, n As Long, x As Long, y As Long, i As Long
+    Dim col As Long, row As Long, x0 As Long, y0 As Long, c As Long, bg As Long, raw As String
+    w = cols * cellW + (cols - 1) * gp
+    h = rows * cellH
+    If rows > 1 Then h = h + rowGap
+    rowBytes = ((w * 3 + 3) \ 4) * 4
+    n = 54 + rowBytes * h
+    ReDim b(0 To n - 1)
+    BmpHeader b, w, h, rowBytes
+    bg = GetSysColor(COLOR_BTNFACE)
+    For y = 0 To h - 1
+        For x = 0 To w - 1
+            i = 54 + y * rowBytes + x * 3
+            b(i) = (bg \ &H10000) And &HFF&: b(i + 1) = (bg \ &H100&) And &HFF&: b(i + 2) = bg And &HFF&
+        Next x
+    Next y
+    For row = 0 To rows - 1
+        For col = 0 To cols - 1
+            c = colors(row * cols + col)
+            x0 = col * (cellW + gp)
+            y0 = row * cellH
+            If row > 0 Then y0 = y0 + rowGap
+            For y = y0 To y0 + cellH - 1
+                For x = x0 To x0 + cellW - 1
+                    i = 54 + (h - 1 - y) * rowBytes + x * 3
+                    If x = x0 Or y = y0 Or x = x0 + cellW - 1 Or y = y0 + cellH - 1 Then
+                        b(i) = 170: b(i + 1) = 170: b(i + 2) = 170
+                    Else
+                        b(i) = (c \ &H10000) And &HFF&: b(i + 1) = (c \ &H100&) And &HFF&: b(i + 2) = c And &HFF&
+                    End If
+                Next x
+            Next y
+        Next col
+    Next row
+    raw = b
+    WriteBytesX p, raw
+End Sub
+#End If
+
+Private Sub BmpHeader(ByRef b() As Byte, ByVal w As Long, ByVal h As Long, ByVal rowBytes As Long)
+    b(0) = 66: b(1) = 77                                         ' "BM"
+    PutLong b, 2, 54 + rowBytes * h
+    PutLong b, 10, 54
+    PutLong b, 14, 40
+    PutLong b, 18, w
+    PutLong b, 22, h
+    b(26) = 1: b(28) = 24
+    PutLong b, 34, rowBytes * h
+End Sub
+
+' Last-resort colour panel when no native window can be shown: a numbered list of theme,
+' standard and recent colours in an input box; a number, R,G,B or #RRGGBB can be entered.
+Private Function ColorListPanel(ByRef c As Long) As Boolean
+    Dim msg As String, ans As String, i As Long, n As Long, lbl As String, idx(0 To 29) As Long
+    Dim rc As Variant, r As Long, g As Long, b As Long
+    For i = 0 To 9
+        idx(n) = i: n = n + 1                                    ' theme colours
+    Next i
+    For i = 0 To 9
+        idx(n) = 60 + i: n = n + 1                               ' standard colours
+    Next i
+    rc = RecentColors()
+    For i = 0 To UBound(rc)
+        If i < 5 Then idx(n) = 70 + i: n = n + 1
+    Next i
+    msg = Tx("col.listPrompt") & vbCrLf
+    For i = 0 To n - 1
+        GalColor idx(i), lbl
+        msg = msg & (i + 1) & ". " & lbl & vbCrLf
+    Next i
+    Do
+        ans = Trim$(InputBox(msg, AppTitle() & " - " & Tx("col.title"), HexRGB(c)))
+        If Len(ans) = 0 Then Exit Function
+        If IsNumeric(ans) And InStr(ans, ",") = 0 Then
+            If CLng(Val(ans)) >= 1 And CLng(Val(ans)) <= n Then
+                c = GalColor(idx(CLng(Val(ans)) - 1))
+                ColorListPanel = True
+                Exit Function
+            End If
+        ElseIf ParseColor(ans, r, g, b) Then
+            c = RGB(r, g, b)
+            ColorListPanel = True
+            Exit Function
+        End If
+        MsgBox Tx("col.bad"), vbExclamation, AppTitle()
+    Loop
+End Function
 
 Private Sub ResetRunState()
     gSvgFallback = 0
     gSvgNative = 0
+    gSvgXpsOff = False
     gBigPngOk = False
 End Sub
 
@@ -793,7 +1451,7 @@ Private Function GetTarget(ByRef win As Object, ByRef sr As Object, ByVal allowW
     selType = win.Selection.Type
     On Error GoTo 0
     If win Is Nothing Or selType < 0 Then
-        MsgBox "请先打开演示文稿，并选中要导出的图形。", vbInformation, AppTitle()
+        MsgBox Tx("msg.openAndSelect"), vbInformation, AppTitle()
         Exit Function
     End If
 
@@ -805,23 +1463,22 @@ Private Function GetTarget(ByRef win As Object, ByRef sr As Object, ByVal allowW
         End If
     Else
         If Not allowWholeSlide Then
-            MsgBox "请先选中图形。", vbInformation, AppTitle()
+            MsgBox Tx("msg.selectFirst"), vbInformation, AppTitle()
             Exit Function
         End If
         On Error Resume Next
         Set sld = win.View.Slide
         On Error GoTo 0
         If sld Is Nothing Then
-            MsgBox "请在普通视图中选中要导出的图形。", vbInformation, AppTitle()
+            MsgBox Tx("msg.normalView"), vbInformation, AppTitle()
             Exit Function
         End If
         Set sr = ExportableRange(sld)
         If sr Is Nothing Then
-            MsgBox "当前幻灯片上没有可导出的图形。", vbInformation, AppTitle()
+            MsgBox Tx("msg.noShapesSlide"), vbInformation, AppTitle()
             Exit Function
         End If
-        If MsgBox("没有选中任何图形。" & vbCrLf & "是否导出当前幻灯片上的全部图形？", _
-                  vbQuestion + vbYesNo, AppTitle()) <> vbYes Then Exit Function
+        If MsgBox(Tx("msg.askWholeSlide"), vbQuestion + vbYesNo, AppTitle()) <> vbYes Then Exit Function
     End If
     GetTarget = Not (sr Is Nothing)
 End Function
@@ -864,7 +1521,8 @@ Private Function ExportItem(ByVal pres As Object, ByVal src As Object, _
     n = 1
     If TypeName(src) = "ShapeRange" Then n = src.Count
     margin = GetMargin()
-    ProgressStep "准备图形"
+    ProgressAt 0.03, Tx("step.prepare", n)
+    CheckCancel
 
     If n = 1 And BgTypeIdx() = BG_NONE And margin <= 0 Then
         If TypeName(src) = "ShapeRange" Then
@@ -877,9 +1535,11 @@ Private Function ExportItem(ByVal pres As Object, ByVal src As Object, _
 
     wasSaved = pres.Saved
     On Error GoTo Failed
-    ProgressStep "合成图形、背景与边距"
+    ProgressAt 0.08, Tx("step.compose")
     Set tmp = AddTempSlide(pres, src)
     Set target = BuildComposite(tmp, src, margin)
+    ProgressAt 0.18, Tx("step.composed")
+    CheckCancel
     result = ExportShape(pres, target, path, fmt)
 
 Cleanup:
@@ -900,28 +1560,30 @@ End Function
 Private Function ExportShape(ByVal pres As Object, ByVal shp As Object, _
                              ByVal path As String, ByVal fmt As Long) As String
     Dim t As String, dpi As Long, px As Double
-    ProgressStep "导出 " & UCase$(FmtExt(fmt))
     Select Case fmt
         Case FMT_EMF
+            ProgressAt 0.25, Tx("step.ppEmf")
             ExportRaw shp, path, PP_FMT_EMF
         Case FMT_WMF
+            ProgressAt 0.25, Tx("step.ppWmf")
             ExportRaw shp, path, PP_FMT_WMF
         Case FMT_EMZ
+            ProgressAt 0.25, Tx("step.ppEmf")
             t = TempFileX("emf")
             ExportToTemp shp, t, PP_FMT_EMF, 0, 0
-            ProgressStep "压缩为 EMZ"
-            If Not GzipX(t, path) Then Err.Raise vbObjectError + 514, , "EMZ 压缩失败。"
+            ProgressAt 0.65, Tx("step.emz")
+            If Not GzipX(t, path) Then Err.Raise vbObjectError + 514, , Tx("err.emz")
         Case FMT_PNG
             dpi = DpiValue()
             px = (shp.Width / 72# * dpi) * (shp.Height / 72# * dpi)
             If px > PNG_WARN_PIXELS And Not gBigPngOk Then
-                If AskUser("按 " & dpi & " DPI 导出，这张图约为 " & CLng(shp.Width / 72# * dpi) & " × " & _
-                           CLng(shp.Height / 72# * dpi) & " 像素（约 " & Format$(px / 1000000#, "0") & _
-                           " 百万像素），可能很慢或内存不足。仍然继续吗？", vbQuestion + vbYesNo) <> vbYes Then
+                If AskUser(Tx("msg.bigPng", dpi, CLng(shp.Width / 72# * dpi), CLng(shp.Height / 72# * dpi), _
+                              Format$(px / 1000000#, "0")), vbQuestion + vbYesNo) <> vbYes Then
                     Err.Raise vbObjectError + 599, , "cancelled"
                 End If
                 gBigPngOk = True
             End If
+            ProgressAt 0.25, Tx("step.png", CLng(shp.Width / 72# * dpi), CLng(shp.Height / 72# * dpi), dpi)
             ExportRaw shp, path, PP_FMT_PNG, _
                       CLng(pres.PageSetup.SlideWidth * dpi / 96), CLng(pres.PageSetup.SlideHeight * dpi / 96)
         Case FMT_SVG
@@ -929,12 +1591,13 @@ Private Function ExportShape(ByVal pres As Object, ByVal shp As Object, _
         Case FMT_PDF
             ExportPdf shp, path
         Case FMT_VSDX
-            ProgressStep "生成 Visio 形状"
+            ProgressAt 0.2, Tx("step.analyze")
             ExportVsdx pres, shp, path
     End Select
     If Len(path) > 0 Then
-        If Not FileExistsX(path) Then Err.Raise vbObjectError + 515, , "没有生成文件：" & path
+        If Not FileExistsX(path) Then Err.Raise vbObjectError + 515, , Tx("err.noFile", path)
     End If
+    ProgressAt 1, Tx("step.doneFile", FileNameOf(path))
     ExportShape = path
 End Function
 
@@ -945,15 +1608,17 @@ End Function
 '  3. EMF converted with Inkscape or LibreOffice, when installed;
 '  4. otherwise offer EMF instead.
 Private Function ExportSvg(ByVal pres As Object, ByVal shp As Object, ByVal path As String) As String
-    Dim ok As Boolean, t As String, e As String, p2 As String
+    Dim ok As Boolean, t As String, e As String, p2 As String, st As Long
 
     If gSvgNative <> 2 Then
+        ProgressAt 0.22, Tx("step.ppSvg")
         t = TempFileX("svg")
         On Error Resume Next
         ExportToTemp shp, t, PP_FMT_SVG, 0, 0
         ok = (Err.Number = 0)
         Err.Clear
         On Error GoTo 0
+        ProgressAt 0.8, Tx("step.fixSvg")
         If ok Then ok = FixSvgFile(t)
         If ok Then
             gSvgNative = 1
@@ -963,24 +1628,45 @@ Private Function ExportSvg(ByVal pres As Object, ByVal shp As Object, ByVal path
         End If
         gSvgNative = 2                              ' this PowerPoint cannot write SVG
         DeleteTempX t
+        gPgFrac = 0.2                               ' the next method starts over
     End If
 
-    ProgressStep "通过 XPS 生成 SVG"
+    st = RUN_FAILED
     t = TempFileX("svg")
-    ok = XpsToSvg(pres, shp, t)
-    If ok Then ok = FixSvgFile(t)
+    If Not gSvgXpsOff Then st = XpsToSvg(pres, shp, t)
+    If st = RUN_CANCELLED Then
+        DeleteTempX t
+        Err.Raise ERR_CANCEL, , "cancelled"
+    End If
+    ok = (st = 0)
+    If ok Then
+        ProgressAt 0.96, Tx("step.fixSvg")
+        ok = FixSvgFile(t)
+    End If
     If ok Then
         MoveTempTo t, path
         ExportSvg = path
         Exit Function
     End If
     DeleteTempX t
+    If st = RUN_TIMEOUT Then
+        If AskUser(Tx("msg.svgTimeout", SVG_TIMEOUT), vbQuestion + vbYesNo) <> vbYes Then
+            Err.Raise ERR_CANCEL, , "cancelled"
+        End If
+        gSvgXpsOff = True                           ' do not wait again for the next shapes of this run
+    End If
 
-    ProgressStep "使用 Inkscape / LibreOffice 转换"
+    ProgressAt 0.5, Tx("step.emf2svg")
     e = TempFileX("emf")
     t = TempFileX("svg")
     ExportToTemp shp, e, PP_FMT_EMF, 0, 0
-    ok = ConvertEmfToSvg(e, t)
+    st = ConvertEmfToSvg(e, t)
+    If st = RUN_CANCELLED Then
+        DeleteTempX e
+        DeleteTempX t
+        Err.Raise ERR_CANCEL, , "cancelled"
+    End If
+    ok = (st = 0)
     If ok Then ok = FixSvgFile(t)
     DeleteTempX e
     If ok Then
@@ -991,10 +1677,7 @@ Private Function ExportSvg(ByVal pres As Object, ByVal shp As Object, ByVal path
     DeleteTempX t
 
     If gSvgFallback = 0 Then
-        If AskUser("没能生成 SVG：这个 PowerPoint 不能直接导出 SVG，内置转换也没有成功（需要系统自带的 Windows PowerShell），" & _
-                   "电脑上也没有可用于转换的 Inkscape 或 LibreOffice。" & _
-                   vbCrLf & vbCrLf & "是否改为导出 EMF？（也可以导出 PDF 后用其他软件转换）", _
-                   vbQuestion + vbYesNo) = vbYes Then
+        If AskUser(Tx("msg.noSvg"), vbQuestion + vbYesNo) = vbYes Then
             gSvgFallback = 1
         Else
             gSvgFallback = 2
@@ -1088,19 +1771,21 @@ Private Sub ExportPdf(ByVal shp As Object, ByVal path As String)
     pw = MinS(MaxS(w * k, 72), 4032)
     ph = MinS(MaxS(h * k, 72), 4032)
     t = TempFileX("pdf")
-    ProgressStep "生成 PDF"
+    ProgressAt 0.25, Tx("step.pdfDoc")
 
     On Error GoTo Failed
     Set tp = Application.Presentations.Add(MSO_FALSE)
     tp.PageSetup.SlideWidth = pw
     tp.PageSetup.SlideHeight = ph
     Set sld = tp.Slides.Add(1, PP_LAYOUT_BLANK)
+    ProgressAt 0.45, Tx("step.pdfPaste")
     Set pic = PasteFromClipboard(sld, shp, True).Item(1)
     pic.LockAspectRatio = MSO_FALSE
     pic.Width = w * k
     pic.Height = h * k
     pic.Left = (pw - w * k) / 2
     pic.Top = (ph - h * k) / 2
+    ProgressAt 0.7, Tx("step.pdfWrite")
     tp.SaveAs t, PP_SAVE_AS_PDF
 
 Cleanup:
@@ -1110,7 +1795,7 @@ Cleanup:
         tp.Close
     End If
     On Error GoTo 0
-    If errNum <> 0 Then Err.Raise errNum, , "PDF 导出失败：" & errDesc
+    If errNum <> 0 Then Err.Raise errNum, , Tx("err.pdf", errDesc)
     MoveTempTo t, path
     Exit Sub
 Failed:
@@ -1128,31 +1813,36 @@ Private Sub ExportVsdx(ByVal pres As Object, ByVal shp As Object, ByVal path As 
     If GetFlag("VsdxNative", "1") Then
         If VsdxNative(pres, shp, path) Then Exit Sub
     End If
+    ProgressAt 0.3, Tx("step.vsdxPicture")
     e = TempFileX("emf")
     ExportToTemp shp, e, PP_FMT_EMF, 0, 0
     gVxId = 0
     Set gVxMedia = New Collection
     SbReset
     SbAdd VxForeignXml(e, 0, 0, shp.Width, shp.Height, "VecStamp")
+    ProgressAt 0.7, Tx("step.vsdxWrite0")
     WriteVsdxPackage shp.Width / 72#, shp.Height / 72#, SbText(), path
     DeleteTempX e
 End Sub
 
 Private Function VsdxNative(ByVal pres As Object, ByVal shp As Object, ByVal path As String) As Boolean
-    Dim wasSaved As Long, ok As Boolean, i As Long
+    Dim wasSaved As Long, ok As Boolean, i As Long, errNum As Long
     wasSaved = pres.Saved
     Set gVxPres = pres
     gVxId = 0
     gVxNative = 0
     gVxPictures = 0
     gVxCopy = 0
+    gVxDone = 0
+    gVxTotal = VxCount(shp)
+    If gVxTotal < 1 Then gVxTotal = 1
     Set gVxMedia = New Collection
     SbReset
     On Error GoTo Failed
     Set gVxScratch = AddTempSlide(pres, shp)
     VxShape shp, shp.Left, shp.Top + shp.Height
     If gVxNative = 0 And gVxPictures = 0 Then GoTo Cleanup
-    ProgressStep "写出 Visio 文件"
+    ProgressAt 0.88, Tx("step.vsdxWrite", gVxNative, gVxPictures)
     WriteVsdxPackage shp.Width / 72#, shp.Height / 72#, SbText(), path
     ok = True
 Cleanup:
@@ -1164,11 +1854,27 @@ Cleanup:
     Next i
     pres.Saved = wasSaved
     On Error GoTo 0
+    If errNum = ERR_CANCEL Then Err.Raise ERR_CANCEL, , "cancelled"
     VsdxNative = ok
     Exit Function
 Failed:
     ok = False
+    errNum = Err.Number
     Resume Cleanup
+End Function
+
+' Number of shapes the walker will convert (group members counted one by one).
+Private Function VxCount(ByVal s As Object) As Long
+    Dim i As Long, t As Long
+    On Error Resume Next
+    t = s.Type
+    If t = MSO_GROUP Then
+        For i = 1 To s.GroupItems.Count
+            VxCount = VxCount + 1
+        Next i
+    Else
+        VxCount = 1
+    End If
 End Function
 
 ' Writes the package: template parts + shapes XML + embedded EMF pictures, zipped.
@@ -1232,6 +1938,9 @@ Private Sub VxShape(ByVal s As Object, ByVal ox As Double, ByVal oy As Double)
         SbAdd "</Shapes></Shape>"
         Exit Sub
     End If
+    gVxDone = gVxDone + 1
+    ProgressAt 0.22 + 0.64 * (gVxDone - 1) / gVxTotal, Tx("step.vsdxShape", gVxDone, gVxTotal, ShortName(VxName(s)))
+    CheckCancel
     If Not VxNative(s, t, ox, oy) Then VxPicture s, ox, oy
 End Sub
 
@@ -1480,8 +2189,11 @@ Private Function VxGeometry(ByVal s As Object, ByVal t As Long, ByVal w As Doubl
         GeoRect 0, 0, w, h, 0, 0
         VxGeometry = True
     Else
-        VxGeometry = VxPreset(s, ast, w, h)
-        If Not VxGeometry Then VxGeometry = VxMerged(s, False)
+        VxGeometry = VxPresetGeo(s, ast, w, h)
+        If Not VxGeometry Then
+            GeoStart w, h, fh, fv
+            VxGeometry = VxMerged(s, False)
+        End If
     End If
 End Function
 
@@ -1501,6 +2213,7 @@ Private Sub GeoBegin(ByVal noFill As Boolean, ByVal noLine As Boolean)
     gGeoRow = 0
     gGeoNoFill = noFill
     gGeoNoLine = noLine
+    gGeoClosed = False
 End Sub
 
 Private Sub GeoXY(ByVal ux As Double, ByVal v As Double, ByRef x As Double, ByRef y As Double)
@@ -1517,6 +2230,7 @@ Private Sub GeoMove(ByVal ux As Double, ByVal v As Double)
     gGeoSec = gGeoSec & "<Row T='MoveTo' IX='" & gGeoRow & "'>" & VxCell("X", NumXml(x)) & VxCell("Y", NumXml(y)) & "</Row>"
     gGeoX0 = x: gGeoY0 = y
     gGeoLX = x: gGeoLY = y
+    gGeoCU = ux: gGeoCV = v: gGeoSU = ux: gGeoSV = v
 End Sub
 
 Private Sub GeoLine(ByVal ux As Double, ByVal v As Double)
@@ -1525,7 +2239,89 @@ Private Sub GeoLine(ByVal ux As Double, ByVal v As Double)
     gGeoRow = gGeoRow + 1
     gGeoSec = gGeoSec & "<Row T='LineTo' IX='" & gGeoRow & "'>" & VxCell("X", NumXml(x)) & VxCell("Y", NumXml(y)) & "</Row>"
     gGeoLX = x: gGeoLY = y
+    gGeoCU = ux: gGeoCV = v
 End Sub
+
+' Closes the current sub-path (a later GeoMove starts the next one in the same section).
+Private Sub GeoClose()
+    If gGeoRow = 0 Then Exit Sub
+    If Abs(gGeoLX - gGeoX0) > 0.000001 Or Abs(gGeoLY - gGeoY0) > 0.000001 Then
+        gGeoRow = gGeoRow + 1
+        gGeoSec = gGeoSec & "<Row T='LineTo' IX='" & gGeoRow & "'>" & VxCell("X", NumXml(gGeoX0)) & VxCell("Y", NumXml(gGeoY0)) & "</Row>"
+        gGeoLX = gGeoX0: gGeoLY = gGeoY0
+    End If
+    gGeoCU = gGeoSU: gGeoCV = gGeoSV
+    gGeoClosed = True
+End Sub
+
+' Quadratic Bezier from the current point, written as the equivalent cubic.
+Private Sub GeoQuad(ByVal u1 As Double, ByVal v1 As Double, ByVal ux As Double, ByVal v As Double)
+    GeoCubic gGeoCU + 2# / 3# * (u1 - gGeoCU), gGeoCV + 2# / 3# * (v1 - gGeoCV), _
+             ux + 2# / 3# * (u1 - ux), v + 2# / 3# * (v1 - v), ux, v
+End Sub
+
+' DrawingML arcTo from the current point: radii wr / hr, start and swing angles in 1/60000 degree.
+' The angles are visual angles; the point on the ellipse uses the parametric angle
+' atan2(wr * sin a, hr * cos a). Written as Visio elliptical arcs of at most 90 degrees each,
+' so rounded corners stay true arcs in Visio.
+Private Sub GeoArcTo(ByVal wr As Double, ByVal hr As Double, ByVal stA As Double, ByVal swA As Double)
+    Dim st As Double, sw As Double, t0 As Double, t1 As Double, dt As Double, cx As Double, cy As Double
+    Dim n As Long, i As Long, a As Double, b As Double, m As Double
+    If wr <= 0.0001 Or hr <= 0.0001 Or Abs(swA) < 1 Then Exit Sub
+    st = stA * PDEG
+    sw = swA * PDEG
+    t0 = Atan2X(wr * Sin(st), hr * Cos(st))
+    t1 = Atan2X(wr * Sin(st + sw), hr * Cos(st + sw))
+    If Abs(sw) >= PI2 - 0.0000001 Then
+        dt = Sgn(sw) * PI2
+    Else
+        dt = t1 - t0
+        If sw > 0 Then
+            Do While dt <= 0: dt = dt + PI2: Loop
+        Else
+            Do While dt >= 0: dt = dt - PI2: Loop
+        End If
+    End If
+    cx = gGeoCU - wr * Cos(t0)
+    cy = gGeoCV - hr * Sin(t0)
+    n = Int(Abs(dt) / (PI2 / 4#) - 0.000000001) + 1
+    For i = 1 To n
+        a = t0 + dt * (i - 1) / n
+        b = t0 + dt * i / n
+        m = (a + b) / 2#
+        GeoEArc cx + wr * Cos(m), cy + hr * Sin(m), cx + wr * Cos(b), cy + hr * Sin(b), wr, hr
+    Next i
+End Sub
+
+' One Visio EllipticalArcTo row: end point, a point on the arc, axis angle and axis ratio.
+Private Sub GeoEArc(ByVal mu As Double, ByVal mv As Double, ByVal eu As Double, ByVal ev As Double, _
+                    ByVal rx As Double, ByVal ry As Double)
+    Dim mx As Double, my As Double, x As Double, y As Double, c As String, d As Double
+    GeoXY mu, mv, mx, my
+    GeoXY eu, ev, x, y
+    If rx >= ry Then
+        c = "0": d = rx / ry
+    Else
+        c = NumXml(PI2 / 4#): d = ry / rx
+    End If
+    gGeoRow = gGeoRow + 1
+    gGeoSec = gGeoSec & "<Row T='EllipticalArcTo' IX='" & gGeoRow & "'>" & VxCell("X", NumXml(x)) & VxCell("Y", NumXml(y)) & _
+              VxCell("A", NumXml(mx)) & VxCell("B", NumXml(my)) & VxCell("C", c) & VxCell("D", NumXml(d)) & "</Row>"
+    gGeoLX = x: gGeoLY = y
+    gGeoCU = eu: gGeoCV = ev
+End Sub
+
+Private Function Atan2X(ByVal y As Double, ByVal x As Double) As Double
+    If x > 0 Then
+        Atan2X = Atn(y / x)
+    ElseIf x < 0 Then
+        If y >= 0 Then Atan2X = Atn(y / x) + PI2 / 2# Else Atan2X = Atn(y / x) - PI2 / 2#
+    ElseIf y > 0 Then
+        Atan2X = PI2 / 4#
+    ElseIf y < 0 Then
+        Atan2X = -PI2 / 4#
+    End If
+End Function
 
 Private Sub GeoCubic(ByVal u1 As Double, ByVal v1 As Double, ByVal u2 As Double, ByVal v2 As Double, _
                      ByVal ux As Double, ByVal v As Double)
@@ -1539,6 +2335,7 @@ Private Sub GeoCubic(ByVal u1 As Double, ByVal v1 As Double, ByVal u2 As Double,
               VxCell("A", "1") & VxCell("B", "1") & VxCell("C", "0") & VxCell("D", "1") & _
               "<Cell N='E' V='" & f & "' F='" & f & "'/></Row>"
     gGeoLX = x: gGeoLY = y
+    gGeoCU = ux: gGeoCV = v
 End Sub
 
 Private Sub GeoEllipse(ByVal cu As Double, ByVal cv As Double, ByVal ru As Double, ByVal rv As Double)
@@ -1608,171 +2405,183 @@ Private Sub GeoRect(ByVal l As Double, ByVal t As Double, ByVal w As Double, ByV
     GeoEnd True
 End Sub
 
-' Elliptic arc as cubic Bezier segments. Angles in radians, y downwards (positive sweep = clockwise).
-Private Sub GeoArc(ByVal cu As Double, ByVal cv As Double, ByVal ru As Double, ByVal rv As Double, _
-                   ByVal t0 As Double, ByVal sweep As Double, ByVal startNew As Boolean)
-    Dim n As Long, d As Double, k As Double, i As Long, a As Double, b As Double
-    If startNew Then
-        GeoMove cu + ru * Cos(t0), cv + rv * Sin(t0)
-    Else
-        GeoLine cu + ru * Cos(t0), cv + rv * Sin(t0)
-    End If
-    n = Int(Abs(sweep) / 1.5707963267949 - 0.000001) + 1
-    d = sweep / n
-    k = 4# / 3# * Tan(d / 4#)
-    a = t0
-    For i = 1 To n
-        b = a + d
-        GeoCubic cu + ru * (Cos(a) - k * Sin(a)), cv + rv * (Sin(a) + k * Cos(a)), _
-                 cu + ru * (Cos(b) + k * Sin(b)), cv + rv * (Sin(b) - k * Cos(b)), _
-                 cu + ru * Cos(b), cv + rv * Sin(b)
-        a = b
-    Next i
-End Sub
-
 Private Function Adj(ByVal s As Object, ByVal i As Long, ByVal defVal As Double) As Double
     Adj = defVal
     On Error Resume Next
     If s.Adjustments.Count >= i Then Adj = s.Adjustments.Item(i)
 End Function
 
-' Common preset shapes, from the DrawingML preset definitions (adjustment values as PowerPoint reports them).
-Private Function VxPreset(ByVal s As Object, ByVal ast As Long, ByVal w As Double, ByVal h As Double) As Boolean
-    Dim ss As Double, a As Double, a2 As Double, x1 As Double, x2 As Double, y1 As Double, y2 As Double, d As Double
-    ss = MinS(CSng(w), CSng(h))
-    VxPreset = True
-    Select Case ast
-        Case 1, 61                                   ' rectangle, flowchart process
-            GeoRect 0, 0, w, h, 0, 0
-        Case 5                                       ' rounded rectangle
-            a = Adj(s, 1, 0.16667)
-            If a < 0 Then a = 0
-            If a > 0.5 Then a = 0.5
-            GeoRect 0, 0, w, h, a * ss, a * ss
-        Case 62                                      ' flowchart alternate process
-            GeoRect 0, 0, w, h, ss / 6, ss / 6
-        Case 69                                      ' flowchart terminator
-            GeoRect 0, 0, w, h, w * 3475 / 21600, h / 2
-        Case 9, 73                                   ' oval, flowchart connector
-            GeoEllipse w / 2, h / 2, w / 2, h / 2
-        Case 4, 63                                   ' diamond, flowchart decision
-            GeoPoly w / 2, 0, w, h / 2, w / 2, h, 0, h / 2
-        Case 7                                       ' isosceles triangle
-            GeoPoly Adj(s, 1, 0.5) * w, 0, w, h, 0, h
-        Case 8                                       ' right triangle
-            GeoPoly 0, h, 0, 0, w, h
-        Case 2                                       ' parallelogram
-            x1 = Adj(s, 1, 0.25) * ss
-            GeoPoly 0, h, x1, 0, w, 0, w - x1, h
-        Case 64                                      ' flowchart data
-            GeoPoly w / 5, 0, w, 0, w * 4 / 5, h, 0, h
-        Case 3                                       ' trapezoid
-            x1 = Adj(s, 1, 0.25) * ss
-            GeoPoly 0, h, x1, 0, w - x1, 0, w, h
-        Case 10                                      ' hexagon
-            x1 = Adj(s, 1, 0.25) * ss
-            GeoPoly 0, h / 2, x1, 0, w - x1, 0, w, h / 2, w - x1, h, x1, h
-        Case 6                                       ' octagon
-            x1 = Adj(s, 1, 0.29289) * ss
-            GeoPoly 0, x1, x1, 0, w - x1, 0, w, x1, w, h - x1, w - x1, h, x1, h, 0, h - x1
-        Case 12                                      ' regular pentagon
-            GeoPoly w / 2, 0, w, h * 0.38196, w * 0.80902, h, w * 0.19098, h, 0, h * 0.38196
-        Case 51                                      ' pentagon (home plate)
-            x1 = w - Adj(s, 1, 0.5) * ss
-            GeoPoly 0, 0, x1, 0, w, h / 2, x1, h, 0, h
-        Case 52                                      ' chevron
-            x1 = Adj(s, 1, 0.5) * ss
-            GeoPoly 0, 0, w - x1, 0, w, h / 2, w - x1, h, 0, h, x1, h / 2
-        Case 33, 34                                  ' right / left arrow
-            d = h * Adj(s, 1, 0.5) / 2
-            x1 = w - Adj(s, 2, 0.5) * ss
-            If ast = 33 Then
-                GeoPoly 0, h / 2 - d, x1, h / 2 - d, x1, 0, w, h / 2, x1, h, x1, h / 2 + d, 0, h / 2 + d
-            Else
-                x1 = w - x1
-                GeoPoly w, h / 2 - d, x1, h / 2 - d, x1, 0, 0, h / 2, x1, h, x1, h / 2 + d, w, h / 2 + d
+' ---- preset geometry engine ---------------------------------------------------
+' Every PowerPoint AutoShape is drawn from its DrawingML preset definition (ECMA-376
+' presetShapeDefinitions, compiled by build/make_presets.py into PresetSource): the guide
+' formulas are evaluated with the shape's size and adjustment values and the paths are
+' written as Visio geometry - straight lines, Bezier curves and true elliptical arcs.
+Private Function VxPresetGeo(ByVal s As Object, ByVal ast As Long, ByVal w As Double, ByVal h As Double) As Boolean
+    Dim src As String, sec() As String, part() As String, i As Long, n As Long, d As String
+    Dim v As Double, a As Double, isAng As Boolean, anyFill As Boolean, rc() As String
+    src = PresetSource(ast)
+    If Len(src) = 0 Then Exit Function
+    sec = Split(src, "|")
+    If UBound(sec) < 3 Then Exit Function
+    gPw = w
+    gPh = h
+    ReDim gPa(0 To 0)
+    If Len(sec(0)) > 0 Then
+        part = Split(sec(0), ",")
+        ReDim gPa(0 To UBound(part) + 1)
+        n = 0
+        On Error Resume Next
+        n = s.Adjustments.Count
+        On Error GoTo 0
+        For i = 0 To UBound(part)
+            d = part(i)
+            isAng = (Left$(d, 1) = "!")
+            If isAng Then d = Mid$(d, 2)
+            v = Val(d)
+            If n >= i + 1 Then
+                ' PowerPoint reports linear adjustments as fractions and angles in degrees
+                On Error Resume Next
+                a = s.Adjustments.Item(i + 1)
+                If Err.Number = 0 Then
+                    If isAng Then
+                        If Abs(a) > 400 Then v = a Else v = a * 60000#
+                        If v < 0 And Val(d) >= 0 Then v = v + 21600000#
+                    Else
+                        If Abs(a) > 10 Then v = a Else v = a * 100000#
+                    End If
+                End If
+                Err.Clear
+                On Error GoTo 0
             End If
-        Case 35, 36                                  ' up / down arrow
-            d = w * Adj(s, 1, 0.5) / 2
-            y1 = Adj(s, 2, 0.5) * ss
-            If ast = 35 Then
-                GeoPoly w / 2, 0, w, y1, w / 2 + d, y1, w / 2 + d, h, w / 2 - d, h, w / 2 - d, y1, 0, y1
-            Else
-                y1 = h - y1
-                GeoPoly w / 2, h, w, y1, w / 2 + d, y1, w / 2 + d, 0, w / 2 - d, 0, w / 2 - d, y1, 0, y1
-            End If
-        Case 37                                      ' left-right arrow
-            d = h * Adj(s, 1, 0.5) / 2
-            x1 = Adj(s, 2, 0.5) * ss
-            x2 = w - x1
-            GeoPoly 0, h / 2, x1, 0, x1, h / 2 - d, x2, h / 2 - d, x2, 0, w, h / 2, x2, h, x2, h / 2 + d, x1, h / 2 + d, x1, h
-        Case 38                                      ' up-down arrow
-            d = w * Adj(s, 1, 0.5) / 2
-            y1 = Adj(s, 2, 0.5) * ss
-            y2 = h - y1
-            GeoPoly w / 2, 0, w, y1, w / 2 + d, y1, w / 2 + d, y2, w, y2, w / 2, h, 0, y2, w / 2 - d, y2, w / 2 - d, y1, 0, y1
-        Case 65                                      ' flowchart predefined process
-            GeoRect 0, 0, w, h, 0, 0
-            GeoBegin True, False
-            GeoMove w / 8, 0: GeoLine w / 8, h
-            GeoEnd False
-            GeoBegin True, False
-            GeoMove w * 7 / 8, 0: GeoLine w * 7 / 8, h
-            GeoEnd False
-        Case 67                                      ' flowchart document
-            GeoBegin False, False
-            GeoMove 0, 0
-            GeoLine w, 0
-            GeoLine w, h * 17322 / 21600
-            GeoCubic w * 10800 / 21600, h * 17322 / 21600, w * 10800 / 21600, h * 23922 / 21600, 0, h * 20172 / 21600
-            GeoEnd True
-        Case 29, 30                                  ' left / right bracket (outline only)
-            y1 = Adj(s, 1, 0.08333) * ss
-            gGeoOpenOnly = True
-            GeoBegin True, False
-            If ast = 29 Then
-                GeoMove w, h
-                GeoArc w, h - y1, w, y1, 1.5707963267949, 1.5707963267949, False
-                GeoLine 0, y1
-                GeoArc w, y1, w, y1, 3.14159265358979, 1.5707963267949, False
-            Else
-                GeoMove 0, 0
-                GeoArc 0, y1, w, y1, -1.5707963267949, 1.5707963267949, False
-                GeoLine w, h - y1
-                GeoArc 0, h - y1, w, y1, 0, 1.5707963267949, False
-            End If
-            GeoEnd False
-        Case 31, 32                                  ' left / right brace (outline only)
-            y1 = Adj(s, 1, 0.08333) * ss
-            y2 = Adj(s, 2, 0.5) * h
-            gGeoOpenOnly = True
-            GeoBegin True, False
-            If ast = 31 Then
-                GeoMove w, h
-                GeoArc w, h - y1, w / 2, y1, 1.5707963267949, 1.5707963267949, False
-                GeoLine w / 2, y2 + y1
-                GeoArc 0, y2 + y1, w / 2, y1, 0, -1.5707963267949, False
-                GeoArc 0, y2 - y1, w / 2, y1, 1.5707963267949, -1.5707963267949, False
-                GeoLine w / 2, y1
-                GeoArc w, y1, w / 2, y1, 3.14159265358979, 1.5707963267949, False
-            Else
-                GeoMove 0, 0
-                GeoArc 0, y1, w / 2, y1, -1.5707963267949, 1.5707963267949, False
-                GeoLine w / 2, y2 - y1
-                GeoArc w, y2 - y1, w / 2, y1, 3.14159265358979, -1.5707963267949, False
-                GeoArc w, y2 + y1, w / 2, y1, -1.5707963267949, -1.5707963267949, False
-                GeoLine w / 2, h - y1
-                GeoArc 0, h - y1, w / 2, y1, 0, 1.5707963267949, False
-            End If
-            GeoEnd False
+            gPa(i + 1) = v
+        Next i
+    End If
+    If Len(sec(1)) > 0 Then
+        part = Split(sec(1), ";")
+        ReDim gPv(0 To UBound(part))
+        For i = 0 To UBound(part)
+            gPv(i) = PresetEval(part(i))
+        Next i
+    Else
+        ReDim gPv(0 To 0)
+    End If
+    part = Split(sec(2), "~")
+    For i = 0 To UBound(part)
+        If PresetPath(part(i)) Then anyFill = True
+    Next i
+    If Not anyFill Then gGeoOpenOnly = True
+    rc = Split(sec(3), ",")
+    If Abs(PresetArg(rc(0))) > 0.5 Or Abs(PresetArg(rc(1))) > 0.5 Or Abs(PresetArg(rc(2)) - w) > 0.5 Or _
+       Abs(PresetArg(rc(3)) - h) > 0.5 Then gGeoTextBox = True      ' text area is inset
+    VxPresetGeo = (Len(gGeo) > 0)
+End Function
+
+' One path: "<fill f|n>,<stroke 1|0>,<path w>,<path h>:<commands>". Returns True when it is filled.
+Private Function PresetPath(ByVal p As String) As Boolean
+    Dim k As Long, hd() As String, cmds() As String, c() As String, i As Long, sx As Double, sy As Double
+    Dim filled As Boolean
+    k = InStr(p, ":")
+    If k = 0 Then Exit Function
+    hd = Split(Left$(p, k - 1), ",")
+    cmds = Split(Mid$(p, k + 1), ";")
+    filled = (hd(0) = "f")
+    sx = 1: sy = 1
+    If Val(hd(2)) > 0 Then sx = gPw / Val(hd(2))
+    If Val(hd(3)) > 0 Then sy = gPh / Val(hd(3))
+    GeoBegin Not filled, (hd(1) = "0")
+    For i = 0 To UBound(cmds)
+        c = Split(cmds(i), ",")
+        Select Case c(0)
+            Case "M": GeoMove PresetArg(c(1)) * sx, PresetArg(c(2)) * sy
+            Case "L": GeoLine PresetArg(c(1)) * sx, PresetArg(c(2)) * sy
+            Case "C": GeoCubic PresetArg(c(1)) * sx, PresetArg(c(2)) * sy, PresetArg(c(3)) * sx, PresetArg(c(4)) * sy, _
+                               PresetArg(c(5)) * sx, PresetArg(c(6)) * sy
+            Case "Q": GeoQuad PresetArg(c(1)) * sx, PresetArg(c(2)) * sy, PresetArg(c(3)) * sx, PresetArg(c(4)) * sy
+            Case "A": GeoArcTo PresetArg(c(1)) * sx, PresetArg(c(2)) * sy, PresetArg(c(3)), PresetArg(c(4))
+            Case "Z": GeoClose
+        End Select
+    Next i
+    PresetPath = filled And gGeoClosed
+    GeoEnd gGeoClosed
+End Function
+
+Private Function PresetArg(ByVal tok As String) As Double
+    Dim c As String
+    c = Left$(tok, 1)
+    If c = "$" Then
+        PresetArg = gPv(CLng(Mid$(tok, 2)))
+    ElseIf c = "@" Then
+        PresetArg = gPa(CLng(Mid$(tok, 2)))
+    ElseIf c = "-" Or (c >= "0" And c <= "9") Then
+        PresetArg = Val(tok)
+    Else
+        PresetArg = PresetBuiltin(tok)
+    End If
+End Function
+
+Private Function PresetBuiltin(ByVal tok As String) As Double
+    Dim ss As Double
+    ss = gPw
+    If gPh < ss Then ss = gPh
+    Select Case tok
+        Case "w", "r": PresetBuiltin = gPw
+        Case "h", "b": PresetBuiltin = gPh
+        Case "l", "t": PresetBuiltin = 0
+        Case "hc": PresetBuiltin = gPw / 2
+        Case "vc": PresetBuiltin = gPh / 2
+        Case "ss": PresetBuiltin = ss
+        Case "ls": If gPw > gPh Then PresetBuiltin = gPw Else PresetBuiltin = gPh
+        Case "cd2": PresetBuiltin = 10800000#
+        Case "cd4": PresetBuiltin = 5400000#
+        Case "cd8": PresetBuiltin = 2700000#
+        Case "k34": PresetBuiltin = 16200000#
+        Case "k38": PresetBuiltin = 8100000#
+        Case "k58": PresetBuiltin = 13500000#
+        Case "k78": PresetBuiltin = 18900000#
         Case Else
-            VxPreset = False
-            Exit Function
+            If Left$(tok, 3) = "ssd" Then
+                PresetBuiltin = ss / Val(Mid$(tok, 4))
+            ElseIf Left$(tok, 2) = "wd" Then
+                PresetBuiltin = gPw / Val(Mid$(tok, 3))
+            ElseIf Left$(tok, 2) = "hd" Then
+                PresetBuiltin = gPh / Val(Mid$(tok, 3))
+            End If
     End Select
-    Select Case ast
-        Case 1, 5, 61, 62, 2, 3, 64, 65, 67
-        Case Else
-            gGeoTextBox = True                      ' text area is inset: place text where PowerPoint draws it
+End Function
+
+' Guide formula "<op>,<x>,<y>,<z>" (DrawingML operators, angles in 1/60000 degree).
+Private Function PresetEval(ByVal f As String) As Double
+    Dim t() As String, x As Double, y As Double, z As Double, n As Long
+    t = Split(f, ",")
+    n = UBound(t)
+    If n >= 1 Then x = PresetArg(t(1))
+    If n >= 2 Then y = PresetArg(t(2))
+    If n >= 3 Then z = PresetArg(t(3))
+    Select Case t(0)
+        Case "m": If z <> 0 Then PresetEval = x * y / z
+        Case "a": PresetEval = x + y - z
+        Case "d": If z <> 0 Then PresetEval = (x + y) / z
+        Case "q": If x > 0 Then PresetEval = y Else PresetEval = z
+        Case "b": PresetEval = Abs(x)
+        Case "t": PresetEval = Atan2X(y, x) / PDEG
+        Case "c": PresetEval = x * Cos(Atan2X(z, y))
+        Case "o": PresetEval = x * Cos(y * PDEG)
+        Case "x": If x > y Then PresetEval = x Else PresetEval = y
+        Case "n": If x < y Then PresetEval = x Else PresetEval = y
+        Case "h": PresetEval = Sqr(x * x + y * y + z * z)
+        Case "p"
+            If y < x Then
+                PresetEval = x
+            ElseIf y > z Then
+                PresetEval = z
+            Else
+                PresetEval = y
+            End If
+        Case "s": PresetEval = x * Sin(Atan2X(z, y))
+        Case "i": PresetEval = x * Sin(y * PDEG)
+        Case "r": If x > 0 Then PresetEval = Sqr(x)
+        Case "g": PresetEval = x * Tan(y * PDEG)
+        Case "v": PresetEval = x
     End Select
 End Function
 
@@ -1817,39 +2626,72 @@ Private Function VxConnector(ByVal s As Object, ByVal w As Double, ByVal h As Do
 End Function
 
 ' Freeform nodes -> geometry. (l, t): origin of the frame the node coordinates are measured from.
+' PowerPoint stores a Bezier segment as two control nodes followed by its end vertex; the
+' SegmentType of a vertex describes the segment that follows it (ShapeNodes.SetSegmentType),
+' control nodes report msoSegmentCurve. Older builds were seen to flag the segment that ends at
+' a node instead, so both readings are scored by tangent continuity and the better one is used.
 Private Function VxNodes(ByVal s As Object, ByVal l As Double, ByVal t As Double, ByVal useFill As Boolean) As Boolean
-    Dim n As Long, i As Long, p As Variant, q As Variant, r As Variant
-    Dim ux As Double, v As Double, su As Double, sv As Double, filled As Boolean, started As Boolean
+    Dim n As Long, i As Long, p As Variant, filled As Boolean, started As Boolean, after As Boolean
+    Dim px() As Double, py() As Double, sg() As Long, scoreF As Long, scoreA As Long
+    Dim su As Double, sv As Double, ux As Double, v As Double
     On Error GoTo Nope
     n = s.Nodes.Count
     If n < 2 Then Exit Function
+    ReDim px(1 To n): ReDim py(1 To n): ReDim sg(1 To n)
+    For i = 1 To n
+        p = s.Nodes.Item(i).Points
+        px(i) = p(1, 1) - l
+        py(i) = p(1, 2) - t
+        sg(i) = s.Nodes.Item(i).SegmentType
+    Next i
     filled = False
     If useFill Then filled = (s.Fill.Visible = MSO_TRUE)
+    For i = 2 To n - 1
+        If sg(i) = 1 And sg(i - 1) = 0 Then
+            If Collinear3(px(i - 1), py(i - 1), px(i), py(i), px(i + 1), py(i + 1)) Then scoreF = scoreF + 1
+            If i >= 3 Then
+                If Collinear3(px(i - 2), py(i - 2), px(i - 1), py(i - 1), px(i), py(i)) Then scoreA = scoreA + 1
+            End If
+        End If
+    Next i
+    after = (scoreA > scoreF)
     i = 1
     Do While i <= n
-        p = s.Nodes.Item(i).Points
-        ux = p(1, 1) - l
-        v = p(1, 2) - t
         If Not started Then
             GeoBegin False, False
-            GeoMove ux, v
-            su = ux: sv = v
+            GeoMove px(i), py(i)
+            su = px(i): sv = py(i)
+            ux = su: v = sv
             started = True
             i = i + 1
-        ElseIf s.Nodes.Item(i).SegmentType = 1 And i + 2 <= n Then
-            q = s.Nodes.Item(i + 1).Points
-            r = s.Nodes.Item(i + 2).Points
-            GeoCubic ux, v, q(1, 1) - l, q(1, 2) - t, r(1, 1) - l, r(1, 2) - t
-            ux = r(1, 1) - l
-            v = r(1, 2) - t
-            i = i + 3
         Else
-            GeoLine ux, v
-            i = i + 1
-        End If
-        If started And i <= n And gGeoRow > 2 And Abs(ux - su) < 0.01 And Abs(v - sv) < 0.01 Then
-            GeoEnd True                              ' sub-path closed: the next node starts a new one
-            started = False
+            If after Then
+                ' flag on the node where a segment ends: node i is the first node of the next segment
+                If sg(i) = 1 And i + 2 <= n Then
+                    GeoCubic px(i), py(i), px(i + 1), py(i + 1), px(i + 2), py(i + 2)
+                    ux = px(i + 2): v = py(i + 2)
+                    i = i + 3
+                Else
+                    GeoLine px(i), py(i)
+                    ux = px(i): v = py(i)
+                    i = i + 1
+                End If
+            Else
+                ' flag on the vertex where a segment starts (node i - 1 is the current vertex)
+                If sg(i - 1) = 1 And i + 2 <= n Then
+                    GeoCubic px(i), py(i), px(i + 1), py(i + 1), px(i + 2), py(i + 2)
+                    ux = px(i + 2): v = py(i + 2)
+                    i = i + 3
+                Else
+                    GeoLine px(i), py(i)
+                    ux = px(i): v = py(i)
+                    i = i + 1
+                End If
+            End If
+            If i <= n And gGeoRow > 2 And Abs(ux - su) < 0.01 And Abs(v - sv) < 0.01 Then
+                GeoEnd True                          ' sub-path closed: the next node starts a new one
+                started = False
+            End If
         End If
     Loop
     If started Then GeoEnd filled Or (Abs(ux - su) < 0.01 And Abs(v - sv) < 0.01)
@@ -1858,6 +2700,18 @@ Private Function VxNodes(ByVal s As Object, ByVal l As Double, ByVal t As Double
     Exit Function
 Nope:
     VxNodes = False
+End Function
+
+' True when b lies on the straight continuation from a to c (smooth join).
+Private Function Collinear3(ByVal ax As Double, ByVal ay As Double, ByVal bx As Double, ByVal by As Double, _
+                            ByVal cx As Double, ByVal cy As Double) As Boolean
+    Dim ux As Double, uy As Double, vx As Double, vy As Double, lu As Double, lv As Double
+    ux = bx - ax: uy = by - ay
+    vx = cx - bx: vy = cy - by
+    lu = Sqr(ux * ux + uy * uy)
+    lv = Sqr(vx * vx + vy * vy)
+    If lu < 0.01 Or lv < 0.01 Then Exit Function
+    Collinear3 = (Abs(ux * vy - uy * vx) / (lu * lv) < 0.02) And (ux * vx + uy * vy > 0)
 End Function
 
 ' Any other closed shape: PowerPoint 2013+ "Merge Shapes - Union" of an unrotated copy with
@@ -2169,17 +3023,23 @@ End Function
 ' SVG for PowerPoint versions without SVG export (Windows, PowerPoint 2013 - 2021 / LTSC):
 ' PowerPoint prints a copy of the drawing (alone on a temporary slide) to XPS, and the
 ' built-in converter turns the XPS page into SVG - paths, gradients, images and real text.
-Private Function XpsToSvg(ByVal pres As Object, ByVal shp As Object, ByVal dst As String) As Boolean
+' The converter runs as a separate hidden process: the progress window shows its steps,
+' Esc stops it and it is stopped after SVG_TIMEOUT seconds.
+' Returns 0 on success, RUN_CANCELLED, RUN_TIMEOUT or another non-zero value on failure.
+Private Function XpsToSvg(ByVal pres As Object, ByVal shp As Object, ByVal dst As String) As Long
 #If Mac Then
-    XpsToSvg = False
+    XpsToSvg = RUN_FAILED
 #Else
-    Dim tmp As Object, c As Object, rng As Object, x As String, sc As String, cmd As String
-    Dim l As Double, t As Double, w As Double, h As Double, i As Long, wasSaved As Long, ok As Boolean
+    Dim tmp As Object, c As Object, rng As Object, x As String, sc As String, cmd As String, pf As String
+    Dim l As Double, t As Double, w As Double, h As Double, i As Long, wasSaved As Long, st As Long
+    st = RUN_FAILED
     wasSaved = pres.Saved
     x = TempFileX("xps")
+    pf = TempFileX("txt")
     On Error GoTo Failed
     sc = HelperScriptPath()
-    If Len(sc) = 0 Then Exit Function
+    If Len(sc) = 0 Then GoTo Cleanup
+    ProgressAt 0.24, Tx("step.xpsPrep")
     Set tmp = AddTempSlide(pres, shp)
     On Error Resume Next
     tmp.FollowMasterBackground = MSO_FALSE
@@ -2196,41 +3056,53 @@ Private Function XpsToSvg(ByVal pres As Object, ByVal shp As Object, ByVal dst A
     Next i
     w = w - l
     h = h - t
+    CheckCancel
+    ProgressAt 0.3, Tx("step.xpsPrint")
     pres.PrintOptions.Ranges.ClearAll
     Set rng = pres.PrintOptions.Ranges.Add(tmp.SlideIndex, tmp.SlideIndex)
     ' Path, XPS, print intent, no frame, handout order, slides, hidden slides, range, slide range
     pres.ExportAsFixedFormat x, 1, 2, MSO_FALSE, 1, 1, MSO_TRUE, rng, 4
-    ProgressStep "转换为 SVG"
+    If Not tmp Is Nothing Then tmp.Delete
+    Set tmp = Nothing
+    ProgressAt 0.4, Tx("step.xps", Tx("xps.start"))
     cmd = "& ([scriptblock]::Create([IO.File]::ReadAllText('" & PsQ(sc) & "',[Text.Encoding]::UTF8))) " & _
           "-Xps '" & PsQ(x) & "' -Out '" & PsQ(dst) & "' -Frame '" & NumXml(l) & "," & NumXml(t) & "," & _
           NumXml(w) & "," & NumXml(h) & "' -Slide '" & NumXml(pres.PageSetup.SlideWidth) & "," & _
-          NumXml(pres.PageSetup.SlideHeight) & "'"
+          NumXml(pres.PageSetup.SlideHeight) & "' -Progress '" & PsQ(pf) & "' -MaxSeconds " & (SVG_TIMEOUT - 5)
     DeleteIfExists dst
-    ok = (RunPowerShell(cmd) = 0)
-    If ok Then ok = Fso().FileExists(dst)
+    st = RunPowerShell(cmd, SVG_TIMEOUT, pf, 0.4, 0.95)
+    If st = 3 Then st = RUN_TIMEOUT
+    If st = 0 Then
+        If Not Fso().FileExists(dst) Then st = RUN_FAILED
+    End If
 Cleanup:
     On Error Resume Next
     If Not tmp Is Nothing Then tmp.Delete
     pres.PrintOptions.Ranges.ClearAll
     DeleteTempX x
+    DeleteTempX pf
     pres.Saved = wasSaved
     On Error GoTo 0
-    XpsToSvg = ok
+    XpsToSvg = st
     Exit Function
 Failed:
-    ok = False
+    If Err.Number = ERR_CANCEL Then st = RUN_CANCELLED Else st = RUN_FAILED
     Resume Cleanup
 #End If
 End Function
 
 #If Mac Then
 #Else
-' Writes the XPS -> SVG converter (embedded in this module) to the temp folder once per version.
+' Writes the XPS -> SVG converter (embedded in this module) to the temp folder.
 Private Function HelperScriptPath() As String
-    Dim p As String
+    Dim p As String, b() As Byte
     On Error GoTo Failed
     p = JoinPath(TempDirX(), "xps2svg-" & VS_VERSION & ".ps1")
-    If Not Fso().FileExists(p) Then WriteBytesX p, Utf8Bytes(HelperScript())
+    b = Utf8Bytes(HelperScript())
+    If Fso().FileExists(p) Then
+        If Fso().GetFile(p).Size <> UBound(b) + 1 Then Fso().DeleteFile p, True
+    End If
+    If Not Fso().FileExists(p) Then WriteBytesX p, b
     HelperScriptPath = p
     Exit Function
 Failed:
@@ -2263,7 +3135,7 @@ Private Function BuildComposite(ByVal tmp As Object, ByVal src As Object, ByVal 
         ClearSlide tmp
         Set s = TryComposite(tmp, src, margin, True)
     End If
-    If s Is Nothing Then Err.Raise vbObjectError + 513, , "所选对象无法组合导出。"
+    If s Is Nothing Then Err.Raise vbObjectError + 513, , Tx("err.group")
     Set BuildComposite = s
 End Function
 
@@ -2367,7 +3239,7 @@ Private Function PasteFromClipboard(ByVal sld As Object, ByVal src As Object, By
             DoEvents
         Loop
     Next k
-    Err.Raise vbObjectError + 512, , "无法通过剪贴板复制所选图形（剪贴板可能被其他程序占用），请重试。"
+    Err.Raise vbObjectError + 512, , Tx("err.clipboard")
 End Function
 
 Private Function GroupAll(ByVal sld As Object) As Object
@@ -2414,7 +3286,7 @@ Private Sub ExportToTemp(ByVal shp As Object, ByVal path As String, ByVal ppFmt 
     Exit Sub
 EH:
 #If Mac Then
-    Err.Raise Err.Number, , Err.Description & vbCrLf & "（PowerPoint for Mac 需要 16.82 或更高版本才能导出图形）"
+    Err.Raise Err.Number, , Err.Description & vbCrLf & Tx("err.macVersion")
 #Else
     Err.Raise Err.Number, , Err.Description
 #End If
@@ -2620,9 +3492,9 @@ End Sub
 
 Private Function FileManagerName() As String
 #If Mac Then
-    FileManagerName = "访达"
+    FileManagerName = Tx("fm.mac")
 #Else
-    FileManagerName = "资源管理器"
+    FileManagerName = Tx("fm.win")
 #End If
 End Function
 
@@ -2630,7 +3502,7 @@ End Function
 Private Function AskSavePath(ByVal initDir As String, ByVal baseName As String, ByRef fmt As Long) As String
     Dim p As String, k As Long
 #If Mac Then
-    p = MacScript2("chooseSaveFile", "导出为 " & UCase$(FmtExt(fmt)) & MAC_SEP & _
+    p = MacScript2("chooseSaveFile", Tx("dlg.saveAs", UCase$(FmtExt(fmt))) & MAC_SEP & _
                    baseName & "." & FmtExt(fmt) & MAC_SEP & initDir)
     If Len(p) = 0 Then Exit Function
 #Else
@@ -2643,7 +3515,7 @@ Private Function AskSavePath(ByVal initDir As String, ByVal baseName As String, 
     Next i
     filterStr = filterStr & vbNullChar
     fileBuf = baseName & String$(2048, vbNullChar)
-    dlgTitle = "矢印 VecStamp - 导出选中图形"
+    dlgTitle = AppTitle() & " - " & Tx("dlg.saveTitle")
     defExt = FmtExt(fmt)
 
     With ofn
@@ -2684,9 +3556,9 @@ Private Function AskSavePath(ByVal initDir As String, ByVal baseName As String, 
 #Else
 Fallback:
     ' Save dialog API unavailable: folder picker + file name prompt.
-    folder = PickFolderX(initDir, "选择导出文件夹")
+    folder = PickFolderX(initDir, Tx("dlg.pickFolder"))
     If Len(folder) = 0 Then Exit Function
-    nm = InputBox("文件名（不含扩展名）：", AppTitle(), baseName)
+    nm = InputBox(Tx("dlg.fileName"), AppTitle(), baseName)
     If Len(nm) = 0 Then Exit Function
     AskSavePath = JoinPath(folder, SafeName(nm) & "." & FmtExt(fmt))
 #End If
@@ -2703,7 +3575,7 @@ Private Function GzipX(ByVal src As String, ByVal dst As String) As Boolean
           "$o=[IO.File]::Create('" & PsQ(dst) & "');" & _
           "$g=New-Object IO.Compression.GZipStream($o,[IO.Compression.CompressionMode]::Compress);" & _
           "$i.CopyTo($g);$g.Dispose();$o.Dispose();$i.Dispose()"
-    ok = (RunPowerShell(cmd) = 0)
+    ok = (RunPowerShell(cmd, 120) = 0)
     DeleteIfExists src
 #End If
     If ok Then ok = FileExistsX(dst)
@@ -2714,10 +3586,11 @@ End Function
 Private Sub ZipFolderX(ByVal dirPath As String, ByVal zipPath As String)
 #If Mac Then
     If MacScript2("zipFolder", dirPath & MAC_SEP & zipPath) <> "ok" Then
-        Err.Raise vbObjectError + 516, , "打包 VSDX 失败。"
+        Err.Raise vbObjectError + 516, , Tx("err.zip")
     End If
 #Else
     Dim cmd As String
+    ProgressAt 0.94, Tx("step.zip")
     DeleteIfExists zipPath
     cmd = "Add-Type -AssemblyName System.IO.Compression;Add-Type -AssemblyName System.IO.Compression.FileSystem;" & _
           "$src='" & PsQ(dirPath) & "';$dst='" & PsQ(zipPath) & "';" & _
@@ -2725,22 +3598,29 @@ Private Sub ZipFolderX(ByVal dirPath As String, ByVal zipPath As String)
           "$fs=@(Get-ChildItem -LiteralPath $src -Recurse -File -Force|Sort-Object @{e={if($_.Name -eq '[Content_Types].xml'){0}else{1}}},FullName);" & _
           "foreach($f in $fs){$n=$f.FullName.Substring($src.Length).TrimStart('\').Replace('\','/');" & _
           "[void][IO.Compression.ZipFileExtensions]::CreateEntryFromFile($z,$f.FullName,$n)};$z.Dispose()"
-    If RunPowerShell(cmd) <> 0 Or Not Fso().FileExists(zipPath) Then
-        Err.Raise vbObjectError + 516, , "打包 VSDX 失败（需要系统自带的 Windows PowerShell）。"
-    End If
+    Select Case RunPowerShell(cmd, 120)
+        Case 0
+            If Not Fso().FileExists(zipPath) Then Err.Raise vbObjectError + 516, , Tx("err.zipPs")
+        Case RUN_CANCELLED
+            Err.Raise ERR_CANCEL, , "cancelled"
+        Case Else
+            Err.Raise vbObjectError + 516, , Tx("err.zipPs")
+    End Select
 #End If
 End Sub
 
 ' EMF -> SVG with Inkscape or LibreOffice, when one of them is installed.
-Private Function ConvertEmfToSvg(ByVal src As String, ByVal dst As String) As Boolean
+' Returns 0 on success, RUN_CANCELLED, or another non-zero value.
+Private Function ConvertEmfToSvg(ByVal src As String, ByVal dst As String) As Long
+    ConvertEmfToSvg = RUN_FAILED
 #If Mac Then
     If MacScript2("inkscapeSvg", src & MAC_SEP & dst) = "ok" Then
-        ConvertEmfToSvg = True
+        ConvertEmfToSvg = 0
     ElseIf MacScript2("libreofficeSvg", src & MAC_SEP & dst) = "ok" Then
-        ConvertEmfToSvg = True
+        ConvertEmfToSvg = 0
     End If
 #Else
-    Dim c As Variant, exe As String, outDir As String, produced As String
+    Dim c As Variant, exe As String, outDir As String, produced As String, st As Long
     For Each c In Array(Environ$("ProgramFiles") & "\Inkscape\bin\inkscape.exe", _
                         Environ$("ProgramW6432") & "\Inkscape\bin\inkscape.exe", _
                         Environ$("ProgramFiles(x86)") & "\Inkscape\bin\inkscape.exe", _
@@ -2748,8 +3628,10 @@ Private Function ConvertEmfToSvg(ByVal src As String, ByVal dst As String) As Bo
         If Fso().FileExists(CStr(c)) Then exe = CStr(c): Exit For
     Next
     If Len(exe) > 0 Then
-        RunWait """" & exe & """ """ & src & """ --export-type=svg ""--export-filename=" & dst & """"
-        If Fso().FileExists(dst) Then ConvertEmfToSvg = True: Exit Function
+        ProgressAt 0.55, Tx("step.inkscape")
+        st = RunHidden("""" & exe & """ """ & src & """ --export-type=svg ""--export-filename=" & dst & """", 120)
+        If st = RUN_CANCELLED Then ConvertEmfToSvg = st: Exit Function
+        If Fso().FileExists(dst) Then ConvertEmfToSvg = 0: Exit Function
     End If
 
     exe = ""
@@ -2761,13 +3643,16 @@ Private Function ConvertEmfToSvg(ByVal src As String, ByVal dst As String) As Bo
     If Len(exe) > 0 Then
         outDir = JoinPath(TempDirX(), "lo_" & Format$(Now, "hhnnss"))
         MakeDirX outDir
-        RunWait """" & exe & """ -env:UserInstallation=" & FileUrlX(JoinPath(TempDirX(), "lo_profile")) & _
-                " --headless --norestore --convert-to svg --outdir """ & outDir & """ """ & src & """"
+        ProgressAt 0.6, Tx("step.libreoffice")
+        st = RunHidden("""" & exe & """ -env:UserInstallation=" & FileUrlX(JoinPath(TempDirX(), "lo_profile")) & _
+                " --headless --norestore --convert-to svg --outdir """ & outDir & """ """ & src & """", 180)
         produced = JoinPath(outDir, BaseNameOf(src) & ".svg")
         If Fso().FileExists(produced) Then
             DeleteIfExists dst
             Fso().MoveFile produced, dst
-            ConvertEmfToSvg = True
+            ConvertEmfToSvg = 0
+        ElseIf st = RUN_CANCELLED Then
+            ConvertEmfToSvg = st
         End If
         RemoveTempDirX outDir
     End If
@@ -2781,12 +3666,12 @@ Private Function MacScript2(ByVal handler As String, ByVal param As String) As S
     MacScript2 = AppleScriptTask(MAC_SCRIPT, handler, param)
     Exit Function
 EH:
-    Err.Raise vbObjectError + 520, , "找不到 macOS 辅助脚本 " & MAC_SCRIPT & "，请重新运行 macOS 安装器。"
+    Err.Raise vbObjectError + 520, , Tx("err.macHelper", MAC_SCRIPT)
 End Function
 
 Private Sub MacMove(ByVal src As String, ByVal dst As String)
     If MacScript2("moveFile", src & MAC_SEP & dst) <> "ok" Then
-        Err.Raise vbObjectError + 521, , "无法把文件写入：" & dst
+        Err.Raise vbObjectError + 521, , Tx("err.macWrite", dst)
     End If
 End Sub
 #Else
@@ -2800,17 +3685,92 @@ Private Sub DeleteIfExists(ByVal p As String)
     If Fso().FileExists(p) Then Fso().DeleteFile p, True
 End Sub
 
-Private Function RunWait(ByVal cmd As String) As Long
-    On Error Resume Next
-    RunWait = CreateObject("WScript.Shell").Run(cmd, 0, True)
-    If Err.Number <> 0 Then RunWait = -1
+' Runs a program without a window and without freezing PowerPoint: while it works, the
+' progress window keeps updating (from progressFile, when given), Esc ends the program and
+' so does the time limit. Returns the program's exit code, RUN_FAILED (could not start),
+' RUN_CANCELLED or RUN_TIMEOUT.
+Private Function RunHidden(ByVal cmdLine As String, ByVal timeoutSec As Double, _
+                           Optional ByVal progressFile As String = "", Optional ByVal frac0 As Double = 0, _
+                           Optional ByVal frac1 As Double = 0) As Long
+    Dim si As STARTUPINFOW, pi As PROCESS_INFORMATION, buf As String, code As Long, t0 As Double, el As Double
+    Dim lastSec As Long
+    buf = cmdLine & vbNullChar
+    si.cb = LenB(si)
+    si.dwFlags = STARTF_USESHOWWINDOW
+    si.wShowWindow = SW_HIDE
+    If CreateProcessW(0, StrPtr(buf), 0, 0, 0, CREATE_NO_WINDOW, 0, 0, si, pi) = 0 Then
+        RunHidden = RUN_FAILED
+        Exit Function
+    End If
+    t0 = Timer
+    lastSec = -1
+    Do
+        If WaitForSingleObject(pi.hProcess, 120) <> WAIT_TIMEOUT Then Exit Do
+        el = Timer - t0
+        If el < 0 Then el = el + 86400#
+        If Len(progressFile) > 0 Then ProgressFromFile progressFile, frac0, frac1, el
+        If Int(el) <> lastSec Then
+            lastSec = Int(el)
+            ProgressElapsed lastSec
+        End If
+        DoEvents
+        If ProgressCancelled() Then
+            TerminateProcess pi.hProcess, 1
+            WaitForSingleObject pi.hProcess, 3000
+            code = RUN_CANCELLED
+            GoTo Done
+        End If
+        If el > timeoutSec Then
+            TerminateProcess pi.hProcess, 1
+            WaitForSingleObject pi.hProcess, 3000
+            code = RUN_TIMEOUT
+            GoTo Done
+        End If
+    Loop
+    If GetExitCodeProcess(pi.hProcess, code) = 0 Then code = RUN_FAILED
+Done:
+    CloseHandle pi.hThread
+    CloseHandle pi.hProcess
+    RunHidden = code
 End Function
 
-' Runs a PowerShell snippet hidden; returns its exit code (0 = success).
-Private Function RunPowerShell(ByVal script As String) As Long
-    RunPowerShell = RunWait("powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden " & _
-                            "-EncodedCommand " & B64Utf16("$ErrorActionPreference='Stop';" & script))
+' Runs a PowerShell snippet (no window). The script is passed as plain text with -Command - no
+' encoded command and no execution-policy switch, so security software sees ordinary use.
+Private Function RunPowerShell(ByVal script As String, ByVal timeoutSec As Double, _
+                               Optional ByVal progressFile As String = "", Optional ByVal frac0 As Double = 0, _
+                               Optional ByVal frac1 As Double = 0) As Long
+    Dim exe As String
+    exe = Environ$("SystemRoot") & "\System32\WindowsPowerShell\v1.0\powershell.exe"
+    If Not Fso().FileExists(exe) Then exe = "powershell.exe"
+    RunPowerShell = RunHidden("""" & exe & """ -NoLogo -NoProfile -NonInteractive -Command """ & _
+                              "$ErrorActionPreference='Stop';" & Replace(script, """", "'") & """", _
+                              timeoutSec, progressFile, frac0, frac1)
 End Function
+
+' Shows the step the XPS -> SVG converter reports in its progress file ("percent|step|a|b").
+Private Sub ProgressFromFile(ByVal path As String, ByVal frac0 As Double, ByVal frac1 As Double, ByVal el As Double)
+    Dim txt As String, f() As String, pct As Double, d As String
+    On Error Resume Next
+    If Not Fso().FileExists(path) Then Exit Sub
+    With Fso().OpenTextFile(path, 1)
+        txt = .ReadAll
+        .Close
+    End With
+    If Err.Number <> 0 Or Len(txt) = 0 Or txt = gPgFile Then Exit Sub
+    On Error GoTo 0
+    gPgFile = txt
+    f = Split(txt, "|")
+    If UBound(f) < 3 Then Exit Sub
+    pct = Val(f(0)) / 100#
+    Select Case f(1)
+        Case "open", "write", "done": d = Tx("xps." & f(1))
+        Case "page": d = Tx("xps.page", f(3))
+        Case "elem": d = Tx("xps.elem", f(2), f(3))
+        Case "font": d = Tx("xps.font", f(2))
+        Case Else: d = f(1)
+    End Select
+    ProgressAt frac0 + (frac1 - frac0) * pct, Tx("step.xps", d)
+End Sub
 
 Private Function PsQ(ByVal s As String) As String
     ' Escape for a PowerShell single-quoted string (PowerShell also treats curly quotes as quotes).
@@ -2818,16 +3778,6 @@ Private Function PsQ(ByVal s As String) As String
     s = Replace(s, ChrW(&H2018), ChrW(&H2018) & ChrW(&H2018))
     s = Replace(s, ChrW(&H2019), ChrW(&H2019) & ChrW(&H2019))
     PsQ = s
-End Function
-
-Private Function B64Utf16(ByVal s As String) As String
-    Dim b() As Byte
-    b = s                                           ' VBA strings are UTF-16LE
-    With CreateObject("MSXML2.DOMDocument").createElement("b64")
-        .DataType = "bin.base64"
-        .nodeTypedValue = b
-        B64Utf16 = Replace(Replace(.Text, vbLf, ""), vbCr, "")
-    End With
 End Function
 
 ' file:/// URL with UTF-8 percent-encoding (for LibreOffice's -env:UserInstallation).
@@ -2860,33 +3810,68 @@ End Function
 
 ' =====================================================================
 '  Progress window (Windows: a small native window; macOS: a dialog from the helper)
+'  A run has items (shapes, files or slides); ProgressAt sets the position inside the current
+'  item and the step being done, and the window shows the overall percentage.
 ' =====================================================================
-Private Sub ProgressBegin(ByVal title As String, ByVal total As Long)
+Private Sub ProgressBegin(ByVal title As String, ByVal items As Long)
     ProgressEnd
-    gPgTotal = total
-    If gPgTotal < 1 Then gPgTotal = 1
-    gPgPos = 0
+    gPgItems = items
+    If gPgItems < 1 Then gPgItems = 1
+    gPgItem = 1
+    gPgFrac = 0
     gPgActive = True
+    gPgCancel = False
     gPgTitle = title
+    gPgLabel = ""
+    gPgDetail = Tx("prog.preparing")
+    gPgFile = ""
 #If Mac Then
     gPgMacPid = ""
-    On Error Resume Next
-    gPgMacPid = AppleScriptTask(MAC_SCRIPT, "progressShow", title & "，请稍候…")
+    gPgMacPct = -100
+    gPgMacTime = 0
+    ProgressShow
 #Else
+    GetAsyncKeyState VK_ESCAPE                     ' forget an Esc pressed before the run started
     ProgressCreate title
 #End If
 End Sub
 
-' Advances one step and shows what is being done.
-Private Sub ProgressStep(ByVal detail As String)
+' Starts item i of the run, with a short label such as "2 / 5: Rectangle 3".
+Private Sub ProgressItem(ByVal i As Long, ByVal label As String)
     If Not gPgActive Then Exit Sub
-    gPgPos = gPgPos + 1
-    If gPgPos > gPgTotal Then gPgTotal = gPgPos + 1
+    gPgItem = i
+    If gPgItem > gPgItems Then gPgItems = gPgItem
+    gPgFrac = 0
+    gPgLabel = label
+    ProgressShow
+End Sub
+
+' Position inside the current item (0..1, never backwards) and the step being done.
+Private Sub ProgressAt(ByVal frac As Double, ByVal detail As String)
+    If Not gPgActive Then Exit Sub
+    If frac < gPgFrac Then frac = gPgFrac
+    If frac > 1 Then frac = 1
+    gPgFrac = frac
+    If Len(detail) > 0 Then gPgDetail = detail
+    ProgressShow
+End Sub
+
+' While an external program runs: show how long it has been working.
+Private Sub ProgressElapsed(ByVal sec As Long)
+    If Not gPgActive Or sec < 2 Then Exit Sub
 #If Mac Then
 #Else
-    ProgressUpdate detail
+    ProgressShow sec
 #End If
 End Sub
+
+Private Function ProgressPercent() As Long
+    Dim p As Long
+    p = Int(((gPgItem - 1) + gPgFrac) / gPgItems * 100# + 0.5)
+    If p < 0 Then p = 0
+    If p > 100 Then p = 100
+    ProgressPercent = p
+End Function
 
 Private Sub ProgressEnd()
     gPgActive = False
@@ -2907,13 +3892,29 @@ Private Sub ProgressEnd()
 #End If
 End Sub
 
-' True when the user pressed Esc in the meantime (Windows only).
+' True once the user pressed Esc (Windows) or closed the progress dialog with its button
+' (macOS) during the run; it stays True until the run ends.
 Private Function ProgressCancelled() As Boolean
 #If Mac Then
+    If gPgActive And Not gPgCancel And Len(gPgMacPid) > 0 Then
+        If Abs(Timer - gPgMacCheck) >= 1.5 Then
+            gPgMacCheck = Timer
+            On Error Resume Next
+            If AppleScriptTask(MAC_SCRIPT, "progressAlive", gPgMacPid) = "0" Then gPgCancel = True
+        End If
+    End If
 #Else
-    If gPgActive Then ProgressCancelled = ((GetAsyncKeyState(VK_ESCAPE) And &H8000) <> 0)
+    If gPgActive And Not gPgCancel Then
+        If (GetAsyncKeyState(VK_ESCAPE) And &H8001) <> 0 Then gPgCancel = True
+    End If
 #End If
+    ProgressCancelled = gPgCancel
 End Function
+
+' Stops the run (error ERR_CANCEL, handled by the export flows) when Esc was pressed.
+Private Sub CheckCancel()
+    If ProgressCancelled() Then Err.Raise ERR_CANCEL, , "cancelled"
+End Sub
 
 ' MsgBox that hides the progress window while it is shown.
 Private Function AskUser(ByVal prompt As String, ByVal buttons As VbMsgBoxStyle) As VbMsgBoxResult
@@ -2923,10 +3924,36 @@ Private Function AskUser(ByVal prompt As String, ByVal buttons As VbMsgBoxStyle)
     If gPgWnd <> 0 Then ShowWindow gPgWnd, SW_HIDE
     AskUser = MsgBox(prompt, buttons, AppTitle())
     If gPgWnd <> 0 And gPgActive Then ShowWindow gPgWnd, SW_SHOWNOACTIVATE
+    GetAsyncKeyState VK_ESCAPE                     ' an Esc that closed the message box does not cancel
 #End If
 End Function
 
 #If Mac Then
+' macOS: the helper shows a small dialog; it is replaced when the text changes noticeably
+' (at most every 1.5 seconds, the dialog cannot be updated in place).
+Private Sub ProgressShow(Optional ByVal sec As Long = -1)
+    Dim pct As Long, txt As String, now As Double
+    If Not gPgActive Then Exit Sub
+    pct = ProgressPercent()
+    txt = gPgTitle
+    If Len(gPgLabel) > 0 Then txt = txt & " - " & gPgLabel
+    txt = txt & vbLf & gPgDetail & vbLf & pct & "%"
+    now = Timer
+    If Len(gPgMacPid) > 0 Then
+        If Abs(pct - gPgMacPct) < 10 And Abs(now - gPgMacTime) < 1.5 Then Exit Sub
+        If txt = gPgMacText Then Exit Sub
+    End If
+    On Error Resume Next
+    If Len(gPgMacPid) > 0 Then
+        gPgMacPid = AppleScriptTask(MAC_SCRIPT, "progressUpdate", gPgMacPid & MAC_SEP & txt & MAC_SEP & Tx("btn.cancel"))
+    Else
+        gPgMacPid = AppleScriptTask(MAC_SCRIPT, "progressShow", txt & MAC_SEP & Tx("btn.cancel"))
+    End If
+    gPgMacPct = pct
+    gPgMacTime = now
+    gPgMacText = txt
+    gPgMacCheck = now
+End Sub
 #Else
 Private Sub ProgressCreate(ByVal title As String)
     Dim r As RECT, dpi As Long, k As Double, w As Long, h As Long, x As Long, y As Long
@@ -2942,8 +3969,8 @@ Private Sub ProgressCreate(ByVal title As String)
     ReleaseDC 0, hdc
     If dpi < 72 Then dpi = 96
     k = dpi / 96#
-    w = CLng(440 * k)
-    h = CLng(150 * k)
+    w = CLng(480 * k)
+    h = CLng(158 * k)
     If owner <> 0 And GetWindowRect(owner, r) <> 0 Then
         x = r.Left + (r.Right - r.Left - w) \ 2
         y = r.Top + (r.Bottom - r.Top - h) \ 2
@@ -2956,41 +3983,68 @@ Private Sub ProgressCreate(ByVal title As String)
     gPgWnd = CreateWindowExW(WS_EX_DLGMODALFRAME Or WS_EX_TOOLWINDOW, StrPtr(cls), StrPtr(cap), WS_POPUP Or WS_CAPTION, _
                              x, y, w, h, owner, 0, 0, 0)
     If gPgWnd = 0 Then Exit Sub
-    face = "Microsoft YaHei UI"
+    face = UiFontName()
     gPgFontB = CreateFontW(-CLng(10.5 * dpi / 72), 0, 0, 0, 700, 0, 0, 0, 1, 0, 0, 5, 0, StrPtr(face))
     gPgFont = CreateFontW(-CLng(9 * dpi / 72), 0, 0, 0, 400, 0, 0, 0, 1, 0, 0, 5, 0, StrPtr(face))
     cls = "Static"
     gPgMsg = CreateWindowExW(0, StrPtr(cls), StrPtr(title), WS_CHILD Or WS_VISIBLE Or SS_NOPREFIX, _
-                             CLng(20 * k), CLng(16 * k), CLng(392 * k), CLng(24 * k), gPgWnd, 0, 0, 0)
+                             CLng(20 * k), CLng(14 * k), CLng(360 * k), CLng(24 * k), gPgWnd, 0, 0, 0)
+    cap = "0%"
+    gPgPct = CreateWindowExW(0, StrPtr(cls), StrPtr(cap), WS_CHILD Or WS_VISIBLE Or SS_NOPREFIX Or SS_RIGHT, _
+                             CLng(380 * k), CLng(14 * k), CLng(72 * k), CLng(24 * k), gPgWnd, 0, 0, 0)
     cls = "msctls_progress32"
     gPgBar = CreateWindowExW(0, StrPtr(cls), 0, WS_CHILD Or WS_VISIBLE, _
-                             CLng(20 * k), CLng(46 * k), CLng(392 * k), CLng(16 * k), gPgWnd, 0, 0, 0)
+                             CLng(20 * k), CLng(44 * k), CLng(432 * k), CLng(16 * k), gPgWnd, 0, 0, 0)
     cls = "Static"
-    cap = "准备中…"
+    cap = gPgDetail
     gPgSub = CreateWindowExW(0, StrPtr(cls), StrPtr(cap), WS_CHILD Or WS_VISIBLE Or SS_NOPREFIX, _
-                             CLng(20 * k), CLng(70 * k), CLng(392 * k), CLng(22 * k), gPgWnd, 0, 0, 0)
+                             CLng(20 * k), CLng(68 * k), CLng(432 * k), CLng(42 * k), gPgWnd, 0, 0, 0)
     SendMessageW gPgMsg, WM_SETFONT, gPgFontB, 1
+    SendMessageW gPgPct, WM_SETFONT, gPgFontB, 1
     SendMessageW gPgSub, WM_SETFONT, gPgFont, 1
-    If gPgBar <> 0 Then SendMessageW gPgBar, PBM_SETRANGE32, 0, gPgTotal
+    If gPgBar <> 0 Then SendMessageW gPgBar, PBM_SETRANGE32, 0, 100
     ShowWindow gPgWnd, SW_SHOWNOACTIVATE
     UpdateWindow gPgWnd
     DoEvents
 Done:
 End Sub
 
-Private Sub ProgressUpdate(ByVal detail As String)
+Private Sub ProgressShow(Optional ByVal sec As Long = -1)
+    Dim head As String, detail As String, pct As Long
     On Error Resume Next
     If gPgWnd = 0 Then Exit Sub
     If IsWindow(gPgWnd) = 0 Then gPgWnd = 0: Exit Sub
-    SetWindowTextW gPgSub, StrPtr(detail & "（按 Esc 可取消）")
-    If gPgBar <> 0 Then
-        SendMessageW gPgBar, PBM_SETRANGE32, 0, gPgTotal
-        SendMessageW gPgBar, PBM_SETPOS, gPgPos, 0
-    End If
+    pct = ProgressPercent()
+    head = gPgTitle
+    If Len(gPgLabel) > 0 Then head = head & " - " & gPgLabel
+    detail = gPgDetail
+    If sec >= 2 Then detail = detail & Tx("prog.elapsed", sec)
+    detail = detail & vbCrLf & Tx("prog.escHint")
+    SetWindowTextW gPgMsg, StrPtr(head)
+    SetWindowTextW gPgPct, StrPtr(CStr(pct) & "%")
+    SetWindowTextW gPgSub, StrPtr(detail)
+    If gPgBar <> 0 Then SendMessageW gPgBar, PBM_SETPOS, pct, 0
     UpdateWindow gPgWnd
     DoEvents
 End Sub
 #End If
+
+
+' Font for native windows in the current interface language.
+Private Function UiFontName() As String
+    Select Case CurLang()
+        Case "zh-TW": UiFontName = "Microsoft JhengHei UI"
+        Case "ja": UiFontName = "Yu Gothic UI"
+        Case "en": UiFontName = "Segoe UI"
+        Case Else: UiFontName = "Microsoft YaHei UI"
+    End Select
+End Function
+
+' A name shortened for one-line labels.
+Private Function ShortName(ByVal nm As String) As String
+    If Len(nm) > 28 Then nm = Left$(nm, 26) & "…"
+    ShortName = nm
+End Function
 
 
 ' =====================================================================
@@ -2998,10 +4052,7 @@ End Sub
 ' =====================================================================
 Private Sub DoFeedback()
     Dim ans As VbMsgBoxResult
-    ans = MsgBox("请选择反馈方式：" & vbCrLf & vbCrLf & _
-                 "【是】发送邮件给作者（" & VS_EMAIL & "）" & vbCrLf & _
-                 "【否】在 GitHub 提交 Issue（需要 GitHub 账号，问题会公开显示）" & vbCrLf & _
-                 "【取消】返回", vbQuestion + vbYesNoCancel, AppTitle() & " - 反馈")
+    ans = MsgBox(Tx("fb.ask", VS_EMAIL), vbQuestion + vbYesNoCancel, AppTitle() & " - " & Tx("fb.title"))
     Select Case ans
         Case vbYes: FeedbackMail
         Case vbNo: FeedbackIssue
@@ -3011,24 +4062,21 @@ End Sub
 Private Sub FeedbackMail()
     Dim copied As Boolean, url As String
     copied = SetClipboardText(VS_EMAIL)
-    If MsgBox(IIf(copied, "作者邮箱已复制到剪贴板：", "作者邮箱：") & VS_EMAIL & vbCrLf & vbCrLf & _
-              "你可以在任何邮箱（网页邮箱、QQ 邮箱、Outlook 等）中新建邮件、粘贴收件人后发送。" & vbCrLf & vbCrLf & _
-              "要现在打开电脑上的默认邮件程序吗？" & vbCrLf & "（如果没有设置邮件程序，可以选择「否」，直接用网页邮箱发送）", _
-              vbQuestion + vbYesNo + vbDefaultButton2, AppTitle() & " - 邮件反馈") <> vbYes Then Exit Sub
-    url = "mailto:" & VS_EMAIL & "?subject=" & UrlEncode("矢印 VecStamp " & VS_VERSION & " 反馈") & _
+    If MsgBox(Tx(IIf(copied, "fb.mailCopied", "fb.mailPlain"), VS_EMAIL), _
+              vbQuestion + vbYesNo + vbDefaultButton2, AppTitle() & " - " & Tx("fb.mailTitle")) <> vbYes Then Exit Sub
+    url = "mailto:" & VS_EMAIL & "?subject=" & UrlEncode(Tx("fb.subject", VS_VERSION)) & _
           "&body=" & UrlEncode(vbCrLf & vbCrLf & "----" & vbCrLf & EnvironmentInfo())
     If Not OpenUrlX(url) Then
-        MsgBox "无法打开邮件程序，请直接发邮件到：" & VS_EMAIL, vbInformation, AppTitle()
+        MsgBox Tx("fb.noMailApp", VS_EMAIL), vbInformation, AppTitle()
     End If
 End Sub
 
 Private Sub FeedbackIssue()
     Dim url As String, body As String
-    body = "**问题描述 / 建议：**" & vbLf & vbLf & vbLf & "**复现步骤：**" & vbLf & "1. " & vbLf & vbLf & _
-           "**运行环境：**" & vbLf & "```" & vbLf & Replace(EnvironmentInfo(), vbCrLf, vbLf) & vbLf & "```" & vbLf
-    url = VS_REPO & "/issues/new?title=" & UrlEncode("[反馈] ") & "&body=" & UrlEncode(body)
+    body = Replace(Tx("fb.issueBody", EnvironmentInfo()), vbCrLf, vbLf)
+    url = VS_REPO & "/issues/new?title=" & UrlEncode(Tx("fb.issueTitle")) & "&body=" & UrlEncode(body)
     If Not OpenUrlX(url) Then
-        MsgBox "无法打开浏览器，请手动访问：" & vbCrLf & VS_REPO & "/issues", vbInformation, AppTitle()
+        MsgBox Tx("fb.noBrowser", VS_REPO & "/issues"), vbInformation, AppTitle()
     End If
 End Sub
 
@@ -3042,25 +4090,12 @@ Private Function EnvironmentInfo() As String
 End Function
 
 Private Sub DoAbout()
-    MsgBox "矢印 VecStamp  v" & VS_VERSION & vbCrLf & _
-           "选中即印 —— 图形一键导出 EMF / SVG / PDF / VSDX / PNG 等格式" & vbCrLf & vbCrLf & _
-           "作者：" & VS_AUTHOR & vbCrLf & _
-           "邮箱：" & VS_EMAIL & vbCrLf & _
-           "主页：" & VS_REPO & vbCrLf & _
-           "开源协议：MIT License" & vbCrLf & _
-           "Copyright (c) " & VS_YEAR & " " & VS_AUTHOR & vbCrLf & vbCrLf & _
-           "矢印承诺永久开源、永久免费：没有收费功能，没有广告，不联网收集任何信息，全部源码在 GitHub 公开。" & vbCrLf & vbCrLf & _
-           "如果它为你节省了时间，欢迎点击功能区「关于」组的「赞赏作者」，用微信或支付宝扫码请作者喝杯咖啡。" & _
-           "赞赏完全自愿，不影响任何功能；你的支持会用于持续维护和改进矢印。", _
-           vbInformation, "关于 " & AppTitle()
+    MsgBox Tx("about.text", VS_VERSION, VS_AUTHOR, VS_EMAIL, VS_REPO, VS_YEAR) & vbCrLf & vbCrLf & _
+           Tx("about.lang", LangName(CurLang())), vbInformation, Tx("about.title", AppTitle())
 End Sub
 
 Private Sub DoDonateThanks(ByVal which As String)
-    MsgBox "谢谢你愿意支持矢印！" & vbCrLf & vbCrLf & _
-           "请用" & which & "扫描「赞赏作者」中对应的二维码，金额随意。" & vbCrLf & _
-           "赞赏完全自愿，矢印的所有功能都永久免费、开源。" & vbCrLf & vbCrLf & _
-           "如果方便，也欢迎在 GitHub 给项目点一个 Star，或把它推荐给需要的同学和同事。", _
-           vbInformation, AppTitle() & " - 赞赏"
+    MsgBox Tx("don.thanks", which), vbInformation, AppTitle() & " - " & Tx("don.title")
 End Sub
 
 Private Function OpenUrlX(ByVal url As String) As Boolean
@@ -3143,19 +4178,19 @@ Private Function ThemeTint(ByVal base As Long, ByVal row As Long, ByRef label As
     lighter = (f > 0)
     If lighter Then
         l = l * (1 - f) + f
-        label = "淡色 " & CLng(f * 100) & "%"
+        label = Tx("col.lighter", CLng(f * 100))
     Else
         l = l * (1 + f)
-        label = "深色 " & CLng(-f * 100) & "%"
+        label = Tx("col.darker", CLng(-f * 100))
     End If
     ThemeTint = HslToRgb(h, s, l)
 End Function
 
 Private Function GalColor(ByVal index As Long, Optional ByRef label As String) As Long
     Dim names As Variant, std As Variant, stdNames As Variant, rc As Variant, col As Long, row As Long, t As String
-    names = Array("白色，背景 1", "黑色，文字 1", "背景 2", "文字 2", "个性色 1", "个性色 2", "个性色 3", "个性色 4", "个性色 5", "个性色 6")
+    names = Split(Tx("col.themeNames"), "|")
     std = Array(&HC0&, &HFF&, &HC0FF&, &HFFFF&, &H50D092, &H50B000, &HF0B000, &HC07000, &H602000, &HA03070)
-    stdNames = Array("深红", "红色", "橙色", "黄色", "浅绿", "绿色", "浅蓝", "蓝色", "深蓝", "紫色")
+    stdNames = Split(Tx("col.stdNames"), "|")
     If index < 60 Then
         col = index Mod 10
         row = index \ 10
@@ -3164,19 +4199,19 @@ Private Function GalColor(ByVal index As Long, Optional ByRef label As String) A
             label = names(col)
         Else
             GalColor = ThemeTint(ThemeBase(col), row, t)
-            label = names(col) & "，" & t
+            label = Tx("col.tint", names(col), t)
         End If
     ElseIf index < 70 Then
         GalColor = std(index - 60)
-        label = "标准色：" & stdNames(index - 60)
+        label = Tx("col.stdItem", stdNames(index - 60))
     Else
         rc = RecentColors()
         If index - 70 <= UBound(rc) Then
             GalColor = rc(index - 70)
-            label = "最近使用的颜色：" & ColorText(rc(index - 70))
+            label = Tx("col.recentItem", ColorText(rc(index - 70)))
         End If
     End If
-    If Len(label) > 0 And index < 70 Then label = label & "（" & ColorText(GalColor) & "）"
+    If Len(label) > 0 And index < 70 Then label = Tx("col.withValue", label, ColorText(GalColor))
 End Function
 
 Private Function ColorText(ByVal c As Long) As String
@@ -3223,11 +4258,17 @@ Private Sub SetBgColor(ByVal c As Long)
     RefreshRibbon
 End Sub
 
-' "More Colors" and the eyedropper run PowerPoint's own tools on a temporary off-slide shape
-' and read its fill colour afterwards. Falls back to the system colour dialog.
+' "More Colors": PowerPoint's own colour dialog (Windows: run on a temporary off-slide shape whose
+' fill colour is read afterwards; macOS: the macOS colour panel, which is what PowerPoint uses there).
+' When it cannot be opened, VecStamp's own colour panel takes over (then the system colour dialog,
+' then a colour list as the last resort).
 Private Sub DoMoreColors()
     Dim c As Long, trans As Double
+    On Error GoTo EH
     c = BgColorValue(BG_CUSTOM)
+#If Mac Then
+    If MacColorPicker(c) Then SetBgColor c
+#Else
     trans = BgAlpha() / 100#
     Select Case PickWithPowerPoint("ObjectFillMoreColorsDialog", False, c, trans)
         Case 1
@@ -3235,8 +4276,16 @@ Private Sub DoMoreColors()
             PutSet "BgAlpha", CStr(CLng(trans * 100))
             RefreshRibbon
         Case -1
-            DoPickColor                                  ' PowerPoint's dialog unavailable: system dialog
+            Select Case ColorPanel(c)
+                Case 1: SetBgColor c
+                Case -1
+                    If SysColorDialog(c, GetActiveWindow()) Then SetBgColor c
+            End Select
     End Select
+#End If
+    Exit Sub
+EH:
+    If ColorListPanel(c) Then SetBgColor c
 End Sub
 
 Private Sub DoEyedropper()
@@ -3247,8 +4296,7 @@ Private Sub DoEyedropper()
         Case 1
             SetBgColor c
         Case -1
-            MsgBox "取色器需要在普通视图中打开一张幻灯片。" & vbCrLf & _
-                   "请切换到普通视图后再点「取色器」，然后在幻灯片上点击要拾取的颜色。", vbInformation, AppTitle()
+            MsgBox Tx("msg.eyedropperView"), vbInformation, AppTitle()
     End Select
 End Sub
 
@@ -3277,7 +4325,11 @@ Private Function PickWithPowerPoint(ByVal idMso As String, ByVal waitForPick As 
     tmp.Select
     c0 = tmp.Fill.ForeColor.RGB
     t0 = tmp.Fill.Transparency
-    If waitForPick Then ProgressBegin "取色器：在幻灯片上点击要拾取的颜色", 1
+    If waitForPick Then
+        ProgressBegin Tx("prog.eyedropper"), 1
+        ProgressItem 1, ""
+        ProgressAt 0, Tx("step.eyedropper")
+    End If
     Application.CommandBars.ExecuteMso idMso
     If waitForPick Then
         started = Timer
@@ -3286,6 +4338,7 @@ Private Function PickWithPowerPoint(ByVal idMso As String, ByVal waitForPick As 
             If tmp.Fill.ForeColor.RGB <> c0 Then Exit Do
             If ProgressCancelled() Then Exit Do
             If Timer - started > 60 Or Timer < started Then Exit Do
+            ProgressAt CDbl(Timer - started) / 60#, ""
         Loop
         ProgressEnd
     End If
@@ -3366,42 +4419,49 @@ Private Function HueChannel(ByVal p As Double, ByVal q As Double, ByVal t As Dou
     End If
 End Function
 
-' Solid-colour swatch for the gallery (Windows: a small BMP file loaded as a picture).
+' Swatches for the ribbon (Windows: a small BMP file loaded as a picture).
 Private Function SwatchPicture(ByVal c As Long, ByVal size As Long) As Object
+    Set SwatchPicture = PatternPicture(0, c, size)
+End Function
+
+' Preview square of a background: transparent = checkerboard, grid = graph paper, else the colour.
+Private Function BgPicture(ByVal bg As Long, ByVal size As Long) As Object
+    Select Case bg
+        Case BG_NONE: Set BgPicture = PatternPicture(1, RGB(255, 255, 255), size)
+        Case BG_GRID: Set BgPicture = PatternPicture(2, RGB(255, 255, 255), size)
+        Case Else: Set BgPicture = PatternPicture(0, BgColorValue(bg), size)
+    End Select
+End Function
+
+' kind: 0 = solid colour c, 1 = checkerboard, 2 = grid on c; grey frame.
+Private Function PatternPicture(ByVal kind As Long, ByVal c As Long, ByVal size As Long) As Object
 #If Mac Then
 #Else
     Dim p As String, b() As Byte, i As Long, x As Long, y As Long, rowBytes As Long, n As Long
-    Dim r As Long, g As Long, bl As Long, edge As Boolean, raw As String
+    Dim r As Long, g As Long, bl As Long, cell As Long, raw As String
     On Error GoTo Done
-    p = JoinPath(TempDirX(), "swatch_" & Mid$(HexRGB(c), 2) & "_" & size & ".bmp")
+    p = JoinPath(TempDirX(), "swatch" & kind & "_" & Mid$(HexRGB(c), 2) & "_" & size & ".bmp")
     If Not Fso().FileExists(p) Then
         rowBytes = ((size * 3 + 3) \ 4) * 4
         n = 54 + rowBytes * size
         ReDim b(0 To n - 1)
-        b(0) = 66: b(1) = 77                                     ' "BM"
-        PutLong b, 2, n
-        PutLong b, 10, 54
-        PutLong b, 14, 40
-        PutLong b, 18, size
-        PutLong b, 22, size
-        b(26) = 1: b(28) = 24
-        PutLong b, 34, rowBytes * size
-        r = c And &HFF&: g = (c \ &H100&) And &HFF&: bl = (c \ &H10000) And &HFF&
+        BmpHeader b, size, size, rowBytes
+        cell = size \ 4
+        If cell < 2 Then cell = 2
         For y = 0 To size - 1
             For x = 0 To size - 1
                 i = 54 + y * rowBytes + x * 3
-                edge = (x = 0 Or y = 0 Or x = size - 1 Or y = size - 1)
-                If edge Then
-                    b(i) = 160: b(i + 1) = 160: b(i + 2) = 160
-                Else
-                    b(i) = bl: b(i + 1) = g: b(i + 2) = r
-                End If
+                r = c And &HFF&: g = (c \ &H100&) And &HFF&: bl = (c \ &H10000) And &HFF&
+                If kind = 1 And ((x \ cell) + (y \ cell)) Mod 2 = 0 Then r = 201: g = 206: bl = 214
+                If kind = 2 And (x Mod cell = 0 Or y Mod cell = 0) Then r = 154: g = 165: bl = 180
+                If x = 0 Or y = 0 Or x = size - 1 Or y = size - 1 Then r = 128: g = 128: bl = 128
+                b(i) = bl: b(i + 1) = g: b(i + 2) = r
             Next x
         Next y
         raw = b
         WriteBytesX p, raw
     End If
-    Set SwatchPicture = LoadPicture(p)
+    Set PatternPicture = LoadPicture(p)
 Done:
 #End If
 End Function
@@ -3459,7 +4519,7 @@ Private Function BaseNameFor(ByVal pres As Object, ByVal sr As Object) As String
     On Error Resume Next
     idx = sr.Parent.SlideIndex
     On Error GoTo 0
-    If idx > 0 Then s = s & "_第" & idx & "页"
+    If idx > 0 Then s = s & "_" & Tx("file.page", idx)
     BaseNameFor = s
 End Function
 
@@ -3517,7 +4577,7 @@ Private Function FolderSettingText() As String
     Dim f As String
     f = GetSet("Folder", "")
     If Len(f) = 0 Then
-        FolderSettingText = "（未设置：使用演示文稿所在文件夹；未保存或在云端时使用桌面）"
+        FolderSettingText = Tx("set.folderNone")
     Else
         FolderSettingText = f
     End If
@@ -3747,50 +4807,44 @@ End Function
 
 Private Function FilterLabel(ByVal fmt As Long) As String
     Select Case fmt
-        Case FMT_EMZ: FilterLabel = "EMZ 压缩的增强型图元文件 (*.emz)"
-        Case FMT_SVG: FilterLabel = "SVG 可缩放矢量图形 (*.svg)"
-        Case FMT_WMF: FilterLabel = "WMF Windows 图元文件 (*.wmf)"
-        Case FMT_PNG: FilterLabel = "PNG 高分辨率位图 (*.png)"
-        Case FMT_PDF: FilterLabel = "PDF 矢量文档 (*.pdf)"
-        Case FMT_VSDX: FilterLabel = "VSDX Visio 绘图 (*.vsdx)"
-        Case Else: FilterLabel = "EMF 增强型图元文件 (*.emf)"
+        Case 0 To FMT_LAST: FilterLabel = Tx("fmt." & FmtExt(fmt)) & " (*." & FmtExt(fmt) & ")"
+        Case Else: FilterLabel = Tx("fmt.emf") & " (*.emf)"
+    End Select
+End Function
+
+Private Function BgShortName(ByVal bg As Long) As String
+    Select Case bg
+        Case BG_WHITE: BgShortName = Tx("bg.white")
+        Case BG_BEIGE: BgShortName = Tx("bg.beige")
+        Case BG_GRID: BgShortName = Tx("bg.grid")
+        Case BG_CUSTOM: BgShortName = Tx("bg.custom")
+        Case Else: BgShortName = Tx("bg.none")
     End Select
 End Function
 
 Private Function BgName(ByVal bg As Long) As String
     Select Case bg
-        Case BG_WHITE: BgName = "白色"
-        Case BG_BEIGE: BgName = "米色"
-        Case BG_GRID: BgName = "网格（间距 " & NumText(GridStep()) & " 磅）"
-        Case BG_CUSTOM: BgName = "自定义颜色 " & ColorSettingText()
-        Case Else: BgName = "透明"
+        Case BG_WHITE: BgName = Tx("bg.white")
+        Case BG_BEIGE: BgName = Tx("bg.beige")
+        Case BG_GRID: BgName = Tx("bg.gridValue", NumText(GridStep()))
+        Case BG_CUSTOM: BgName = Tx("bg.customValue", ColorSettingText())
+        Case Else: BgName = Tx("bg.none")
     End Select
 End Function
 
 Private Function SettingsSummary() As String
     Dim s As String, bg As Long
-    s = "按当前设置导出选中图形" & vbCrLf & vbCrLf
-    s = s & "默认格式：" & UCase$(FmtExt(GetIdx("Format", FMT_LAST))) & vbCrLf
-    If GetIdx("Mode", 1) = 1 Then
-        s = s & "多个图形：每个图形一个文件" & vbCrLf
-    Else
-        s = s & "多个图形：合并为一个文件" & vbCrLf
-    End If
-    If GetIdx("Naming", 1) = 1 Then
-        s = s & "保存方式：自动保存到默认文件夹" & vbCrLf
-    Else
-        s = s & "保存方式：每次选择保存位置" & vbCrLf
-    End If
-    s = s & "PNG 分辨率：" & DpiValue() & " DPI" & vbCrLf
+    s = Tx("sum.head") & vbCrLf & vbCrLf
+    s = s & Tx("sum.format", UCase$(FmtExt(GetIdx("Format", FMT_LAST)))) & vbCrLf
+    s = s & Tx("sum.mode", Tx(IIf(GetIdx("Mode", 1) = 1, "mode.split", "mode.merge"))) & vbCrLf
+    s = s & Tx("sum.naming", Tx(IIf(GetIdx("Naming", 1) = 1, "naming.auto", "naming.ask"))) & vbCrLf
+    s = s & Tx("sum.dpi", DpiValue()) & vbCrLf
     bg = BgTypeIdx()
-    s = s & "背景：" & BgName(bg)
-    If bg <> BG_NONE Then s = s & "，透明度 " & BgAlpha() & "%"
-    s = s & vbCrLf & "边距：" & NumText(GetMargin()) & " 磅"
-    If GetFlag("VsdxNative", "1") Then
-        s = s & vbCrLf & "VSDX：Visio 原生形状（文字可编辑）"
-    Else
-        s = s & vbCrLf & "VSDX：嵌入 EMF 矢量图片"
-    End If
+    s = s & Tx("sum.bg", BgName(bg))
+    If bg <> BG_NONE Then s = s & Tx("sum.alpha", BgAlpha())
+    s = s & vbCrLf & Tx("sum.margin", NumText(GetMargin()))
+    s = s & vbCrLf & Tx(IIf(GetFlag("VsdxNative", "1"), "sum.vsdxNative", "sum.vsdxPicture"))
+    s = s & vbCrLf & Tx("sum.lang", LangName(CurLang()))
     SettingsSummary = s
 End Function
 
@@ -3804,7 +4858,23 @@ Private Sub Report(ByVal files As Collection, ByVal showList As Boolean)
         Exit Sub
     End If
     If Not showList Then Exit Sub
-    msg = "已导出 " & files.Count & " 个文件：" & vbCrLf & vbCrLf
+    msg = Tx("msg.exported", files.Count) & vbCrLf & vbCrLf
+    For i = 1 To files.Count
+        If i > 8 Then msg = msg & "……" & vbCrLf: Exit For
+        msg = msg & CStr(files(i)) & vbCrLf
+    Next i
+    MsgBox msg, vbInformation, AppTitle()
+End Sub
+
+' After Esc / Cancel: says so and lists the files finished before.
+Private Sub ReportCancelled(ByVal files As Collection)
+    Dim msg As String, i As Long
+    If files.Count = 0 Then
+        MsgBox Tx("msg.cancelled"), vbInformation, AppTitle()
+        Exit Sub
+    End If
+    PutSet "LastFolder", ParentFolder(CStr(files(1)))
+    msg = Tx("msg.cancelledPartial", files.Count) & vbCrLf & vbCrLf
     For i = 1 To files.Count
         If i > 8 Then msg = msg & "……" & vbCrLf: Exit For
         msg = msg & CStr(files(i)) & vbCrLf
@@ -3818,7 +4888,82 @@ Private Sub RefreshRibbon()
 End Sub
 
 Private Function AppTitle() As String
-    AppTitle = "矢印 VecStamp"
+    AppTitle = Tx("app.title")
+End Function
+
+
+' =====================================================================
+'  Interface languages: Simplified Chinese (default), Traditional Chinese, English, Japanese.
+'  The texts live in src/i18n/strings.json; the build turns them into LoadStrings (generated
+'  block below), which fills gStr with the texts of one language.
+' =====================================================================
+Private Function CurLang() As String
+    If Len(gLang) = 0 Then
+        gLang = GetSet("Lang", "zh-CN")
+        If InStr("|zh-CN|zh-TW|en|ja|", "|" & gLang & "|") = 0 Then gLang = "zh-CN"
+    End If
+    CurLang = gLang
+End Function
+
+' Switches the interface language at once (the caller refreshes the ribbon).
+Private Sub SetLang(ByVal code As String)
+    If InStr("|zh-CN|zh-TW|en|ja|", "|" & code & "|") = 0 Then code = "zh-CN"
+    PutSet "Lang", code
+    gLang = code
+    Set gStr = Nothing
+End Sub
+
+' Each language under its own name (not translated).
+Private Function LangName(ByVal code As String) As String
+    Select Case code
+        Case "zh-TW": LangName = "繁體中文"
+        Case "en": LangName = "English"
+        Case "ja": LangName = "日本語"
+        Case Else: LangName = "简体中文"
+    End Select
+End Function
+
+Private Sub EnsureStrings()
+    If gStr Is Nothing Then
+        Set gStr = New Collection
+        LoadStrings CurLang()
+    End If
+End Sub
+
+' The text of key in the current language with {0}, {1}, ... replaced by args (the key itself
+' when it is missing). Err is preserved: Tx is often called inside error handlers.
+Private Function Tx(ByVal key As String, ParamArray args() As Variant) As String
+    Dim s As String, i As Long, en As Long, ed As String, es As String
+    en = Err.Number: ed = Err.Description: es = Err.Source
+    EnsureStrings
+    On Error Resume Next
+    s = gStr.Item(key)
+    If Err.Number <> 0 Then s = key
+    On Error GoTo 0
+    For i = 0 To UBound(args)
+        s = Replace(s, "{" & i & "}", CStr(args(i)))
+    Next i
+    If en <> 0 Then
+        Err.Number = en
+        Err.Description = ed
+        Err.Source = es
+    End If
+    Tx = s
+End Function
+
+Private Function TxHas(ByVal key As String) As Boolean
+    Dim s As String, en As Long, ed As String, es As String
+    en = Err.Number: ed = Err.Description: es = Err.Source
+    EnsureStrings
+    On Error Resume Next
+    s = gStr.Item(key)
+    TxHas = (Err.Number = 0)
+    On Error GoTo 0
+    If en <> 0 Then
+        Err.Number = en
+        Err.Description = ed
+        Err.Source = es
+    End If
 End Function
 
 ' Decodes UTF-16 code units written as 4-digit hex groups (used by the ASCII-only build).
@@ -3831,8 +4976,8 @@ Private Function U(ByVal h As String) As String
 End Function
 
 
-' >>> GENERATED: VSDX TEMPLATE PARTS AND HELPER SCRIPT (build/build_bas.py fills this block
-'     from src/vsdx and src/helpers)
+' >>> GENERATED: VSDX TEMPLATE PARTS, HELPER SCRIPT AND PRESET SHAPES (build/build_bas.py fills
+'     this block from src/vsdx, src/helpers and src/presets)
 Private Function VsdxPart(ByVal partName As String) As String
     VsdxPart = ""
 End Function
@@ -3844,4 +4989,11 @@ End Function
 Private Function HelperScript() As String
     HelperScript = ""
 End Function
+
+Private Function PresetSource(ByVal ast As Long) As String
+    PresetSource = ""
+End Function
+
+Private Sub LoadStrings(ByVal lang As String)
+End Sub
 ' <<< GENERATED

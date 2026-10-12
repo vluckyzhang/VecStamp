@@ -615,9 +615,12 @@ def _text(shape):
 
 # ------------------------------------------------------------------ walker
 class Collector:
-    def __init__(self, ctx, export_emf):
+    def __init__(self, ctx, export_emf, on_shape=None, total=0):
         self.ctx = ctx
         self.export_emf = export_emf        # function(shape) -> EMF bytes
+        self.on_shape = on_shape            # function(i, n, name) before each shape (may raise to cancel)
+        self.total = total
+        self.done = 0
         self.native = 0
         self.pictures = 0
 
@@ -625,6 +628,9 @@ class Collector:
         """shape -> dict; (ox, oy): parent origin in page 1/100 mm (left, bottom)."""
         stype = shape.getShapeType().rsplit('.', 1)[-1]
         name = _get(shape, 'Name', '') or ''
+        if stype != 'GroupShape' and self.on_shape is not None:
+            self.done += 1
+            self.on_shape(self.done, max(self.total, self.done), name or stype.replace('Shape', ''))
         if stype == 'GroupShape':
             pos, size = shape.getPosition(), shape.getSize()
             gx, gy = pos.X, pos.Y + size.Height
@@ -686,12 +692,27 @@ def _rect_screen(w, h, r):
     return rect_path(w, h, r)
 
 
-def collect(ctx, shapes, rect, export_emf):
+def count_shapes(shapes):
+    """Number of shapes, counting the members of groups instead of the groups."""
+    n = 0
+    for s in shapes:
+        try:
+            if s.getShapeType().endswith('GroupShape'):
+                n += count_shapes([s.getByIndex(i) for i in range(s.getCount())])
+                continue
+        except Exception:
+            pass
+        n += 1
+    return n
+
+
+def collect(ctx, shapes, rect, export_emf, on_shape=None):
     """shapes (z-order, bottom first) and their bounding rect (x0, y0, x1, y1) in 1/100 mm.
 
-    Returns (dicts, page width in, page height in, collector)."""
+    on_shape(i, n, name) is called before each (non-group) shape. Returns (dicts, page width in,
+    page height in, collector)."""
     x0, y0, x1, y1 = rect
-    col = Collector(ctx, export_emf)
+    col = Collector(ctx, export_emf, on_shape, count_shapes(shapes) if on_shape is not None else 0)
     dicts = [col.convert(s, x0, y1) for s in shapes]
     return dicts, (x1 - x0) / HMM, (y1 - y0) / HMM, col
 

@@ -10,7 +10,9 @@
 # Windows PowerShell 5.1 and PowerShell 7 compatible; no modules needed.
 # The add-in embeds this file (build/build_bas.py), writes it to its temp folder and runs:
 #   & ([scriptblock]::Create((Get-Content -Raw xps2svg.ps1))) -Xps in.xps -Out out.svg -Frame "l,t,w,h" -Slide "w,h"
-# Frame and Slide are in points (slide coordinates). Exit code 0 = success.
+# Frame and Slide are in points (slide coordinates). Exit code 0 = success, 1 = failure,
+# 3 = gave up after -MaxSeconds. With -Progress the script keeps "<percent>|<step>|<a>|<b>" in that
+# file (steps: open, page, elem, font, write, done) so the add-in can show what is happening.
 #
 # Copyright (c) 2026 vluckyzhang <vluckyzhang@gmail.com>. MIT License.
 
@@ -19,6 +21,9 @@ param(
     [Parameter(Mandatory = $true)][string]$Out,
     [string]$Frame = '',
     [string]$Slide = '',
+    [string]$Progress = '',
+    [int]$MaxSeconds = 150,
+    [int]$MaxFontBytes = 6000000,
     [switch]$NoEmbedFonts
 )
 
@@ -27,6 +32,34 @@ Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $Inv = [Globalization.CultureInfo]::InvariantCulture
 $KeyNs = 'http://schemas.microsoft.com/xps/2005/06/resourcedictionary-key'
+$Watch = [Diagnostics.Stopwatch]::StartNew()
+$script:LastReport = -1.0
+$script:LastPct = -1
+$script:Done = 0
+$script:Total = 1
+
+# ------------------------------------------------------------------ progress and time limit
+function Report([int]$pct, [string]$step, [int]$a = 0, [int]$b = 0) {
+    if (-not $Progress) { return }
+    $now = $Watch.Elapsed.TotalMilliseconds
+    if ($pct -eq $script:LastPct -and $now - $script:LastReport -lt 400) { return }
+    if ($step -eq 'elem' -and $now - $script:LastReport -lt 150) { return }
+    $script:LastPct = $pct
+    $script:LastReport = $now
+    try { [IO.File]::WriteAllText($Progress, ('{0}|{1}|{2}|{3}' -f $pct, $step, $a, $b)) } catch { }
+}
+
+function CheckTime {
+    if ($Watch.Elapsed.TotalSeconds -gt $MaxSeconds) { throw 'timeout' }
+}
+
+function Tick {
+    $script:Done++
+    if (($script:Done % 8) -eq 0) {
+        CheckTime
+        Report ([int](15 + 70 * [Math]::Min(1.0, $script:Done / [double]$script:Total))) 'elem' $script:Done $script:Total
+    }
+}
 
 # ------------------------------------------------------------------ helpers
 function N([double]$v) {
@@ -152,6 +185,7 @@ $Resources = @{}      # x:Key -> XmlElement
 $script:Box = $null   # content bounding box in page units [x0, y0, x1, y1]
 $script:PageW = 0.0
 $script:PageH = 0.0
+$script:FontsEmbedded = 0
 
 function NewId([string]$prefix) {
     $script:IdN++
@@ -348,9 +382,11 @@ function ImageInfo([byte[]]$b) {
     elseif ($b.Length -gt 4 -and $b[0] -eq 0xFF -and $b[1] -eq 0xD8) {
         $info.mime = 'image/jpeg'
         $i = 2
-        while ($i + 9 -lt $b.Length) {
+        $lim = [Math]::Min($b.Length, 2097152)
+        while ($i + 9 -lt $lim) {
             if ($b[$i] -ne 0xFF) { $i++; continue }
             $mk = $b[$i + 1]
+            if ($mk -eq 0xDA -or $mk -eq 0xD9) { break }      # start of scan / end: no size marker found
             $len = ([int]$b[$i + 2] -shl 8) -bor $b[$i + 3]
             if ($mk -eq 0xE0 -and $b[$i + 4] -eq 0x4A -and $b[$i + 11] -eq 1) {
                 $dx = ([int]$b[$i + 12] -shl 8) -bor $b[$i + 13]; $dy = ([int]$b[$i + 14] -shl 8) -bor $b[$i + 15]
@@ -499,26 +535,27 @@ function Deobfuscate([byte[]]$b, [string]$part) {
 
 function FontInfo([string]$part) {
     if ($Fonts.ContainsKey($part)) { return $Fonts[$part] }
-    $info = @{ family = 'sans-serif'; local = ''; weight = 400; italic = $false; upm = 1000; adv = $null; cmap = $null; rev = $null; id = ''; data = $null }
+    $info = @{ family = 'sans-serif'; local = ''; weight = 400; italic = $false; upm = 1000; adv = $null; cmap = $null; rev = $null; id = ''; data = $null; bytes = $null; tables = $null; metrics = $false; mapped = $false }
     $Fonts[$part] = $info
     $b = ReadBytes $part
     if ($null -eq $b) { return $info }
     $b = Deobfuscate $b $part
     if (-not (IsFont $b)) { return $info }
-    $info.data = $b
+    $info.bytes = $b
     $t = FontTables $b
+    $info.tables = $t
     try {
         if ($t.ContainsKey('name')) {
             $o = $t['name'][0]
             $count = U16 $b ($o + 2); $str = $o + (U16 $b ($o + 4))
             $best = @{}
-            for ($i = 0; $i -lt $count; $i++) {
+            for ($i = 0; $i -lt $count -and $i -lt 400; $i++) {
                 $r = $o + 6 + 12 * $i
                 $plat = U16 $b $r; $lang = U16 $b ($r + 4); $nid = U16 $b ($r + 6)
                 $len = U16 $b ($r + 8); $off = U16 $b ($r + 10)
                 if ($plat -ne 3 -or ($nid -ne 1 -and $nid -ne 16)) { continue }
                 $s = [Text.Encoding]::BigEndianUnicode.GetString($b, $str + $off, $len)
-                $key = $(if ($lang -eq 0x409) { 'en' } elseif ($lang -eq 0x804 -or $lang -eq 0x404) { 'zh' } else { 'x' }) + $nid
+                $key = $(if ($lang -eq 0x409) { 'en' } elseif ($lang -eq 0x804 -or $lang -eq 0x404 -or $lang -eq 0x411) { 'zh' } else { 'x' }) + $nid
                 $best[$key] = $s
             }
             foreach ($k in @('en16', 'en1', 'x16', 'x1')) { if ($best[$k]) { $info.family = $best[$k]; break } }
@@ -530,66 +567,93 @@ function FontInfo([string]$part) {
             $info.italic = ((U16 $b ($o + 62)) -band 1) -eq 1
         }
         if ($t.ContainsKey('head')) { $info.upm = U16 $b ($t['head'][0] + 18) }
-        if ($t.ContainsKey('hhea') -and $t.ContainsKey('hmtx')) {
-            $nh = U16 $b ($t['hhea'][0] + 34)
-            $o = $t['hmtx'][0]
-            $adv = New-Object int[] ([Math]::Max($nh, 1))
-            for ($i = 0; $i -lt $nh; $i++) { $adv[$i] = U16 $b ($o + 4 * $i) }
-            $info.adv = $adv
-        }
-        if ($t.ContainsKey('cmap')) {
-            $o = $t['cmap'][0]
-            $n = U16 $b ($o + 2)
-            $sub = -1
-            for ($i = 0; $i -lt $n; $i++) {
-                $r = $o + 4 + 8 * $i
-                $plat = U16 $b $r; $eid = U16 $b ($r + 2); $so = $o + [int](U32 $b ($r + 4))
-                $fmt = U16 $b $so
-                if ($plat -eq 3 -and ($eid -eq 1 -or $eid -eq 10 -or $eid -eq 0) -and ($fmt -eq 4 -or $fmt -eq 12)) { $sub = $so; if ($fmt -eq 12) { break } }
-            }
-            if ($sub -ge 0) {
-                $map = @{}
-                $fmt = U16 $b $sub
-                if ($fmt -eq 4) {
-                    $segX2 = U16 $b ($sub + 6)
-                    $ends = $sub + 14; $starts = $ends + $segX2 + 2; $deltas = $starts + $segX2; $ranges = $deltas + $segX2
-                    for ($s = 0; $s -lt $segX2 / 2; $s++) {
-                        $e = U16 $b ($ends + 2 * $s); $st = U16 $b ($starts + 2 * $s)
-                        $dl = U16 $b ($deltas + 2 * $s); $ro = U16 $b ($ranges + 2 * $s)
-                        if ($st -eq 0xFFFF) { continue }
-                        for ($c = $st; $c -le $e; $c++) {
-                            if ($ro -eq 0) { $g = ($c + $dl) % 65536 }
-                            else {
-                                $ga = $ranges + 2 * $s + $ro + 2 * ($c - $st)
-                                $g = U16 $b $ga
-                                if ($g -ne 0) { $g = ($g + $dl) % 65536 }
-                            }
-                            if ($g -ne 0) { $map[$c] = $g }
-                        }
-                    }
-                }
-                else {
-                    $ng = [int](U32 $b ($sub + 12))
-                    for ($s = 0; $s -lt $ng; $s++) {
-                        $r = $sub + 16 + 12 * $s
-                        $st = [int](U32 $b $r); $e = [int](U32 $b ($r + 4)); $g0 = [int](U32 $b ($r + 8))
-                        if ($e - $st -gt 70000) { continue }
-                        for ($c = $st; $c -le $e; $c++) { $map[$c] = $g0 + ($c - $st) }
-                    }
-                }
-                $info.cmap = $map
-            }
-        }
     }
     catch { }
     $info.id = NewId 'f'
-    if (-not $NoEmbedFonts -and [Text.Encoding]::ASCII.GetString($b, 0, 4) -ne 'ttcf') {
+    # Large fonts (a complete CJK font, for example) are referenced by name only: embedding them
+    # would make the SVG huge and slow to write. TrueType collections cannot be embedded.
+    if (-not $NoEmbedFonts -and $b.Length -le $MaxFontBytes -and [Text.Encoding]::ASCII.GetString($b, 0, 4) -ne 'ttcf') {
+        $info.data = $b
+        $script:FontsEmbedded++
+        Report 88 'font' $script:FontsEmbedded 0
         [void]$Defs.Append('<style>@font-face{font-family:''' + $info.id + ''';src:url(data:font/ttf;base64,' + [Convert]::ToBase64String($b) + ');}</style>')
     }
     return $info
 }
 
+# Advance widths (hmtx) - only read when a glyph run has no advances of its own.
+function EnsureMetrics($info) {
+    if ($info.metrics) { return }
+    $info.metrics = $true
+    $t = $info.tables; $b = $info.bytes
+    if ($null -eq $t -or $null -eq $b) { return }
+    try {
+        if ($t.ContainsKey('hhea') -and $t.ContainsKey('hmtx')) {
+            $nh = U16 $b ($t['hhea'][0] + 34)
+            $o = $t['hmtx'][0]
+            $adv = New-Object int[] ([Math]::Max($nh, 1))
+            for ($i = 0; $i -lt $nh; $i++) { $adv[$i] = ([int]$b[$o + 4 * $i] -shl 8) -bor $b[$o + 4 * $i + 1] }
+            $info.adv = $adv
+        }
+    }
+    catch { }
+}
+
+# Character map - only read when a glyph run lacks glyph indices or characters.
+function EnsureCmap($info) {
+    if ($info.mapped) { return }
+    $info.mapped = $true
+    $t = $info.tables; $b = $info.bytes
+    if ($null -eq $t -or $null -eq $b -or -not $t.ContainsKey('cmap')) { return }
+    try {
+        $o = $t['cmap'][0]
+        $n = U16 $b ($o + 2)
+        $sub = -1
+        for ($i = 0; $i -lt $n; $i++) {
+            $r = $o + 4 + 8 * $i
+            $plat = U16 $b $r; $eid = U16 $b ($r + 2); $so = $o + [int](U32 $b ($r + 4))
+            $fmt = U16 $b $so
+            if ($plat -eq 3 -and ($eid -eq 1 -or $eid -eq 10 -or $eid -eq 0) -and ($fmt -eq 4 -or $fmt -eq 12)) { $sub = $so; if ($fmt -eq 12) { break } }
+        }
+        if ($sub -lt 0) { return }
+        $map = New-Object 'System.Collections.Generic.Dictionary[int,int]'
+        $fmt = U16 $b $sub
+        if ($fmt -eq 4) {
+            $segX2 = U16 $b ($sub + 6)
+            $ends = $sub + 14; $starts = $ends + $segX2 + 2; $deltas = $starts + $segX2; $ranges = $deltas + $segX2
+            for ($s = 0; $s -lt $segX2 / 2; $s++) {
+                $e = U16 $b ($ends + 2 * $s); $st = U16 $b ($starts + 2 * $s)
+                $dl = U16 $b ($deltas + 2 * $s); $ro = U16 $b ($ranges + 2 * $s)
+                if ($st -eq 0xFFFF) { continue }
+                for ($c = $st; $c -le $e; $c++) {
+                    if ($ro -eq 0) { $g = ($c + $dl) % 65536 }
+                    else {
+                        $ga = $ranges + 2 * $s + $ro + 2 * ($c - $st)
+                        $g = ([int]$b[$ga] -shl 8) -bor $b[$ga + 1]
+                        if ($g -ne 0) { $g = ($g + $dl) % 65536 }
+                    }
+                    if ($g -ne 0) { $map[$c] = $g }
+                }
+                CheckTime
+            }
+        }
+        else {
+            $ng = [int](U32 $b ($sub + 12))
+            for ($s = 0; $s -lt $ng; $s++) {
+                $r = $sub + 16 + 12 * $s
+                $st = [int](U32 $b $r); $e = [int](U32 $b ($r + 4)); $g0 = [int](U32 $b ($r + 8))
+                if ($e - $st -gt 70000) { continue }
+                for ($c = $st; $c -le $e; $c++) { $map[$c] = $g0 + ($c - $st) }
+                CheckTime
+            }
+        }
+        $info.cmap = $map
+    }
+    catch { }
+}
+
 function GlyphAdvance($info, [int]$gid) {
+    EnsureMetrics $info
     if ($null -eq $info.adv -or $info.adv.Count -eq 0) { return 0.0 }
     if ($gid -ge $info.adv.Count) { $gid = $info.adv.Count - 1 }
     if ($gid -lt 0) { return 0.0 }
@@ -597,13 +661,15 @@ function GlyphAdvance($info, [int]$gid) {
 }
 
 function GidOf($info, [int]$cp) {
+    EnsureCmap $info
     if ($null -eq $info.cmap) { return -1 }
-    $g = $info.cmap[$cp]
-    if ($null -eq $g) { return -1 }
-    return [int]$g
+    $g = 0
+    if ($info.cmap.TryGetValue($cp, [ref]$g)) { return [int]$g }
+    return -1
 }
 
 function CharFromGid($info, [int]$gid) {
+    EnsureCmap $info
     if ($null -eq $info.cmap) { return $null }
     if ($null -eq $info.rev) {
         $info.rev = @{}
@@ -684,6 +750,7 @@ function IsPageBackground($pts, $ctm) {
 }
 
 function DoPath($node, $ctm, [string]$base, [System.Text.StringBuilder]$sb) {
+    Tick
     $g = Geometry $node.GetAttribute('Data') $node 'Path.Data'
     if ($null -eq $g -or -not $g.d) { return }
     $pts = FigureBounds $g.d
@@ -732,6 +799,7 @@ function DoPath($node, $ctm, [string]$base, [System.Text.StringBuilder]$sb) {
 }
 
 function DoGlyphs($node, $ctm, [string]$base, [System.Text.StringBuilder]$sb) {
+    Tick
     $fontPart = Resolve $base $node.GetAttribute('FontUri')
     $info = FontInfo $fontPart
     $em = Num $node.GetAttribute('FontRenderingEmSize')
@@ -824,15 +892,19 @@ function DoChildren($node, $ctm, [string]$base, [System.Text.StringBuilder]$sb) 
 
 # ------------------------------------------------------------------ main
 try {
+    Report 8 'open'
     $page = FirstPage
     $doc = ReadXml $page
     if (-not $doc) { throw "cannot read $page" }
     $root = $doc.DocumentElement
     $script:PageW = Num $root.GetAttribute('Width')
     $script:PageH = Num $root.GetAttribute('Height')
+    $script:Total = [Math]::Max(1, $doc.SelectNodes("//*[local-name()='Path' or local-name()='Glyphs']").Count)
+    Report 12 'page' 0 $script:Total
     LoadResources $root $page
     DoChildren $root @(1.0, 0.0, 0.0, 1.0, 0.0, 0.0) $page $Body
     if ($Body.Length -eq 0) { throw 'empty page' }
+    Report 92 'write'
 
     # crop: the drawing's frame (from PowerPoint) united with what was actually drawn
     $crop = $null
@@ -863,10 +935,13 @@ try {
     $enc = New-Object System.Text.UTF8Encoding($false)
     [IO.File]::WriteAllText($Out, $svg.ToString(), $enc)
     $Zip.Dispose()
+    $script:LastPct = -1
+    Report 100 'done'
     exit 0
 }
 catch {
     try { $Zip.Dispose() } catch { }
     [Console]::Error.WriteLine('xps2svg: ' + $_.Exception.Message)
+    if ($_.Exception.Message -eq 'timeout') { exit 3 }
     exit 1
 }

@@ -17,7 +17,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$Version    = '1.2.1'
+$Version    = '1.2.2'
 $AddinName  = 'VecStamp'
 $LegacyName = 'VectorExport'                       # v1.0「PPT 矢量导出加载项」
 $Root       = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)

@@ -1,2 +1,2 @@
-VecStamp - export the selected shapes of Impress / Draw as EMF, EMZ, SVG, WMF, PDF, VSDX or high-resolution PNG, with optional white, beige, grid or custom background, transparency and margin. Batch export of every slide.
+VecStamp - export the selected shapes of Impress / Draw as EMF, EMZ, SVG, WMF, PDF, VSDX or high-resolution PNG, with optional white, beige, grid or custom background, transparency and margin. Batch export of every slide. Interface in Simplified Chinese, Traditional Chinese, English and Japanese.
 Author: vluckyzhang (vluckyzhang@gmail.com). MIT License.

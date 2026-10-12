@@ -5,30 +5,30 @@
   <node oor:name="AddonUI">
     <node oor:name="OfficeMenuBar">
       <node oor:name="com.vluckyzhang.vecstamp.menu" oor:op="replace">
-        <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">VecStamp</value><value xml:lang="zh-CN">矢印</value></prop>
+        <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">矢印</value><value xml:lang="zh-TW">矢印</value><value xml:lang="en-US">VecStamp</value><value xml:lang="ja">矢印</value></prop>
         <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         <node oor:name="Submenu">
           <node oor:name="m01" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:emf</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export as EMF…</value><value xml:lang="zh-CN">导出为 EMF…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出为 EMF…</value><value xml:lang="zh-TW">匯出為 EMF…</value><value xml:lang="en-US">Export as EMF…</value><value xml:lang="ja">EMF としてエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m02" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:emz</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export as EMZ…</value><value xml:lang="zh-CN">导出为 EMZ…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出为 EMZ…</value><value xml:lang="zh-TW">匯出為 EMZ…</value><value xml:lang="en-US">Export as EMZ…</value><value xml:lang="ja">EMZ としてエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m03" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:svg</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export as SVG…</value><value xml:lang="zh-CN">导出为 SVG…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出为 SVG…</value><value xml:lang="zh-TW">匯出為 SVG…</value><value xml:lang="en-US">Export as SVG…</value><value xml:lang="ja">SVG としてエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m04" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:wmf</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export as WMF…</value><value xml:lang="zh-CN">导出为 WMF…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出为 WMF…</value><value xml:lang="zh-TW">匯出為 WMF…</value><value xml:lang="en-US">Export as WMF…</value><value xml:lang="ja">WMF としてエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
@@ -37,19 +37,19 @@
           </node>
           <node oor:name="m06" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:pdf</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export as PDF…</value><value xml:lang="zh-CN">导出为 PDF…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出为 PDF…</value><value xml:lang="zh-TW">匯出為 PDF…</value><value xml:lang="en-US">Export as PDF…</value><value xml:lang="ja">PDF としてエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m07" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:vsdx</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export as VSDX (Visio)…</value><value xml:lang="zh-CN">导出为 VSDX（Visio）…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出为 VSDX（Visio）…</value><value xml:lang="zh-TW">匯出為 VSDX（Visio）…</value><value xml:lang="en-US">Export as VSDX (Visio)…</value><value xml:lang="ja">VSDX（Visio）としてエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m08" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:png</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export as PNG…</value><value xml:lang="zh-CN">导出为 PNG…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出为 PNG…</value><value xml:lang="zh-TW">匯出為 PNG…</value><value xml:lang="en-US">Export as PNG…</value><value xml:lang="ja">PNG としてエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
@@ -58,19 +58,19 @@
           </node>
           <node oor:name="m10" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?batch</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export every slide…</value><value xml:lang="zh-CN">逐页导出…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">逐页导出…</value><value xml:lang="zh-TW">逐頁匯出…</value><value xml:lang="en-US">Export every slide…</value><value xml:lang="ja">スライドごとにエクスポート…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m11" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?picture</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">EMF picture copy</value><value xml:lang="zh-CN">EMF 图片副本</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">EMF 图片副本</value><value xml:lang="zh-TW">EMF 圖片副本</value><value xml:lang="en-US">EMF picture copy</value><value xml:lang="ja">EMF 画像コピー</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m12" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?openfolder</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Open export folder</value><value xml:lang="zh-CN">打开导出文件夹</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">打开导出文件夹</value><value xml:lang="zh-TW">開啟匯出資料夾</value><value xml:lang="en-US">Open export folder</value><value xml:lang="ja">エクスポート先フォルダーを開く</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
@@ -79,40 +79,46 @@
           </node>
           <node oor:name="m14" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?settings</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export settings…</value><value xml:lang="zh-CN">导出设置…</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出设置…</value><value xml:lang="zh-TW">匯出設定…</value><value xml:lang="en-US">Export settings…</value><value xml:lang="ja">エクスポート設定…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m15" oor:op="replace">
-            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?help</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Help</value><value xml:lang="zh-CN">使用说明</value></prop>
+            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?language</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">界面语言（Language）…</value><value xml:lang="zh-TW">介面語言（Language）…</value><value xml:lang="en-US">Language…</value><value xml:lang="ja">表示言語（Language）…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m16" oor:op="replace">
-            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?feedback</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Feedback…</value><value xml:lang="zh-CN">反馈…</value></prop>
+            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?help</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">使用说明</value><value xml:lang="zh-TW">使用說明</value><value xml:lang="en-US">Help</value><value xml:lang="ja">使い方</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m17" oor:op="replace">
-            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?home</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Project page</value><value xml:lang="zh-CN">项目主页</value></prop>
+            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?feedback</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">反馈…</value><value xml:lang="zh-TW">意見回饋…</value><value xml:lang="en-US">Feedback…</value><value xml:lang="ja">フィードバック…</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
           <node oor:name="m18" oor:op="replace">
-            <prop oor:name="URL" oor:type="xs:string"><value>private:separator</value></prop>
-          </node>
-          <node oor:name="m19" oor:op="replace">
-            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?donate</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Support the author</value><value xml:lang="zh-CN">赞赏作者</value></prop>
+            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?home</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">项目主页</value><value xml:lang="zh-TW">專案首頁</value><value xml:lang="en-US">Project page</value><value xml:lang="ja">プロジェクトページ</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
+          <node oor:name="m19" oor:op="replace">
+            <prop oor:name="URL" oor:type="xs:string"><value>private:separator</value></prop>
+          </node>
           <node oor:name="m20" oor:op="replace">
+            <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?donate</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">赞赏作者</value><value xml:lang="zh-TW">贊助作者</value><value xml:lang="en-US">Support the author</value><value xml:lang="ja">作者を支援</value></prop>
+            <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
+            <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
+          </node>
+          <node oor:name="m21" oor:op="replace">
             <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?about</value></prop>
-            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">About VecStamp</value><value xml:lang="zh-CN">关于矢印</value></prop>
+            <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">关于矢印</value><value xml:lang="zh-TW">關於矢印</value><value xml:lang="en-US">About VecStamp</value><value xml:lang="ja">矢印について</value></prop>
             <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
             <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
           </node>
@@ -121,46 +127,46 @@
     </node>
     <node oor:name="OfficeToolBar">
       <node oor:name="com.vluckyzhang.vecstamp.toolbar" oor:op="replace">
-        <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">VecStamp</value><value xml:lang="zh-CN">矢印</value></prop>
+        <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">矢印</value><value xml:lang="zh-TW">矢印</value><value xml:lang="en-US">VecStamp</value><value xml:lang="ja">矢印</value></prop>
         <node oor:name="t01" oor:op="replace">
           <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:default</value></prop>
-          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export (default format)</value><value xml:lang="zh-CN">导出（默认格式）</value></prop>
+          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出（默认格式）</value><value xml:lang="zh-TW">匯出（預設格式）</value><value xml:lang="en-US">Export (default format)</value><value xml:lang="ja">エクスポート（既定の形式）</value></prop>
           <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
           <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         </node>
         <node oor:name="t02" oor:op="replace">
           <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:emf</value></prop>
-          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">EMF</value><value xml:lang="zh-CN">EMF</value></prop>
+          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">EMF</value><value xml:lang="zh-TW">EMF</value><value xml:lang="en-US">EMF</value><value xml:lang="ja">EMF</value></prop>
           <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
           <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         </node>
         <node oor:name="t03" oor:op="replace">
           <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:svg</value></prop>
-          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">SVG</value><value xml:lang="zh-CN">SVG</value></prop>
+          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">SVG</value><value xml:lang="zh-TW">SVG</value><value xml:lang="en-US">SVG</value><value xml:lang="ja">SVG</value></prop>
           <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
           <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         </node>
         <node oor:name="t04" oor:op="replace">
           <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:pdf</value></prop>
-          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">PDF</value><value xml:lang="zh-CN">PDF</value></prop>
+          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">PDF</value><value xml:lang="zh-TW">PDF</value><value xml:lang="en-US">PDF</value><value xml:lang="ja">PDF</value></prop>
           <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
           <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         </node>
         <node oor:name="t05" oor:op="replace">
           <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?export:png</value></prop>
-          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">PNG</value><value xml:lang="zh-CN">PNG</value></prop>
+          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">PNG</value><value xml:lang="zh-TW">PNG</value><value xml:lang="en-US">PNG</value><value xml:lang="ja">PNG</value></prop>
           <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
           <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         </node>
         <node oor:name="t06" oor:op="replace">
           <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?batch</value></prop>
-          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export every slide</value><value xml:lang="zh-CN">逐页导出</value></prop>
+          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">逐页导出</value><value xml:lang="zh-TW">逐頁匯出</value><value xml:lang="en-US">Export every slide</value><value xml:lang="ja">スライドごとにエクスポート</value></prop>
           <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
           <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         </node>
         <node oor:name="t07" oor:op="replace">
           <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?settings</value></prop>
-          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="en-US">Export settings</value><value xml:lang="zh-CN">导出设置</value></prop>
+          <prop oor:name="Title" oor:type="xs:string"><value xml:lang="zh-CN">导出设置</value><value xml:lang="zh-TW">匯出設定</value><value xml:lang="en-US">Export settings</value><value xml:lang="ja">エクスポート設定</value></prop>
           <prop oor:name="Target" oor:type="xs:string"><value>_self</value></prop>
           <prop oor:name="Context" oor:type="xs:string"><value>com.sun.star.presentation.PresentationDocument,com.sun.star.drawing.DrawingDocument</value></prop>
         </node>
@@ -242,6 +248,13 @@
         <node oor:name="UserDefinedImages">
           <prop oor:name="ImageSmallURL" oor:type="xs:string"><value>%origin%/icons/settings_16.png</value></prop>
           <prop oor:name="ImageBigURL" oor:type="xs:string"><value>%origin%/icons/settings_26.png</value></prop>
+        </node>
+      </node>
+      <node oor:name="com.vluckyzhang.vecstamp.img.language" oor:op="replace">
+        <prop oor:name="URL" oor:type="xs:string"><value>service:com.vluckyzhang.vecstamp.Exporter?language</value></prop>
+        <node oor:name="UserDefinedImages">
+          <prop oor:name="ImageSmallURL" oor:type="xs:string"><value>%origin%/icons/lang_16.png</value></prop>
+          <prop oor:name="ImageBigURL" oor:type="xs:string"><value>%origin%/icons/lang_26.png</value></prop>
         </node>
       </node>
       <node oor:name="com.vluckyzhang.vecstamp.img.help" oor:op="replace">
