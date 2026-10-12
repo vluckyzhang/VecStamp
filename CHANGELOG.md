@@ -2,7 +2,7 @@
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [1.2.2] - 2026-10-11
+## [1.2.2] - 2026-10-12
 
 ### 修复
 - **导出 SVG 一直停在「转换为 SVG」阶段，按 Esc 也无法取消**（Windows，PowerPoint 2013 – 2021 的 XPS 转换）：
@@ -31,6 +31,7 @@
 - **多语言 README 与官网 SEO**：README 提供简体中文、繁體中文、English、日本語四个版本（配图同样有四种语言）；宣传网站生成四种语言页面（`/`、`/zh-TW/`、`/en/`、`/ja/`），加入语言切换菜单、`canonical` / `hreflang`、Open Graph、结构化数据（SoftwareApplication、FAQPage）、`sitemap.xml` 和 `robots.txt` 中的 Sitemap；网站地址在 `website/config.js` 的 `siteUrl` 中配置。
 - 快速开始说明新增 `Quick-Start.txt`、`快速開始.txt`、`クイックスタート.txt`。
 - 修正宣传网站导航中的「失印 VecStamp」笔误。
+- LibreOffice：工具栏名称显示为「矢印」（之前显示为「扩展 1 / Add-On 1」），安装后默认停靠在工具栏区域（扩展新增 `ImpressWindowState.xcu` / `DrawWindowState.xcu`）。
 
 ## [1.2.1] - 2026-10-09
 

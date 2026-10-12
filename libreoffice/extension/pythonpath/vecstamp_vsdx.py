@@ -32,8 +32,8 @@ ARROWS = {'none': 0, 'triangle': 4, 'open': 1, 'stealth': 5, 'diamond': 22, 'ova
 # dash styles -> Visio LinePattern
 PATTERNS = {'solid': 1, 'dash': 2, 'dot': 3, 'dashdot': 4, 'dashdotdot': 5, 'longdash': 9,
             'longdashdot': 7, 'rounddot': 10}
-_CJK = re.compile('[⺀-鿿가-힯豈-﫿＀-￯]')
-_BAD = re.compile('[\x00-\x08\x0b\x0c\x0e-\x1f￾￿]')
+_CJK = re.compile('[\u2e80-\u9fff\uac00-\ud7af\uf900-\ufaff\uff00-\uffef]')
+_BAD = re.compile('[\x00-\x08\x0b\x0c\x0e-\x1f\ufffe\uffff]')
 
 
 def num(v):

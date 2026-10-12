@@ -162,6 +162,16 @@ def run(tmp):
         items = menu.getByName('com.vluckyzhang.vecstamp.menu').getByName('Submenu').getElementNames()
         print(f'  menu entries: {len(items)}   extension version: {report["version"]}   '
               f'about dialog controls: {len(report["about"])}')
+        # the toolbar is called "矢印" / "VecStamp" (window state UIName), not "Add-On 1"
+        for module in ('ImpressWindowState', 'DrawWindowState'):
+            states = cp.createInstanceWithArguments('com.sun.star.configuration.ConfigurationAccess',
+                                                    (pv('nodepath', f'/org.openoffice.Office.UI.{module}/UIElements/States'),))
+            key = 'private:resource/toolbar/addon_com.vluckyzhang.vecstamp.toolbar'
+            ui_name = states.getByName(key).getPropertyValue('UIName') if states.hasByName(key) else ''
+            if not ui_name:
+                print(f'  FAIL toolbar name missing in {module}')
+                failures += 1
+        print(f'  toolbar name: {ui_name}')
         # progress reporting: increasing fractions ending at 1.0, a step text for every call
         for ext, steps in report['steps'].items():
             fr = [f for f, _ in steps]
